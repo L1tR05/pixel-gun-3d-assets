@@ -1,4 +1,4 @@
-![Pixel Gun 3D Assets](https://i.imgur.com/NLaLr99.png)
+![Pixel Gun 3D Assets](https://i.imgur.com/ns9ZYxP.png)
 
 [![Version: 13.2.1](https://i.imgur.com/M8B0Gmg.png)](../../releases)
 [![Platform: iOS](https://i.imgur.com/4qu5FBa.png)](https://www.apple.com/ios)
