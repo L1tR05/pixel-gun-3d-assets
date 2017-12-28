@@ -1,0 +1,16 @@
+# Mesh "Skull" exported with Unity Assets Bundle Extractor; 4 vertices, 6 indices, 20 bytes per vertex
+g Skull
+# SubMesh 0
+# Vertices
+v -0.055000 0.055000 0.000000
+vt 0.007800 0.992291
+v 0.055000 0.055000 0.000000
+vt 0.195179 0.992291
+v -0.055000 -0.055000 0.000000
+vt 0.007800 0.804912
+v 0.055000 -0.055000 0.000000
+vt 0.195179 0.804912
+# Faces (1 to 4)
+f -2/-2 -3/-3 -4/-4
+f -3/-3 -2/-2 -1/-1
+

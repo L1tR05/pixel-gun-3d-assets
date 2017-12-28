@@ -1,0 +1,16 @@
+# Mesh "glow_007" exported with Unity Assets Bundle Extractor; 4 vertices, 6 indices, 20 bytes per vertex
+g glow_007
+# SubMesh 0
+# Vertices
+v 1.562500 1.562500 0.000000
+vt 0.810547 0.746094
+v -1.562500 -1.562500 0.000000
+vt 0.750000 0.632813
+v -1.562500 1.562500 0.000000
+vt 0.750000 0.746094
+v 1.562500 -1.562500 0.000000
+vt 0.810547 0.632813
+# Faces (1 to 4)
+f -2/-2 -3/-3 -4/-4
+f -3/-3 -1/-1 -4/-4
+
