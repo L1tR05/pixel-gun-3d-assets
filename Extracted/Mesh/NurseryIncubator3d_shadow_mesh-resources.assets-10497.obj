@@ -1,0 +1,21 @@
+# Mesh "NurseryIncubator3d_shadow_mesh" exported with Unity Assets Bundle Extractor; 4 vertices, 6 indices, 256 bits per vertex
+g NurseryIncubator3d_shadow_mesh
+# SubMesh 0
+# Vertices
+v 1.402208 1.402209 -0.002172
+vt 0.000000 0.000001
+vn -0.000000 0.000000 1.000000
+v 1.402209 -1.402208 -0.002172
+vt 0.000001 1.000000
+vn -0.000000 0.000000 1.000000
+v -1.402209 -1.402208 -0.002172
+vt 1.000000 0.999999
+vn -0.000000 0.000000 1.000000
+v -1.402209 1.402207 -0.002172
+vt 0.999999 0.000001
+vn -0.000000 0.000000 1.000000
+# Faces (1 to 4)
+g NurseryIncubator3d_shadow_mesh_0
+f -2/-2/-2 -3/-3/-3 -4/-4/-4
+f -1/-1/-1 -2/-2/-2 -4/-4/-4
+

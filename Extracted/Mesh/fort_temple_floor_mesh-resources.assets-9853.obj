@@ -1,0 +1,21 @@
+# Mesh "fort_temple_floor_mesh" exported with Unity Assets Bundle Extractor; 4 vertices, 6 indices, 320 bits per vertex
+g fort_temple_floor_mesh
+# SubMesh 0
+# Vertices
+v 20.714491 -18.486328 0.051448
+vt -21.038553 -17.986729
+vn -0.000000 0.000000 1.000000
+v 20.714491 18.487135 0.051448
+vt -21.038546 18.986734
+vn -0.000000 0.000000 1.000000
+v 63.373333 18.487135 0.051448
+vt 21.620296 18.986725
+vn -0.000000 0.000000 1.000000
+v 63.373333 -18.486328 0.051448
+vt 21.620289 -17.986738
+vn -0.000000 0.000000 1.000000
+# Faces (1 to 4)
+g fort_temple_floor_mesh_0
+f -2/-2/-2 -3/-3/-3 -4/-4/-4
+f -1/-1/-1 -2/-2/-2 -4/-4/-4
+

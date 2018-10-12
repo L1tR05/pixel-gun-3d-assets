@@ -1,0 +1,17 @@
+# Mesh "Health_Frame.001" exported with Unity Assets Bundle Extractor; 4 vertices, 6 indices, 160 bits per vertex
+g Health_Frame.001
+# SubMesh 0
+# Vertices
+v -0.031580 0.031000 0.000000
+vt 0.025204 0.773427
+v 0.031580 0.031000 0.000000
+vt 0.184235 0.773427
+v -0.031580 -0.031000 -0.000000
+vt 0.025204 0.620220
+v 0.031580 -0.031000 -0.000000
+vt 0.184235 0.620220
+# Faces (1 to 4)
+g Health_Frame.001_0
+f -2/-2 -3/-3 -4/-4
+f -3/-3 -2/-2 -1/-1
+

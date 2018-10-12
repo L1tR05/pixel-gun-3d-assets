@@ -1,0 +1,21 @@
+# Mesh "decor_big_castle_3_rotator_mesh" exported with Unity Assets Bundle Extractor; 4 vertices, 6 indices, 448 bits per vertex
+g decor_big_castle_3_rotator_mesh
+# SubMesh 0
+# Vertices
+v 0.347743 -0.347743 0.000000
+vt 0.546875 0.703125
+vn -0.000000 0.000000 1.000000
+v -0.347743 -0.347743 0.000000
+vt 0.468750 0.703125
+vn -0.000000 0.000000 1.000000
+v -0.347743 0.347743 0.000000
+vt 0.468750 0.781250
+vn -0.000000 0.000000 1.000000
+v 0.347743 0.347743 0.000000
+vt 0.546875 0.781250
+vn -0.000000 0.000000 1.000000
+# Faces (1 to 4)
+g decor_big_castle_3_rotator_mesh_0
+f -2/-2/-2 -3/-3/-3 -4/-4/-4
+f -1/-1/-1 -2/-2/-2 -4/-4/-4
+
