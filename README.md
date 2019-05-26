@@ -1,6 +1,6 @@
 ![Pixel Gun 3D Assets](https://i.imgur.com/ns9ZYxP.png)
 
-[![Version: 15.3.1](/_media/info_version.png)]()
+[![Version: 16.3.0](/_media/info_version.png)]()
 ![Platform: iOS](/_media/info_platform.png)
 
 ![Download assets](/_media/title_download.png)

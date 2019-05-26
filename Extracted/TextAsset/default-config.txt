@@ -1,0 +1,62 @@
+{
+    "playerStates": {
+        "nonPaying": {
+            "minPayment": 0,
+            "maxPayment": 0
+        },
+        "tadpole": {
+            "minPayment": 1,
+            "maxPayment": 3
+        },
+        "minnow": {
+            "minPayment": 4,
+            "maxPayment": 7
+        },
+        "pike": {
+            "minPayment": 8,
+            "maxPayment": 15
+        },
+        "dolphin": {
+            "minPayment": 16,
+            "maxPayment": 30
+        },
+        "whale": {
+            "minPayment": 31,
+            "maxPayment": 80
+        },
+        "megaWhale": {
+            "minPayment": 81,
+            "maxPayment": 2147483647
+        }
+    },
+    "contextSettings": {
+        "looserContext": {
+            "sequence": 3,
+            "timeout": 360
+        },
+        "resetAfterMinutes": 4320,
+        "showActiveOfferAfterMinutes": 240,
+        "paymentTypeDowngradeInterval": 10080
+    },
+    "windowsSettings": [
+        {
+            "window": "OfferPackGridDrawer",
+            "pixelmans": [
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            "window": "OfferPackScrollDrawer",
+            "pixelmans": [
+                5,
+                6,
+                7
+            ]
+        }
+    ],
+    "packs": [
+       
+    ]
+}

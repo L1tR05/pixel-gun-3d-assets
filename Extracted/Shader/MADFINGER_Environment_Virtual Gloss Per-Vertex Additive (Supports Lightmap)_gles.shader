@@ -1,0 +1,247 @@
+//////////////////////////////////////////
+//
+// NOTE: This is *not* a valid shader file
+//
+///////////////////////////////////////////
+Shader "MADFINGER/Environment/Virtual Gloss Per-Vertex Additive (Supports Lightmap)" {
+Properties {
+_MainTex ("Base (RGB) Gloss (A)", 2D) = "white" { }
+_SpecOffset ("Specular Offset from Camera", Vector) = (1,10,2,0)
+_SpecRange ("Specular Range", Float) = 20
+_SpecColor ("Specular Color", Color) = (0.5,0.5,0.5,1)
+_Shininess ("Shininess", Range(0.01, 1)) = 0.078125
+_ScrollingSpeed ("Scrolling speed", Vector) = (0,0,0,0)
+}
+SubShader {
+ LOD 100
+ Tags { "LIGHTMODE" = "FORWARDBASE" "RenderType" = "Opaque" }
+ Pass {
+  LOD 100
+  Tags { "LIGHTMODE" = "FORWARDBASE" "RenderType" = "Opaque" }
+  GpuProgramID 1214
+Program "vp" {
+SubProgram "gles hw_tier00 " {
+"#version 100
+
+#ifdef VERTEX
+attribute vec4 _glesVertex;
+attribute vec3 _glesNormal;
+attribute vec4 _glesMultiTexCoord0;
+uniform highp vec4 _Time;
+uniform highp mat4 unity_ObjectToWorld;
+uniform highp mat4 unity_MatrixV;
+uniform highp mat4 unity_MatrixVP;
+highp mat4 unity_MatrixMV;
+uniform highp vec3 _SpecOffset;
+uniform highp float _SpecRange;
+uniform highp vec3 _SpecColor;
+uniform highp float _Shininess;
+uniform highp vec4 _ScrollingSpeed;
+varying highp vec2 xlv_TEXCOORD0;
+varying lowp vec3 xlv_TEXCOORD2;
+void main ()
+{
+  unity_MatrixMV = (unity_MatrixV * unity_ObjectToWorld);
+  lowp vec3 tmpvar_1;
+  highp vec4 tmpvar_2;
+  tmpvar_2.w = 1.0;
+  tmpvar_2.xyz = _glesVertex.xyz;
+  highp mat3 tmpvar_3;
+  tmpvar_3[0] = unity_MatrixMV[0].xyz;
+  tmpvar_3[1] = unity_MatrixMV[1].xyz;
+  tmpvar_3[2] = unity_MatrixMV[2].xyz;
+  highp vec3 tmpvar_4;
+  tmpvar_4 = ((unity_MatrixMV * _glesVertex).xyz - (_SpecOffset * vec3(1.0, 1.0, -1.0)));
+  highp float tmpvar_5;
+  tmpvar_5 = (1.0 - clamp ((
+    sqrt(dot (tmpvar_4, tmpvar_4))
+   / _SpecRange), 0.0, 1.0));
+  highp float tmpvar_6;
+  tmpvar_6 = pow (clamp (dot (
+    (tmpvar_3 * _glesNormal)
+  , 
+    normalize(((vec3(0.0, 0.0, 1.0) + normalize(
+      -(tmpvar_4)
+    )) * 0.5))
+  ), 0.0, 1.0), (_Shininess * 128.0));
+  tmpvar_1 = ((_SpecColor * tmpvar_6) * (2.0 * tmpvar_5));
+  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_2));
+  xlv_TEXCOORD0 = (_glesMultiTexCoord0 + fract((_ScrollingSpeed * _Time.y))).xy;
+  xlv_TEXCOORD2 = tmpvar_1;
+}
+
+
+#endif
+#ifdef FRAGMENT
+uniform sampler2D _MainTex;
+varying highp vec2 xlv_TEXCOORD0;
+varying lowp vec3 xlv_TEXCOORD2;
+void main ()
+{
+  lowp vec4 c_1;
+  lowp vec4 tmpvar_2;
+  tmpvar_2 = texture2D (_MainTex, xlv_TEXCOORD0);
+  c_1.w = tmpvar_2.w;
+  c_1.xyz = (tmpvar_2.xyz + (xlv_TEXCOORD2 * tmpvar_2.w));
+  gl_FragData[0] = c_1;
+}
+
+
+#endif
+"
+}
+SubProgram "gles hw_tier01 " {
+"#version 100
+
+#ifdef VERTEX
+attribute vec4 _glesVertex;
+attribute vec3 _glesNormal;
+attribute vec4 _glesMultiTexCoord0;
+uniform highp vec4 _Time;
+uniform highp mat4 unity_ObjectToWorld;
+uniform highp mat4 unity_MatrixV;
+uniform highp mat4 unity_MatrixVP;
+highp mat4 unity_MatrixMV;
+uniform highp vec3 _SpecOffset;
+uniform highp float _SpecRange;
+uniform highp vec3 _SpecColor;
+uniform highp float _Shininess;
+uniform highp vec4 _ScrollingSpeed;
+varying highp vec2 xlv_TEXCOORD0;
+varying lowp vec3 xlv_TEXCOORD2;
+void main ()
+{
+  unity_MatrixMV = (unity_MatrixV * unity_ObjectToWorld);
+  lowp vec3 tmpvar_1;
+  highp vec4 tmpvar_2;
+  tmpvar_2.w = 1.0;
+  tmpvar_2.xyz = _glesVertex.xyz;
+  highp mat3 tmpvar_3;
+  tmpvar_3[0] = unity_MatrixMV[0].xyz;
+  tmpvar_3[1] = unity_MatrixMV[1].xyz;
+  tmpvar_3[2] = unity_MatrixMV[2].xyz;
+  highp vec3 tmpvar_4;
+  tmpvar_4 = ((unity_MatrixMV * _glesVertex).xyz - (_SpecOffset * vec3(1.0, 1.0, -1.0)));
+  highp float tmpvar_5;
+  tmpvar_5 = (1.0 - clamp ((
+    sqrt(dot (tmpvar_4, tmpvar_4))
+   / _SpecRange), 0.0, 1.0));
+  highp float tmpvar_6;
+  tmpvar_6 = pow (clamp (dot (
+    (tmpvar_3 * _glesNormal)
+  , 
+    normalize(((vec3(0.0, 0.0, 1.0) + normalize(
+      -(tmpvar_4)
+    )) * 0.5))
+  ), 0.0, 1.0), (_Shininess * 128.0));
+  tmpvar_1 = ((_SpecColor * tmpvar_6) * (2.0 * tmpvar_5));
+  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_2));
+  xlv_TEXCOORD0 = (_glesMultiTexCoord0 + fract((_ScrollingSpeed * _Time.y))).xy;
+  xlv_TEXCOORD2 = tmpvar_1;
+}
+
+
+#endif
+#ifdef FRAGMENT
+uniform sampler2D _MainTex;
+varying highp vec2 xlv_TEXCOORD0;
+varying lowp vec3 xlv_TEXCOORD2;
+void main ()
+{
+  lowp vec4 c_1;
+  lowp vec4 tmpvar_2;
+  tmpvar_2 = texture2D (_MainTex, xlv_TEXCOORD0);
+  c_1.w = tmpvar_2.w;
+  c_1.xyz = (tmpvar_2.xyz + (xlv_TEXCOORD2 * tmpvar_2.w));
+  gl_FragData[0] = c_1;
+}
+
+
+#endif
+"
+}
+SubProgram "gles hw_tier02 " {
+"#version 100
+
+#ifdef VERTEX
+attribute vec4 _glesVertex;
+attribute vec3 _glesNormal;
+attribute vec4 _glesMultiTexCoord0;
+uniform highp vec4 _Time;
+uniform highp mat4 unity_ObjectToWorld;
+uniform highp mat4 unity_MatrixV;
+uniform highp mat4 unity_MatrixVP;
+highp mat4 unity_MatrixMV;
+uniform highp vec3 _SpecOffset;
+uniform highp float _SpecRange;
+uniform highp vec3 _SpecColor;
+uniform highp float _Shininess;
+uniform highp vec4 _ScrollingSpeed;
+varying highp vec2 xlv_TEXCOORD0;
+varying lowp vec3 xlv_TEXCOORD2;
+void main ()
+{
+  unity_MatrixMV = (unity_MatrixV * unity_ObjectToWorld);
+  lowp vec3 tmpvar_1;
+  highp vec4 tmpvar_2;
+  tmpvar_2.w = 1.0;
+  tmpvar_2.xyz = _glesVertex.xyz;
+  highp mat3 tmpvar_3;
+  tmpvar_3[0] = unity_MatrixMV[0].xyz;
+  tmpvar_3[1] = unity_MatrixMV[1].xyz;
+  tmpvar_3[2] = unity_MatrixMV[2].xyz;
+  highp vec3 tmpvar_4;
+  tmpvar_4 = ((unity_MatrixMV * _glesVertex).xyz - (_SpecOffset * vec3(1.0, 1.0, -1.0)));
+  highp float tmpvar_5;
+  tmpvar_5 = (1.0 - clamp ((
+    sqrt(dot (tmpvar_4, tmpvar_4))
+   / _SpecRange), 0.0, 1.0));
+  highp float tmpvar_6;
+  tmpvar_6 = pow (clamp (dot (
+    (tmpvar_3 * _glesNormal)
+  , 
+    normalize(((vec3(0.0, 0.0, 1.0) + normalize(
+      -(tmpvar_4)
+    )) * 0.5))
+  ), 0.0, 1.0), (_Shininess * 128.0));
+  tmpvar_1 = ((_SpecColor * tmpvar_6) * (2.0 * tmpvar_5));
+  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_2));
+  xlv_TEXCOORD0 = (_glesMultiTexCoord0 + fract((_ScrollingSpeed * _Time.y))).xy;
+  xlv_TEXCOORD2 = tmpvar_1;
+}
+
+
+#endif
+#ifdef FRAGMENT
+uniform sampler2D _MainTex;
+varying highp vec2 xlv_TEXCOORD0;
+varying lowp vec3 xlv_TEXCOORD2;
+void main ()
+{
+  lowp vec4 c_1;
+  lowp vec4 tmpvar_2;
+  tmpvar_2 = texture2D (_MainTex, xlv_TEXCOORD0);
+  c_1.w = tmpvar_2.w;
+  c_1.xyz = (tmpvar_2.xyz + (xlv_TEXCOORD2 * tmpvar_2.w));
+  gl_FragData[0] = c_1;
+}
+
+
+#endif
+"
+}
+}
+Program "fp" {
+SubProgram "gles hw_tier00 " {
+""
+}
+SubProgram "gles hw_tier01 " {
+""
+}
+SubProgram "gles hw_tier02 " {
+""
+}
+}
+}
+}
+}

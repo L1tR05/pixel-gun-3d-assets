@@ -1,0 +1,16 @@
+g Ice_Palace_Duel_Knights_Collider001
+v -3 16.25 4.932314
+v -3 16.25 13
+v 3 16.25 13
+v 3 16.25 4.932314
+vt -23 1.999995
+vt -23 7.999994
+vt -29 7.999992
+vt -29 1.999994
+vn 0 -1 0
+vn 0 -1 0
+vn 0 -1 0
+vn 0 -1 0
+g Ice_Palace_Duel_Knights_Collider001_0
+f 3/3/3 2/2/2 1/1/1
+f 4/4/4 3/3/3 1/1/1
