@@ -341,7 +341,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -487,7 +487,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -633,7 +633,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -1094,7 +1094,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -1245,7 +1245,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -1396,7 +1396,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -1850,7 +1850,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -1996,7 +1996,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -2142,7 +2142,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -2666,7 +2666,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -2837,7 +2837,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -3008,7 +3008,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -3179,7 +3179,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -3357,7 +3357,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -3535,7 +3535,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -4097,7 +4097,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -4270,7 +4270,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -4443,7 +4443,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -5216,7 +5216,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -5375,7 +5375,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -5534,7 +5534,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -6044,7 +6044,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -6208,7 +6208,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -6372,7 +6372,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -6878,7 +6878,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -7037,7 +7037,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -7196,7 +7196,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -7760,7 +7760,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -7942,7 +7942,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -8124,7 +8124,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -8306,7 +8306,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -8496,7 +8496,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -8686,7 +8686,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -9293,7 +9293,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -9477,7 +9477,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -9661,7 +9661,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -10424,7 +10424,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -10570,7 +10570,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -10716,7 +10716,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -11177,7 +11177,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -11328,7 +11328,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -11479,7 +11479,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -11933,7 +11933,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -12079,7 +12079,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -12225,7 +12225,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -12749,7 +12749,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -12920,7 +12920,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -13091,7 +13091,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -13262,7 +13262,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -13440,7 +13440,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -13618,7 +13618,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -14180,7 +14180,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -14353,7 +14353,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -14526,7 +14526,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -15299,7 +15299,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -15458,7 +15458,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -15617,7 +15617,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -16127,7 +16127,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -16291,7 +16291,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -16455,7 +16455,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -16961,7 +16961,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -17120,7 +17120,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -17279,7 +17279,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -17843,7 +17843,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -18025,7 +18025,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -18207,7 +18207,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -18389,7 +18389,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -18579,7 +18579,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -18769,7 +18769,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -19376,7 +19376,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -19560,7 +19560,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -19744,7 +19744,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -20516,7 +20516,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -20664,7 +20664,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -20812,7 +20812,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -21284,7 +21284,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -21438,7 +21438,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -21592,7 +21592,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -22058,7 +22058,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -22206,7 +22206,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -22354,7 +22354,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -22889,7 +22889,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -23062,7 +23062,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -23235,7 +23235,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -23408,7 +23408,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -23588,7 +23588,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -23768,7 +23768,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -24335,7 +24335,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -24508,7 +24508,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -24681,7 +24681,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -25469,7 +25469,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -25632,7 +25632,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -25795,7 +25795,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -26321,7 +26321,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -26489,7 +26489,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -26657,7 +26657,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 "#ifdef VERTEX
 #version 100
 
@@ -27176,7 +27176,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -27337,7 +27337,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -27498,7 +27498,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 "#ifdef VERTEX
 #version 100
 
@@ -28079,7 +28079,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -28265,7 +28265,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -28451,7 +28451,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -28637,7 +28637,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -28830,7 +28830,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -29023,7 +29023,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -29636,7 +29636,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -29820,7 +29820,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -30004,7 +30004,7 @@ void main()
 "
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 "#ifdef VERTEX
 #version 100
 
@@ -30478,15 +30478,15 @@ Keywords { "_EMISSION_OFF" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30502,15 +30502,15 @@ Keywords { "_EMISSION_OFF" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30526,15 +30526,15 @@ Keywords { "_EMISSION_OFF" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30550,27 +30550,27 @@ Keywords { "_EMISSION_OFF" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30586,15 +30586,15 @@ Keywords { "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30622,15 +30622,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_OFF" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30646,15 +30646,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30670,15 +30670,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_OFF" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30694,27 +30694,27 @@ Keywords { "FOG_LINEAR" "_EMISSION_OFF" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30730,15 +30730,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_OFF" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_OFF" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30766,15 +30766,15 @@ Keywords { "_EMISSION_TEX" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30790,15 +30790,15 @@ Keywords { "_EMISSION_TEX" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30814,15 +30814,15 @@ Keywords { "_EMISSION_TEX" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30838,27 +30838,27 @@ Keywords { "_EMISSION_TEX" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30874,15 +30874,15 @@ Keywords { "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30910,15 +30910,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_TEX" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30934,15 +30934,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30958,15 +30958,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_TEX" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -30982,27 +30982,27 @@ Keywords { "FOG_LINEAR" "_EMISSION_TEX" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -31018,15 +31018,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_TEX" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_TEX" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -31054,15 +31054,15 @@ Keywords { "_EMISSION_ALPHA" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -31078,15 +31078,15 @@ Keywords { "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -31102,15 +31102,15 @@ Keywords { "_EMISSION_ALPHA" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -31126,27 +31126,27 @@ Keywords { "_EMISSION_ALPHA" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -31162,15 +31162,15 @@ Keywords { "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -31198,15 +31198,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -31222,15 +31222,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -31246,15 +31246,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -31270,27 +31270,27 @@ Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "ALPHATEST_ENABLE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
@@ -31306,15 +31306,15 @@ Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier01 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier02 " {
-Keywords { "FOG_LINEAR" "LIGHTING_ENABLE" "_EMISSION_ALPHA" "IS_OPAQUE" "HSV_ACTIVE" }
+Keywords { "FOG_LINEAR" "_EMISSION_ALPHA" "LIGHTING_ENABLE" "IS_OPAQUE" "HSV_ACTIVE" }
 ""
 }
 SubProgram "gles hw_tier00 " {
