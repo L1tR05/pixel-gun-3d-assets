@@ -17,7 +17,7 @@ SubShader {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZWrite Off
   Offset -1, -1
-  GpuProgramID 15728
+  GpuProgramID 9493
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -52,24 +52,25 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _Time;
 uniform 	vec4 _Color;
 uniform 	float _BulletSpeed;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump float u_xlat16_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 vec4 u_xlat2;
 mediump float u_xlat16_3;
 vec2 u_xlat4;
 vec2 u_xlat5;
 mediump float u_xlat16_8;
 float u_xlat10;
-lowp float u_xlat10_10;
+mediump float u_xlat16_10;
 bool u_xlatb10;
 float u_xlat15;
 bool u_xlatb15;
@@ -78,13 +79,13 @@ void main()
     u_xlat0.x = vs_TEXCOORD0.x * 5.0;
     u_xlat0.z = u_xlat0.x / vs_COLOR0.w;
     u_xlat0.yw = vs_TEXCOORD0.yy;
-    u_xlat10_10 = texture(_MainTex, u_xlat0.zw).w;
+    u_xlat16_10 = texture(_MainTex, u_xlat0.zw).w;
     u_xlat15 = fract(_Time.x);
     u_xlat15 = u_xlat15 + vs_TEXCOORD0.x;
     u_xlat15 = u_xlat15 / vs_COLOR0.x;
     u_xlat0.x = u_xlat15 * 0.5;
-    u_xlat10_1 = texture(_MainTex, u_xlat0.xy);
-    u_xlat16_0 = u_xlat10_10 * u_xlat10_1.w;
+    u_xlat16_1 = texture(_MainTex, u_xlat0.xy);
+    u_xlat16_0 = u_xlat16_10 * u_xlat16_1.w;
     u_xlat16_0 = u_xlat16_0 * vs_COLOR0.w;
     u_xlat5.x = (-vs_TEXCOORD0.x) + 0.00999999978;
 #ifdef UNITY_ADRENO_ES3
@@ -133,7 +134,7 @@ void main()
     u_xlat0.x = u_xlat5.y + u_xlat5.y;
     u_xlat5.x = (-u_xlat5.y) + 1.0;
     u_xlat0.xzw = u_xlat0.xxx * _Color.xyz;
-    u_xlat2.xyz = u_xlat10_1.xyz * u_xlat5.xxx + u_xlat0.xzw;
+    u_xlat2.xyz = u_xlat16_1.xyz * u_xlat5.xxx + u_xlat0.xzw;
     SV_Target0 = u_xlat2;
     return;
 }
@@ -174,24 +175,25 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _Time;
 uniform 	vec4 _Color;
 uniform 	float _BulletSpeed;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump float u_xlat16_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 vec4 u_xlat2;
 mediump float u_xlat16_3;
 vec2 u_xlat4;
 vec2 u_xlat5;
 mediump float u_xlat16_8;
 float u_xlat10;
-lowp float u_xlat10_10;
+mediump float u_xlat16_10;
 bool u_xlatb10;
 float u_xlat15;
 bool u_xlatb15;
@@ -200,13 +202,13 @@ void main()
     u_xlat0.x = vs_TEXCOORD0.x * 5.0;
     u_xlat0.z = u_xlat0.x / vs_COLOR0.w;
     u_xlat0.yw = vs_TEXCOORD0.yy;
-    u_xlat10_10 = texture(_MainTex, u_xlat0.zw).w;
+    u_xlat16_10 = texture(_MainTex, u_xlat0.zw).w;
     u_xlat15 = fract(_Time.x);
     u_xlat15 = u_xlat15 + vs_TEXCOORD0.x;
     u_xlat15 = u_xlat15 / vs_COLOR0.x;
     u_xlat0.x = u_xlat15 * 0.5;
-    u_xlat10_1 = texture(_MainTex, u_xlat0.xy);
-    u_xlat16_0 = u_xlat10_10 * u_xlat10_1.w;
+    u_xlat16_1 = texture(_MainTex, u_xlat0.xy);
+    u_xlat16_0 = u_xlat16_10 * u_xlat16_1.w;
     u_xlat16_0 = u_xlat16_0 * vs_COLOR0.w;
     u_xlat5.x = (-vs_TEXCOORD0.x) + 0.00999999978;
 #ifdef UNITY_ADRENO_ES3
@@ -255,7 +257,7 @@ void main()
     u_xlat0.x = u_xlat5.y + u_xlat5.y;
     u_xlat5.x = (-u_xlat5.y) + 1.0;
     u_xlat0.xzw = u_xlat0.xxx * _Color.xyz;
-    u_xlat2.xyz = u_xlat10_1.xyz * u_xlat5.xxx + u_xlat0.xzw;
+    u_xlat2.xyz = u_xlat16_1.xyz * u_xlat5.xxx + u_xlat0.xzw;
     SV_Target0 = u_xlat2;
     return;
 }
@@ -296,24 +298,25 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _Time;
 uniform 	vec4 _Color;
 uniform 	float _BulletSpeed;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump float u_xlat16_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 vec4 u_xlat2;
 mediump float u_xlat16_3;
 vec2 u_xlat4;
 vec2 u_xlat5;
 mediump float u_xlat16_8;
 float u_xlat10;
-lowp float u_xlat10_10;
+mediump float u_xlat16_10;
 bool u_xlatb10;
 float u_xlat15;
 bool u_xlatb15;
@@ -322,13 +325,13 @@ void main()
     u_xlat0.x = vs_TEXCOORD0.x * 5.0;
     u_xlat0.z = u_xlat0.x / vs_COLOR0.w;
     u_xlat0.yw = vs_TEXCOORD0.yy;
-    u_xlat10_10 = texture(_MainTex, u_xlat0.zw).w;
+    u_xlat16_10 = texture(_MainTex, u_xlat0.zw).w;
     u_xlat15 = fract(_Time.x);
     u_xlat15 = u_xlat15 + vs_TEXCOORD0.x;
     u_xlat15 = u_xlat15 / vs_COLOR0.x;
     u_xlat0.x = u_xlat15 * 0.5;
-    u_xlat10_1 = texture(_MainTex, u_xlat0.xy);
-    u_xlat16_0 = u_xlat10_10 * u_xlat10_1.w;
+    u_xlat16_1 = texture(_MainTex, u_xlat0.xy);
+    u_xlat16_0 = u_xlat16_10 * u_xlat16_1.w;
     u_xlat16_0 = u_xlat16_0 * vs_COLOR0.w;
     u_xlat5.x = (-vs_TEXCOORD0.x) + 0.00999999978;
 #ifdef UNITY_ADRENO_ES3
@@ -377,7 +380,7 @@ void main()
     u_xlat0.x = u_xlat5.y + u_xlat5.y;
     u_xlat5.x = (-u_xlat5.y) + 1.0;
     u_xlat0.xzw = u_xlat0.xxx * _Color.xyz;
-    u_xlat2.xyz = u_xlat10_1.xyz * u_xlat5.xxx + u_xlat0.xzw;
+    u_xlat2.xyz = u_xlat16_1.xyz * u_xlat5.xxx + u_xlat0.xzw;
     SV_Target0 = u_xlat2;
     return;
 }

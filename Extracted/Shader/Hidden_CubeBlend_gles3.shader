@@ -15,7 +15,7 @@ SubShader {
   Tags { "QUEUE" = "Background" "RenderType" = "Background" }
   ZTest Always
   ZWrite Off
-  GpuProgramID 19854
+  GpuProgramID 54436
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -45,33 +45,36 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _TexA_HDR;
 uniform 	mediump vec4 _TexB_HDR;
 uniform 	float _Level;
 uniform 	float _value;
-uniform lowp samplerCube _TexA;
-uniform lowp samplerCube _TexB;
+uniform mediump samplerCube _TexA;
+uniform mediump samplerCube _TexB;
 in highp vec3 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 mediump float u_xlat16_7;
 void main()
 {
-    u_xlat10_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat16_0.w + -1.0;
     u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
     u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
-    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
-    u_xlat10_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_1.xyz = u_xlat16_0.xyz * u_xlat16_1.xxx;
+    u_xlat16_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat16_0.w + -1.0;
     u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
     u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
-    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat16_0.xyz + (-u_xlat16_1.xyz);
     u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     SV_Target0.w = 1.0;
@@ -109,33 +112,36 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _TexA_HDR;
 uniform 	mediump vec4 _TexB_HDR;
 uniform 	float _Level;
 uniform 	float _value;
-uniform lowp samplerCube _TexA;
-uniform lowp samplerCube _TexB;
+uniform mediump samplerCube _TexA;
+uniform mediump samplerCube _TexB;
 in highp vec3 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 mediump float u_xlat16_7;
 void main()
 {
-    u_xlat10_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat16_0.w + -1.0;
     u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
     u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
-    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
-    u_xlat10_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_1.xyz = u_xlat16_0.xyz * u_xlat16_1.xxx;
+    u_xlat16_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat16_0.w + -1.0;
     u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
     u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
-    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat16_0.xyz + (-u_xlat16_1.xyz);
     u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     SV_Target0.w = 1.0;
@@ -173,33 +179,36 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _TexA_HDR;
 uniform 	mediump vec4 _TexB_HDR;
 uniform 	float _Level;
 uniform 	float _value;
-uniform lowp samplerCube _TexA;
-uniform lowp samplerCube _TexB;
+uniform mediump samplerCube _TexA;
+uniform mediump samplerCube _TexB;
 in highp vec3 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 mediump float u_xlat16_7;
 void main()
 {
-    u_xlat10_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat16_0.w + -1.0;
     u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
     u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
-    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
-    u_xlat10_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_1.xyz = u_xlat16_0.xyz * u_xlat16_1.xxx;
+    u_xlat16_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat16_0.w + -1.0;
     u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
     u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
-    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat16_0.xyz + (-u_xlat16_1.xyz);
     u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     SV_Target0.w = 1.0;
@@ -229,7 +238,7 @@ SubShader {
   Tags { "QUEUE" = "Background" "RenderType" = "Background" }
   ZTest Always
   ZWrite Off
-  GpuProgramID 105093
+  GpuProgramID 120266
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -259,33 +268,36 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _TexA_HDR;
 uniform 	mediump vec4 _TexB_HDR;
 uniform 	float _Level;
 uniform 	float _value;
-uniform lowp samplerCube _TexA;
-uniform lowp samplerCube _TexB;
+uniform mediump samplerCube _TexA;
+uniform mediump samplerCube _TexB;
 in highp vec3 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 mediump float u_xlat16_7;
 void main()
 {
-    u_xlat10_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat16_0.w + -1.0;
     u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
     u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
-    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
-    u_xlat10_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_1.xyz = u_xlat16_0.xyz * u_xlat16_1.xxx;
+    u_xlat16_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat16_0.w + -1.0;
     u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
     u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
-    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat16_0.xyz + (-u_xlat16_1.xyz);
     u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     SV_Target0.w = 1.0;
@@ -323,33 +335,36 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _TexA_HDR;
 uniform 	mediump vec4 _TexB_HDR;
 uniform 	float _Level;
 uniform 	float _value;
-uniform lowp samplerCube _TexA;
-uniform lowp samplerCube _TexB;
+uniform mediump samplerCube _TexA;
+uniform mediump samplerCube _TexB;
 in highp vec3 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 mediump float u_xlat16_7;
 void main()
 {
-    u_xlat10_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat16_0.w + -1.0;
     u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
     u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
-    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
-    u_xlat10_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_1.xyz = u_xlat16_0.xyz * u_xlat16_1.xxx;
+    u_xlat16_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat16_0.w + -1.0;
     u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
     u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
-    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat16_0.xyz + (-u_xlat16_1.xyz);
     u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     SV_Target0.w = 1.0;
@@ -387,33 +402,36 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _TexA_HDR;
 uniform 	mediump vec4 _TexB_HDR;
 uniform 	float _Level;
 uniform 	float _value;
-uniform lowp samplerCube _TexA;
-uniform lowp samplerCube _TexB;
+uniform mediump samplerCube _TexA;
+uniform mediump samplerCube _TexB;
 in highp vec3 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 mediump float u_xlat16_7;
 void main()
 {
-    u_xlat10_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_0 = textureLod(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat16_0.w + -1.0;
     u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
     u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
-    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
-    u_xlat10_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
-    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_1.xyz = u_xlat16_0.xyz * u_xlat16_1.xxx;
+    u_xlat16_0 = textureLod(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat16_0.w + -1.0;
     u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
     u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
-    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat16_0.xyz + (-u_xlat16_1.xyz);
     u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     SV_Target0.w = 1.0;

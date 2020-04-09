@@ -16,7 +16,7 @@ SubShader {
   ZWrite Off
   Cull Off
   Offset -1, -1
-  GpuProgramID 48610
+  GpuProgramID 4903
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -67,11 +67,12 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ClipArgs0;
 uniform 	vec4 _ClipArgs1;
 uniform 	vec4 _ClipArgs2;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD2;
@@ -80,15 +81,14 @@ layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 vec2 u_xlat1;
 mediump float u_xlat16_1;
-lowp float u_xlat10_1;
 void main()
 {
     u_xlat0 = -abs(vs_TEXCOORD1) + vec4(1.0, 1.0, 1.0, 1.0);
     u_xlat0.xy = u_xlat0.xy * _ClipArgs0.xy;
-    u_xlat0.zw = vec2(u_xlat0.z * _ClipArgs1.x, u_xlat0.w * _ClipArgs1.y);
+    u_xlat0.zw = u_xlat0.zw * _ClipArgs1.xy;
     u_xlat0.xz = min(u_xlat0.yw, u_xlat0.xz);
     u_xlat0.x = min(u_xlat0.z, u_xlat0.x);
-    u_xlat1.xy = vec2(-abs(vs_TEXCOORD2.x) + float(1.0), -abs(vs_TEXCOORD2.y) + float(1.0));
+    u_xlat1.xy = -abs(vs_TEXCOORD2.xy) + vec2(1.0, 1.0);
     u_xlat1.xy = u_xlat1.xy * _ClipArgs2.xy;
     u_xlat1.x = min(u_xlat1.y, u_xlat1.x);
     u_xlat0.x = min(u_xlat1.x, u_xlat0.x);
@@ -97,8 +97,8 @@ void main()
 #else
     u_xlat0.x = clamp(u_xlat0.x, 0.0, 1.0);
 #endif
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_1 * vs_COLOR0.w;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_1 * vs_COLOR0.w;
     u_xlat0.x = u_xlat0.x * u_xlat16_1;
     SV_Target0.w = u_xlat0.x;
     SV_Target0.xyz = vs_COLOR0.xyz;
@@ -157,11 +157,12 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ClipArgs0;
 uniform 	vec4 _ClipArgs1;
 uniform 	vec4 _ClipArgs2;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD2;
@@ -170,15 +171,14 @@ layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 vec2 u_xlat1;
 mediump float u_xlat16_1;
-lowp float u_xlat10_1;
 void main()
 {
     u_xlat0 = -abs(vs_TEXCOORD1) + vec4(1.0, 1.0, 1.0, 1.0);
     u_xlat0.xy = u_xlat0.xy * _ClipArgs0.xy;
-    u_xlat0.zw = vec2(u_xlat0.z * _ClipArgs1.x, u_xlat0.w * _ClipArgs1.y);
+    u_xlat0.zw = u_xlat0.zw * _ClipArgs1.xy;
     u_xlat0.xz = min(u_xlat0.yw, u_xlat0.xz);
     u_xlat0.x = min(u_xlat0.z, u_xlat0.x);
-    u_xlat1.xy = vec2(-abs(vs_TEXCOORD2.x) + float(1.0), -abs(vs_TEXCOORD2.y) + float(1.0));
+    u_xlat1.xy = -abs(vs_TEXCOORD2.xy) + vec2(1.0, 1.0);
     u_xlat1.xy = u_xlat1.xy * _ClipArgs2.xy;
     u_xlat1.x = min(u_xlat1.y, u_xlat1.x);
     u_xlat0.x = min(u_xlat1.x, u_xlat0.x);
@@ -187,8 +187,8 @@ void main()
 #else
     u_xlat0.x = clamp(u_xlat0.x, 0.0, 1.0);
 #endif
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_1 * vs_COLOR0.w;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_1 * vs_COLOR0.w;
     u_xlat0.x = u_xlat0.x * u_xlat16_1;
     SV_Target0.w = u_xlat0.x;
     SV_Target0.xyz = vs_COLOR0.xyz;
@@ -247,11 +247,12 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ClipArgs0;
 uniform 	vec4 _ClipArgs1;
 uniform 	vec4 _ClipArgs2;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD2;
@@ -260,15 +261,14 @@ layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 vec2 u_xlat1;
 mediump float u_xlat16_1;
-lowp float u_xlat10_1;
 void main()
 {
     u_xlat0 = -abs(vs_TEXCOORD1) + vec4(1.0, 1.0, 1.0, 1.0);
     u_xlat0.xy = u_xlat0.xy * _ClipArgs0.xy;
-    u_xlat0.zw = vec2(u_xlat0.z * _ClipArgs1.x, u_xlat0.w * _ClipArgs1.y);
+    u_xlat0.zw = u_xlat0.zw * _ClipArgs1.xy;
     u_xlat0.xz = min(u_xlat0.yw, u_xlat0.xz);
     u_xlat0.x = min(u_xlat0.z, u_xlat0.x);
-    u_xlat1.xy = vec2(-abs(vs_TEXCOORD2.x) + float(1.0), -abs(vs_TEXCOORD2.y) + float(1.0));
+    u_xlat1.xy = -abs(vs_TEXCOORD2.xy) + vec2(1.0, 1.0);
     u_xlat1.xy = u_xlat1.xy * _ClipArgs2.xy;
     u_xlat1.x = min(u_xlat1.y, u_xlat1.x);
     u_xlat0.x = min(u_xlat1.x, u_xlat0.x);
@@ -277,8 +277,8 @@ void main()
 #else
     u_xlat0.x = clamp(u_xlat0.x, 0.0, 1.0);
 #endif
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_1 * vs_COLOR0.w;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_1 * vs_COLOR0.w;
     u_xlat0.x = u_xlat0.x * u_xlat16_1;
     SV_Target0.w = u_xlat0.x;
     SV_Target0.xyz = vs_COLOR0.xyz;

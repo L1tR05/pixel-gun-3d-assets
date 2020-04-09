@@ -18,7 +18,7 @@ SubShader {
   ZTest Less
   ZWrite Off
   Cull Off
-  GpuProgramID 56292
+  GpuProgramID 48554
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }
@@ -81,6 +81,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -154,6 +155,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -227,6 +229,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -300,6 +303,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -373,6 +377,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -446,6 +451,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -491,7 +497,7 @@ Keywords { "LIGHTMAP_ON" }
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZTest Less
   Offset 0, -1
-  GpuProgramID 119442
+  GpuProgramID 77400
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }
@@ -524,15 +530,16 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0 = u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0 = u_xlat16_0;
     return;
 }
 
@@ -570,15 +577,16 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0 = u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0 = u_xlat16_0;
     return;
 }
 
@@ -616,15 +624,16 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0 = u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0 = u_xlat16_0;
     return;
 }
 
@@ -662,15 +671,16 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0 = u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0 = u_xlat16_0;
     return;
 }
 
@@ -708,15 +718,16 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0 = u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0 = u_xlat16_0;
     return;
 }
 
@@ -754,15 +765,16 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0 = u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0 = u_xlat16_0;
     return;
 }
 

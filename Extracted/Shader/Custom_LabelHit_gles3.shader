@@ -16,7 +16,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 8771
+  GpuProgramID 13704
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -50,24 +50,24 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 bool u_xlatb1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = u_xlat10_0 * vs_COLOR0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR0;
 #ifdef UNITY_ADRENO_ES3
     u_xlatb1 = !!(u_xlat16_0.w<0.100000001);
 #else
     u_xlatb1 = u_xlat16_0.w<0.100000001;
 #endif
-    if((int(u_xlatb1) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb1) * int(0xffffffffu)))!=0){discard;}
     SV_Target0 = u_xlat16_0;
     return;
 }
@@ -107,24 +107,24 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 bool u_xlatb1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = u_xlat10_0 * vs_COLOR0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR0;
 #ifdef UNITY_ADRENO_ES3
     u_xlatb1 = !!(u_xlat16_0.w<0.100000001);
 #else
     u_xlatb1 = u_xlat16_0.w<0.100000001;
 #endif
-    if((int(u_xlatb1) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb1) * int(0xffffffffu)))!=0){discard;}
     SV_Target0 = u_xlat16_0;
     return;
 }
@@ -164,24 +164,24 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 bool u_xlatb1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = u_xlat10_0 * vs_COLOR0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR0;
 #ifdef UNITY_ADRENO_ES3
     u_xlatb1 = !!(u_xlat16_0.w<0.100000001);
 #else
     u_xlatb1 = u_xlat16_0.w<0.100000001;
 #endif
-    if((int(u_xlatb1) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb1) * int(0xffffffffu)))!=0){discard;}
     SV_Target0 = u_xlat16_0;
     return;
 }

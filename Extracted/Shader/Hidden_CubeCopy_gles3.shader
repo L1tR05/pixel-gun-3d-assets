@@ -17,7 +17,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 16856
+  GpuProgramID 46078
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -47,10 +47,14 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	float _Level;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out highp vec4 SV_Target0;
 void main()
@@ -90,10 +94,14 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	float _Level;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out highp vec4 SV_Target0;
 void main()
@@ -133,10 +141,14 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	float _Level;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out highp vec4 SV_Target0;
 void main()
@@ -171,7 +183,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 84428
+  GpuProgramID 115922
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -201,10 +213,14 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	float _Level;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out highp vec4 SV_Target0;
 void main()
@@ -244,10 +260,14 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	float _Level;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out highp vec4 SV_Target0;
 void main()
@@ -287,10 +307,14 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	float _Level;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out highp vec4 SV_Target0;
 void main()

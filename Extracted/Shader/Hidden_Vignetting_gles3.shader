@@ -13,7 +13,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 60767
+  GpuProgramID 18513
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -48,18 +48,18 @@ vs_TEXCOORD1 = phase0_Output0_1.zw;
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Intensity;
 uniform 	mediump float _Blur;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _VignetteTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _VignetteTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
 mediump vec4 u_xlat16_1;
-lowp vec4 u_xlat10_1;
-lowp vec4 u_xlat10_2;
+mediump vec4 u_xlat16_2;
 mediump float u_xlat16_3;
 void main()
 {
@@ -74,10 +74,10 @@ void main()
     u_xlat16_0.x = clamp(u_xlat16_0.x, 0.0, 1.0);
 #endif
     u_xlat16_3 = (-u_xlat16_0.y) * 0.100000001 + 1.0;
-    u_xlat10_1 = texture(_VignetteTex, vs_TEXCOORD1.xy);
-    u_xlat10_2 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_1 = u_xlat10_1 + (-u_xlat10_2);
-    u_xlat16_1 = u_xlat16_0.xxxx * u_xlat16_1 + u_xlat10_2;
+    u_xlat16_1 = texture(_VignetteTex, vs_TEXCOORD1.xy);
+    u_xlat16_2 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = u_xlat16_1 + (-u_xlat16_2);
+    u_xlat16_1 = u_xlat16_0.xxxx * u_xlat16_1 + u_xlat16_2;
     u_xlat16_0 = vec4(u_xlat16_3) * u_xlat16_1;
     SV_Target0 = u_xlat16_0;
     return;
@@ -119,18 +119,18 @@ vs_TEXCOORD1 = phase0_Output0_1.zw;
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Intensity;
 uniform 	mediump float _Blur;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _VignetteTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _VignetteTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
 mediump vec4 u_xlat16_1;
-lowp vec4 u_xlat10_1;
-lowp vec4 u_xlat10_2;
+mediump vec4 u_xlat16_2;
 mediump float u_xlat16_3;
 void main()
 {
@@ -145,10 +145,10 @@ void main()
     u_xlat16_0.x = clamp(u_xlat16_0.x, 0.0, 1.0);
 #endif
     u_xlat16_3 = (-u_xlat16_0.y) * 0.100000001 + 1.0;
-    u_xlat10_1 = texture(_VignetteTex, vs_TEXCOORD1.xy);
-    u_xlat10_2 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_1 = u_xlat10_1 + (-u_xlat10_2);
-    u_xlat16_1 = u_xlat16_0.xxxx * u_xlat16_1 + u_xlat10_2;
+    u_xlat16_1 = texture(_VignetteTex, vs_TEXCOORD1.xy);
+    u_xlat16_2 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = u_xlat16_1 + (-u_xlat16_2);
+    u_xlat16_1 = u_xlat16_0.xxxx * u_xlat16_1 + u_xlat16_2;
     u_xlat16_0 = vec4(u_xlat16_3) * u_xlat16_1;
     SV_Target0 = u_xlat16_0;
     return;
@@ -190,18 +190,18 @@ vs_TEXCOORD1 = phase0_Output0_1.zw;
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Intensity;
 uniform 	mediump float _Blur;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _VignetteTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _VignetteTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
 mediump vec4 u_xlat16_1;
-lowp vec4 u_xlat10_1;
-lowp vec4 u_xlat10_2;
+mediump vec4 u_xlat16_2;
 mediump float u_xlat16_3;
 void main()
 {
@@ -216,10 +216,10 @@ void main()
     u_xlat16_0.x = clamp(u_xlat16_0.x, 0.0, 1.0);
 #endif
     u_xlat16_3 = (-u_xlat16_0.y) * 0.100000001 + 1.0;
-    u_xlat10_1 = texture(_VignetteTex, vs_TEXCOORD1.xy);
-    u_xlat10_2 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_1 = u_xlat10_1 + (-u_xlat10_2);
-    u_xlat16_1 = u_xlat16_0.xxxx * u_xlat16_1 + u_xlat10_2;
+    u_xlat16_1 = texture(_VignetteTex, vs_TEXCOORD1.xy);
+    u_xlat16_2 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = u_xlat16_1 + (-u_xlat16_2);
+    u_xlat16_1 = u_xlat16_0.xxxx * u_xlat16_1 + u_xlat16_2;
     u_xlat16_0 = vec4(u_xlat16_3) * u_xlat16_1;
     SV_Target0 = u_xlat16_0;
     return;

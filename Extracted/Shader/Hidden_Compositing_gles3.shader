@@ -10,9 +10,9 @@ _SecondTex ("_SecondTex (A)", 2D) = "black" { }
 }
 SubShader {
  Pass {
-  Name "MIX_RGBA_TO_RGBA"
+  Name "Mix_RGBA_To_RGBA"
   Cull Off
-  GpuProgramID 26712
+  GpuProgramID 64389
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -44,25 +44,26 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	float _AlphaParam;
 uniform 	float _SecondAlphaParam;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _SecondTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _SecondTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-lowp vec4 u_xlat10_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_0;
+mediump vec4 u_xlat16_1;
 float u_xlat6;
 void main()
 {
-    u_xlat10_0 = texture(_SecondTex, vs_TEXCOORD0.xy);
-    u_xlat6 = u_xlat10_0.w * _SecondAlphaParam;
-    u_xlat0.xyz = u_xlat10_0.xyz * vec3(u_xlat6);
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat6 = u_xlat10_1.w * _AlphaParam;
-    u_xlat0.xyz = vec3(u_xlat6) * u_xlat10_1.xyz + u_xlat0.xyz;
+    u_xlat16_0 = texture(_SecondTex, vs_TEXCOORD0.xy);
+    u_xlat6 = u_xlat16_0.w * _SecondAlphaParam;
+    u_xlat0.xyz = u_xlat16_0.xyz * vec3(u_xlat6);
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat6 = u_xlat16_1.w * _AlphaParam;
+    u_xlat0.xyz = vec3(u_xlat6) * u_xlat16_1.xyz + u_xlat0.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     SV_Target0.w = 1.0;
     return;
@@ -101,25 +102,26 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	float _AlphaParam;
 uniform 	float _SecondAlphaParam;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _SecondTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _SecondTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-lowp vec4 u_xlat10_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_0;
+mediump vec4 u_xlat16_1;
 float u_xlat6;
 void main()
 {
-    u_xlat10_0 = texture(_SecondTex, vs_TEXCOORD0.xy);
-    u_xlat6 = u_xlat10_0.w * _SecondAlphaParam;
-    u_xlat0.xyz = u_xlat10_0.xyz * vec3(u_xlat6);
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat6 = u_xlat10_1.w * _AlphaParam;
-    u_xlat0.xyz = vec3(u_xlat6) * u_xlat10_1.xyz + u_xlat0.xyz;
+    u_xlat16_0 = texture(_SecondTex, vs_TEXCOORD0.xy);
+    u_xlat6 = u_xlat16_0.w * _SecondAlphaParam;
+    u_xlat0.xyz = u_xlat16_0.xyz * vec3(u_xlat6);
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat6 = u_xlat16_1.w * _AlphaParam;
+    u_xlat0.xyz = vec3(u_xlat6) * u_xlat16_1.xyz + u_xlat0.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     SV_Target0.w = 1.0;
     return;
@@ -158,25 +160,26 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	float _AlphaParam;
 uniform 	float _SecondAlphaParam;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _SecondTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _SecondTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-lowp vec4 u_xlat10_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_0;
+mediump vec4 u_xlat16_1;
 float u_xlat6;
 void main()
 {
-    u_xlat10_0 = texture(_SecondTex, vs_TEXCOORD0.xy);
-    u_xlat6 = u_xlat10_0.w * _SecondAlphaParam;
-    u_xlat0.xyz = u_xlat10_0.xyz * vec3(u_xlat6);
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat6 = u_xlat10_1.w * _AlphaParam;
-    u_xlat0.xyz = vec3(u_xlat6) * u_xlat10_1.xyz + u_xlat0.xyz;
+    u_xlat16_0 = texture(_SecondTex, vs_TEXCOORD0.xy);
+    u_xlat6 = u_xlat16_0.w * _SecondAlphaParam;
+    u_xlat0.xyz = u_xlat16_0.xyz * vec3(u_xlat6);
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat6 = u_xlat16_1.w * _AlphaParam;
+    u_xlat0.xyz = vec3(u_xlat6) * u_xlat16_1.xyz + u_xlat0.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     SV_Target0.w = 1.0;
     return;

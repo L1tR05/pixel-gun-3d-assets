@@ -18,7 +18,7 @@ SubShader {
  Pass {
   LOD 100
   Tags { "LIGHTMODE" = "FORWARDBASE" "RenderType" = "Opaque" }
-  GpuProgramID 1214
+  GpuProgramID 30797
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -120,17 +120,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec3 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0.xyz = vs_TEXCOORD2.xyz * u_xlat10_0.www + u_xlat10_0.xyz;
-    SV_Target0.w = u_xlat10_0.w;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0.xyz = vs_TEXCOORD2.xyz * u_xlat16_0.www + u_xlat16_0.xyz;
+    SV_Target0.w = u_xlat16_0.w;
     return;
 }
 
@@ -237,17 +238,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec3 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0.xyz = vs_TEXCOORD2.xyz * u_xlat10_0.www + u_xlat10_0.xyz;
-    SV_Target0.w = u_xlat10_0.w;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0.xyz = vs_TEXCOORD2.xyz * u_xlat16_0.www + u_xlat16_0.xyz;
+    SV_Target0.w = u_xlat16_0.w;
     return;
 }
 
@@ -354,17 +356,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec3 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0.xyz = vs_TEXCOORD2.xyz * u_xlat10_0.www + u_xlat10_0.xyz;
-    SV_Target0.w = u_xlat10_0.w;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0.xyz = vs_TEXCOORD2.xyz * u_xlat16_0.www + u_xlat16_0.xyz;
+    SV_Target0.w = u_xlat16_0.w;
     return;
 }
 

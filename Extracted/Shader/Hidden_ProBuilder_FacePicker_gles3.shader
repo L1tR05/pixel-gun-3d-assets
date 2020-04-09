@@ -9,9 +9,9 @@ Properties {
 SubShader {
  Tags { "ProBuilderPicker" = "Base" }
  Pass {
-  Name "BASE"
+  Name "Base"
   Tags { "ProBuilderPicker" = "Base" }
-  GpuProgramID 8980
+  GpuProgramID 19717
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -42,6 +42,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out highp vec4 SV_Target0;
@@ -83,6 +84,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out highp vec4 SV_Target0;
@@ -124,6 +126,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out highp vec4 SV_Target0;

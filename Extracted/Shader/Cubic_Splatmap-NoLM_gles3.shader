@@ -15,7 +15,7 @@ _Splat0 ("Layer 0 (R)", 2D) = "white" { }
 SubShader {
  Pass {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Geometry-100" "RenderType" = "Opaque" }
-  GpuProgramID 45182
+  GpuProgramID 2293
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_ON" }
@@ -73,44 +73,43 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD2;
 in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz;
     u_xlat0.w = vs_COLOR1.w;
     SV_Target0 = u_xlat0;
@@ -176,44 +175,43 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD2;
 in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz;
     u_xlat0.w = vs_COLOR1.w;
     SV_Target0 = u_xlat0;
@@ -279,44 +277,43 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD2;
 in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz;
     u_xlat0.w = vs_COLOR1.w;
     SV_Target0 = u_xlat0;
@@ -386,14 +383,15 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD2;
@@ -401,32 +399,30 @@ in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
 float u_xlat15;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat15 = vs_TEXCOORD3;
 #ifdef UNITY_ADRENO_ES3
@@ -503,14 +499,15 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD2;
@@ -518,32 +515,30 @@ in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
 float u_xlat15;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat15 = vs_TEXCOORD3;
 #ifdef UNITY_ADRENO_ES3
@@ -620,14 +615,15 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD2;
@@ -635,32 +631,30 @@ in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
 float u_xlat15;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat15 = vs_TEXCOORD3;
 #ifdef UNITY_ADRENO_ES3
@@ -729,44 +723,43 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD2;
 in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz;
     u_xlat0.w = vs_COLOR1.w;
     SV_Target0 = u_xlat0;
@@ -828,44 +821,43 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD2;
 in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz;
     u_xlat0.w = vs_COLOR1.w;
     SV_Target0 = u_xlat0;
@@ -927,44 +919,43 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD2;
 in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz;
     u_xlat0.w = vs_COLOR1.w;
     SV_Target0 = u_xlat0;
@@ -1030,14 +1021,15 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD2;
@@ -1045,32 +1037,30 @@ in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
 float u_xlat15;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat15 = vs_TEXCOORD3;
 #ifdef UNITY_ADRENO_ES3
@@ -1143,14 +1133,15 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD2;
@@ -1158,32 +1149,30 @@ in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
 float u_xlat15;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat15 = vs_TEXCOORD3;
 #ifdef UNITY_ADRENO_ES3
@@ -1256,14 +1245,15 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _Control;
-uniform lowp sampler2D _Splat3;
-uniform lowp sampler2D _Splat0;
-uniform lowp sampler2D _Splat1;
-uniform lowp sampler2D _Splat2;
-uniform lowp sampler2D _Tile;
+uniform mediump sampler2D _Control;
+uniform mediump sampler2D _Splat3;
+uniform mediump sampler2D _Splat0;
+uniform mediump sampler2D _Splat1;
+uniform mediump sampler2D _Splat2;
+uniform mediump sampler2D _Tile;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD2;
@@ -1271,32 +1261,30 @@ in highp vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
-lowp vec3 u_xlat10_1;
+mediump vec3 u_xlat16_1;
 mediump float u_xlat16_2;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 mediump vec3 u_xlat16_4;
-lowp vec3 u_xlat10_4;
 mediump float u_xlat16_7;
 float u_xlat15;
-lowp float u_xlat10_15;
+mediump float u_xlat16_15;
 void main()
 {
-    u_xlat10_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
-    u_xlat10_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_2 = dot(u_xlat10_1.xyz, vec3(0.5, 0.5, 0.5));
+    u_xlat16_0.xyz = texture(_Splat0, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_1.xyz = texture(_Splat3, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_2 = dot(u_xlat16_1.xyz, vec3(0.5, 0.5, 0.5));
     u_xlat16_7 = (-u_xlat16_2) + 1.0;
-    u_xlat10_3 = texture(_Control, vs_TEXCOORD0.xy);
-    u_xlat16_2 = u_xlat10_3.y * u_xlat16_7 + u_xlat16_2;
-    u_xlat10_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_4.xyz = u_xlat10_3.yyy * u_xlat10_4.xyz;
+    u_xlat16_3 = texture(_Control, vs_TEXCOORD0.xy);
+    u_xlat16_2 = u_xlat16_3.y * u_xlat16_7 + u_xlat16_2;
+    u_xlat16_4.xyz = texture(_Splat1, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_4.xyz = u_xlat16_3.yyy * u_xlat16_4.xyz;
     u_xlat16_4.xyz = vec3(u_xlat16_2) * u_xlat16_4.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.xxx * u_xlat10_0.xyz + u_xlat16_4.xyz;
-    u_xlat10_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_3.zzz * u_xlat10_4.xyz + u_xlat16_0.xyz;
-    u_xlat16_0.xyz = u_xlat10_3.www * u_xlat10_1.xyz + u_xlat16_0.xyz;
-    u_xlat10_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
-    u_xlat16_0.xyz = vec3(u_xlat10_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.xxx * u_xlat16_0.xyz + u_xlat16_4.xyz;
+    u_xlat16_4.xyz = texture(_Splat2, vs_TEXCOORD2.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_3.zzz * u_xlat16_4.xyz + u_xlat16_0.xyz;
+    u_xlat16_0.xyz = u_xlat16_3.www * u_xlat16_1.xyz + u_xlat16_0.xyz;
+    u_xlat16_15 = texture(_Tile, vs_TEXCOORD2.xy).x;
+    u_xlat16_0.xyz = vec3(u_xlat16_15) * vec3(0.5, 0.5, 0.5) + u_xlat16_0.xyz;
     u_xlat0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat15 = vs_TEXCOORD3;
 #ifdef UNITY_ADRENO_ES3

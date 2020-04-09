@@ -50,6 +50,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -96,6 +97,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -142,6 +144,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -221,6 +224,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -305,6 +309,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -389,6 +394,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -472,6 +478,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -518,6 +525,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -564,6 +572,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -643,6 +652,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -727,6 +737,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -811,6 +822,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -892,6 +904,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -938,6 +951,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -984,6 +998,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -1063,6 +1078,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -1147,6 +1163,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -1231,6 +1248,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -1277,7 +1295,7 @@ Keywords { "FOG_LINEAR" }
   LOD 200
   Tags { "QUEUE" = "Transparent" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 45964
+  GpuProgramID 21571
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -1305,6 +1323,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 layout(location = 0) out highp vec4 SV_TARGET0;
@@ -1343,6 +1362,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 layout(location = 0) out highp vec4 SV_TARGET0;
@@ -1381,6 +1401,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 layout(location = 0) out highp vec4 SV_TARGET0;

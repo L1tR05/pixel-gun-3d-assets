@@ -11,7 +11,7 @@ SubShader {
  Pass {
   ZTest Always
   Cull Off
-  GpuProgramID 4079
+  GpuProgramID 55646
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -22,7 +22,7 @@ uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
 uniform 	vec4 _MainTex_ST;
 in highp vec4 in_POSITION0;
 in highp vec2 in_TEXCOORD0;
-out highp vec2 vs_TEXCOORD0;
+layout(location = 0) out highp vec2 vs_TEXCOORD0;
 vec4 u_xlat0;
 vec4 u_xlat1;
 void main()
@@ -43,6 +43,7 @@ void main()
 #ifdef FRAGMENT
 #version 310 es
 
+precision highp float;
 precision highp int;
 layout(location = 0) out highp vec4 SV_Target0;
 void main()
@@ -64,7 +65,7 @@ uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
 uniform 	vec4 _MainTex_ST;
 in highp vec4 in_POSITION0;
 in highp vec2 in_TEXCOORD0;
-out highp vec2 vs_TEXCOORD0;
+layout(location = 0) out highp vec2 vs_TEXCOORD0;
 vec4 u_xlat0;
 vec4 u_xlat1;
 void main()
@@ -85,6 +86,7 @@ void main()
 #ifdef FRAGMENT
 #version 310 es
 
+precision highp float;
 precision highp int;
 layout(location = 0) out highp vec4 SV_Target0;
 void main()
@@ -106,7 +108,7 @@ uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
 uniform 	vec4 _MainTex_ST;
 in highp vec4 in_POSITION0;
 in highp vec2 in_TEXCOORD0;
-out highp vec2 vs_TEXCOORD0;
+layout(location = 0) out highp vec2 vs_TEXCOORD0;
 vec4 u_xlat0;
 vec4 u_xlat1;
 void main()
@@ -127,6 +129,7 @@ void main()
 #ifdef FRAGMENT
 #version 310 es
 
+precision highp float;
 precision highp int;
 layout(location = 0) out highp vec4 SV_Target0;
 void main()

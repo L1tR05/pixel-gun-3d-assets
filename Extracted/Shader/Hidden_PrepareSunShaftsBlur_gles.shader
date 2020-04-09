@@ -13,202 +13,214 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 7847
+  GpuProgramID 50821
 Program "vp" {
 SubProgram "gles hw_tier00 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute mediump vec2 in_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  mediump vec2 tmpvar_1;
-  tmpvar_1 = _glesMultiTexCoord0.xy;
-  highp vec2 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  tmpvar_2 = tmpvar_1;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform highp vec4 _ZBufferParams;
-uniform sampler2D _MainTex;
-uniform sampler2D _CameraDepthTexture;
-uniform mediump float _NoSkyBoxMask;
-uniform mediump vec4 _SunPosition;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
-{
-  mediump vec4 outColor_1;
-  mediump vec2 vec_2;
-  mediump vec4 tex_3;
-  highp float depthSample_4;
-  lowp float tmpvar_5;
-  tmpvar_5 = texture2D (_CameraDepthTexture, xlv_TEXCOORD0).x;
-  depthSample_4 = tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = texture2D (_MainTex, xlv_TEXCOORD0);
-  tex_3 = tmpvar_6;
-  highp float tmpvar_7;
-  tmpvar_7 = (1.0/(((_ZBufferParams.x * depthSample_4) + _ZBufferParams.y)));
-  depthSample_4 = tmpvar_7;
-  highp vec2 tmpvar_8;
-  tmpvar_8 = (_SunPosition.xy - xlv_TEXCOORD0);
-  vec_2 = tmpvar_8;
-  mediump float tmpvar_9;
-  tmpvar_9 = clamp ((_SunPosition.w - sqrt(
-    dot (vec_2, vec_2)
-  )), 0.0, 1.0);
-  outColor_1 = vec4(0.0, 0.0, 0.0, 0.0);
-  if ((tmpvar_7 > 0.99)) {
-    outColor_1 = vec4((max (tex_3.w, (_NoSkyBoxMask * 
-      dot (tex_3.xyz, vec3(0.59, 0.3, 0.11))
-    )) * tmpvar_9));
-  };
-  gl_FragData[0] = outColor_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	vec4 _ZBufferParams;
+uniform 	mediump float _NoSkyBoxMask;
+uniform 	mediump vec4 _SunPosition;
+uniform highp sampler2D _CameraDepthTexture;
+uniform lowp sampler2D _MainTex;
+varying highp vec2 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec2 u_xlat0;
+mediump float u_xlat16_0;
+lowp vec4 u_xlat10_0;
+bool u_xlatb0;
+mediump float u_xlat16_1;
+void main()
+{
+    u_xlat0.xy = (-vs_TEXCOORD0.xy) + _SunPosition.xy;
+    u_xlat16_1 = dot(u_xlat0.xy, u_xlat0.xy);
+    u_xlat16_1 = sqrt(u_xlat16_1);
+    u_xlat16_1 = (-u_xlat16_1) + _SunPosition.w;
+    u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_0 = u_xlat16_0 * _NoSkyBoxMask;
+    u_xlat16_0 = max(u_xlat16_0, u_xlat10_0.w);
+    u_xlat16_1 = u_xlat16_1 * u_xlat16_0;
+    u_xlat0.x = texture2D(_CameraDepthTexture, vs_TEXCOORD0.xy).x;
+    u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
+    u_xlat0.x = float(1.0) / u_xlat0.x;
+    u_xlatb0 = 0.99000001<u_xlat0.x;
+    SV_Target0 = (bool(u_xlatb0)) ? vec4(u_xlat16_1) : vec4(0.0, 0.0, 0.0, 0.0);
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier01 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute mediump vec2 in_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  mediump vec2 tmpvar_1;
-  tmpvar_1 = _glesMultiTexCoord0.xy;
-  highp vec2 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  tmpvar_2 = tmpvar_1;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform highp vec4 _ZBufferParams;
-uniform sampler2D _MainTex;
-uniform sampler2D _CameraDepthTexture;
-uniform mediump float _NoSkyBoxMask;
-uniform mediump vec4 _SunPosition;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
-{
-  mediump vec4 outColor_1;
-  mediump vec2 vec_2;
-  mediump vec4 tex_3;
-  highp float depthSample_4;
-  lowp float tmpvar_5;
-  tmpvar_5 = texture2D (_CameraDepthTexture, xlv_TEXCOORD0).x;
-  depthSample_4 = tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = texture2D (_MainTex, xlv_TEXCOORD0);
-  tex_3 = tmpvar_6;
-  highp float tmpvar_7;
-  tmpvar_7 = (1.0/(((_ZBufferParams.x * depthSample_4) + _ZBufferParams.y)));
-  depthSample_4 = tmpvar_7;
-  highp vec2 tmpvar_8;
-  tmpvar_8 = (_SunPosition.xy - xlv_TEXCOORD0);
-  vec_2 = tmpvar_8;
-  mediump float tmpvar_9;
-  tmpvar_9 = clamp ((_SunPosition.w - sqrt(
-    dot (vec_2, vec_2)
-  )), 0.0, 1.0);
-  outColor_1 = vec4(0.0, 0.0, 0.0, 0.0);
-  if ((tmpvar_7 > 0.99)) {
-    outColor_1 = vec4((max (tex_3.w, (_NoSkyBoxMask * 
-      dot (tex_3.xyz, vec3(0.59, 0.3, 0.11))
-    )) * tmpvar_9));
-  };
-  gl_FragData[0] = outColor_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	vec4 _ZBufferParams;
+uniform 	mediump float _NoSkyBoxMask;
+uniform 	mediump vec4 _SunPosition;
+uniform highp sampler2D _CameraDepthTexture;
+uniform lowp sampler2D _MainTex;
+varying highp vec2 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec2 u_xlat0;
+mediump float u_xlat16_0;
+lowp vec4 u_xlat10_0;
+bool u_xlatb0;
+mediump float u_xlat16_1;
+void main()
+{
+    u_xlat0.xy = (-vs_TEXCOORD0.xy) + _SunPosition.xy;
+    u_xlat16_1 = dot(u_xlat0.xy, u_xlat0.xy);
+    u_xlat16_1 = sqrt(u_xlat16_1);
+    u_xlat16_1 = (-u_xlat16_1) + _SunPosition.w;
+    u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_0 = u_xlat16_0 * _NoSkyBoxMask;
+    u_xlat16_0 = max(u_xlat16_0, u_xlat10_0.w);
+    u_xlat16_1 = u_xlat16_1 * u_xlat16_0;
+    u_xlat0.x = texture2D(_CameraDepthTexture, vs_TEXCOORD0.xy).x;
+    u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
+    u_xlat0.x = float(1.0) / u_xlat0.x;
+    u_xlatb0 = 0.99000001<u_xlat0.x;
+    SV_Target0 = (bool(u_xlatb0)) ? vec4(u_xlat16_1) : vec4(0.0, 0.0, 0.0, 0.0);
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier02 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute mediump vec2 in_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  mediump vec2 tmpvar_1;
-  tmpvar_1 = _glesMultiTexCoord0.xy;
-  highp vec2 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  tmpvar_2 = tmpvar_1;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform highp vec4 _ZBufferParams;
-uniform sampler2D _MainTex;
-uniform sampler2D _CameraDepthTexture;
-uniform mediump float _NoSkyBoxMask;
-uniform mediump vec4 _SunPosition;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
-{
-  mediump vec4 outColor_1;
-  mediump vec2 vec_2;
-  mediump vec4 tex_3;
-  highp float depthSample_4;
-  lowp float tmpvar_5;
-  tmpvar_5 = texture2D (_CameraDepthTexture, xlv_TEXCOORD0).x;
-  depthSample_4 = tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = texture2D (_MainTex, xlv_TEXCOORD0);
-  tex_3 = tmpvar_6;
-  highp float tmpvar_7;
-  tmpvar_7 = (1.0/(((_ZBufferParams.x * depthSample_4) + _ZBufferParams.y)));
-  depthSample_4 = tmpvar_7;
-  highp vec2 tmpvar_8;
-  tmpvar_8 = (_SunPosition.xy - xlv_TEXCOORD0);
-  vec_2 = tmpvar_8;
-  mediump float tmpvar_9;
-  tmpvar_9 = clamp ((_SunPosition.w - sqrt(
-    dot (vec_2, vec_2)
-  )), 0.0, 1.0);
-  outColor_1 = vec4(0.0, 0.0, 0.0, 0.0);
-  if ((tmpvar_7 > 0.99)) {
-    outColor_1 = vec4((max (tex_3.w, (_NoSkyBoxMask * 
-      dot (tex_3.xyz, vec3(0.59, 0.3, 0.11))
-    )) * tmpvar_9));
-  };
-  gl_FragData[0] = outColor_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	vec4 _ZBufferParams;
+uniform 	mediump float _NoSkyBoxMask;
+uniform 	mediump vec4 _SunPosition;
+uniform highp sampler2D _CameraDepthTexture;
+uniform lowp sampler2D _MainTex;
+varying highp vec2 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec2 u_xlat0;
+mediump float u_xlat16_0;
+lowp vec4 u_xlat10_0;
+bool u_xlatb0;
+mediump float u_xlat16_1;
+void main()
+{
+    u_xlat0.xy = (-vs_TEXCOORD0.xy) + _SunPosition.xy;
+    u_xlat16_1 = dot(u_xlat0.xy, u_xlat0.xy);
+    u_xlat16_1 = sqrt(u_xlat16_1);
+    u_xlat16_1 = (-u_xlat16_1) + _SunPosition.w;
+    u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_0 = u_xlat16_0 * _NoSkyBoxMask;
+    u_xlat16_0 = max(u_xlat16_0, u_xlat10_0.w);
+    u_xlat16_1 = u_xlat16_1 * u_xlat16_0;
+    u_xlat0.x = texture2D(_CameraDepthTexture, vs_TEXCOORD0.xy).x;
+    u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
+    u_xlat0.x = float(1.0) / u_xlat0.x;
+    u_xlatb0 = 0.99000001<u_xlat0.x;
+    SV_Target0 = (bool(u_xlatb0)) ? vec4(u_xlat16_1) : vec4(0.0, 0.0, 0.0, 0.0);
+    return;
+}
 
 #endif
 "
@@ -230,214 +242,223 @@ SubProgram "gles hw_tier02 " {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 116553
+  GpuProgramID 113549
 Program "vp" {
 SubProgram "gles hw_tier00 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute mediump vec2 in_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  mediump vec2 tmpvar_1;
-  tmpvar_1 = _glesMultiTexCoord0.xy;
-  highp vec2 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  tmpvar_2 = tmpvar_1;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-uniform sampler2D _Skybox;
-uniform mediump float _NoSkyBoxMask;
-uniform mediump vec4 _SunPosition;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
-{
-  mediump vec4 outColor_1;
-  mediump vec2 vec_2;
-  highp vec4 tex_3;
-  highp vec4 sky_4;
-  lowp vec4 tmpvar_5;
-  tmpvar_5 = texture2D (_Skybox, xlv_TEXCOORD0);
-  sky_4 = tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = texture2D (_MainTex, xlv_TEXCOORD0);
-  tex_3 = tmpvar_6;
-  highp vec2 tmpvar_7;
-  tmpvar_7 = (_SunPosition.xy - xlv_TEXCOORD0);
-  vec_2 = tmpvar_7;
-  mediump float tmpvar_8;
-  tmpvar_8 = clamp ((_SunPosition.w - sqrt(
-    dot (vec_2, vec_2)
-  )), 0.0, 1.0);
-  outColor_1 = vec4(0.0, 0.0, 0.0, 0.0);
-  highp vec3 tmpvar_9;
-  tmpvar_9 = abs((sky_4.xyz - tex_3.xyz));
-  mediump vec3 rgb_10;
-  rgb_10 = tmpvar_9;
-  mediump float tmpvar_11;
-  tmpvar_11 = dot (rgb_10, vec3(0.22, 0.707, 0.071));
-  if ((tmpvar_11 < 0.2)) {
-    mediump vec4 skyboxValue_12;
-    skyboxValue_12 = sky_4;
-    outColor_1 = vec4((max (skyboxValue_12.w, (_NoSkyBoxMask * 
-      dot (skyboxValue_12.xyz, vec3(0.59, 0.3, 0.11))
-    )) * tmpvar_8));
-  };
-  gl_FragData[0] = outColor_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	mediump float _NoSkyBoxMask;
+uniform 	mediump vec4 _SunPosition;
+uniform lowp sampler2D _Skybox;
+uniform lowp sampler2D _MainTex;
+varying highp vec2 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec2 u_xlat0;
+mediump vec3 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+bool u_xlatb0;
+mediump float u_xlat16_1;
+mediump float u_xlat16_2;
+lowp vec3 u_xlat10_2;
+mediump float u_xlat16_4;
+mediump float u_xlat16_9;
+void main()
+{
+    u_xlat0.xy = (-vs_TEXCOORD0.xy) + _SunPosition.xy;
+    u_xlat16_1 = dot(u_xlat0.xy, u_xlat0.xy);
+    u_xlat16_1 = sqrt(u_xlat16_1);
+    u_xlat16_1 = (-u_xlat16_1) + _SunPosition.w;
+    u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
+    u_xlat10_0 = texture2D(_Skybox, vs_TEXCOORD0.xy);
+    u_xlat16_2 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_2 = u_xlat16_2 * _NoSkyBoxMask;
+    u_xlat16_9 = max(u_xlat10_0.w, u_xlat16_2);
+    u_xlat16_1 = u_xlat16_1 * u_xlat16_9;
+    u_xlat10_2.xyz = texture2D(_MainTex, vs_TEXCOORD0.xy).xyz;
+    u_xlat16_0.xyz = u_xlat10_0.xyz + (-u_xlat10_2.xyz);
+    u_xlat16_4 = dot(abs(u_xlat16_0.xyz), vec3(0.219999999, 0.707000017, 0.0710000023));
+    u_xlatb0 = u_xlat16_4<0.200000003;
+    SV_Target0 = (bool(u_xlatb0)) ? vec4(u_xlat16_1) : vec4(0.0, 0.0, 0.0, 0.0);
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier01 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute mediump vec2 in_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  mediump vec2 tmpvar_1;
-  tmpvar_1 = _glesMultiTexCoord0.xy;
-  highp vec2 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  tmpvar_2 = tmpvar_1;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-uniform sampler2D _Skybox;
-uniform mediump float _NoSkyBoxMask;
-uniform mediump vec4 _SunPosition;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
-{
-  mediump vec4 outColor_1;
-  mediump vec2 vec_2;
-  highp vec4 tex_3;
-  highp vec4 sky_4;
-  lowp vec4 tmpvar_5;
-  tmpvar_5 = texture2D (_Skybox, xlv_TEXCOORD0);
-  sky_4 = tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = texture2D (_MainTex, xlv_TEXCOORD0);
-  tex_3 = tmpvar_6;
-  highp vec2 tmpvar_7;
-  tmpvar_7 = (_SunPosition.xy - xlv_TEXCOORD0);
-  vec_2 = tmpvar_7;
-  mediump float tmpvar_8;
-  tmpvar_8 = clamp ((_SunPosition.w - sqrt(
-    dot (vec_2, vec_2)
-  )), 0.0, 1.0);
-  outColor_1 = vec4(0.0, 0.0, 0.0, 0.0);
-  highp vec3 tmpvar_9;
-  tmpvar_9 = abs((sky_4.xyz - tex_3.xyz));
-  mediump vec3 rgb_10;
-  rgb_10 = tmpvar_9;
-  mediump float tmpvar_11;
-  tmpvar_11 = dot (rgb_10, vec3(0.22, 0.707, 0.071));
-  if ((tmpvar_11 < 0.2)) {
-    mediump vec4 skyboxValue_12;
-    skyboxValue_12 = sky_4;
-    outColor_1 = vec4((max (skyboxValue_12.w, (_NoSkyBoxMask * 
-      dot (skyboxValue_12.xyz, vec3(0.59, 0.3, 0.11))
-    )) * tmpvar_8));
-  };
-  gl_FragData[0] = outColor_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	mediump float _NoSkyBoxMask;
+uniform 	mediump vec4 _SunPosition;
+uniform lowp sampler2D _Skybox;
+uniform lowp sampler2D _MainTex;
+varying highp vec2 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec2 u_xlat0;
+mediump vec3 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+bool u_xlatb0;
+mediump float u_xlat16_1;
+mediump float u_xlat16_2;
+lowp vec3 u_xlat10_2;
+mediump float u_xlat16_4;
+mediump float u_xlat16_9;
+void main()
+{
+    u_xlat0.xy = (-vs_TEXCOORD0.xy) + _SunPosition.xy;
+    u_xlat16_1 = dot(u_xlat0.xy, u_xlat0.xy);
+    u_xlat16_1 = sqrt(u_xlat16_1);
+    u_xlat16_1 = (-u_xlat16_1) + _SunPosition.w;
+    u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
+    u_xlat10_0 = texture2D(_Skybox, vs_TEXCOORD0.xy);
+    u_xlat16_2 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_2 = u_xlat16_2 * _NoSkyBoxMask;
+    u_xlat16_9 = max(u_xlat10_0.w, u_xlat16_2);
+    u_xlat16_1 = u_xlat16_1 * u_xlat16_9;
+    u_xlat10_2.xyz = texture2D(_MainTex, vs_TEXCOORD0.xy).xyz;
+    u_xlat16_0.xyz = u_xlat10_0.xyz + (-u_xlat10_2.xyz);
+    u_xlat16_4 = dot(abs(u_xlat16_0.xyz), vec3(0.219999999, 0.707000017, 0.0710000023));
+    u_xlatb0 = u_xlat16_4<0.200000003;
+    SV_Target0 = (bool(u_xlatb0)) ? vec4(u_xlat16_1) : vec4(0.0, 0.0, 0.0, 0.0);
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier02 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute mediump vec2 in_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  mediump vec2 tmpvar_1;
-  tmpvar_1 = _glesMultiTexCoord0.xy;
-  highp vec2 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  tmpvar_2 = tmpvar_1;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-uniform sampler2D _Skybox;
-uniform mediump float _NoSkyBoxMask;
-uniform mediump vec4 _SunPosition;
-varying highp vec2 xlv_TEXCOORD0;
-void main ()
-{
-  mediump vec4 outColor_1;
-  mediump vec2 vec_2;
-  highp vec4 tex_3;
-  highp vec4 sky_4;
-  lowp vec4 tmpvar_5;
-  tmpvar_5 = texture2D (_Skybox, xlv_TEXCOORD0);
-  sky_4 = tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = texture2D (_MainTex, xlv_TEXCOORD0);
-  tex_3 = tmpvar_6;
-  highp vec2 tmpvar_7;
-  tmpvar_7 = (_SunPosition.xy - xlv_TEXCOORD0);
-  vec_2 = tmpvar_7;
-  mediump float tmpvar_8;
-  tmpvar_8 = clamp ((_SunPosition.w - sqrt(
-    dot (vec_2, vec_2)
-  )), 0.0, 1.0);
-  outColor_1 = vec4(0.0, 0.0, 0.0, 0.0);
-  highp vec3 tmpvar_9;
-  tmpvar_9 = abs((sky_4.xyz - tex_3.xyz));
-  mediump vec3 rgb_10;
-  rgb_10 = tmpvar_9;
-  mediump float tmpvar_11;
-  tmpvar_11 = dot (rgb_10, vec3(0.22, 0.707, 0.071));
-  if ((tmpvar_11 < 0.2)) {
-    mediump vec4 skyboxValue_12;
-    skyboxValue_12 = sky_4;
-    outColor_1 = vec4((max (skyboxValue_12.w, (_NoSkyBoxMask * 
-      dot (skyboxValue_12.xyz, vec3(0.59, 0.3, 0.11))
-    )) * tmpvar_8));
-  };
-  gl_FragData[0] = outColor_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	mediump float _NoSkyBoxMask;
+uniform 	mediump vec4 _SunPosition;
+uniform lowp sampler2D _Skybox;
+uniform lowp sampler2D _MainTex;
+varying highp vec2 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec2 u_xlat0;
+mediump vec3 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+bool u_xlatb0;
+mediump float u_xlat16_1;
+mediump float u_xlat16_2;
+lowp vec3 u_xlat10_2;
+mediump float u_xlat16_4;
+mediump float u_xlat16_9;
+void main()
+{
+    u_xlat0.xy = (-vs_TEXCOORD0.xy) + _SunPosition.xy;
+    u_xlat16_1 = dot(u_xlat0.xy, u_xlat0.xy);
+    u_xlat16_1 = sqrt(u_xlat16_1);
+    u_xlat16_1 = (-u_xlat16_1) + _SunPosition.w;
+    u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
+    u_xlat10_0 = texture2D(_Skybox, vs_TEXCOORD0.xy);
+    u_xlat16_2 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_2 = u_xlat16_2 * _NoSkyBoxMask;
+    u_xlat16_9 = max(u_xlat10_0.w, u_xlat16_2);
+    u_xlat16_1 = u_xlat16_1 * u_xlat16_9;
+    u_xlat10_2.xyz = texture2D(_MainTex, vs_TEXCOORD0.xy).xyz;
+    u_xlat16_0.xyz = u_xlat10_0.xyz + (-u_xlat10_2.xyz);
+    u_xlat16_4 = dot(abs(u_xlat16_0.xyz), vec3(0.219999999, 0.707000017, 0.0710000023));
+    u_xlatb0 = u_xlat16_4<0.200000003;
+    SV_Target0 = (bool(u_xlatb0)) ? vec4(u_xlat16_1) : vec4(0.0, 0.0, 0.0, 0.0);
+    return;
+}
 
 #endif
 "

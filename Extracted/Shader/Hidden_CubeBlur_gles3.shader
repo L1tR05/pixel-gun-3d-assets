@@ -19,7 +19,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 25931
+  GpuProgramID 17245
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -50,41 +50,35 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Level;
 uniform 	mediump float _Texel;
 uniform 	mediump float _Scale;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in mediump vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec3 u_xlat16_0;
 mediump vec4 u_xlat16_1;
-lowp vec4 u_xlat10_1;
 bvec3 u_xlatb1;
 mediump vec4 u_xlat16_2;
-lowp vec4 u_xlat10_2;
 mediump vec3 u_xlat16_3;
 mediump vec4 u_xlat16_4;
-lowp vec4 u_xlat10_4;
 mediump vec3 u_xlat16_5;
 mediump vec4 u_xlat16_6;
-lowp vec4 u_xlat10_6;
 mediump vec4 u_xlat16_7;
-lowp vec4 u_xlat10_7;
 mediump vec4 u_xlat16_8;
-lowp vec4 u_xlat10_8;
 mediump vec3 u_xlat16_9;
 mediump vec3 u_xlat16_10;
 mediump vec3 u_xlat16_11;
 mediump vec4 u_xlat16_12;
-lowp vec4 u_xlat10_12;
 mediump vec4 u_xlat16_13;
-lowp vec4 u_xlat10_13;
 mediump vec4 u_xlat16_14;
-lowp vec4 u_xlat10_14;
 mediump vec4 u_xlat16_15;
-lowp vec4 u_xlat10_15;
 mediump vec3 u_xlat16_16;
 mediump vec3 u_xlat16_17;
 mediump float u_xlat16_34;
@@ -122,8 +116,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_6.y), abs(u_xlat16_6.x));
     u_xlat16_51 = max(abs(u_xlat16_6.z), u_xlat16_51);
     u_xlat16_6.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_7.xyz;
-    u_xlat10_1 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
-    u_xlat16_1 = max(u_xlat10_1, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_1 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
+    u_xlat16_1 = max(u_xlat16_1, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_6.xyz = u_xlat16_4.xyz * vec3(1.5, 1.5, 1.5) + vs_TEXCOORD0.xyz;
     u_xlat16_7.xyz = (-u_xlat16_4.zxy) * vec3(2.5, 2.5, 2.5) + u_xlat16_6.xyz;
     u_xlat16_8.xyz = max(u_xlat16_7.xyz, vec3(-1.0, -1.0, -1.0));
@@ -132,8 +126,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_7.y), abs(u_xlat16_7.x));
     u_xlat16_51 = max(abs(u_xlat16_7.z), u_xlat16_51);
     u_xlat16_7.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_8.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_7.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_7.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_1 = u_xlat16_1 + u_xlat16_7;
     u_xlat16_1 = u_xlat16_1 * u_xlat16_3.yyyy;
     u_xlat16_8.xyz = (-u_xlat16_4.zxy) * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
@@ -145,10 +139,10 @@ void main()
     u_xlat16_8.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_9.xyz;
     u_xlat16_9.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_8.xyz;
     u_xlat16_8.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_8.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_8.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_8.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_3.xxxx * u_xlat16_7 + u_xlat16_1;
     u_xlat16_9.xyz = (-u_xlat16_4.xyz) * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
@@ -159,8 +153,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_10.y), abs(u_xlat16_10.x));
     u_xlat16_51 = max(abs(u_xlat16_10.z), u_xlat16_51);
     u_xlat16_10.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_11.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_10.xyz = u_xlat16_4.xyz * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
     u_xlat16_11.xyz = (-u_xlat16_4.zxy) * vec3(2.5, 2.5, 2.5) + u_xlat16_10.xyz;
     u_xlat16_12.xyz = max(u_xlat16_11.xyz, vec3(-1.0, -1.0, -1.0));
@@ -169,8 +163,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_11.y), abs(u_xlat16_11.x));
     u_xlat16_51 = max(abs(u_xlat16_11.z), u_xlat16_51);
     u_xlat16_11.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_12.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_11.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_11.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_3.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_11.xyz = u_xlat16_0.yyy * u_xlat16_0.xyz;
@@ -182,8 +176,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + u_xlat16_9.xyz;
     u_xlat16_13.xyz = max(u_xlat16_12.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
@@ -191,8 +185,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_11.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + u_xlat16_6.xyz;
@@ -202,8 +196,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + u_xlat16_5.xyz;
     u_xlat16_13.xyz = max(u_xlat16_12.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
@@ -211,8 +205,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_7 = u_xlat16_7 * u_xlat16_11.yyyy;
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + vs_TEXCOORD0.xyz;
@@ -224,10 +218,10 @@ void main()
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_12.xyz;
     u_xlat16_12.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_12.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_12;
     u_xlat16_7 = u_xlat16_11.xxxx * u_xlat16_8 + u_xlat16_7;
     u_xlat16_1 = u_xlat16_1 + u_xlat16_7;
@@ -239,10 +233,10 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13.xyz = max(u_xlat16_10.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_14.xyz = u_xlat16_10.xyz + (-u_xlat16_13.xyz);
@@ -251,11 +245,11 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_12;
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_12;
     u_xlat16_1 = u_xlat16_0.zzzz * u_xlat16_8 + u_xlat16_1;
     u_xlat16_13.xyz = max(u_xlat16_5.xyz, vec3(-1.0, -1.0, -1.0));
@@ -266,10 +260,10 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13.xyz = max(u_xlat16_6.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_14.xyz = u_xlat16_6.xyz + (-u_xlat16_13.xyz);
@@ -278,30 +272,30 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_13;
     u_xlat16_8 = u_xlat16_0.yyyy * u_xlat16_8;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_12 = u_xlat16_12 + u_xlat16_13;
     u_xlat16_12 = u_xlat16_0.yyyy * u_xlat16_12;
     u_xlat16_14.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + vs_TEXCOORD0.xyz;
     u_xlat16_15.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_14.xyz;
     u_xlat16_14.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_14.xyz;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_14 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
-    u_xlat16_14 = max(u_xlat10_14, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_14 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
+    u_xlat16_14 = max(u_xlat16_14, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_15.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + vs_TEXCOORD0.xyz;
     u_xlat16_16.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_15.xyz;
     u_xlat16_15.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_15.xyz;
-    u_xlat10_15 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
-    u_xlat16_15 = max(u_xlat10_15, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_15 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
+    u_xlat16_15 = max(u_xlat16_15, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13 = u_xlat16_13 + u_xlat16_15;
     u_xlat16_8 = u_xlat16_0.xxxx * u_xlat16_13 + u_xlat16_8;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13 = u_xlat16_13 + u_xlat16_14;
     u_xlat16_12 = u_xlat16_0.xxxx * u_xlat16_13 + u_xlat16_12;
     u_xlat16_1 = u_xlat16_1 + u_xlat16_12;
@@ -316,8 +310,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + u_xlat16_10.xyz;
     u_xlat16_10.xyz = u_xlat16_4.zxy * vec3(2.5, 2.5, 2.5) + u_xlat16_10.xyz;
     u_xlat16_16.xyz = max(u_xlat16_17.xyz, vec3(-1.0, -1.0, -1.0));
@@ -326,8 +320,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_11.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + u_xlat16_5.xyz;
@@ -338,8 +332,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + u_xlat16_6.xyz;
     u_xlat16_6.xyz = u_xlat16_4.zxy * vec3(2.5, 2.5, 2.5) + u_xlat16_6.xyz;
     u_xlat16_16.xyz = max(u_xlat16_17.xyz, vec3(-1.0, -1.0, -1.0));
@@ -348,8 +342,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_7 = u_xlat16_7 * u_xlat16_11.yyyy;
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + vs_TEXCOORD0.xyz;
@@ -361,10 +355,10 @@ void main()
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
     u_xlat16_16.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_17.xyz;
     u_xlat16_17.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_17.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_12;
     u_xlat16_7 = u_xlat16_11.xxxx * u_xlat16_8 + u_xlat16_7;
     u_xlat16_17.x = dot(u_xlat16_11.xyz, vec3(2.0, 2.0, 2.0));
@@ -375,16 +369,16 @@ void main()
     u_xlat16_34 = max(abs(u_xlat16_10.y), abs(u_xlat16_10.x));
     u_xlat16_34 = max(abs(u_xlat16_10.z), u_xlat16_34);
     u_xlat16_10.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_11.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_10.xyz = max(u_xlat16_9.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_10.xyz = min(u_xlat16_10.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_9.xyz = u_xlat16_9.xyz + (-u_xlat16_10.xyz);
     u_xlat16_34 = max(abs(u_xlat16_9.y), abs(u_xlat16_9.x));
     u_xlat16_34 = max(abs(u_xlat16_9.z), u_xlat16_34);
     u_xlat16_9.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_10.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_3.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_9.xyz = u_xlat16_4.zxy * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
@@ -396,10 +390,10 @@ void main()
     u_xlat16_9.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_10.xyz;
     u_xlat16_10.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_9.xyz;
     u_xlat16_4.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_9.xyz;
-    u_xlat10_4 = textureLod(_MainTex, u_xlat16_4.xyz, _Level);
-    u_xlat16_4 = max(u_xlat10_4, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_4 = textureLod(_MainTex, u_xlat16_4.xyz, _Level);
+    u_xlat16_4 = max(u_xlat16_4, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_4 = u_xlat16_4 + u_xlat16_7;
     u_xlat16_9.xyz = max(u_xlat16_6.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_9.xyz = min(u_xlat16_9.xyz, vec3(1.0, 1.0, 1.0));
@@ -407,16 +401,16 @@ void main()
     u_xlat16_34 = max(abs(u_xlat16_6.y), abs(u_xlat16_6.x));
     u_xlat16_34 = max(abs(u_xlat16_6.z), u_xlat16_34);
     u_xlat16_6.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_9.xyz;
-    u_xlat10_6 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
-    u_xlat16_6 = max(u_xlat10_6, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_6 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
+    u_xlat16_6 = max(u_xlat16_6, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_9.xyz = max(u_xlat16_5.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_9.xyz = min(u_xlat16_9.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_5.xyz = u_xlat16_5.xyz + (-u_xlat16_9.xyz);
     u_xlat16_34 = max(abs(u_xlat16_5.y), abs(u_xlat16_5.x));
     u_xlat16_34 = max(abs(u_xlat16_5.z), u_xlat16_34);
     u_xlat16_2.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_9.xyz;
-    u_xlat10_2 = textureLod(_MainTex, u_xlat16_2.xyz, _Level);
-    u_xlat16_2 = max(u_xlat10_2, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_2 = textureLod(_MainTex, u_xlat16_2.xyz, _Level);
+    u_xlat16_2 = max(u_xlat16_2, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_2 = u_xlat16_2 + u_xlat16_6;
     u_xlat16_2 = u_xlat16_2 * u_xlat16_3.yyyy;
     u_xlat16_2 = u_xlat16_3.xxxx * u_xlat16_4 + u_xlat16_2;
@@ -462,41 +456,35 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Level;
 uniform 	mediump float _Texel;
 uniform 	mediump float _Scale;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in mediump vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec3 u_xlat16_0;
 mediump vec4 u_xlat16_1;
-lowp vec4 u_xlat10_1;
 bvec3 u_xlatb1;
 mediump vec4 u_xlat16_2;
-lowp vec4 u_xlat10_2;
 mediump vec3 u_xlat16_3;
 mediump vec4 u_xlat16_4;
-lowp vec4 u_xlat10_4;
 mediump vec3 u_xlat16_5;
 mediump vec4 u_xlat16_6;
-lowp vec4 u_xlat10_6;
 mediump vec4 u_xlat16_7;
-lowp vec4 u_xlat10_7;
 mediump vec4 u_xlat16_8;
-lowp vec4 u_xlat10_8;
 mediump vec3 u_xlat16_9;
 mediump vec3 u_xlat16_10;
 mediump vec3 u_xlat16_11;
 mediump vec4 u_xlat16_12;
-lowp vec4 u_xlat10_12;
 mediump vec4 u_xlat16_13;
-lowp vec4 u_xlat10_13;
 mediump vec4 u_xlat16_14;
-lowp vec4 u_xlat10_14;
 mediump vec4 u_xlat16_15;
-lowp vec4 u_xlat10_15;
 mediump vec3 u_xlat16_16;
 mediump vec3 u_xlat16_17;
 mediump float u_xlat16_34;
@@ -534,8 +522,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_6.y), abs(u_xlat16_6.x));
     u_xlat16_51 = max(abs(u_xlat16_6.z), u_xlat16_51);
     u_xlat16_6.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_7.xyz;
-    u_xlat10_1 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
-    u_xlat16_1 = max(u_xlat10_1, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_1 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
+    u_xlat16_1 = max(u_xlat16_1, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_6.xyz = u_xlat16_4.xyz * vec3(1.5, 1.5, 1.5) + vs_TEXCOORD0.xyz;
     u_xlat16_7.xyz = (-u_xlat16_4.zxy) * vec3(2.5, 2.5, 2.5) + u_xlat16_6.xyz;
     u_xlat16_8.xyz = max(u_xlat16_7.xyz, vec3(-1.0, -1.0, -1.0));
@@ -544,8 +532,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_7.y), abs(u_xlat16_7.x));
     u_xlat16_51 = max(abs(u_xlat16_7.z), u_xlat16_51);
     u_xlat16_7.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_8.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_7.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_7.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_1 = u_xlat16_1 + u_xlat16_7;
     u_xlat16_1 = u_xlat16_1 * u_xlat16_3.yyyy;
     u_xlat16_8.xyz = (-u_xlat16_4.zxy) * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
@@ -557,10 +545,10 @@ void main()
     u_xlat16_8.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_9.xyz;
     u_xlat16_9.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_8.xyz;
     u_xlat16_8.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_8.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_8.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_8.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_3.xxxx * u_xlat16_7 + u_xlat16_1;
     u_xlat16_9.xyz = (-u_xlat16_4.xyz) * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
@@ -571,8 +559,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_10.y), abs(u_xlat16_10.x));
     u_xlat16_51 = max(abs(u_xlat16_10.z), u_xlat16_51);
     u_xlat16_10.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_11.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_10.xyz = u_xlat16_4.xyz * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
     u_xlat16_11.xyz = (-u_xlat16_4.zxy) * vec3(2.5, 2.5, 2.5) + u_xlat16_10.xyz;
     u_xlat16_12.xyz = max(u_xlat16_11.xyz, vec3(-1.0, -1.0, -1.0));
@@ -581,8 +569,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_11.y), abs(u_xlat16_11.x));
     u_xlat16_51 = max(abs(u_xlat16_11.z), u_xlat16_51);
     u_xlat16_11.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_12.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_11.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_11.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_3.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_11.xyz = u_xlat16_0.yyy * u_xlat16_0.xyz;
@@ -594,8 +582,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + u_xlat16_9.xyz;
     u_xlat16_13.xyz = max(u_xlat16_12.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
@@ -603,8 +591,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_11.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + u_xlat16_6.xyz;
@@ -614,8 +602,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + u_xlat16_5.xyz;
     u_xlat16_13.xyz = max(u_xlat16_12.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
@@ -623,8 +611,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_7 = u_xlat16_7 * u_xlat16_11.yyyy;
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + vs_TEXCOORD0.xyz;
@@ -636,10 +624,10 @@ void main()
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_12.xyz;
     u_xlat16_12.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_12.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_12;
     u_xlat16_7 = u_xlat16_11.xxxx * u_xlat16_8 + u_xlat16_7;
     u_xlat16_1 = u_xlat16_1 + u_xlat16_7;
@@ -651,10 +639,10 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13.xyz = max(u_xlat16_10.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_14.xyz = u_xlat16_10.xyz + (-u_xlat16_13.xyz);
@@ -663,11 +651,11 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_12;
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_12;
     u_xlat16_1 = u_xlat16_0.zzzz * u_xlat16_8 + u_xlat16_1;
     u_xlat16_13.xyz = max(u_xlat16_5.xyz, vec3(-1.0, -1.0, -1.0));
@@ -678,10 +666,10 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13.xyz = max(u_xlat16_6.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_14.xyz = u_xlat16_6.xyz + (-u_xlat16_13.xyz);
@@ -690,30 +678,30 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_13;
     u_xlat16_8 = u_xlat16_0.yyyy * u_xlat16_8;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_12 = u_xlat16_12 + u_xlat16_13;
     u_xlat16_12 = u_xlat16_0.yyyy * u_xlat16_12;
     u_xlat16_14.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + vs_TEXCOORD0.xyz;
     u_xlat16_15.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_14.xyz;
     u_xlat16_14.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_14.xyz;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_14 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
-    u_xlat16_14 = max(u_xlat10_14, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_14 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
+    u_xlat16_14 = max(u_xlat16_14, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_15.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + vs_TEXCOORD0.xyz;
     u_xlat16_16.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_15.xyz;
     u_xlat16_15.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_15.xyz;
-    u_xlat10_15 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
-    u_xlat16_15 = max(u_xlat10_15, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_15 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
+    u_xlat16_15 = max(u_xlat16_15, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13 = u_xlat16_13 + u_xlat16_15;
     u_xlat16_8 = u_xlat16_0.xxxx * u_xlat16_13 + u_xlat16_8;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13 = u_xlat16_13 + u_xlat16_14;
     u_xlat16_12 = u_xlat16_0.xxxx * u_xlat16_13 + u_xlat16_12;
     u_xlat16_1 = u_xlat16_1 + u_xlat16_12;
@@ -728,8 +716,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + u_xlat16_10.xyz;
     u_xlat16_10.xyz = u_xlat16_4.zxy * vec3(2.5, 2.5, 2.5) + u_xlat16_10.xyz;
     u_xlat16_16.xyz = max(u_xlat16_17.xyz, vec3(-1.0, -1.0, -1.0));
@@ -738,8 +726,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_11.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + u_xlat16_5.xyz;
@@ -750,8 +738,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + u_xlat16_6.xyz;
     u_xlat16_6.xyz = u_xlat16_4.zxy * vec3(2.5, 2.5, 2.5) + u_xlat16_6.xyz;
     u_xlat16_16.xyz = max(u_xlat16_17.xyz, vec3(-1.0, -1.0, -1.0));
@@ -760,8 +748,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_7 = u_xlat16_7 * u_xlat16_11.yyyy;
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + vs_TEXCOORD0.xyz;
@@ -773,10 +761,10 @@ void main()
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
     u_xlat16_16.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_17.xyz;
     u_xlat16_17.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_17.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_12;
     u_xlat16_7 = u_xlat16_11.xxxx * u_xlat16_8 + u_xlat16_7;
     u_xlat16_17.x = dot(u_xlat16_11.xyz, vec3(2.0, 2.0, 2.0));
@@ -787,16 +775,16 @@ void main()
     u_xlat16_34 = max(abs(u_xlat16_10.y), abs(u_xlat16_10.x));
     u_xlat16_34 = max(abs(u_xlat16_10.z), u_xlat16_34);
     u_xlat16_10.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_11.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_10.xyz = max(u_xlat16_9.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_10.xyz = min(u_xlat16_10.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_9.xyz = u_xlat16_9.xyz + (-u_xlat16_10.xyz);
     u_xlat16_34 = max(abs(u_xlat16_9.y), abs(u_xlat16_9.x));
     u_xlat16_34 = max(abs(u_xlat16_9.z), u_xlat16_34);
     u_xlat16_9.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_10.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_3.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_9.xyz = u_xlat16_4.zxy * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
@@ -808,10 +796,10 @@ void main()
     u_xlat16_9.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_10.xyz;
     u_xlat16_10.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_9.xyz;
     u_xlat16_4.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_9.xyz;
-    u_xlat10_4 = textureLod(_MainTex, u_xlat16_4.xyz, _Level);
-    u_xlat16_4 = max(u_xlat10_4, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_4 = textureLod(_MainTex, u_xlat16_4.xyz, _Level);
+    u_xlat16_4 = max(u_xlat16_4, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_4 = u_xlat16_4 + u_xlat16_7;
     u_xlat16_9.xyz = max(u_xlat16_6.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_9.xyz = min(u_xlat16_9.xyz, vec3(1.0, 1.0, 1.0));
@@ -819,16 +807,16 @@ void main()
     u_xlat16_34 = max(abs(u_xlat16_6.y), abs(u_xlat16_6.x));
     u_xlat16_34 = max(abs(u_xlat16_6.z), u_xlat16_34);
     u_xlat16_6.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_9.xyz;
-    u_xlat10_6 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
-    u_xlat16_6 = max(u_xlat10_6, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_6 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
+    u_xlat16_6 = max(u_xlat16_6, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_9.xyz = max(u_xlat16_5.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_9.xyz = min(u_xlat16_9.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_5.xyz = u_xlat16_5.xyz + (-u_xlat16_9.xyz);
     u_xlat16_34 = max(abs(u_xlat16_5.y), abs(u_xlat16_5.x));
     u_xlat16_34 = max(abs(u_xlat16_5.z), u_xlat16_34);
     u_xlat16_2.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_9.xyz;
-    u_xlat10_2 = textureLod(_MainTex, u_xlat16_2.xyz, _Level);
-    u_xlat16_2 = max(u_xlat10_2, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_2 = textureLod(_MainTex, u_xlat16_2.xyz, _Level);
+    u_xlat16_2 = max(u_xlat16_2, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_2 = u_xlat16_2 + u_xlat16_6;
     u_xlat16_2 = u_xlat16_2 * u_xlat16_3.yyyy;
     u_xlat16_2 = u_xlat16_3.xxxx * u_xlat16_4 + u_xlat16_2;
@@ -874,41 +862,35 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Level;
 uniform 	mediump float _Texel;
 uniform 	mediump float _Scale;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in mediump vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec3 u_xlat16_0;
 mediump vec4 u_xlat16_1;
-lowp vec4 u_xlat10_1;
 bvec3 u_xlatb1;
 mediump vec4 u_xlat16_2;
-lowp vec4 u_xlat10_2;
 mediump vec3 u_xlat16_3;
 mediump vec4 u_xlat16_4;
-lowp vec4 u_xlat10_4;
 mediump vec3 u_xlat16_5;
 mediump vec4 u_xlat16_6;
-lowp vec4 u_xlat10_6;
 mediump vec4 u_xlat16_7;
-lowp vec4 u_xlat10_7;
 mediump vec4 u_xlat16_8;
-lowp vec4 u_xlat10_8;
 mediump vec3 u_xlat16_9;
 mediump vec3 u_xlat16_10;
 mediump vec3 u_xlat16_11;
 mediump vec4 u_xlat16_12;
-lowp vec4 u_xlat10_12;
 mediump vec4 u_xlat16_13;
-lowp vec4 u_xlat10_13;
 mediump vec4 u_xlat16_14;
-lowp vec4 u_xlat10_14;
 mediump vec4 u_xlat16_15;
-lowp vec4 u_xlat10_15;
 mediump vec3 u_xlat16_16;
 mediump vec3 u_xlat16_17;
 mediump float u_xlat16_34;
@@ -946,8 +928,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_6.y), abs(u_xlat16_6.x));
     u_xlat16_51 = max(abs(u_xlat16_6.z), u_xlat16_51);
     u_xlat16_6.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_7.xyz;
-    u_xlat10_1 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
-    u_xlat16_1 = max(u_xlat10_1, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_1 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
+    u_xlat16_1 = max(u_xlat16_1, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_6.xyz = u_xlat16_4.xyz * vec3(1.5, 1.5, 1.5) + vs_TEXCOORD0.xyz;
     u_xlat16_7.xyz = (-u_xlat16_4.zxy) * vec3(2.5, 2.5, 2.5) + u_xlat16_6.xyz;
     u_xlat16_8.xyz = max(u_xlat16_7.xyz, vec3(-1.0, -1.0, -1.0));
@@ -956,8 +938,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_7.y), abs(u_xlat16_7.x));
     u_xlat16_51 = max(abs(u_xlat16_7.z), u_xlat16_51);
     u_xlat16_7.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_8.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_7.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_7.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_1 = u_xlat16_1 + u_xlat16_7;
     u_xlat16_1 = u_xlat16_1 * u_xlat16_3.yyyy;
     u_xlat16_8.xyz = (-u_xlat16_4.zxy) * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
@@ -969,10 +951,10 @@ void main()
     u_xlat16_8.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_9.xyz;
     u_xlat16_9.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_8.xyz;
     u_xlat16_8.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_8.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_8.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_8.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_3.xxxx * u_xlat16_7 + u_xlat16_1;
     u_xlat16_9.xyz = (-u_xlat16_4.xyz) * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
@@ -983,8 +965,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_10.y), abs(u_xlat16_10.x));
     u_xlat16_51 = max(abs(u_xlat16_10.z), u_xlat16_51);
     u_xlat16_10.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_11.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_10.xyz = u_xlat16_4.xyz * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
     u_xlat16_11.xyz = (-u_xlat16_4.zxy) * vec3(2.5, 2.5, 2.5) + u_xlat16_10.xyz;
     u_xlat16_12.xyz = max(u_xlat16_11.xyz, vec3(-1.0, -1.0, -1.0));
@@ -993,8 +975,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_11.y), abs(u_xlat16_11.x));
     u_xlat16_51 = max(abs(u_xlat16_11.z), u_xlat16_51);
     u_xlat16_11.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_12.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_11.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_11.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_3.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_11.xyz = u_xlat16_0.yyy * u_xlat16_0.xyz;
@@ -1006,8 +988,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + u_xlat16_9.xyz;
     u_xlat16_13.xyz = max(u_xlat16_12.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
@@ -1015,8 +997,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_11.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + u_xlat16_6.xyz;
@@ -1026,8 +1008,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + u_xlat16_5.xyz;
     u_xlat16_13.xyz = max(u_xlat16_12.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
@@ -1035,8 +1017,8 @@ void main()
     u_xlat16_51 = max(abs(u_xlat16_12.y), abs(u_xlat16_12.x));
     u_xlat16_51 = max(abs(u_xlat16_12.z), u_xlat16_51);
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_7 = u_xlat16_7 * u_xlat16_11.yyyy;
     u_xlat16_12.xyz = (-u_xlat16_4.zxy) * vec3(1.5, 1.5, 1.5) + vs_TEXCOORD0.xyz;
@@ -1048,10 +1030,10 @@ void main()
     u_xlat16_12.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_12.xyz;
     u_xlat16_12.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_12.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_12.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_12;
     u_xlat16_7 = u_xlat16_11.xxxx * u_xlat16_8 + u_xlat16_7;
     u_xlat16_1 = u_xlat16_1 + u_xlat16_7;
@@ -1063,10 +1045,10 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13.xyz = max(u_xlat16_10.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_14.xyz = u_xlat16_10.xyz + (-u_xlat16_13.xyz);
@@ -1075,11 +1057,11 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_12;
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_12;
     u_xlat16_1 = u_xlat16_0.zzzz * u_xlat16_8 + u_xlat16_1;
     u_xlat16_13.xyz = max(u_xlat16_5.xyz, vec3(-1.0, -1.0, -1.0));
@@ -1090,10 +1072,10 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13.xyz = max(u_xlat16_6.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_13.xyz = min(u_xlat16_13.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_14.xyz = u_xlat16_6.xyz + (-u_xlat16_13.xyz);
@@ -1102,30 +1084,30 @@ void main()
     u_xlat16_13.xyz = (-vec3(u_xlat16_51)) * u_xlat16_2.xyz + u_xlat16_13.xyz;
     u_xlat16_14.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
     u_xlat16_13.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_13.xyz;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_13.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_13;
     u_xlat16_8 = u_xlat16_0.yyyy * u_xlat16_8;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_12 = u_xlat16_12 + u_xlat16_13;
     u_xlat16_12 = u_xlat16_0.yyyy * u_xlat16_12;
     u_xlat16_14.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + vs_TEXCOORD0.xyz;
     u_xlat16_15.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_14.xyz;
     u_xlat16_14.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_14.xyz;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_14 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
-    u_xlat16_14 = max(u_xlat10_14, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_14.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_14 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
+    u_xlat16_14 = max(u_xlat16_14, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_15.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + vs_TEXCOORD0.xyz;
     u_xlat16_16.xyz = (-u_xlat16_4.zxy) * vec3(0.5, 0.5, 0.5) + u_xlat16_15.xyz;
     u_xlat16_15.xyz = u_xlat16_4.zxy * vec3(0.5, 0.5, 0.5) + u_xlat16_15.xyz;
-    u_xlat10_15 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
-    u_xlat16_15 = max(u_xlat10_15, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_15 = textureLod(_MainTex, u_xlat16_15.xyz, _Level);
+    u_xlat16_15 = max(u_xlat16_15, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13 = u_xlat16_13 + u_xlat16_15;
     u_xlat16_8 = u_xlat16_0.xxxx * u_xlat16_13 + u_xlat16_8;
-    u_xlat10_13 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
-    u_xlat16_13 = max(u_xlat10_13, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_13 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
+    u_xlat16_13 = max(u_xlat16_13, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_13 = u_xlat16_13 + u_xlat16_14;
     u_xlat16_12 = u_xlat16_0.xxxx * u_xlat16_13 + u_xlat16_12;
     u_xlat16_1 = u_xlat16_1 + u_xlat16_12;
@@ -1140,8 +1122,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + u_xlat16_10.xyz;
     u_xlat16_10.xyz = u_xlat16_4.zxy * vec3(2.5, 2.5, 2.5) + u_xlat16_10.xyz;
     u_xlat16_16.xyz = max(u_xlat16_17.xyz, vec3(-1.0, -1.0, -1.0));
@@ -1150,8 +1132,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_11.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + u_xlat16_5.xyz;
@@ -1162,8 +1144,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + u_xlat16_6.xyz;
     u_xlat16_6.xyz = u_xlat16_4.zxy * vec3(2.5, 2.5, 2.5) + u_xlat16_6.xyz;
     u_xlat16_16.xyz = max(u_xlat16_17.xyz, vec3(-1.0, -1.0, -1.0));
@@ -1172,8 +1154,8 @@ void main()
     u_xlat16_17.x = max(abs(u_xlat16_17.y), abs(u_xlat16_17.x));
     u_xlat16_17.x = max(abs(u_xlat16_17.z), u_xlat16_17.x);
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_7 = u_xlat16_7 * u_xlat16_11.yyyy;
     u_xlat16_17.xyz = u_xlat16_4.zxy * vec3(1.5, 1.5, 1.5) + vs_TEXCOORD0.xyz;
@@ -1185,10 +1167,10 @@ void main()
     u_xlat16_17.xyz = (-u_xlat16_17.xxx) * u_xlat16_2.xyz + u_xlat16_16.xyz;
     u_xlat16_16.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_17.xyz;
     u_xlat16_17.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_17.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_12 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
-    u_xlat16_12 = max(u_xlat10_12, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_17.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_12 = textureLod(_MainTex, u_xlat16_16.xyz, _Level);
+    u_xlat16_12 = max(u_xlat16_12, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_8 = u_xlat16_8 + u_xlat16_12;
     u_xlat16_7 = u_xlat16_11.xxxx * u_xlat16_8 + u_xlat16_7;
     u_xlat16_17.x = dot(u_xlat16_11.xyz, vec3(2.0, 2.0, 2.0));
@@ -1199,16 +1181,16 @@ void main()
     u_xlat16_34 = max(abs(u_xlat16_10.y), abs(u_xlat16_10.x));
     u_xlat16_34 = max(abs(u_xlat16_10.z), u_xlat16_34);
     u_xlat16_10.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_11.xyz;
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_10.xyz = max(u_xlat16_9.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_10.xyz = min(u_xlat16_10.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_9.xyz = u_xlat16_9.xyz + (-u_xlat16_10.xyz);
     u_xlat16_34 = max(abs(u_xlat16_9.y), abs(u_xlat16_9.x));
     u_xlat16_34 = max(abs(u_xlat16_9.z), u_xlat16_34);
     u_xlat16_9.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_10.xyz;
-    u_xlat10_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
-    u_xlat16_8 = max(u_xlat10_8, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_8 = textureLod(_MainTex, u_xlat16_9.xyz, _Level);
+    u_xlat16_8 = max(u_xlat16_8, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_7 = u_xlat16_7 + u_xlat16_8;
     u_xlat16_1 = u_xlat16_3.zzzz * u_xlat16_7 + u_xlat16_1;
     u_xlat16_9.xyz = u_xlat16_4.zxy * vec3(2.5, 2.5, 2.5) + vs_TEXCOORD0.xyz;
@@ -1220,10 +1202,10 @@ void main()
     u_xlat16_9.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_10.xyz;
     u_xlat16_10.xyz = u_xlat16_4.xyz * vec3(0.5, 0.5, 0.5) + u_xlat16_9.xyz;
     u_xlat16_4.xyz = (-u_xlat16_4.xyz) * vec3(0.5, 0.5, 0.5) + u_xlat16_9.xyz;
-    u_xlat10_4 = textureLod(_MainTex, u_xlat16_4.xyz, _Level);
-    u_xlat16_4 = max(u_xlat10_4, vec4(0.0, 0.0, 0.0, 0.0));
-    u_xlat10_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
-    u_xlat16_7 = max(u_xlat10_7, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_4 = textureLod(_MainTex, u_xlat16_4.xyz, _Level);
+    u_xlat16_4 = max(u_xlat16_4, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_7 = textureLod(_MainTex, u_xlat16_10.xyz, _Level);
+    u_xlat16_7 = max(u_xlat16_7, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_4 = u_xlat16_4 + u_xlat16_7;
     u_xlat16_9.xyz = max(u_xlat16_6.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_9.xyz = min(u_xlat16_9.xyz, vec3(1.0, 1.0, 1.0));
@@ -1231,16 +1213,16 @@ void main()
     u_xlat16_34 = max(abs(u_xlat16_6.y), abs(u_xlat16_6.x));
     u_xlat16_34 = max(abs(u_xlat16_6.z), u_xlat16_34);
     u_xlat16_6.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_9.xyz;
-    u_xlat10_6 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
-    u_xlat16_6 = max(u_xlat10_6, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_6 = textureLod(_MainTex, u_xlat16_6.xyz, _Level);
+    u_xlat16_6 = max(u_xlat16_6, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_9.xyz = max(u_xlat16_5.xyz, vec3(-1.0, -1.0, -1.0));
     u_xlat16_9.xyz = min(u_xlat16_9.xyz, vec3(1.0, 1.0, 1.0));
     u_xlat16_5.xyz = u_xlat16_5.xyz + (-u_xlat16_9.xyz);
     u_xlat16_34 = max(abs(u_xlat16_5.y), abs(u_xlat16_5.x));
     u_xlat16_34 = max(abs(u_xlat16_5.z), u_xlat16_34);
     u_xlat16_2.xyz = (-vec3(u_xlat16_34)) * u_xlat16_2.xyz + u_xlat16_9.xyz;
-    u_xlat10_2 = textureLod(_MainTex, u_xlat16_2.xyz, _Level);
-    u_xlat16_2 = max(u_xlat10_2, vec4(0.0, 0.0, 0.0, 0.0));
+    u_xlat16_2 = textureLod(_MainTex, u_xlat16_2.xyz, _Level);
+    u_xlat16_2 = max(u_xlat16_2, vec4(0.0, 0.0, 0.0, 0.0));
     u_xlat16_2 = u_xlat16_2 + u_xlat16_6;
     u_xlat16_2 = u_xlat16_2 * u_xlat16_3.yyyy;
     u_xlat16_2 = u_xlat16_3.xxxx * u_xlat16_4 + u_xlat16_2;
@@ -1280,7 +1262,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 97250
+  GpuProgramID 82116
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -1311,17 +1293,21 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Level;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in mediump vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = textureLod(_MainTex, vs_TEXCOORD0.xyz, _Level);
-    SV_Target0 = u_xlat10_0;
+    u_xlat16_0 = textureLod(_MainTex, vs_TEXCOORD0.xyz, _Level);
+    SV_Target0 = u_xlat16_0;
     return;
 }
 
@@ -1357,17 +1343,21 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Level;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in mediump vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = textureLod(_MainTex, vs_TEXCOORD0.xyz, _Level);
-    SV_Target0 = u_xlat10_0;
+    u_xlat16_0 = textureLod(_MainTex, vs_TEXCOORD0.xyz, _Level);
+    SV_Target0 = u_xlat16_0;
     return;
 }
 
@@ -1403,17 +1393,21 @@ void main()
 #endif
 #ifdef FRAGMENT
 #version 300 es
+#ifdef GL_EXT_shader_texture_lod
+#extension GL_EXT_shader_texture_lod : enable
+#endif
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Level;
-uniform lowp samplerCube _MainTex;
+uniform mediump samplerCube _MainTex;
 in mediump vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = textureLod(_MainTex, vs_TEXCOORD0.xyz, _Level);
-    SV_Target0 = u_xlat10_0;
+    u_xlat16_0 = textureLod(_MainTex, vs_TEXCOORD0.xyz, _Level);
+    SV_Target0 = u_xlat16_0;
     return;
 }
 

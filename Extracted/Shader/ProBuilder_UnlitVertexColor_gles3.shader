@@ -11,7 +11,7 @@ SubShader {
  Pass {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "AlphaTest" "RenderType" = "Transparent" }
   Cull Off
-  GpuProgramID 38562
+  GpuProgramID 46748
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -42,6 +42,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -83,6 +84,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -124,6 +126,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;

@@ -8,172 +8,283 @@ Properties {
 }
 SubShader {
  Pass {
-  GpuProgramID 12560
+  GpuProgramID 18613
 Program "vp" {
 SubProgram "gles hw_tier00 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_1));
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-void main ()
-{
-  gl_FragData[0] = vec4(1.0, 0.0, 1.0, 1.0);
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+#define SV_Target0 gl_FragData[0]
+void main()
+{
+    SV_Target0 = vec4(1.0, 0.0, 1.0, 1.0);
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier01 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_1));
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-void main ()
-{
-  gl_FragData[0] = vec4(1.0, 0.0, 1.0, 1.0);
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+#define SV_Target0 gl_FragData[0]
+void main()
+{
+    SV_Target0 = vec4(1.0, 0.0, 1.0, 1.0);
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier02 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_1));
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-void main ()
-{
-  gl_FragData[0] = vec4(1.0, 0.0, 1.0, 1.0);
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+#define SV_Target0 gl_FragData[0]
+void main()
+{
+    SV_Target0 = vec4(1.0, 0.0, 1.0, 1.0);
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier00 " {
 Keywords { "UNITY_SINGLE_PASS_STEREO" }
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_StereoMatrixVP[2];
-uniform highp int unity_StereoEyeIndex;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_StereoMatrixVP[8];
+uniform 	int unity_StereoEyeIndex;
+attribute highp vec4 in_POSITION0;
+vec4 u_xlat0;
+int u_xlati1;
+vec4 u_xlat2;
+int op_shl(int a, int b) { return int(floor(float(a) * pow(2.0, float(b)))); }
+ivec2 op_shl(ivec2 a, ivec2 b) { a.x = op_shl(a.x, b.x); a.y = op_shl(a.y, b.y); return a; }
+ivec3 op_shl(ivec3 a, ivec3 b) { a.x = op_shl(a.x, b.x); a.y = op_shl(a.y, b.y); a.z = op_shl(a.z, b.z); return a; }
+ivec4 op_shl(ivec4 a, ivec4 b) { a.x = op_shl(a.x, b.x); a.y = op_shl(a.y, b.y); a.z = op_shl(a.z, b.z); a.w = op_shl(a.w, b.w); return a; }
+
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_StereoMatrixVP[unity_StereoEyeIndex] * (unity_ObjectToWorld * tmpvar_1));
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlati1 = op_shl(unity_StereoEyeIndex, 2);
+    u_xlat2 = u_xlat0.yyyy * hlslcc_mtx4x4unity_StereoMatrixVP[(u_xlati1 + 1)];
+    u_xlat2 = hlslcc_mtx4x4unity_StereoMatrixVP[u_xlati1] * u_xlat0.xxxx + u_xlat2;
+    u_xlat2 = hlslcc_mtx4x4unity_StereoMatrixVP[(u_xlati1 + 2)] * u_xlat0.zzzz + u_xlat2;
+    gl_Position = hlslcc_mtx4x4unity_StereoMatrixVP[(u_xlati1 + 3)] * u_xlat0.wwww + u_xlat2;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-void main ()
-{
-  gl_FragData[0] = vec4(1.0, 0.0, 1.0, 1.0);
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+#define SV_Target0 gl_FragData[0]
+void main()
+{
+    SV_Target0 = vec4(1.0, 0.0, 1.0, 1.0);
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier01 " {
 Keywords { "UNITY_SINGLE_PASS_STEREO" }
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_StereoMatrixVP[2];
-uniform highp int unity_StereoEyeIndex;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_StereoMatrixVP[8];
+uniform 	int unity_StereoEyeIndex;
+attribute highp vec4 in_POSITION0;
+vec4 u_xlat0;
+int u_xlati1;
+vec4 u_xlat2;
+int op_shl(int a, int b) { return int(floor(float(a) * pow(2.0, float(b)))); }
+ivec2 op_shl(ivec2 a, ivec2 b) { a.x = op_shl(a.x, b.x); a.y = op_shl(a.y, b.y); return a; }
+ivec3 op_shl(ivec3 a, ivec3 b) { a.x = op_shl(a.x, b.x); a.y = op_shl(a.y, b.y); a.z = op_shl(a.z, b.z); return a; }
+ivec4 op_shl(ivec4 a, ivec4 b) { a.x = op_shl(a.x, b.x); a.y = op_shl(a.y, b.y); a.z = op_shl(a.z, b.z); a.w = op_shl(a.w, b.w); return a; }
+
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_StereoMatrixVP[unity_StereoEyeIndex] * (unity_ObjectToWorld * tmpvar_1));
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlati1 = op_shl(unity_StereoEyeIndex, 2);
+    u_xlat2 = u_xlat0.yyyy * hlslcc_mtx4x4unity_StereoMatrixVP[(u_xlati1 + 1)];
+    u_xlat2 = hlslcc_mtx4x4unity_StereoMatrixVP[u_xlati1] * u_xlat0.xxxx + u_xlat2;
+    u_xlat2 = hlslcc_mtx4x4unity_StereoMatrixVP[(u_xlati1 + 2)] * u_xlat0.zzzz + u_xlat2;
+    gl_Position = hlslcc_mtx4x4unity_StereoMatrixVP[(u_xlati1 + 3)] * u_xlat0.wwww + u_xlat2;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-void main ()
-{
-  gl_FragData[0] = vec4(1.0, 0.0, 1.0, 1.0);
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+#define SV_Target0 gl_FragData[0]
+void main()
+{
+    SV_Target0 = vec4(1.0, 0.0, 1.0, 1.0);
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier02 " {
 Keywords { "UNITY_SINGLE_PASS_STEREO" }
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_StereoMatrixVP[2];
-uniform highp int unity_StereoEyeIndex;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_StereoMatrixVP[8];
+uniform 	int unity_StereoEyeIndex;
+attribute highp vec4 in_POSITION0;
+vec4 u_xlat0;
+int u_xlati1;
+vec4 u_xlat2;
+int op_shl(int a, int b) { return int(floor(float(a) * pow(2.0, float(b)))); }
+ivec2 op_shl(ivec2 a, ivec2 b) { a.x = op_shl(a.x, b.x); a.y = op_shl(a.y, b.y); return a; }
+ivec3 op_shl(ivec3 a, ivec3 b) { a.x = op_shl(a.x, b.x); a.y = op_shl(a.y, b.y); a.z = op_shl(a.z, b.z); return a; }
+ivec4 op_shl(ivec4 a, ivec4 b) { a.x = op_shl(a.x, b.x); a.y = op_shl(a.y, b.y); a.z = op_shl(a.z, b.z); a.w = op_shl(a.w, b.w); return a; }
+
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_StereoMatrixVP[unity_StereoEyeIndex] * (unity_ObjectToWorld * tmpvar_1));
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlati1 = op_shl(unity_StereoEyeIndex, 2);
+    u_xlat2 = u_xlat0.yyyy * hlslcc_mtx4x4unity_StereoMatrixVP[(u_xlati1 + 1)];
+    u_xlat2 = hlslcc_mtx4x4unity_StereoMatrixVP[u_xlati1] * u_xlat0.xxxx + u_xlat2;
+    u_xlat2 = hlslcc_mtx4x4unity_StereoMatrixVP[(u_xlati1 + 2)] * u_xlat0.zzzz + u_xlat2;
+    gl_Position = hlslcc_mtx4x4unity_StereoMatrixVP[(u_xlati1 + 3)] * u_xlat0.wwww + u_xlat2;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-void main ()
-{
-  gl_FragData[0] = vec4(1.0, 0.0, 1.0, 1.0);
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+#define SV_Target0 gl_FragData[0]
+void main()
+{
+    SV_Target0 = vec4(1.0, 0.0, 1.0, 1.0);
+    return;
+}
 
 #endif
 "

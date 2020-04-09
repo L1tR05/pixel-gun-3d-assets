@@ -29,484 +29,574 @@ SubShader {
   LOD 100
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
   Cull Off
-  GpuProgramID 15294
+  GpuProgramID 26736
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp vec4 _Time;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _MainTex_ST;
-uniform highp vec4 _DetailTex_ST;
-uniform highp float _ScrollX;
-uniform highp float _ScrollY;
-uniform highp float _Scroll2X;
-uniform highp float _Scroll2Y;
-uniform highp float _MMultiplier;
-uniform highp float _SineAmplX;
-uniform highp float _SineAmplY;
-uniform highp float _SineFreqX;
-uniform highp float _SineFreqY;
-uniform highp float _SineAmplX2;
-uniform highp float _SineAmplY2;
-uniform highp float _SineFreqX2;
-uniform highp float _SineFreqY2;
-uniform highp vec4 _Color;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
+uniform 	vec4 _Time;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _MainTex_ST;
+uniform 	vec4 _DetailTex_ST;
+uniform 	float _ScrollX;
+uniform 	float _ScrollY;
+uniform 	float _Scroll2X;
+uniform 	float _Scroll2Y;
+uniform 	float _MMultiplier;
+uniform 	float _SineAmplX;
+uniform 	float _SineAmplY;
+uniform 	float _SineFreqX;
+uniform 	float _SineFreqY;
+uniform 	float _SineAmplX2;
+uniform 	float _SineAmplY2;
+uniform 	float _SineFreqX2;
+uniform 	float _SineFreqY2;
+uniform 	vec4 _Color;
+attribute highp vec4 in_POSITION0;
+attribute highp vec4 in_TEXCOORD0;
+attribute mediump vec4 in_COLOR0;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+vec4 u_xlat0;
+vec4 u_xlat1;
+vec3 u_xlat2;
+float u_xlat6;
+void main()
 {
-  highp vec4 tmpvar_1;
-  lowp vec4 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  highp vec2 tmpvar_4;
-  tmpvar_4.x = _ScrollX;
-  tmpvar_4.y = _ScrollY;
-  tmpvar_1.xy = (((_glesMultiTexCoord0.xy * _MainTex_ST.xy) + _MainTex_ST.zw) + fract((tmpvar_4 * _Time.xy)));
-  highp vec2 tmpvar_5;
-  tmpvar_5.x = _Scroll2X;
-  tmpvar_5.y = _Scroll2Y;
-  tmpvar_1.zw = (((_glesMultiTexCoord0.xy * _DetailTex_ST.xy) + _DetailTex_ST.zw) + fract((tmpvar_5 * _Time.xy)));
-  tmpvar_1.x = (tmpvar_1.x + (sin(
-    (_Time * _SineFreqX)
-  ) * _SineAmplX).x);
-  tmpvar_1.y = (tmpvar_1.y + (sin(
-    (_Time * _SineFreqY)
-  ) * _SineAmplY).x);
-  tmpvar_1.z = (tmpvar_1.z + (sin(
-    (_Time * _SineFreqX2)
-  ) * _SineAmplX2).x);
-  tmpvar_1.w = (tmpvar_1.w + (sin(
-    (_Time * _SineFreqY2)
-  ) * _SineAmplY2).x);
-  tmpvar_2 = ((_MMultiplier * _Color) * _glesColor);
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_1;
-  xlv_TEXCOORD1 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    u_xlat0.x = _Time.x * _SineFreqX;
+    u_xlat0.x = sin(u_xlat0.x);
+    u_xlat2.xy = in_TEXCOORD0.xy * _MainTex_ST.xy + _MainTex_ST.zw;
+    u_xlat1 = _Time.xyxy * vec4(_ScrollX, _ScrollY, _Scroll2X, _Scroll2Y);
+    u_xlat1 = fract(u_xlat1);
+    u_xlat2.xy = u_xlat2.xy + u_xlat1.xy;
+    vs_TEXCOORD0.x = u_xlat0.x * _SineAmplX + u_xlat2.x;
+    u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
+    u_xlat0.xy = u_xlat1.zw + u_xlat0.xy;
+    u_xlat6 = _Time.x * _SineFreqY2;
+    u_xlat6 = sin(u_xlat6);
+    vs_TEXCOORD0.w = u_xlat6 * _SineAmplY2 + u_xlat0.y;
+    u_xlat2.xz = _Time.xx * vec2(_SineFreqY, _SineFreqX2);
+    u_xlat2.xz = sin(u_xlat2.xz);
+    vs_TEXCOORD0.y = u_xlat2.x * _SineAmplY + u_xlat2.y;
+    vs_TEXCOORD0.z = u_xlat2.z * _SineAmplX2 + u_xlat0.x;
+    u_xlat0 = vec4(_MMultiplier) * _Color;
+    u_xlat0 = u_xlat0 * in_COLOR0;
+    vs_TEXCOORD1 = u_xlat0;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-uniform sampler2D _DetailTex;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = ((texture2D (_MainTex, xlv_TEXCOORD0.xy) * texture2D (_DetailTex, xlv_TEXCOORD0.zw)) * xlv_TEXCOORD1);
-  gl_FragData[0] = tmpvar_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform lowp sampler2D _MainTex;
+uniform lowp sampler2D _DetailTex;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+lowp vec4 u_xlat10_1;
+void main()
+{
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat10_1 = texture2D(_DetailTex, vs_TEXCOORD0.zw);
+    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    SV_Target0 = u_xlat16_0 * vs_TEXCOORD1;
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier01 " {
 Keywords { "LIGHTMAP_OFF" }
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp vec4 _Time;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _MainTex_ST;
-uniform highp vec4 _DetailTex_ST;
-uniform highp float _ScrollX;
-uniform highp float _ScrollY;
-uniform highp float _Scroll2X;
-uniform highp float _Scroll2Y;
-uniform highp float _MMultiplier;
-uniform highp float _SineAmplX;
-uniform highp float _SineAmplY;
-uniform highp float _SineFreqX;
-uniform highp float _SineFreqY;
-uniform highp float _SineAmplX2;
-uniform highp float _SineAmplY2;
-uniform highp float _SineFreqX2;
-uniform highp float _SineFreqY2;
-uniform highp vec4 _Color;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
+uniform 	vec4 _Time;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _MainTex_ST;
+uniform 	vec4 _DetailTex_ST;
+uniform 	float _ScrollX;
+uniform 	float _ScrollY;
+uniform 	float _Scroll2X;
+uniform 	float _Scroll2Y;
+uniform 	float _MMultiplier;
+uniform 	float _SineAmplX;
+uniform 	float _SineAmplY;
+uniform 	float _SineFreqX;
+uniform 	float _SineFreqY;
+uniform 	float _SineAmplX2;
+uniform 	float _SineAmplY2;
+uniform 	float _SineFreqX2;
+uniform 	float _SineFreqY2;
+uniform 	vec4 _Color;
+attribute highp vec4 in_POSITION0;
+attribute highp vec4 in_TEXCOORD0;
+attribute mediump vec4 in_COLOR0;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+vec4 u_xlat0;
+vec4 u_xlat1;
+vec3 u_xlat2;
+float u_xlat6;
+void main()
 {
-  highp vec4 tmpvar_1;
-  lowp vec4 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  highp vec2 tmpvar_4;
-  tmpvar_4.x = _ScrollX;
-  tmpvar_4.y = _ScrollY;
-  tmpvar_1.xy = (((_glesMultiTexCoord0.xy * _MainTex_ST.xy) + _MainTex_ST.zw) + fract((tmpvar_4 * _Time.xy)));
-  highp vec2 tmpvar_5;
-  tmpvar_5.x = _Scroll2X;
-  tmpvar_5.y = _Scroll2Y;
-  tmpvar_1.zw = (((_glesMultiTexCoord0.xy * _DetailTex_ST.xy) + _DetailTex_ST.zw) + fract((tmpvar_5 * _Time.xy)));
-  tmpvar_1.x = (tmpvar_1.x + (sin(
-    (_Time * _SineFreqX)
-  ) * _SineAmplX).x);
-  tmpvar_1.y = (tmpvar_1.y + (sin(
-    (_Time * _SineFreqY)
-  ) * _SineAmplY).x);
-  tmpvar_1.z = (tmpvar_1.z + (sin(
-    (_Time * _SineFreqX2)
-  ) * _SineAmplX2).x);
-  tmpvar_1.w = (tmpvar_1.w + (sin(
-    (_Time * _SineFreqY2)
-  ) * _SineAmplY2).x);
-  tmpvar_2 = ((_MMultiplier * _Color) * _glesColor);
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_1;
-  xlv_TEXCOORD1 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    u_xlat0.x = _Time.x * _SineFreqX;
+    u_xlat0.x = sin(u_xlat0.x);
+    u_xlat2.xy = in_TEXCOORD0.xy * _MainTex_ST.xy + _MainTex_ST.zw;
+    u_xlat1 = _Time.xyxy * vec4(_ScrollX, _ScrollY, _Scroll2X, _Scroll2Y);
+    u_xlat1 = fract(u_xlat1);
+    u_xlat2.xy = u_xlat2.xy + u_xlat1.xy;
+    vs_TEXCOORD0.x = u_xlat0.x * _SineAmplX + u_xlat2.x;
+    u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
+    u_xlat0.xy = u_xlat1.zw + u_xlat0.xy;
+    u_xlat6 = _Time.x * _SineFreqY2;
+    u_xlat6 = sin(u_xlat6);
+    vs_TEXCOORD0.w = u_xlat6 * _SineAmplY2 + u_xlat0.y;
+    u_xlat2.xz = _Time.xx * vec2(_SineFreqY, _SineFreqX2);
+    u_xlat2.xz = sin(u_xlat2.xz);
+    vs_TEXCOORD0.y = u_xlat2.x * _SineAmplY + u_xlat2.y;
+    vs_TEXCOORD0.z = u_xlat2.z * _SineAmplX2 + u_xlat0.x;
+    u_xlat0 = vec4(_MMultiplier) * _Color;
+    u_xlat0 = u_xlat0 * in_COLOR0;
+    vs_TEXCOORD1 = u_xlat0;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-uniform sampler2D _DetailTex;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = ((texture2D (_MainTex, xlv_TEXCOORD0.xy) * texture2D (_DetailTex, xlv_TEXCOORD0.zw)) * xlv_TEXCOORD1);
-  gl_FragData[0] = tmpvar_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform lowp sampler2D _MainTex;
+uniform lowp sampler2D _DetailTex;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+lowp vec4 u_xlat10_1;
+void main()
+{
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat10_1 = texture2D(_DetailTex, vs_TEXCOORD0.zw);
+    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    SV_Target0 = u_xlat16_0 * vs_TEXCOORD1;
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier02 " {
 Keywords { "LIGHTMAP_OFF" }
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp vec4 _Time;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _MainTex_ST;
-uniform highp vec4 _DetailTex_ST;
-uniform highp float _ScrollX;
-uniform highp float _ScrollY;
-uniform highp float _Scroll2X;
-uniform highp float _Scroll2Y;
-uniform highp float _MMultiplier;
-uniform highp float _SineAmplX;
-uniform highp float _SineAmplY;
-uniform highp float _SineFreqX;
-uniform highp float _SineFreqY;
-uniform highp float _SineAmplX2;
-uniform highp float _SineAmplY2;
-uniform highp float _SineFreqX2;
-uniform highp float _SineFreqY2;
-uniform highp vec4 _Color;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
+uniform 	vec4 _Time;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _MainTex_ST;
+uniform 	vec4 _DetailTex_ST;
+uniform 	float _ScrollX;
+uniform 	float _ScrollY;
+uniform 	float _Scroll2X;
+uniform 	float _Scroll2Y;
+uniform 	float _MMultiplier;
+uniform 	float _SineAmplX;
+uniform 	float _SineAmplY;
+uniform 	float _SineFreqX;
+uniform 	float _SineFreqY;
+uniform 	float _SineAmplX2;
+uniform 	float _SineAmplY2;
+uniform 	float _SineFreqX2;
+uniform 	float _SineFreqY2;
+uniform 	vec4 _Color;
+attribute highp vec4 in_POSITION0;
+attribute highp vec4 in_TEXCOORD0;
+attribute mediump vec4 in_COLOR0;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+vec4 u_xlat0;
+vec4 u_xlat1;
+vec3 u_xlat2;
+float u_xlat6;
+void main()
 {
-  highp vec4 tmpvar_1;
-  lowp vec4 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  highp vec2 tmpvar_4;
-  tmpvar_4.x = _ScrollX;
-  tmpvar_4.y = _ScrollY;
-  tmpvar_1.xy = (((_glesMultiTexCoord0.xy * _MainTex_ST.xy) + _MainTex_ST.zw) + fract((tmpvar_4 * _Time.xy)));
-  highp vec2 tmpvar_5;
-  tmpvar_5.x = _Scroll2X;
-  tmpvar_5.y = _Scroll2Y;
-  tmpvar_1.zw = (((_glesMultiTexCoord0.xy * _DetailTex_ST.xy) + _DetailTex_ST.zw) + fract((tmpvar_5 * _Time.xy)));
-  tmpvar_1.x = (tmpvar_1.x + (sin(
-    (_Time * _SineFreqX)
-  ) * _SineAmplX).x);
-  tmpvar_1.y = (tmpvar_1.y + (sin(
-    (_Time * _SineFreqY)
-  ) * _SineAmplY).x);
-  tmpvar_1.z = (tmpvar_1.z + (sin(
-    (_Time * _SineFreqX2)
-  ) * _SineAmplX2).x);
-  tmpvar_1.w = (tmpvar_1.w + (sin(
-    (_Time * _SineFreqY2)
-  ) * _SineAmplY2).x);
-  tmpvar_2 = ((_MMultiplier * _Color) * _glesColor);
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_1;
-  xlv_TEXCOORD1 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    u_xlat0.x = _Time.x * _SineFreqX;
+    u_xlat0.x = sin(u_xlat0.x);
+    u_xlat2.xy = in_TEXCOORD0.xy * _MainTex_ST.xy + _MainTex_ST.zw;
+    u_xlat1 = _Time.xyxy * vec4(_ScrollX, _ScrollY, _Scroll2X, _Scroll2Y);
+    u_xlat1 = fract(u_xlat1);
+    u_xlat2.xy = u_xlat2.xy + u_xlat1.xy;
+    vs_TEXCOORD0.x = u_xlat0.x * _SineAmplX + u_xlat2.x;
+    u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
+    u_xlat0.xy = u_xlat1.zw + u_xlat0.xy;
+    u_xlat6 = _Time.x * _SineFreqY2;
+    u_xlat6 = sin(u_xlat6);
+    vs_TEXCOORD0.w = u_xlat6 * _SineAmplY2 + u_xlat0.y;
+    u_xlat2.xz = _Time.xx * vec2(_SineFreqY, _SineFreqX2);
+    u_xlat2.xz = sin(u_xlat2.xz);
+    vs_TEXCOORD0.y = u_xlat2.x * _SineAmplY + u_xlat2.y;
+    vs_TEXCOORD0.z = u_xlat2.z * _SineAmplX2 + u_xlat0.x;
+    u_xlat0 = vec4(_MMultiplier) * _Color;
+    u_xlat0 = u_xlat0 * in_COLOR0;
+    vs_TEXCOORD1 = u_xlat0;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-uniform sampler2D _DetailTex;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = ((texture2D (_MainTex, xlv_TEXCOORD0.xy) * texture2D (_DetailTex, xlv_TEXCOORD0.zw)) * xlv_TEXCOORD1);
-  gl_FragData[0] = tmpvar_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform lowp sampler2D _MainTex;
+uniform lowp sampler2D _DetailTex;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+lowp vec4 u_xlat10_1;
+void main()
+{
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat10_1 = texture2D(_DetailTex, vs_TEXCOORD0.zw);
+    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    SV_Target0 = u_xlat16_0 * vs_TEXCOORD1;
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier00 " {
 Keywords { "LIGHTMAP_ON" }
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp vec4 _Time;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _MainTex_ST;
-uniform highp vec4 _DetailTex_ST;
-uniform highp float _ScrollX;
-uniform highp float _ScrollY;
-uniform highp float _Scroll2X;
-uniform highp float _Scroll2Y;
-uniform highp float _MMultiplier;
-uniform highp float _SineAmplX;
-uniform highp float _SineAmplY;
-uniform highp float _SineFreqX;
-uniform highp float _SineFreqY;
-uniform highp float _SineAmplX2;
-uniform highp float _SineAmplY2;
-uniform highp float _SineFreqX2;
-uniform highp float _SineFreqY2;
-uniform highp vec4 _Color;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
+uniform 	vec4 _Time;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _MainTex_ST;
+uniform 	vec4 _DetailTex_ST;
+uniform 	float _ScrollX;
+uniform 	float _ScrollY;
+uniform 	float _Scroll2X;
+uniform 	float _Scroll2Y;
+uniform 	float _MMultiplier;
+uniform 	float _SineAmplX;
+uniform 	float _SineAmplY;
+uniform 	float _SineFreqX;
+uniform 	float _SineFreqY;
+uniform 	float _SineAmplX2;
+uniform 	float _SineAmplY2;
+uniform 	float _SineFreqX2;
+uniform 	float _SineFreqY2;
+uniform 	vec4 _Color;
+attribute highp vec4 in_POSITION0;
+attribute highp vec4 in_TEXCOORD0;
+attribute mediump vec4 in_COLOR0;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+vec4 u_xlat0;
+vec4 u_xlat1;
+vec3 u_xlat2;
+float u_xlat6;
+void main()
 {
-  highp vec4 tmpvar_1;
-  lowp vec4 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  highp vec2 tmpvar_4;
-  tmpvar_4.x = _ScrollX;
-  tmpvar_4.y = _ScrollY;
-  tmpvar_1.xy = (((_glesMultiTexCoord0.xy * _MainTex_ST.xy) + _MainTex_ST.zw) + fract((tmpvar_4 * _Time.xy)));
-  highp vec2 tmpvar_5;
-  tmpvar_5.x = _Scroll2X;
-  tmpvar_5.y = _Scroll2Y;
-  tmpvar_1.zw = (((_glesMultiTexCoord0.xy * _DetailTex_ST.xy) + _DetailTex_ST.zw) + fract((tmpvar_5 * _Time.xy)));
-  tmpvar_1.x = (tmpvar_1.x + (sin(
-    (_Time * _SineFreqX)
-  ) * _SineAmplX).x);
-  tmpvar_1.y = (tmpvar_1.y + (sin(
-    (_Time * _SineFreqY)
-  ) * _SineAmplY).x);
-  tmpvar_1.z = (tmpvar_1.z + (sin(
-    (_Time * _SineFreqX2)
-  ) * _SineAmplX2).x);
-  tmpvar_1.w = (tmpvar_1.w + (sin(
-    (_Time * _SineFreqY2)
-  ) * _SineAmplY2).x);
-  tmpvar_2 = ((_MMultiplier * _Color) * _glesColor);
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_1;
-  xlv_TEXCOORD1 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    u_xlat0.x = _Time.x * _SineFreqX;
+    u_xlat0.x = sin(u_xlat0.x);
+    u_xlat2.xy = in_TEXCOORD0.xy * _MainTex_ST.xy + _MainTex_ST.zw;
+    u_xlat1 = _Time.xyxy * vec4(_ScrollX, _ScrollY, _Scroll2X, _Scroll2Y);
+    u_xlat1 = fract(u_xlat1);
+    u_xlat2.xy = u_xlat2.xy + u_xlat1.xy;
+    vs_TEXCOORD0.x = u_xlat0.x * _SineAmplX + u_xlat2.x;
+    u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
+    u_xlat0.xy = u_xlat1.zw + u_xlat0.xy;
+    u_xlat6 = _Time.x * _SineFreqY2;
+    u_xlat6 = sin(u_xlat6);
+    vs_TEXCOORD0.w = u_xlat6 * _SineAmplY2 + u_xlat0.y;
+    u_xlat2.xz = _Time.xx * vec2(_SineFreqY, _SineFreqX2);
+    u_xlat2.xz = sin(u_xlat2.xz);
+    vs_TEXCOORD0.y = u_xlat2.x * _SineAmplY + u_xlat2.y;
+    vs_TEXCOORD0.z = u_xlat2.z * _SineAmplX2 + u_xlat0.x;
+    u_xlat0 = vec4(_MMultiplier) * _Color;
+    u_xlat0 = u_xlat0 * in_COLOR0;
+    vs_TEXCOORD1 = u_xlat0;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-uniform sampler2D _DetailTex;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = ((texture2D (_MainTex, xlv_TEXCOORD0.xy) * texture2D (_DetailTex, xlv_TEXCOORD0.zw)) * xlv_TEXCOORD1);
-  gl_FragData[0] = tmpvar_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform lowp sampler2D _MainTex;
+uniform lowp sampler2D _DetailTex;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+lowp vec4 u_xlat10_1;
+void main()
+{
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat10_1 = texture2D(_DetailTex, vs_TEXCOORD0.zw);
+    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    SV_Target0 = u_xlat16_0 * vs_TEXCOORD1;
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier01 " {
 Keywords { "LIGHTMAP_ON" }
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp vec4 _Time;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _MainTex_ST;
-uniform highp vec4 _DetailTex_ST;
-uniform highp float _ScrollX;
-uniform highp float _ScrollY;
-uniform highp float _Scroll2X;
-uniform highp float _Scroll2Y;
-uniform highp float _MMultiplier;
-uniform highp float _SineAmplX;
-uniform highp float _SineAmplY;
-uniform highp float _SineFreqX;
-uniform highp float _SineFreqY;
-uniform highp float _SineAmplX2;
-uniform highp float _SineAmplY2;
-uniform highp float _SineFreqX2;
-uniform highp float _SineFreqY2;
-uniform highp vec4 _Color;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
+uniform 	vec4 _Time;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _MainTex_ST;
+uniform 	vec4 _DetailTex_ST;
+uniform 	float _ScrollX;
+uniform 	float _ScrollY;
+uniform 	float _Scroll2X;
+uniform 	float _Scroll2Y;
+uniform 	float _MMultiplier;
+uniform 	float _SineAmplX;
+uniform 	float _SineAmplY;
+uniform 	float _SineFreqX;
+uniform 	float _SineFreqY;
+uniform 	float _SineAmplX2;
+uniform 	float _SineAmplY2;
+uniform 	float _SineFreqX2;
+uniform 	float _SineFreqY2;
+uniform 	vec4 _Color;
+attribute highp vec4 in_POSITION0;
+attribute highp vec4 in_TEXCOORD0;
+attribute mediump vec4 in_COLOR0;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+vec4 u_xlat0;
+vec4 u_xlat1;
+vec3 u_xlat2;
+float u_xlat6;
+void main()
 {
-  highp vec4 tmpvar_1;
-  lowp vec4 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  highp vec2 tmpvar_4;
-  tmpvar_4.x = _ScrollX;
-  tmpvar_4.y = _ScrollY;
-  tmpvar_1.xy = (((_glesMultiTexCoord0.xy * _MainTex_ST.xy) + _MainTex_ST.zw) + fract((tmpvar_4 * _Time.xy)));
-  highp vec2 tmpvar_5;
-  tmpvar_5.x = _Scroll2X;
-  tmpvar_5.y = _Scroll2Y;
-  tmpvar_1.zw = (((_glesMultiTexCoord0.xy * _DetailTex_ST.xy) + _DetailTex_ST.zw) + fract((tmpvar_5 * _Time.xy)));
-  tmpvar_1.x = (tmpvar_1.x + (sin(
-    (_Time * _SineFreqX)
-  ) * _SineAmplX).x);
-  tmpvar_1.y = (tmpvar_1.y + (sin(
-    (_Time * _SineFreqY)
-  ) * _SineAmplY).x);
-  tmpvar_1.z = (tmpvar_1.z + (sin(
-    (_Time * _SineFreqX2)
-  ) * _SineAmplX2).x);
-  tmpvar_1.w = (tmpvar_1.w + (sin(
-    (_Time * _SineFreqY2)
-  ) * _SineAmplY2).x);
-  tmpvar_2 = ((_MMultiplier * _Color) * _glesColor);
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_1;
-  xlv_TEXCOORD1 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    u_xlat0.x = _Time.x * _SineFreqX;
+    u_xlat0.x = sin(u_xlat0.x);
+    u_xlat2.xy = in_TEXCOORD0.xy * _MainTex_ST.xy + _MainTex_ST.zw;
+    u_xlat1 = _Time.xyxy * vec4(_ScrollX, _ScrollY, _Scroll2X, _Scroll2Y);
+    u_xlat1 = fract(u_xlat1);
+    u_xlat2.xy = u_xlat2.xy + u_xlat1.xy;
+    vs_TEXCOORD0.x = u_xlat0.x * _SineAmplX + u_xlat2.x;
+    u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
+    u_xlat0.xy = u_xlat1.zw + u_xlat0.xy;
+    u_xlat6 = _Time.x * _SineFreqY2;
+    u_xlat6 = sin(u_xlat6);
+    vs_TEXCOORD0.w = u_xlat6 * _SineAmplY2 + u_xlat0.y;
+    u_xlat2.xz = _Time.xx * vec2(_SineFreqY, _SineFreqX2);
+    u_xlat2.xz = sin(u_xlat2.xz);
+    vs_TEXCOORD0.y = u_xlat2.x * _SineAmplY + u_xlat2.y;
+    vs_TEXCOORD0.z = u_xlat2.z * _SineAmplX2 + u_xlat0.x;
+    u_xlat0 = vec4(_MMultiplier) * _Color;
+    u_xlat0 = u_xlat0 * in_COLOR0;
+    vs_TEXCOORD1 = u_xlat0;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-uniform sampler2D _DetailTex;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = ((texture2D (_MainTex, xlv_TEXCOORD0.xy) * texture2D (_DetailTex, xlv_TEXCOORD0.zw)) * xlv_TEXCOORD1);
-  gl_FragData[0] = tmpvar_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform lowp sampler2D _MainTex;
+uniform lowp sampler2D _DetailTex;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+lowp vec4 u_xlat10_1;
+void main()
+{
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat10_1 = texture2D(_DetailTex, vs_TEXCOORD0.zw);
+    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    SV_Target0 = u_xlat16_0 * vs_TEXCOORD1;
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier02 " {
 Keywords { "LIGHTMAP_ON" }
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp vec4 _Time;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _MainTex_ST;
-uniform highp vec4 _DetailTex_ST;
-uniform highp float _ScrollX;
-uniform highp float _ScrollY;
-uniform highp float _Scroll2X;
-uniform highp float _Scroll2Y;
-uniform highp float _MMultiplier;
-uniform highp float _SineAmplX;
-uniform highp float _SineAmplY;
-uniform highp float _SineFreqX;
-uniform highp float _SineFreqY;
-uniform highp float _SineAmplX2;
-uniform highp float _SineAmplY2;
-uniform highp float _SineFreqX2;
-uniform highp float _SineFreqY2;
-uniform highp vec4 _Color;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
+uniform 	vec4 _Time;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _MainTex_ST;
+uniform 	vec4 _DetailTex_ST;
+uniform 	float _ScrollX;
+uniform 	float _ScrollY;
+uniform 	float _Scroll2X;
+uniform 	float _Scroll2Y;
+uniform 	float _MMultiplier;
+uniform 	float _SineAmplX;
+uniform 	float _SineAmplY;
+uniform 	float _SineFreqX;
+uniform 	float _SineFreqY;
+uniform 	float _SineAmplX2;
+uniform 	float _SineAmplY2;
+uniform 	float _SineFreqX2;
+uniform 	float _SineFreqY2;
+uniform 	vec4 _Color;
+attribute highp vec4 in_POSITION0;
+attribute highp vec4 in_TEXCOORD0;
+attribute mediump vec4 in_COLOR0;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+vec4 u_xlat0;
+vec4 u_xlat1;
+vec3 u_xlat2;
+float u_xlat6;
+void main()
 {
-  highp vec4 tmpvar_1;
-  lowp vec4 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  highp vec2 tmpvar_4;
-  tmpvar_4.x = _ScrollX;
-  tmpvar_4.y = _ScrollY;
-  tmpvar_1.xy = (((_glesMultiTexCoord0.xy * _MainTex_ST.xy) + _MainTex_ST.zw) + fract((tmpvar_4 * _Time.xy)));
-  highp vec2 tmpvar_5;
-  tmpvar_5.x = _Scroll2X;
-  tmpvar_5.y = _Scroll2Y;
-  tmpvar_1.zw = (((_glesMultiTexCoord0.xy * _DetailTex_ST.xy) + _DetailTex_ST.zw) + fract((tmpvar_5 * _Time.xy)));
-  tmpvar_1.x = (tmpvar_1.x + (sin(
-    (_Time * _SineFreqX)
-  ) * _SineAmplX).x);
-  tmpvar_1.y = (tmpvar_1.y + (sin(
-    (_Time * _SineFreqY)
-  ) * _SineAmplY).x);
-  tmpvar_1.z = (tmpvar_1.z + (sin(
-    (_Time * _SineFreqX2)
-  ) * _SineAmplX2).x);
-  tmpvar_1.w = (tmpvar_1.w + (sin(
-    (_Time * _SineFreqY2)
-  ) * _SineAmplY2).x);
-  tmpvar_2 = ((_MMultiplier * _Color) * _glesColor);
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_1;
-  xlv_TEXCOORD1 = tmpvar_2;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    u_xlat0.x = _Time.x * _SineFreqX;
+    u_xlat0.x = sin(u_xlat0.x);
+    u_xlat2.xy = in_TEXCOORD0.xy * _MainTex_ST.xy + _MainTex_ST.zw;
+    u_xlat1 = _Time.xyxy * vec4(_ScrollX, _ScrollY, _Scroll2X, _Scroll2Y);
+    u_xlat1 = fract(u_xlat1);
+    u_xlat2.xy = u_xlat2.xy + u_xlat1.xy;
+    vs_TEXCOORD0.x = u_xlat0.x * _SineAmplX + u_xlat2.x;
+    u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
+    u_xlat0.xy = u_xlat1.zw + u_xlat0.xy;
+    u_xlat6 = _Time.x * _SineFreqY2;
+    u_xlat6 = sin(u_xlat6);
+    vs_TEXCOORD0.w = u_xlat6 * _SineAmplY2 + u_xlat0.y;
+    u_xlat2.xz = _Time.xx * vec2(_SineFreqY, _SineFreqX2);
+    u_xlat2.xz = sin(u_xlat2.xz);
+    vs_TEXCOORD0.y = u_xlat2.x * _SineAmplY + u_xlat2.y;
+    vs_TEXCOORD0.z = u_xlat2.z * _SineAmplX2 + u_xlat0.x;
+    u_xlat0 = vec4(_MMultiplier) * _Color;
+    u_xlat0 = u_xlat0 * in_COLOR0;
+    vs_TEXCOORD1 = u_xlat0;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-uniform sampler2D _DetailTex;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_TEXCOORD1;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = ((texture2D (_MainTex, xlv_TEXCOORD0.xy) * texture2D (_DetailTex, xlv_TEXCOORD0.zw)) * xlv_TEXCOORD1);
-  gl_FragData[0] = tmpvar_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform lowp sampler2D _MainTex;
+uniform lowp sampler2D _DetailTex;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_TEXCOORD1;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+lowp vec4 u_xlat10_1;
+void main()
+{
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat10_1 = texture2D(_DetailTex, vs_TEXCOORD0.zw);
+    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    SV_Target0 = u_xlat16_0 * vs_TEXCOORD1;
+    return;
+}
 
 #endif
 "

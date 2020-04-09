@@ -8,7 +8,7 @@ Properties {
 }
 SubShader {
  Pass {
-  GpuProgramID 12560
+  GpuProgramID 18613
 Program "vp" {
 SubProgram "vulkan hw_tier00 " {
 "// shader disassembly not supported on SPIR-V

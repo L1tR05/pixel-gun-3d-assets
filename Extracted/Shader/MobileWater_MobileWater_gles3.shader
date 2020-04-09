@@ -19,7 +19,6 @@ SubProgram "gles3 " {
 "#version 300 es
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -32,6 +31,39 @@ SubProgram "gles3 " {
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
 #endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 35
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS10
+    #define SHADER_AVAILABLE_INTERPOLATORS10 1
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS15
+    #define SHADER_AVAILABLE_INTERPOLATORS15 1
+#endif
+#ifndef SHADER_AVAILABLE_INTEGERS
+    #define SHADER_AVAILABLE_INTEGERS 1
+#endif
+#ifndef SHADER_AVAILABLE_MRT4
+    #define SHADER_AVAILABLE_MRT4 1
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_SAMPLELOD
+    #define SHADER_AVAILABLE_SAMPLELOD 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
+#endif
+#ifndef SHADER_AVAILABLE_2DARRAY
+    #define SHADER_AVAILABLE_2DARRAY 1
+#endif
+#ifndef SHADER_AVAILABLE_INSTANCING
+    #define SHADER_AVAILABLE_INSTANCING 1
+#endif
 #ifndef SHADER_API_GLES3
     #define SHADER_API_GLES3 1
 #endif
@@ -95,7 +127,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 19
+#line 51
 
 #line 14
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -108,7 +140,6 @@ mat4 transpose(mat4 mtx)
         varying mediump vec2 uv;
                      
         
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 
 #ifdef VERTEX
 #define gl_Vertex _glesVertex
@@ -127,6 +158,8 @@ in vec4 _glesMultiTexCoord0;
 #define gl_FragColor _glesFragColor
 layout(location = 0) out mediump vec4 _glesFragColor;
 
+precision highp float;
+
         uniform lowp sampler2D _MainTex;
         uniform lowp vec4 _Color;
         void main() {
@@ -140,7 +173,6 @@ SubProgram "gles3 " {
 "#version 300 es
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -152,6 +184,39 @@ SubProgram "gles3 " {
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
 #endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 35
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS10
+    #define SHADER_AVAILABLE_INTERPOLATORS10 1
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS15
+    #define SHADER_AVAILABLE_INTERPOLATORS15 1
+#endif
+#ifndef SHADER_AVAILABLE_INTEGERS
+    #define SHADER_AVAILABLE_INTEGERS 1
+#endif
+#ifndef SHADER_AVAILABLE_MRT4
+    #define SHADER_AVAILABLE_MRT4 1
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_SAMPLELOD
+    #define SHADER_AVAILABLE_SAMPLELOD 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
+#endif
+#ifndef SHADER_AVAILABLE_2DARRAY
+    #define SHADER_AVAILABLE_2DARRAY 1
+#endif
+#ifndef SHADER_AVAILABLE_INSTANCING
+    #define SHADER_AVAILABLE_INSTANCING 1
+#endif
 #ifndef SHADER_API_GLES3
     #define SHADER_API_GLES3 1
 #endif
@@ -215,7 +280,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 18
+#line 50
 
 #line 14
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -228,7 +293,6 @@ mat4 transpose(mat4 mtx)
         varying mediump vec2 uv;
                      
         
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 
 #ifdef VERTEX
 #define gl_Vertex _glesVertex
@@ -246,6 +310,8 @@ in vec4 _glesMultiTexCoord0;
 #ifdef FRAGMENT
 #define gl_FragColor _glesFragColor
 layout(location = 0) out mediump vec4 _glesFragColor;
+
+precision highp float;
 
         uniform lowp sampler2D _MainTex;
         uniform lowp vec4 _Color;
@@ -260,7 +326,6 @@ SubProgram "gles3 " {
 "#version 300 es
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -271,6 +336,39 @@ SubProgram "gles3 " {
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 35
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS10
+    #define SHADER_AVAILABLE_INTERPOLATORS10 1
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS15
+    #define SHADER_AVAILABLE_INTERPOLATORS15 1
+#endif
+#ifndef SHADER_AVAILABLE_INTEGERS
+    #define SHADER_AVAILABLE_INTEGERS 1
+#endif
+#ifndef SHADER_AVAILABLE_MRT4
+    #define SHADER_AVAILABLE_MRT4 1
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_SAMPLELOD
+    #define SHADER_AVAILABLE_SAMPLELOD 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
+#endif
+#ifndef SHADER_AVAILABLE_2DARRAY
+    #define SHADER_AVAILABLE_2DARRAY 1
+#endif
+#ifndef SHADER_AVAILABLE_INSTANCING
+    #define SHADER_AVAILABLE_INSTANCING 1
 #endif
 #ifndef SHADER_API_GLES3
     #define SHADER_API_GLES3 1
@@ -335,7 +433,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 18
+#line 50
 
 #line 14
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -348,7 +446,6 @@ mat4 transpose(mat4 mtx)
         varying mediump vec2 uv;
                      
         
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 
 #ifdef VERTEX
 #define gl_Vertex _glesVertex
@@ -366,6 +463,8 @@ in vec4 _glesMultiTexCoord0;
 #ifdef FRAGMENT
 #define gl_FragColor _glesFragColor
 layout(location = 0) out mediump vec4 _glesFragColor;
+
+precision highp float;
 
         uniform lowp sampler2D _MainTex;
         uniform lowp vec4 _Color;
@@ -382,7 +481,6 @@ SubProgram "gles3 " {
 "#version 300 es
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -395,6 +493,39 @@ SubProgram "gles3 " {
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
 #endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 35
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS10
+    #define SHADER_AVAILABLE_INTERPOLATORS10 1
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS15
+    #define SHADER_AVAILABLE_INTERPOLATORS15 1
+#endif
+#ifndef SHADER_AVAILABLE_INTEGERS
+    #define SHADER_AVAILABLE_INTEGERS 1
+#endif
+#ifndef SHADER_AVAILABLE_MRT4
+    #define SHADER_AVAILABLE_MRT4 1
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_SAMPLELOD
+    #define SHADER_AVAILABLE_SAMPLELOD 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
+#endif
+#ifndef SHADER_AVAILABLE_2DARRAY
+    #define SHADER_AVAILABLE_2DARRAY 1
+#endif
+#ifndef SHADER_AVAILABLE_INSTANCING
+    #define SHADER_AVAILABLE_INSTANCING 1
+#endif
 #ifndef SHADER_API_GLES3
     #define SHADER_API_GLES3 1
 #endif
@@ -458,7 +589,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 19
+#line 51
 
 #line 14
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -471,7 +602,6 @@ mat4 transpose(mat4 mtx)
         varying mediump vec2 uv;
                      
         
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 
 #ifdef VERTEX
 #define gl_Vertex _glesVertex
@@ -490,6 +620,8 @@ in vec4 _glesMultiTexCoord0;
 #define gl_FragColor _glesFragColor
 layout(location = 0) out mediump vec4 _glesFragColor;
 
+precision highp float;
+
         uniform lowp sampler2D _MainTex;
         uniform lowp vec4 _Color;
         void main() {
@@ -503,7 +635,6 @@ SubProgram "gles3 " {
 "#version 300 es
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -515,6 +646,39 @@ SubProgram "gles3 " {
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
 #endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 35
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS10
+    #define SHADER_AVAILABLE_INTERPOLATORS10 1
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS15
+    #define SHADER_AVAILABLE_INTERPOLATORS15 1
+#endif
+#ifndef SHADER_AVAILABLE_INTEGERS
+    #define SHADER_AVAILABLE_INTEGERS 1
+#endif
+#ifndef SHADER_AVAILABLE_MRT4
+    #define SHADER_AVAILABLE_MRT4 1
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_SAMPLELOD
+    #define SHADER_AVAILABLE_SAMPLELOD 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
+#endif
+#ifndef SHADER_AVAILABLE_2DARRAY
+    #define SHADER_AVAILABLE_2DARRAY 1
+#endif
+#ifndef SHADER_AVAILABLE_INSTANCING
+    #define SHADER_AVAILABLE_INSTANCING 1
+#endif
 #ifndef SHADER_API_GLES3
     #define SHADER_API_GLES3 1
 #endif
@@ -578,7 +742,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 18
+#line 50
 
 #line 14
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -591,7 +755,6 @@ mat4 transpose(mat4 mtx)
         varying mediump vec2 uv;
                      
         
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 
 #ifdef VERTEX
 #define gl_Vertex _glesVertex
@@ -609,6 +772,8 @@ in vec4 _glesMultiTexCoord0;
 #ifdef FRAGMENT
 #define gl_FragColor _glesFragColor
 layout(location = 0) out mediump vec4 _glesFragColor;
+
+precision highp float;
 
         uniform lowp sampler2D _MainTex;
         uniform lowp vec4 _Color;
@@ -623,7 +788,6 @@ SubProgram "gles3 " {
 "#version 300 es
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -634,6 +798,39 @@ SubProgram "gles3 " {
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 35
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS10
+    #define SHADER_AVAILABLE_INTERPOLATORS10 1
+#endif
+#ifndef SHADER_AVAILABLE_INTERPOLATORS15
+    #define SHADER_AVAILABLE_INTERPOLATORS15 1
+#endif
+#ifndef SHADER_AVAILABLE_INTEGERS
+    #define SHADER_AVAILABLE_INTEGERS 1
+#endif
+#ifndef SHADER_AVAILABLE_MRT4
+    #define SHADER_AVAILABLE_MRT4 1
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_SAMPLELOD
+    #define SHADER_AVAILABLE_SAMPLELOD 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
+#endif
+#ifndef SHADER_AVAILABLE_2DARRAY
+    #define SHADER_AVAILABLE_2DARRAY 1
+#endif
+#ifndef SHADER_AVAILABLE_INSTANCING
+    #define SHADER_AVAILABLE_INSTANCING 1
 #endif
 #ifndef SHADER_API_GLES3
     #define SHADER_API_GLES3 1
@@ -698,7 +895,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 18
+#line 50
 
 #line 14
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -711,7 +908,6 @@ mat4 transpose(mat4 mtx)
         varying mediump vec2 uv;
                      
         
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 
 #ifdef VERTEX
 #define gl_Vertex _glesVertex
@@ -729,6 +925,8 @@ in vec4 _glesMultiTexCoord0;
 #ifdef FRAGMENT
 #define gl_FragColor _glesFragColor
 layout(location = 0) out mediump vec4 _glesFragColor;
+
+precision highp float;
 
         uniform lowp sampler2D _MainTex;
         uniform lowp vec4 _Color;
@@ -781,16 +979,17 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0 = u_xlat10_0 * _Color;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0 = u_xlat16_0 * _Color;
     return;
 }
 
@@ -829,16 +1028,17 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0 = u_xlat10_0 * _Color;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0 = u_xlat16_0 * _Color;
     return;
 }
 
@@ -877,16 +1077,17 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0 = u_xlat10_0 * _Color;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0 = u_xlat16_0 * _Color;
     return;
 }
 
@@ -958,21 +1159,22 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump float vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 mediump float u_xlat16_7;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_1.xyz = u_xlat10_0.xyz * _Color.xyz + (-unity_FogColor.xyz);
-    u_xlat16_7 = u_xlat10_0.w * _Color.w;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1.xyz = u_xlat16_0.xyz * _Color.xyz + (-unity_FogColor.xyz);
+    u_xlat16_7 = u_xlat16_0.w * _Color.w;
     SV_Target0.w = u_xlat16_7;
     SV_Target0.xyz = vec3(vs_TEXCOORD1) * u_xlat16_1.xyz + unity_FogColor.xyz;
     return;
@@ -1046,21 +1248,22 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump float vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 mediump float u_xlat16_7;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_1.xyz = u_xlat10_0.xyz * _Color.xyz + (-unity_FogColor.xyz);
-    u_xlat16_7 = u_xlat10_0.w * _Color.w;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1.xyz = u_xlat16_0.xyz * _Color.xyz + (-unity_FogColor.xyz);
+    u_xlat16_7 = u_xlat16_0.w * _Color.w;
     SV_Target0.w = u_xlat16_7;
     SV_Target0.xyz = vec3(vs_TEXCOORD1) * u_xlat16_1.xyz + unity_FogColor.xyz;
     return;
@@ -1134,21 +1337,22 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump float vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 mediump float u_xlat16_7;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_1.xyz = u_xlat10_0.xyz * _Color.xyz + (-unity_FogColor.xyz);
-    u_xlat16_7 = u_xlat10_0.w * _Color.w;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1.xyz = u_xlat16_0.xyz * _Color.xyz + (-unity_FogColor.xyz);
+    u_xlat16_7 = u_xlat16_0.w * _Color.w;
     SV_Target0.w = u_xlat16_7;
     SV_Target0.xyz = vec3(vs_TEXCOORD1) * u_xlat16_1.xyz + unity_FogColor.xyz;
     return;

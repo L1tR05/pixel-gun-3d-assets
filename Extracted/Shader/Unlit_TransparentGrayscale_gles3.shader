@@ -16,7 +16,7 @@ SubShader {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZWrite Off
   Cull Off
-  GpuProgramID 5221
+  GpuProgramID 19568
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -50,9 +50,10 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -103,9 +104,10 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -156,9 +158,10 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;

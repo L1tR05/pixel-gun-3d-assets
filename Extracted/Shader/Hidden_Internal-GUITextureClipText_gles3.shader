@@ -14,7 +14,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 3322
+  GpuProgramID 29063
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -61,21 +61,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump float u_xlat16_0;
-lowp float u_xlat10_0;
-lowp float u_xlat10_1;
+mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat10_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat16_0 = u_xlat10_1 * u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0 = u_xlat16_1 * u_xlat16_0;
     u_xlat16_0 = u_xlat16_0 * vs_COLOR0.w;
     SV_Target0.w = u_xlat16_0;
     SV_Target0.xyz = vs_COLOR0.xyz;
@@ -130,21 +130,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump float u_xlat16_0;
-lowp float u_xlat10_0;
-lowp float u_xlat10_1;
+mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat10_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat16_0 = u_xlat10_1 * u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0 = u_xlat16_1 * u_xlat16_0;
     u_xlat16_0 = u_xlat16_0 * vs_COLOR0.w;
     SV_Target0.w = u_xlat16_0;
     SV_Target0.xyz = vs_COLOR0.xyz;
@@ -199,21 +199,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump float u_xlat16_0;
-lowp float u_xlat10_0;
-lowp float u_xlat10_1;
+mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat10_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat16_0 = u_xlat10_1 * u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0 = u_xlat16_1 * u_xlat16_0;
     u_xlat16_0 = u_xlat16_0 * vs_COLOR0.w;
     SV_Target0.w = u_xlat16_0;
     SV_Target0.xyz = vs_COLOR0.xyz;
@@ -244,7 +244,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 102232
+  GpuProgramID 114351
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -291,21 +291,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump float u_xlat16_0;
-lowp float u_xlat10_0;
-lowp float u_xlat10_1;
+mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat10_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat16_0 = u_xlat10_1 * u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0 = u_xlat16_1 * u_xlat16_0;
     u_xlat16_0 = u_xlat16_0 * vs_COLOR0.w;
     SV_Target0.w = u_xlat16_0;
     SV_Target0.xyz = vs_COLOR0.xyz;
@@ -360,21 +360,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump float u_xlat16_0;
-lowp float u_xlat10_0;
-lowp float u_xlat10_1;
+mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat10_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat16_0 = u_xlat10_1 * u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0 = u_xlat16_1 * u_xlat16_0;
     u_xlat16_0 = u_xlat16_0 * vs_COLOR0.w;
     SV_Target0.w = u_xlat16_0;
     SV_Target0.xyz = vs_COLOR0.xyz;
@@ -429,21 +429,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump float u_xlat16_0;
-lowp float u_xlat10_0;
-lowp float u_xlat10_1;
+mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat10_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat16_0 = u_xlat10_1 * u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0 = u_xlat16_1 * u_xlat16_0;
     u_xlat16_0 = u_xlat16_0 * vs_COLOR0.w;
     SV_Target0.w = u_xlat16_0;
     SV_Target0.xyz = vs_COLOR0.xyz;

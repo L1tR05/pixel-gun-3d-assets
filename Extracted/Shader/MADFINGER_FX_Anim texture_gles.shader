@@ -16,310 +16,262 @@ SubShader {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZWrite Off
   Cull Off
-  GpuProgramID 38010
+  GpuProgramID 1660
 Program "vp" {
 SubProgram "gles hw_tier00 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp vec4 _Time;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _Color;
-uniform highp vec4 _NumTexTiles;
-uniform highp float _ReplaySpeed;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_COLOR;
-void main ()
+uniform 	vec4 _Time;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _Color;
+uniform 	vec4 _NumTexTiles;
+uniform 	float _ReplaySpeed;
+attribute highp vec4 in_POSITION0;
+attribute highp vec4 in_TEXCOORD0;
+attribute mediump vec4 in_COLOR0;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_COLOR0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+bvec4 u_xlatb1;
+vec4 u_xlat2;
+float u_xlat3;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1 = _glesVertex;
-  highp vec4 tile_2;
-  lowp vec4 tmpvar_3;
-  highp float tmpvar_4;
-  tmpvar_4 = (((_glesColor.w * 60.0) + _Time.y) * _ReplaySpeed);
-  highp float tmpvar_5;
-  tmpvar_5 = floor(tmpvar_4);
-  highp float tmpvar_6;
-  tmpvar_6 = (tmpvar_5 + 1.0);
-  highp float tmpvar_7;
-  tmpvar_7 = (tmpvar_4 - tmpvar_5);
-  highp vec2 tmpvar_8;
-  tmpvar_8 = (1.0/(_NumTexTiles.xy));
-  highp vec2 tmpvar_9;
-  tmpvar_9.x = tmpvar_5;
-  tmpvar_9.y = floor((tmpvar_5 / _NumTexTiles.x));
-  tile_2.xy = tmpvar_9;
-  highp vec2 tmpvar_10;
-  tmpvar_10.x = tmpvar_6;
-  tmpvar_10.y = floor((tmpvar_6 / _NumTexTiles.x));
-  tile_2.zw = tmpvar_10;
-  highp vec4 tmpvar_11;
-  tmpvar_11 = (tile_2 / _NumTexTiles.xyxy);
-  highp vec4 tmpvar_12;
-  tmpvar_12 = (fract(abs(tmpvar_11)) * _NumTexTiles.xyxy);
-  highp float tmpvar_13;
-  if ((tmpvar_11.x >= 0.0)) {
-    tmpvar_13 = tmpvar_12.x;
-  } else {
-    tmpvar_13 = -(tmpvar_12.x);
-  };
-  highp float tmpvar_14;
-  if ((tmpvar_11.y >= 0.0)) {
-    tmpvar_14 = tmpvar_12.y;
-  } else {
-    tmpvar_14 = -(tmpvar_12.y);
-  };
-  highp float tmpvar_15;
-  if ((tmpvar_11.z >= 0.0)) {
-    tmpvar_15 = tmpvar_12.z;
-  } else {
-    tmpvar_15 = -(tmpvar_12.z);
-  };
-  highp float tmpvar_16;
-  if ((tmpvar_11.w >= 0.0)) {
-    tmpvar_16 = tmpvar_12.w;
-  } else {
-    tmpvar_16 = -(tmpvar_12.w);
-  };
-  highp vec4 tmpvar_17;
-  tmpvar_17.x = tmpvar_13;
-  tmpvar_17.y = tmpvar_14;
-  tmpvar_17.z = tmpvar_15;
-  tmpvar_17.w = tmpvar_16;
-  tile_2 = tmpvar_17;
-  highp vec4 tmpvar_18;
-  tmpvar_18.w = 1.0;
-  tmpvar_18.xyz = tmpvar_1.xyz;
-  highp vec4 tmpvar_19;
-  tmpvar_19.xyz = (_Color.xyz * _glesColor.xyz);
-  tmpvar_19.w = tmpvar_7;
-  tmpvar_3 = tmpvar_19;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_18));
-  xlv_TEXCOORD0 = ((_glesMultiTexCoord0.xyxy + tmpvar_17) * tmpvar_8.xyxy);
-  xlv_COLOR = tmpvar_3;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    u_xlat0.x = in_COLOR0.w * 60.0 + _Time.y;
+    u_xlat3 = u_xlat0.x * _ReplaySpeed;
+    u_xlat1.x = floor(u_xlat3);
+    u_xlat3 = u_xlat1.x + 1.0;
+    u_xlat3 = u_xlat3 / _NumTexTiles.x;
+    u_xlat1.w = floor(u_xlat3);
+    u_xlat3 = u_xlat1.x / _NumTexTiles.x;
+    u_xlat1.y = floor(u_xlat3);
+    u_xlat1.z = u_xlat1.x + 1.0;
+    u_xlat2 = u_xlat1 / _NumTexTiles.xyxy;
+    u_xlat0.w = u_xlat0.x * _ReplaySpeed + (-u_xlat1.x);
+    u_xlatb1 = greaterThanEqual(u_xlat2, (-u_xlat2));
+    u_xlat2 = fract(abs(u_xlat2));
+    u_xlat1.x = (u_xlatb1.x) ? u_xlat2.x : (-u_xlat2.x);
+    u_xlat1.y = (u_xlatb1.y) ? u_xlat2.y : (-u_xlat2.y);
+    u_xlat1.z = (u_xlatb1.z) ? u_xlat2.z : (-u_xlat2.z);
+    u_xlat1.w = (u_xlatb1.w) ? u_xlat2.w : (-u_xlat2.w);
+    u_xlat1 = u_xlat1 * _NumTexTiles.xyxy + in_TEXCOORD0.xyxy;
+    u_xlat2 = vec4(1.0, 1.0, 1.0, 1.0) / _NumTexTiles.xyxy;
+    vs_TEXCOORD0 = u_xlat1 * u_xlat2;
+    u_xlat0.xyz = in_COLOR0.xyz * _Color.xyz;
+    vs_COLOR0 = u_xlat0;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_COLOR;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = (mix (texture2D (_MainTex, xlv_TEXCOORD0.xy), texture2D (_MainTex, xlv_TEXCOORD0.zw), xlv_COLOR.wwww) * xlv_COLOR);
-  gl_FragData[0] = tmpvar_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform lowp sampler2D _MainTex;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_COLOR0;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+lowp vec4 u_xlat10_1;
+void main()
+{
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.zw);
+    u_xlat10_1 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat10_0 + (-u_xlat10_1);
+    u_xlat16_0 = vs_COLOR0.wwww * u_xlat16_0 + u_xlat10_1;
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR0;
+    SV_Target0 = u_xlat16_0;
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier01 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp vec4 _Time;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _Color;
-uniform highp vec4 _NumTexTiles;
-uniform highp float _ReplaySpeed;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_COLOR;
-void main ()
+uniform 	vec4 _Time;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _Color;
+uniform 	vec4 _NumTexTiles;
+uniform 	float _ReplaySpeed;
+attribute highp vec4 in_POSITION0;
+attribute highp vec4 in_TEXCOORD0;
+attribute mediump vec4 in_COLOR0;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_COLOR0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+bvec4 u_xlatb1;
+vec4 u_xlat2;
+float u_xlat3;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1 = _glesVertex;
-  highp vec4 tile_2;
-  lowp vec4 tmpvar_3;
-  highp float tmpvar_4;
-  tmpvar_4 = (((_glesColor.w * 60.0) + _Time.y) * _ReplaySpeed);
-  highp float tmpvar_5;
-  tmpvar_5 = floor(tmpvar_4);
-  highp float tmpvar_6;
-  tmpvar_6 = (tmpvar_5 + 1.0);
-  highp float tmpvar_7;
-  tmpvar_7 = (tmpvar_4 - tmpvar_5);
-  highp vec2 tmpvar_8;
-  tmpvar_8 = (1.0/(_NumTexTiles.xy));
-  highp vec2 tmpvar_9;
-  tmpvar_9.x = tmpvar_5;
-  tmpvar_9.y = floor((tmpvar_5 / _NumTexTiles.x));
-  tile_2.xy = tmpvar_9;
-  highp vec2 tmpvar_10;
-  tmpvar_10.x = tmpvar_6;
-  tmpvar_10.y = floor((tmpvar_6 / _NumTexTiles.x));
-  tile_2.zw = tmpvar_10;
-  highp vec4 tmpvar_11;
-  tmpvar_11 = (tile_2 / _NumTexTiles.xyxy);
-  highp vec4 tmpvar_12;
-  tmpvar_12 = (fract(abs(tmpvar_11)) * _NumTexTiles.xyxy);
-  highp float tmpvar_13;
-  if ((tmpvar_11.x >= 0.0)) {
-    tmpvar_13 = tmpvar_12.x;
-  } else {
-    tmpvar_13 = -(tmpvar_12.x);
-  };
-  highp float tmpvar_14;
-  if ((tmpvar_11.y >= 0.0)) {
-    tmpvar_14 = tmpvar_12.y;
-  } else {
-    tmpvar_14 = -(tmpvar_12.y);
-  };
-  highp float tmpvar_15;
-  if ((tmpvar_11.z >= 0.0)) {
-    tmpvar_15 = tmpvar_12.z;
-  } else {
-    tmpvar_15 = -(tmpvar_12.z);
-  };
-  highp float tmpvar_16;
-  if ((tmpvar_11.w >= 0.0)) {
-    tmpvar_16 = tmpvar_12.w;
-  } else {
-    tmpvar_16 = -(tmpvar_12.w);
-  };
-  highp vec4 tmpvar_17;
-  tmpvar_17.x = tmpvar_13;
-  tmpvar_17.y = tmpvar_14;
-  tmpvar_17.z = tmpvar_15;
-  tmpvar_17.w = tmpvar_16;
-  tile_2 = tmpvar_17;
-  highp vec4 tmpvar_18;
-  tmpvar_18.w = 1.0;
-  tmpvar_18.xyz = tmpvar_1.xyz;
-  highp vec4 tmpvar_19;
-  tmpvar_19.xyz = (_Color.xyz * _glesColor.xyz);
-  tmpvar_19.w = tmpvar_7;
-  tmpvar_3 = tmpvar_19;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_18));
-  xlv_TEXCOORD0 = ((_glesMultiTexCoord0.xyxy + tmpvar_17) * tmpvar_8.xyxy);
-  xlv_COLOR = tmpvar_3;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    u_xlat0.x = in_COLOR0.w * 60.0 + _Time.y;
+    u_xlat3 = u_xlat0.x * _ReplaySpeed;
+    u_xlat1.x = floor(u_xlat3);
+    u_xlat3 = u_xlat1.x + 1.0;
+    u_xlat3 = u_xlat3 / _NumTexTiles.x;
+    u_xlat1.w = floor(u_xlat3);
+    u_xlat3 = u_xlat1.x / _NumTexTiles.x;
+    u_xlat1.y = floor(u_xlat3);
+    u_xlat1.z = u_xlat1.x + 1.0;
+    u_xlat2 = u_xlat1 / _NumTexTiles.xyxy;
+    u_xlat0.w = u_xlat0.x * _ReplaySpeed + (-u_xlat1.x);
+    u_xlatb1 = greaterThanEqual(u_xlat2, (-u_xlat2));
+    u_xlat2 = fract(abs(u_xlat2));
+    u_xlat1.x = (u_xlatb1.x) ? u_xlat2.x : (-u_xlat2.x);
+    u_xlat1.y = (u_xlatb1.y) ? u_xlat2.y : (-u_xlat2.y);
+    u_xlat1.z = (u_xlatb1.z) ? u_xlat2.z : (-u_xlat2.z);
+    u_xlat1.w = (u_xlatb1.w) ? u_xlat2.w : (-u_xlat2.w);
+    u_xlat1 = u_xlat1 * _NumTexTiles.xyxy + in_TEXCOORD0.xyxy;
+    u_xlat2 = vec4(1.0, 1.0, 1.0, 1.0) / _NumTexTiles.xyxy;
+    vs_TEXCOORD0 = u_xlat1 * u_xlat2;
+    u_xlat0.xyz = in_COLOR0.xyz * _Color.xyz;
+    vs_COLOR0 = u_xlat0;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_COLOR;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = (mix (texture2D (_MainTex, xlv_TEXCOORD0.xy), texture2D (_MainTex, xlv_TEXCOORD0.zw), xlv_COLOR.wwww) * xlv_COLOR);
-  gl_FragData[0] = tmpvar_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform lowp sampler2D _MainTex;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_COLOR0;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+lowp vec4 u_xlat10_1;
+void main()
+{
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.zw);
+    u_xlat10_1 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat10_0 + (-u_xlat10_1);
+    u_xlat16_0 = vs_COLOR0.wwww * u_xlat16_0 + u_xlat10_1;
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR0;
+    SV_Target0 = u_xlat16_0;
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier02 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp vec4 _Time;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _Color;
-uniform highp vec4 _NumTexTiles;
-uniform highp float _ReplaySpeed;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_COLOR;
-void main ()
+uniform 	vec4 _Time;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _Color;
+uniform 	vec4 _NumTexTiles;
+uniform 	float _ReplaySpeed;
+attribute highp vec4 in_POSITION0;
+attribute highp vec4 in_TEXCOORD0;
+attribute mediump vec4 in_COLOR0;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_COLOR0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+bvec4 u_xlatb1;
+vec4 u_xlat2;
+float u_xlat3;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1 = _glesVertex;
-  highp vec4 tile_2;
-  lowp vec4 tmpvar_3;
-  highp float tmpvar_4;
-  tmpvar_4 = (((_glesColor.w * 60.0) + _Time.y) * _ReplaySpeed);
-  highp float tmpvar_5;
-  tmpvar_5 = floor(tmpvar_4);
-  highp float tmpvar_6;
-  tmpvar_6 = (tmpvar_5 + 1.0);
-  highp float tmpvar_7;
-  tmpvar_7 = (tmpvar_4 - tmpvar_5);
-  highp vec2 tmpvar_8;
-  tmpvar_8 = (1.0/(_NumTexTiles.xy));
-  highp vec2 tmpvar_9;
-  tmpvar_9.x = tmpvar_5;
-  tmpvar_9.y = floor((tmpvar_5 / _NumTexTiles.x));
-  tile_2.xy = tmpvar_9;
-  highp vec2 tmpvar_10;
-  tmpvar_10.x = tmpvar_6;
-  tmpvar_10.y = floor((tmpvar_6 / _NumTexTiles.x));
-  tile_2.zw = tmpvar_10;
-  highp vec4 tmpvar_11;
-  tmpvar_11 = (tile_2 / _NumTexTiles.xyxy);
-  highp vec4 tmpvar_12;
-  tmpvar_12 = (fract(abs(tmpvar_11)) * _NumTexTiles.xyxy);
-  highp float tmpvar_13;
-  if ((tmpvar_11.x >= 0.0)) {
-    tmpvar_13 = tmpvar_12.x;
-  } else {
-    tmpvar_13 = -(tmpvar_12.x);
-  };
-  highp float tmpvar_14;
-  if ((tmpvar_11.y >= 0.0)) {
-    tmpvar_14 = tmpvar_12.y;
-  } else {
-    tmpvar_14 = -(tmpvar_12.y);
-  };
-  highp float tmpvar_15;
-  if ((tmpvar_11.z >= 0.0)) {
-    tmpvar_15 = tmpvar_12.z;
-  } else {
-    tmpvar_15 = -(tmpvar_12.z);
-  };
-  highp float tmpvar_16;
-  if ((tmpvar_11.w >= 0.0)) {
-    tmpvar_16 = tmpvar_12.w;
-  } else {
-    tmpvar_16 = -(tmpvar_12.w);
-  };
-  highp vec4 tmpvar_17;
-  tmpvar_17.x = tmpvar_13;
-  tmpvar_17.y = tmpvar_14;
-  tmpvar_17.z = tmpvar_15;
-  tmpvar_17.w = tmpvar_16;
-  tile_2 = tmpvar_17;
-  highp vec4 tmpvar_18;
-  tmpvar_18.w = 1.0;
-  tmpvar_18.xyz = tmpvar_1.xyz;
-  highp vec4 tmpvar_19;
-  tmpvar_19.xyz = (_Color.xyz * _glesColor.xyz);
-  tmpvar_19.w = tmpvar_7;
-  tmpvar_3 = tmpvar_19;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_18));
-  xlv_TEXCOORD0 = ((_glesMultiTexCoord0.xyxy + tmpvar_17) * tmpvar_8.xyxy);
-  xlv_COLOR = tmpvar_3;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    u_xlat0.x = in_COLOR0.w * 60.0 + _Time.y;
+    u_xlat3 = u_xlat0.x * _ReplaySpeed;
+    u_xlat1.x = floor(u_xlat3);
+    u_xlat3 = u_xlat1.x + 1.0;
+    u_xlat3 = u_xlat3 / _NumTexTiles.x;
+    u_xlat1.w = floor(u_xlat3);
+    u_xlat3 = u_xlat1.x / _NumTexTiles.x;
+    u_xlat1.y = floor(u_xlat3);
+    u_xlat1.z = u_xlat1.x + 1.0;
+    u_xlat2 = u_xlat1 / _NumTexTiles.xyxy;
+    u_xlat0.w = u_xlat0.x * _ReplaySpeed + (-u_xlat1.x);
+    u_xlatb1 = greaterThanEqual(u_xlat2, (-u_xlat2));
+    u_xlat2 = fract(abs(u_xlat2));
+    u_xlat1.x = (u_xlatb1.x) ? u_xlat2.x : (-u_xlat2.x);
+    u_xlat1.y = (u_xlatb1.y) ? u_xlat2.y : (-u_xlat2.y);
+    u_xlat1.z = (u_xlatb1.z) ? u_xlat2.z : (-u_xlat2.z);
+    u_xlat1.w = (u_xlatb1.w) ? u_xlat2.w : (-u_xlat2.w);
+    u_xlat1 = u_xlat1 * _NumTexTiles.xyxy + in_TEXCOORD0.xyxy;
+    u_xlat2 = vec4(1.0, 1.0, 1.0, 1.0) / _NumTexTiles.xyxy;
+    vs_TEXCOORD0 = u_xlat1 * u_xlat2;
+    u_xlat0.xyz = in_COLOR0.xyz * _Color.xyz;
+    vs_COLOR0 = u_xlat0;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform sampler2D _MainTex;
-varying highp vec4 xlv_TEXCOORD0;
-varying lowp vec4 xlv_COLOR;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = (mix (texture2D (_MainTex, xlv_TEXCOORD0.xy), texture2D (_MainTex, xlv_TEXCOORD0.zw), xlv_COLOR.wwww) * xlv_COLOR);
-  gl_FragData[0] = tmpvar_1;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform lowp sampler2D _MainTex;
+varying highp vec4 vs_TEXCOORD0;
+varying mediump vec4 vs_COLOR0;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+lowp vec4 u_xlat10_1;
+void main()
+{
+    u_xlat10_0 = texture2D(_MainTex, vs_TEXCOORD0.zw);
+    u_xlat10_1 = texture2D(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat10_0 + (-u_xlat10_1);
+    u_xlat16_0 = vs_COLOR0.wwww * u_xlat16_0 + u_xlat10_1;
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR0;
+    SV_Target0 = u_xlat16_0;
+    return;
+}
 
 #endif
 "

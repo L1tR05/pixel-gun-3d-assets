@@ -15,7 +15,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 55031
+  GpuProgramID 35762
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -49,24 +49,24 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ZBufferParams;
 uniform 	mediump float _Saturation;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _RgbTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _RgbTex;
 uniform highp sampler2D _CameraDepthTexture;
-uniform lowp sampler2D _ZCurve;
-uniform lowp sampler2D _RgbDepthTex;
+uniform mediump sampler2D _ZCurve;
+uniform mediump sampler2D _RgbDepthTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp vec3 u_xlat10_0;
+mediump vec3 u_xlat16_0;
 vec2 u_xlat1;
 mediump vec3 u_xlat16_2;
-lowp vec3 u_xlat10_2;
-lowp vec3 u_xlat10_3;
-lowp vec3 u_xlat10_4;
+mediump vec3 u_xlat16_3;
+mediump vec3 u_xlat16_4;
 mediump vec3 u_xlat16_5;
 mediump vec3 u_xlat16_6;
 vec2 u_xlat15;
@@ -77,27 +77,27 @@ void main()
     u_xlat1.x = u_xlat0.y;
     u_xlat1.y = float(0.625);
     u_xlat15.y = float(0.5);
-    u_xlat10_2.xyz = texture(_RgbDepthTex, u_xlat1.xy).xyz;
-    u_xlat10_3.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 0.0, 1.0);
+    u_xlat16_2.xyz = texture(_RgbDepthTex, u_xlat1.xy).xyz;
+    u_xlat16_3.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.0, 0.0, 1.0);
     SV_Target0.w = u_xlat0.w;
     u_xlat0.y = float(0.125);
     u_xlat0.w = float(0.375);
-    u_xlat10_4.xyz = texture(_RgbDepthTex, u_xlat0.xy).xyz;
-    u_xlat16_5.xyz = u_xlat10_4.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
-    u_xlat10_2.xyz = texture(_RgbDepthTex, u_xlat0.zw).xyz;
-    u_xlat16_5.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0) + u_xlat16_5.xyz;
-    u_xlat10_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
-    u_xlat10_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0);
-    u_xlat16_6.xyz = u_xlat10_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
-    u_xlat16_6.xyz = u_xlat10_3.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_6.xyz;
+    u_xlat16_4.xyz = texture(_RgbDepthTex, u_xlat0.xy).xyz;
+    u_xlat16_5.xyz = u_xlat16_4.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_2.xyz = texture(_RgbDepthTex, u_xlat0.zw).xyz;
+    u_xlat16_5.xyz = u_xlat16_2.xyz * vec3(0.0, 1.0, 0.0) + u_xlat16_5.xyz;
+    u_xlat16_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
+    u_xlat16_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.0, 1.0, 0.0);
+    u_xlat16_6.xyz = u_xlat16_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_6.xyz = u_xlat16_3.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_6.xyz;
     u_xlat16_5.xyz = u_xlat16_5.xyz + (-u_xlat16_6.xyz);
     u_xlat0.x = texture(_CameraDepthTexture, vs_TEXCOORD1.xy).x;
     u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
     u_xlat15.x = float(1.0) / u_xlat0.x;
-    u_xlat10_0.x = texture(_ZCurve, u_xlat15.xy).x;
-    u_xlat16_5.xyz = u_xlat10_0.xxx * u_xlat16_5.xyz + u_xlat16_6.xyz;
+    u_xlat16_0.x = texture(_ZCurve, u_xlat15.xy).x;
+    u_xlat16_5.xyz = u_xlat16_0.xxx * u_xlat16_5.xyz + u_xlat16_6.xyz;
     u_xlat16_26 = dot(u_xlat16_5.xyz, vec3(0.219999999, 0.707000017, 0.0710000023));
     u_xlat16_5.xyz = (-vec3(u_xlat16_26)) + u_xlat16_5.xyz;
     SV_Target0.xyz = vec3(_Saturation) * u_xlat16_5.xyz + vec3(u_xlat16_26);
@@ -139,24 +139,24 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ZBufferParams;
 uniform 	mediump float _Saturation;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _RgbTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _RgbTex;
 uniform highp sampler2D _CameraDepthTexture;
-uniform lowp sampler2D _ZCurve;
-uniform lowp sampler2D _RgbDepthTex;
+uniform mediump sampler2D _ZCurve;
+uniform mediump sampler2D _RgbDepthTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp vec3 u_xlat10_0;
+mediump vec3 u_xlat16_0;
 vec2 u_xlat1;
 mediump vec3 u_xlat16_2;
-lowp vec3 u_xlat10_2;
-lowp vec3 u_xlat10_3;
-lowp vec3 u_xlat10_4;
+mediump vec3 u_xlat16_3;
+mediump vec3 u_xlat16_4;
 mediump vec3 u_xlat16_5;
 mediump vec3 u_xlat16_6;
 vec2 u_xlat15;
@@ -167,27 +167,27 @@ void main()
     u_xlat1.x = u_xlat0.y;
     u_xlat1.y = float(0.625);
     u_xlat15.y = float(0.5);
-    u_xlat10_2.xyz = texture(_RgbDepthTex, u_xlat1.xy).xyz;
-    u_xlat10_3.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 0.0, 1.0);
+    u_xlat16_2.xyz = texture(_RgbDepthTex, u_xlat1.xy).xyz;
+    u_xlat16_3.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.0, 0.0, 1.0);
     SV_Target0.w = u_xlat0.w;
     u_xlat0.y = float(0.125);
     u_xlat0.w = float(0.375);
-    u_xlat10_4.xyz = texture(_RgbDepthTex, u_xlat0.xy).xyz;
-    u_xlat16_5.xyz = u_xlat10_4.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
-    u_xlat10_2.xyz = texture(_RgbDepthTex, u_xlat0.zw).xyz;
-    u_xlat16_5.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0) + u_xlat16_5.xyz;
-    u_xlat10_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
-    u_xlat10_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0);
-    u_xlat16_6.xyz = u_xlat10_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
-    u_xlat16_6.xyz = u_xlat10_3.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_6.xyz;
+    u_xlat16_4.xyz = texture(_RgbDepthTex, u_xlat0.xy).xyz;
+    u_xlat16_5.xyz = u_xlat16_4.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_2.xyz = texture(_RgbDepthTex, u_xlat0.zw).xyz;
+    u_xlat16_5.xyz = u_xlat16_2.xyz * vec3(0.0, 1.0, 0.0) + u_xlat16_5.xyz;
+    u_xlat16_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
+    u_xlat16_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.0, 1.0, 0.0);
+    u_xlat16_6.xyz = u_xlat16_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_6.xyz = u_xlat16_3.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_6.xyz;
     u_xlat16_5.xyz = u_xlat16_5.xyz + (-u_xlat16_6.xyz);
     u_xlat0.x = texture(_CameraDepthTexture, vs_TEXCOORD1.xy).x;
     u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
     u_xlat15.x = float(1.0) / u_xlat0.x;
-    u_xlat10_0.x = texture(_ZCurve, u_xlat15.xy).x;
-    u_xlat16_5.xyz = u_xlat10_0.xxx * u_xlat16_5.xyz + u_xlat16_6.xyz;
+    u_xlat16_0.x = texture(_ZCurve, u_xlat15.xy).x;
+    u_xlat16_5.xyz = u_xlat16_0.xxx * u_xlat16_5.xyz + u_xlat16_6.xyz;
     u_xlat16_26 = dot(u_xlat16_5.xyz, vec3(0.219999999, 0.707000017, 0.0710000023));
     u_xlat16_5.xyz = (-vec3(u_xlat16_26)) + u_xlat16_5.xyz;
     SV_Target0.xyz = vec3(_Saturation) * u_xlat16_5.xyz + vec3(u_xlat16_26);
@@ -229,24 +229,24 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ZBufferParams;
 uniform 	mediump float _Saturation;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _RgbTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _RgbTex;
 uniform highp sampler2D _CameraDepthTexture;
-uniform lowp sampler2D _ZCurve;
-uniform lowp sampler2D _RgbDepthTex;
+uniform mediump sampler2D _ZCurve;
+uniform mediump sampler2D _RgbDepthTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp vec3 u_xlat10_0;
+mediump vec3 u_xlat16_0;
 vec2 u_xlat1;
 mediump vec3 u_xlat16_2;
-lowp vec3 u_xlat10_2;
-lowp vec3 u_xlat10_3;
-lowp vec3 u_xlat10_4;
+mediump vec3 u_xlat16_3;
+mediump vec3 u_xlat16_4;
 mediump vec3 u_xlat16_5;
 mediump vec3 u_xlat16_6;
 vec2 u_xlat15;
@@ -257,27 +257,27 @@ void main()
     u_xlat1.x = u_xlat0.y;
     u_xlat1.y = float(0.625);
     u_xlat15.y = float(0.5);
-    u_xlat10_2.xyz = texture(_RgbDepthTex, u_xlat1.xy).xyz;
-    u_xlat10_3.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 0.0, 1.0);
+    u_xlat16_2.xyz = texture(_RgbDepthTex, u_xlat1.xy).xyz;
+    u_xlat16_3.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.0, 0.0, 1.0);
     SV_Target0.w = u_xlat0.w;
     u_xlat0.y = float(0.125);
     u_xlat0.w = float(0.375);
-    u_xlat10_4.xyz = texture(_RgbDepthTex, u_xlat0.xy).xyz;
-    u_xlat16_5.xyz = u_xlat10_4.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
-    u_xlat10_2.xyz = texture(_RgbDepthTex, u_xlat0.zw).xyz;
-    u_xlat16_5.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0) + u_xlat16_5.xyz;
-    u_xlat10_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
-    u_xlat10_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0);
-    u_xlat16_6.xyz = u_xlat10_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
-    u_xlat16_6.xyz = u_xlat10_3.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_6.xyz;
+    u_xlat16_4.xyz = texture(_RgbDepthTex, u_xlat0.xy).xyz;
+    u_xlat16_5.xyz = u_xlat16_4.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_2.xyz = texture(_RgbDepthTex, u_xlat0.zw).xyz;
+    u_xlat16_5.xyz = u_xlat16_2.xyz * vec3(0.0, 1.0, 0.0) + u_xlat16_5.xyz;
+    u_xlat16_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
+    u_xlat16_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.0, 1.0, 0.0);
+    u_xlat16_6.xyz = u_xlat16_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_6.xyz = u_xlat16_3.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_6.xyz;
     u_xlat16_5.xyz = u_xlat16_5.xyz + (-u_xlat16_6.xyz);
     u_xlat0.x = texture(_CameraDepthTexture, vs_TEXCOORD1.xy).x;
     u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
     u_xlat15.x = float(1.0) / u_xlat0.x;
-    u_xlat10_0.x = texture(_ZCurve, u_xlat15.xy).x;
-    u_xlat16_5.xyz = u_xlat10_0.xxx * u_xlat16_5.xyz + u_xlat16_6.xyz;
+    u_xlat16_0.x = texture(_ZCurve, u_xlat15.xy).x;
+    u_xlat16_5.xyz = u_xlat16_0.xxx * u_xlat16_5.xyz + u_xlat16_6.xyz;
     u_xlat16_26 = dot(u_xlat16_5.xyz, vec3(0.219999999, 0.707000017, 0.0710000023));
     u_xlat16_5.xyz = (-vec3(u_xlat16_26)) + u_xlat16_5.xyz;
     SV_Target0.xyz = vec3(_Saturation) * u_xlat16_5.xyz + vec3(u_xlat16_26);

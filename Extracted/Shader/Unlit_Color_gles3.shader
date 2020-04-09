@@ -13,7 +13,7 @@ SubShader {
  Pass {
   LOD 100
   Tags { "RenderType" = "Opaque" }
-  GpuProgramID 4001
+  GpuProgramID 65397
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -41,6 +41,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -80,6 +81,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -119,6 +121,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -163,6 +166,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump vec4 _Color;
@@ -219,6 +223,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump vec4 _Color;
@@ -275,6 +280,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump vec4 _Color;

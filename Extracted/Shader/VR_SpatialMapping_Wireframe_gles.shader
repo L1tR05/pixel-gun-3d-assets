@@ -11,7 +11,7 @@ SubShader {
  Tags { "RenderType" = "Opaque" }
  Pass {
   Tags { "RenderType" = "Opaque" }
-  GpuProgramID 59481
+  GpuProgramID 23880
 Program "vp" {
 }
 Program "fp" {

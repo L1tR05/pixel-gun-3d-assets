@@ -13,7 +13,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 8280
+  GpuProgramID 23180
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -44,17 +44,17 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Saturation;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _RgbTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _RgbTex;
 in mediump vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp vec3 u_xlat10_0;
+mediump vec3 u_xlat16_0;
 vec4 u_xlat1;
 mediump vec3 u_xlat16_2;
-lowp vec3 u_xlat10_2;
 mediump vec3 u_xlat16_3;
 mediump float u_xlat16_15;
 void main()
@@ -63,14 +63,14 @@ void main()
     u_xlat0.w = float(0.375);
     u_xlat1 = texture(_MainTex, vs_TEXCOORD0.xy).zxyw;
     u_xlat0.xz = u_xlat1.yz;
-    u_xlat10_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
-    u_xlat10_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0);
-    u_xlat16_3.xyz = u_xlat10_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
+    u_xlat16_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.0, 1.0, 0.0);
+    u_xlat16_3.xyz = u_xlat16_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
     SV_Target0.w = u_xlat1.w;
     u_xlat1.y = 0.625;
-    u_xlat10_0.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
-    u_xlat16_3.xyz = u_xlat10_0.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_3.xyz;
+    u_xlat16_0.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
+    u_xlat16_3.xyz = u_xlat16_0.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_3.xyz;
     u_xlat16_15 = dot(u_xlat16_3.xyz, vec3(0.219999999, 0.707000017, 0.0710000023));
     u_xlat16_3.xyz = (-vec3(u_xlat16_15)) + u_xlat16_3.xyz;
     SV_Target0.xyz = vec3(_Saturation) * u_xlat16_3.xyz + vec3(u_xlat16_15);
@@ -109,17 +109,17 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Saturation;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _RgbTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _RgbTex;
 in mediump vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp vec3 u_xlat10_0;
+mediump vec3 u_xlat16_0;
 vec4 u_xlat1;
 mediump vec3 u_xlat16_2;
-lowp vec3 u_xlat10_2;
 mediump vec3 u_xlat16_3;
 mediump float u_xlat16_15;
 void main()
@@ -128,14 +128,14 @@ void main()
     u_xlat0.w = float(0.375);
     u_xlat1 = texture(_MainTex, vs_TEXCOORD0.xy).zxyw;
     u_xlat0.xz = u_xlat1.yz;
-    u_xlat10_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
-    u_xlat10_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0);
-    u_xlat16_3.xyz = u_xlat10_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
+    u_xlat16_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.0, 1.0, 0.0);
+    u_xlat16_3.xyz = u_xlat16_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
     SV_Target0.w = u_xlat1.w;
     u_xlat1.y = 0.625;
-    u_xlat10_0.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
-    u_xlat16_3.xyz = u_xlat10_0.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_3.xyz;
+    u_xlat16_0.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
+    u_xlat16_3.xyz = u_xlat16_0.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_3.xyz;
     u_xlat16_15 = dot(u_xlat16_3.xyz, vec3(0.219999999, 0.707000017, 0.0710000023));
     u_xlat16_3.xyz = (-vec3(u_xlat16_15)) + u_xlat16_3.xyz;
     SV_Target0.xyz = vec3(_Saturation) * u_xlat16_3.xyz + vec3(u_xlat16_15);
@@ -174,17 +174,17 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Saturation;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _RgbTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _RgbTex;
 in mediump vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp vec3 u_xlat10_0;
+mediump vec3 u_xlat16_0;
 vec4 u_xlat1;
 mediump vec3 u_xlat16_2;
-lowp vec3 u_xlat10_2;
 mediump vec3 u_xlat16_3;
 mediump float u_xlat16_15;
 void main()
@@ -193,14 +193,14 @@ void main()
     u_xlat0.w = float(0.375);
     u_xlat1 = texture(_MainTex, vs_TEXCOORD0.xy).zxyw;
     u_xlat0.xz = u_xlat1.yz;
-    u_xlat10_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
-    u_xlat10_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0);
-    u_xlat16_3.xyz = u_xlat10_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_2.xyz = texture(_RgbTex, u_xlat0.zw).xyz;
+    u_xlat16_0.xyz = texture(_RgbTex, u_xlat0.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.0, 1.0, 0.0);
+    u_xlat16_3.xyz = u_xlat16_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
     SV_Target0.w = u_xlat1.w;
     u_xlat1.y = 0.625;
-    u_xlat10_0.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
-    u_xlat16_3.xyz = u_xlat10_0.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_3.xyz;
+    u_xlat16_0.xyz = texture(_RgbTex, u_xlat1.xy).xyz;
+    u_xlat16_3.xyz = u_xlat16_0.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_3.xyz;
     u_xlat16_15 = dot(u_xlat16_3.xyz, vec3(0.219999999, 0.707000017, 0.0710000023));
     u_xlat16_3.xyz = (-vec3(u_xlat16_15)) + u_xlat16_3.xyz;
     SV_Target0.xyz = vec3(_Saturation) * u_xlat16_3.xyz + vec3(u_xlat16_15);

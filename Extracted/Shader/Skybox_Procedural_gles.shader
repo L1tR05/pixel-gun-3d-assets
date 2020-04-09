@@ -17,763 +17,784 @@ SubShader {
   Tags { "PreviewType" = "Skybox" "QUEUE" = "Background" "RenderType" = "Background" }
   ZWrite Off
   Cull Off
-  GpuProgramID 16313
+  GpuProgramID 42091
 Program "vp" {
 SubProgram "gles hw_tier00 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-uniform highp vec4 _WorldSpaceLightPos0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform mediump vec3 _Color;
-highp vec3 kInvWavelength;
-varying mediump vec3 xlv_TEXCOORD0;
-varying mediump vec3 xlv_TEXCOORD1;
-varying mediump vec3 xlv_TEXCOORD2;
-void main ()
+uniform 	vec4 _WorldSpaceLightPos0;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	mediump vec3 _Color;
+attribute highp vec4 in_POSITION0;
+varying mediump vec3 vs_TEXCOORD0;
+varying mediump vec3 vs_TEXCOORD1;
+varying mediump vec3 vs_TEXCOORD2;
+vec4 u_xlat0;
+mediump vec3 u_xlat16_0;
+vec3 u_xlat1;
+vec4 u_xlat2;
+vec4 u_xlat3;
+vec3 u_xlat4;
+vec3 u_xlat5;
+vec3 u_xlat6;
+vec3 u_xlat7;
+vec3 u_xlat8;
+vec3 u_xlat9;
+vec2 u_xlat13;
+float u_xlat14;
+float u_xlat23;
+float u_xlat24;
+float u_xlat31;
+int u_xlati31;
+float u_xlat32;
+bool u_xlatb32;
+float u_xlat33;
+bool u_xlatb33;
+float u_xlat34;
+void main()
 {
-  mediump vec3 tmpvar_1;
-  mediump float tmpvar_2;
-  tmpvar_2 = pow (_Color.x, 0.454545);
-  tmpvar_1.x = (1.0/(((
-    ((0.65 * mix (2.0, 0.7, tmpvar_2)) * (0.65 * mix (2.0, 0.7, tmpvar_2)))
-   * 
-    (0.65 * mix (2.0, 0.7, tmpvar_2))
-  ) * (0.65 * 
-    mix (2.0, 0.7, tmpvar_2)
-  ))));
-  mediump float tmpvar_3;
-  tmpvar_3 = pow (_Color.y, 0.454545);
-  tmpvar_1.y = (1.0/(((
-    ((0.57 * mix (2.0, 0.7, tmpvar_3)) * (0.57 * mix (2.0, 0.7, tmpvar_3)))
-   * 
-    (0.57 * mix (2.0, 0.7, tmpvar_3))
-  ) * (0.57 * 
-    mix (2.0, 0.7, tmpvar_3)
-  ))));
-  mediump float tmpvar_4;
-  tmpvar_4 = pow (_Color.z, 0.454545);
-  tmpvar_1.z = (1.0/(((
-    ((0.475 * mix (2.0, 0.7, tmpvar_4)) * (0.475 * mix (2.0, 0.7, tmpvar_4)))
-   * 
-    (0.475 * mix (2.0, 0.7, tmpvar_4))
-  ) * (0.475 * 
-    mix (2.0, 0.7, tmpvar_4)
-  ))));
-  kInvWavelength = tmpvar_1;
-  highp float far_5;
-  mediump vec3 tmpvar_6;
-  mediump vec3 tmpvar_7;
-  mediump vec3 tmpvar_8;
-  highp vec4 tmpvar_9;
-  highp vec4 tmpvar_10;
-  tmpvar_10.w = 1.0;
-  tmpvar_10.xyz = _glesVertex.xyz;
-  tmpvar_9 = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_10));
-  highp mat3 tmpvar_11;
-  tmpvar_11[0] = unity_ObjectToWorld[0].xyz;
-  tmpvar_11[1] = unity_ObjectToWorld[1].xyz;
-  tmpvar_11[2] = unity_ObjectToWorld[2].xyz;
-  highp vec3 tmpvar_12;
-  tmpvar_12 = normalize((tmpvar_11 * _glesVertex.xyz));
-  tmpvar_6 = -(tmpvar_12);
-  far_5 = 0.0;
-  if ((tmpvar_12.y >= 0.0)) {
-    highp vec3 frontColor_13;
-    highp vec3 samplePoint_14;
-    far_5 = (sqrt((
-      (1.050625 + (tmpvar_12.y * tmpvar_12.y))
-     - 1.0)) - tmpvar_12.y);
-    highp float tmpvar_15;
-    tmpvar_15 = (1.0 - (dot (tmpvar_12, vec3(0.0, 1.0001, 0.0)) / 1.0001));
-    highp float tmpvar_16;
-    tmpvar_16 = (exp((-0.00287 + 
-      (tmpvar_15 * (0.459 + (tmpvar_15 * (3.83 + 
-        (tmpvar_15 * (-6.8 + (tmpvar_15 * 5.25)))
-      ))))
-    )) * 0.2460318);
-    highp float tmpvar_17;
-    tmpvar_17 = (far_5 / 2.0);
-    highp float tmpvar_18;
-    tmpvar_18 = (tmpvar_17 * 40.00004);
-    highp vec3 tmpvar_19;
-    tmpvar_19 = (tmpvar_12 * tmpvar_17);
-    highp vec3 tmpvar_20;
-    tmpvar_20 = (vec3(0.0, 1.0001, 0.0) + (tmpvar_19 * 0.5));
-    highp float tmpvar_21;
-    tmpvar_21 = sqrt(dot (tmpvar_20, tmpvar_20));
-    highp float tmpvar_22;
-    tmpvar_22 = exp((160.0002 * (1.0 - tmpvar_21)));
-    highp float tmpvar_23;
-    tmpvar_23 = (1.0 - (dot (_WorldSpaceLightPos0.xyz, tmpvar_20) / tmpvar_21));
-    highp float tmpvar_24;
-    tmpvar_24 = (1.0 - (dot (tmpvar_12, tmpvar_20) / tmpvar_21));
-    frontColor_13 = (exp((
-      -((tmpvar_16 + (tmpvar_22 * (
-        (0.25 * exp((-0.00287 + (tmpvar_23 * 
-          (0.459 + (tmpvar_23 * (3.83 + (tmpvar_23 * 
-            (-6.8 + (tmpvar_23 * 5.25))
-          ))))
-        ))))
-       - 
-        (0.25 * exp((-0.00287 + (tmpvar_24 * 
-          (0.459 + (tmpvar_24 * (3.83 + (tmpvar_24 * 
-            (-6.8 + (tmpvar_24 * 5.25))
-          ))))
-        ))))
-      ))))
-     * 
-      ((kInvWavelength * 0.03141593) + 0.01256637)
-    )) * (tmpvar_22 * tmpvar_18));
-    samplePoint_14 = (tmpvar_20 + tmpvar_19);
-    highp float tmpvar_25;
-    tmpvar_25 = sqrt(dot (samplePoint_14, samplePoint_14));
-    highp float tmpvar_26;
-    tmpvar_26 = exp((160.0002 * (1.0 - tmpvar_25)));
-    highp float tmpvar_27;
-    tmpvar_27 = (1.0 - (dot (_WorldSpaceLightPos0.xyz, samplePoint_14) / tmpvar_25));
-    highp float tmpvar_28;
-    tmpvar_28 = (1.0 - (dot (tmpvar_12, samplePoint_14) / tmpvar_25));
-    frontColor_13 = (frontColor_13 + (exp(
-      (-((tmpvar_16 + (tmpvar_26 * 
-        ((0.25 * exp((-0.00287 + 
-          (tmpvar_27 * (0.459 + (tmpvar_27 * (3.83 + 
-            (tmpvar_27 * (-6.8 + (tmpvar_27 * 5.25)))
-          ))))
-        ))) - (0.25 * exp((-0.00287 + 
-          (tmpvar_28 * (0.459 + (tmpvar_28 * (3.83 + 
-            (tmpvar_28 * (-6.8 + (tmpvar_28 * 5.25)))
-          ))))
-        ))))
-      ))) * ((kInvWavelength * 0.03141593) + 0.01256637))
-    ) * (tmpvar_26 * tmpvar_18)));
-    samplePoint_14 = (samplePoint_14 + tmpvar_19);
-    tmpvar_7 = (frontColor_13 * (kInvWavelength * 0.05));
-    tmpvar_8 = (frontColor_13 * 0.02);
-  } else {
-    highp vec3 frontColor_1_29;
-    highp vec3 samplePoint_1_30;
-    highp float scaledLength_1_31;
-    highp float temp_32;
-    highp float cameraOffset_33;
-    far_5 = (-0.0001 / min (-1e-05, tmpvar_12.y));
-    highp vec3 tmpvar_34;
-    tmpvar_34 = (vec3(0.0, 1.0001, 0.0) + (far_5 * tmpvar_12));
-    highp float tmpvar_35;
-    highp float tmpvar_36;
-    tmpvar_36 = (1.0 - dot (-(tmpvar_12), tmpvar_34));
-    tmpvar_35 = (0.25 * exp((-0.00287 + 
-      (tmpvar_36 * (0.459 + (tmpvar_36 * (3.83 + 
-        (tmpvar_36 * (-6.8 + (tmpvar_36 * 5.25)))
-      ))))
-    )));
-    highp float tmpvar_37;
-    tmpvar_37 = (1.0 - dot (_WorldSpaceLightPos0.xyz, tmpvar_34));
-    cameraOffset_33 = (0.9996001 * tmpvar_35);
-    temp_32 = ((0.25 * exp(
-      (-0.00287 + (tmpvar_37 * (0.459 + (tmpvar_37 * 
-        (3.83 + (tmpvar_37 * (-6.8 + (tmpvar_37 * 5.25))))
-      ))))
-    )) + tmpvar_35);
-    highp float tmpvar_38;
-    tmpvar_38 = (far_5 / 2.0);
-    scaledLength_1_31 = (tmpvar_38 * 40.00004);
-    highp vec3 tmpvar_39;
-    tmpvar_39 = (tmpvar_12 * tmpvar_38);
-    samplePoint_1_30 = (vec3(0.0, 1.0001, 0.0) + (tmpvar_39 * 0.5));
-    highp float tmpvar_40;
-    tmpvar_40 = exp((160.0002 * (1.0 - 
-      sqrt(dot (samplePoint_1_30, samplePoint_1_30))
-    )));
-    frontColor_1_29 = (exp((
-      (cameraOffset_33 - (tmpvar_40 * temp_32))
-     * 
-      ((kInvWavelength * 0.03141593) + 0.01256637)
-    )) * (tmpvar_40 * scaledLength_1_31));
-    samplePoint_1_30 = (samplePoint_1_30 + tmpvar_39);
-    highp float tmpvar_41;
-    tmpvar_41 = exp((160.0002 * (1.0 - 
-      sqrt(dot (samplePoint_1_30, samplePoint_1_30))
-    )));
-    highp vec3 tmpvar_42;
-    tmpvar_42 = exp(((cameraOffset_33 - 
-      (tmpvar_41 * temp_32)
-    ) * (
-      (kInvWavelength * 0.03141593)
-     + 0.01256637)));
-    frontColor_1_29 = (frontColor_1_29 + (tmpvar_42 * (tmpvar_41 * scaledLength_1_31)));
-    samplePoint_1_30 = (samplePoint_1_30 + tmpvar_39);
-    tmpvar_7 = (frontColor_1_29 * ((kInvWavelength * 0.05) + 0.02));
-    highp vec3 tmpvar_43;
-    tmpvar_43 = clamp (tmpvar_42, vec3(0.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0));
-    tmpvar_8 = tmpvar_43;
-  };
-  gl_Position = tmpvar_9;
-  xlv_TEXCOORD0 = tmpvar_6;
-  xlv_TEXCOORD1 = tmpvar_7;
-  xlv_TEXCOORD2 = tmpvar_8;
+    u_xlat16_0.xyz = log2(_Color.xyz);
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vec3(0.454544991, 0.454544991, 0.454544991);
+    u_xlat16_0.xyz = exp2(u_xlat16_0.xyz);
+    u_xlat1.xyz = u_xlat16_0.xyz * vec3(-1.29999995, -1.29999995, -1.29999995) + vec3(2.0, 2.0, 2.0);
+    u_xlat1.xyz = u_xlat1.xyz * vec3(0.649999976, 0.569999993, 0.474999994);
+    u_xlat1.xyz = u_xlat1.xyz * u_xlat1.xyz;
+    u_xlat1.xyz = u_xlat1.xyz * u_xlat1.xyz;
+    u_xlat1.xyz = vec3(1.0, 1.0, 1.0) / u_xlat1.xyz;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat2 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat3 = u_xlat2.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat2.xxxx + u_xlat3;
+    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat2.zzzz + u_xlat3;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat2.wwww + u_xlat3;
+    u_xlat31 = dot(u_xlat0.xyz, u_xlat0.xyz);
+    u_xlat31 = inversesqrt(u_xlat31);
+    u_xlat2.xyz = u_xlat0.xyz * vec3(u_xlat31);
+    u_xlatb32 = u_xlat2.y>=0.0;
+    if(u_xlatb32){
+        u_xlat32 = u_xlat2.y * u_xlat2.y + 0.0506249666;
+        u_xlat32 = sqrt(u_xlat32);
+        u_xlat32 = (-u_xlat0.y) * u_xlat31 + u_xlat32;
+        u_xlat31 = (-u_xlat0.y) * u_xlat31 + 1.0;
+        u_xlat3.x = u_xlat31 * 5.25 + -6.80000019;
+        u_xlat3.x = u_xlat31 * u_xlat3.x + 3.82999992;
+        u_xlat3.x = u_xlat31 * u_xlat3.x + 0.458999991;
+        u_xlat31 = u_xlat31 * u_xlat3.x + -0.00286999997;
+        u_xlat31 = u_xlat31 * 1.44269502;
+        u_xlat31 = exp2(u_xlat31);
+        u_xlat31 = u_xlat31 * 0.246031836;
+        u_xlat3.xy = vec2(u_xlat32) * vec2(0.5, 20.0);
+        u_xlat4.xyz = u_xlat2.xyz * u_xlat3.xxx;
+        u_xlat4.xyz = u_xlat4.xyz * vec3(0.5, 0.5, 0.5) + vec3(0.0, 1.00010002, 0.0);
+        u_xlat32 = dot(u_xlat4.xyz, u_xlat4.xyz);
+        u_xlat32 = sqrt(u_xlat32);
+        u_xlat23 = (-u_xlat32) + 1.0;
+        u_xlat23 = u_xlat23 * 230.831207;
+        u_xlat23 = exp2(u_xlat23);
+        u_xlat33 = dot(_WorldSpaceLightPos0.xyz, u_xlat4.xyz);
+        u_xlat33 = u_xlat33 / u_xlat32;
+        u_xlat34 = dot(u_xlat2.xyz, u_xlat4.xyz);
+        u_xlat32 = u_xlat34 / u_xlat32;
+        u_xlat33 = (-u_xlat33) + 1.0;
+        u_xlat34 = u_xlat33 * 5.25 + -6.80000019;
+        u_xlat34 = u_xlat33 * u_xlat34 + 3.82999992;
+        u_xlat34 = u_xlat33 * u_xlat34 + 0.458999991;
+        u_xlat33 = u_xlat33 * u_xlat34 + -0.00286999997;
+        u_xlat33 = u_xlat33 * 1.44269502;
+        u_xlat33 = exp2(u_xlat33);
+        u_xlat32 = (-u_xlat32) + 1.0;
+        u_xlat34 = u_xlat32 * 5.25 + -6.80000019;
+        u_xlat34 = u_xlat32 * u_xlat34 + 3.82999992;
+        u_xlat34 = u_xlat32 * u_xlat34 + 0.458999991;
+        u_xlat32 = u_xlat32 * u_xlat34 + -0.00286999997;
+        u_xlat32 = u_xlat32 * 1.44269502;
+        u_xlat32 = exp2(u_xlat32);
+        u_xlat32 = u_xlat32 * 0.25;
+        u_xlat32 = u_xlat33 * 0.25 + (-u_xlat32);
+        u_xlat32 = u_xlat23 * u_xlat32 + u_xlat31;
+        u_xlat5.xyz = u_xlat1.xyz * vec3(0.0314159282, 0.0314159282, 0.0314159282) + vec3(0.0125663709, 0.0125663709, 0.0125663709);
+        u_xlat6.xyz = (-vec3(u_xlat32)) * u_xlat5.xyz;
+        u_xlat6.xyz = u_xlat6.xyz * vec3(1.44269502, 1.44269502, 1.44269502);
+        u_xlat6.xyz = exp2(u_xlat6.xyz);
+        u_xlat32 = u_xlat3.y * u_xlat23;
+        u_xlat3.xzw = u_xlat2.xyz * u_xlat3.xxx + u_xlat4.xyz;
+        u_xlat4.x = dot(u_xlat3.xzw, u_xlat3.xzw);
+        u_xlat4.x = sqrt(u_xlat4.x);
+        u_xlat14 = (-u_xlat4.x) + 1.0;
+        u_xlat14 = u_xlat14 * 230.831207;
+        u_xlat14 = exp2(u_xlat14);
+        u_xlat24 = dot(_WorldSpaceLightPos0.xyz, u_xlat3.xzw);
+        u_xlat24 = u_xlat24 / u_xlat4.x;
+        u_xlat3.x = dot(u_xlat2.xyz, u_xlat3.xzw);
+        u_xlat3.x = u_xlat3.x / u_xlat4.x;
+        u_xlat23 = (-u_xlat24) + 1.0;
+        u_xlat33 = u_xlat23 * 5.25 + -6.80000019;
+        u_xlat33 = u_xlat23 * u_xlat33 + 3.82999992;
+        u_xlat33 = u_xlat23 * u_xlat33 + 0.458999991;
+        u_xlat23 = u_xlat23 * u_xlat33 + -0.00286999997;
+        u_xlat23 = u_xlat23 * 1.44269502;
+        u_xlat23 = exp2(u_xlat23);
+        u_xlat3.x = (-u_xlat3.x) + 1.0;
+        u_xlat33 = u_xlat3.x * 5.25 + -6.80000019;
+        u_xlat33 = u_xlat3.x * u_xlat33 + 3.82999992;
+        u_xlat33 = u_xlat3.x * u_xlat33 + 0.458999991;
+        u_xlat3.x = u_xlat3.x * u_xlat33 + -0.00286999997;
+        u_xlat3.x = u_xlat3.x * 1.44269502;
+        u_xlat3.x = exp2(u_xlat3.x);
+        u_xlat3.x = u_xlat3.x * 0.25;
+        u_xlat3.x = u_xlat23 * 0.25 + (-u_xlat3.x);
+        u_xlat31 = u_xlat14 * u_xlat3.x + u_xlat31;
+        u_xlat3.xzw = u_xlat5.xyz * (-vec3(u_xlat31));
+        u_xlat3.xzw = u_xlat3.xzw * vec3(1.44269502, 1.44269502, 1.44269502);
+        u_xlat3.xzw = exp2(u_xlat3.xzw);
+        u_xlat31 = u_xlat3.y * u_xlat14;
+        u_xlat3.xyz = vec3(u_xlat31) * u_xlat3.xzw;
+        u_xlat3.xyz = u_xlat6.xyz * vec3(u_xlat32) + u_xlat3.xyz;
+        u_xlat4.xyz = u_xlat1.xyz * u_xlat3.xyz;
+        u_xlat4.xyz = u_xlat4.xyz * vec3(0.0500000007, 0.0500000007, 0.0500000007);
+        u_xlat3.xyz = u_xlat3.xyz * vec3(0.0199999996, 0.0199999996, 0.0199999996);
+        vs_TEXCOORD1.xyz = u_xlat4.xyz;
+        vs_TEXCOORD2.xyz = u_xlat3.xyz;
+    } else {
+        u_xlat31 = min(u_xlat2.y, -9.99999975e-06);
+        u_xlat31 = -9.99999975e-05 / u_xlat31;
+        u_xlat3.xyz = vec3(u_xlat31) * u_xlat2.xyz + vec3(0.0, 1.00010002, 0.0);
+        u_xlat32 = dot((-u_xlat2.xyz), u_xlat3.xyz);
+        u_xlat3.x = dot(_WorldSpaceLightPos0.xyz, u_xlat3.xyz);
+        u_xlat32 = (-u_xlat32) + 1.0;
+        u_xlat13.x = u_xlat32 * 5.25 + -6.80000019;
+        u_xlat13.x = u_xlat32 * u_xlat13.x + 3.82999992;
+        u_xlat13.x = u_xlat32 * u_xlat13.x + 0.458999991;
+        u_xlat32 = u_xlat32 * u_xlat13.x + -0.00286999997;
+        u_xlat32 = u_xlat32 * 1.44269502;
+        u_xlat32 = exp2(u_xlat32);
+        u_xlat3.x = (-u_xlat3.x) + 1.0;
+        u_xlat13.x = u_xlat3.x * 5.25 + -6.80000019;
+        u_xlat13.x = u_xlat3.x * u_xlat13.x + 3.82999992;
+        u_xlat13.x = u_xlat3.x * u_xlat13.x + 0.458999991;
+        u_xlat3.x = u_xlat3.x * u_xlat13.x + -0.00286999997;
+        u_xlat3.x = u_xlat3.x * 1.44269502;
+        u_xlat3.x = exp2(u_xlat3.x);
+        u_xlat13.xy = vec2(u_xlat32) * vec2(0.25, 0.249900013);
+        u_xlat32 = u_xlat3.x * 0.25 + u_xlat13.x;
+        u_xlat3.xy = vec2(u_xlat31) * vec2(0.5, 20.0);
+        u_xlat4.xyz = u_xlat2.xyz * u_xlat3.xxx;
+        u_xlat4.xyz = u_xlat4.xyz * vec3(0.5, 0.5, 0.5) + vec3(0.0, 1.00010002, 0.0);
+        u_xlat5.xyz = u_xlat1.xyz * vec3(0.0314159282, 0.0314159282, 0.0314159282) + vec3(0.0125663709, 0.0125663709, 0.0125663709);
+        u_xlat6.xyz = u_xlat4.xyz;
+        u_xlat7.x = float(0.0);
+        u_xlat7.y = float(0.0);
+        u_xlat7.z = float(0.0);
+        u_xlat8.x = float(0.0);
+        u_xlat8.y = float(0.0);
+        u_xlat8.z = float(0.0);
+        for(int u_xlati_loop_1 = 0 ; u_xlati_loop_1<2 ; u_xlati_loop_1++)
+        {
+            u_xlat33 = dot(u_xlat6.xyz, u_xlat6.xyz);
+            u_xlat33 = sqrt(u_xlat33);
+            u_xlat33 = (-u_xlat33) + 1.0;
+            u_xlat33 = u_xlat33 * 230.831207;
+            u_xlat33 = exp2(u_xlat33);
+            u_xlat34 = u_xlat33 * u_xlat32 + (-u_xlat13.y);
+            u_xlat9.xyz = u_xlat5.xyz * (-vec3(u_xlat34));
+            u_xlat9.xyz = u_xlat9.xyz * vec3(1.44269502, 1.44269502, 1.44269502);
+            u_xlat8.xyz = exp2(u_xlat9.xyz);
+            u_xlat33 = u_xlat3.y * u_xlat33;
+            u_xlat7.xyz = u_xlat8.xyz * vec3(u_xlat33) + u_xlat7.xyz;
+            u_xlat6.xyz = u_xlat2.xyz * u_xlat3.xxx + u_xlat6.xyz;
+        }
+        u_xlat1.xyz = u_xlat1.xyz * vec3(0.0500000007, 0.0500000007, 0.0500000007) + vec3(0.0199999996, 0.0199999996, 0.0199999996);
+        u_xlat1.xyz = u_xlat1.xyz * u_xlat7.xyz;
+        u_xlat3.xyz = min(u_xlat8.xyz, vec3(1.0, 1.0, 1.0));
+        vs_TEXCOORD1.xyz = u_xlat1.xyz;
+        vs_TEXCOORD2.xyz = u_xlat3.xyz;
+    //ENDIF
+    }
+    vs_TEXCOORD0.xyz = (-u_xlat2.xyz);
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform highp vec4 _WorldSpaceLightPos0;
-uniform lowp vec4 _LightColor0;
-uniform mediump float _HdrExposure;
-uniform mediump vec3 _GroundColor;
-uniform mediump vec3 _SunTint;
-uniform mediump float _SunStrength;
-varying mediump vec3 xlv_TEXCOORD0;
-varying mediump vec3 xlv_TEXCOORD1;
-varying mediump vec3 xlv_TEXCOORD2;
-void main ()
-{
-  mediump vec3 col_1;
-  if ((xlv_TEXCOORD0.y < 0.0)) {
-    mediump float eyeCos_2;
-    mediump vec3 tmpvar_3;
-    tmpvar_3 = normalize(xlv_TEXCOORD0);
-    highp float tmpvar_4;
-    tmpvar_4 = dot (_WorldSpaceLightPos0.xyz, tmpvar_3);
-    eyeCos_2 = tmpvar_4;
-    mediump float tmpvar_5;
-    tmpvar_5 = (eyeCos_2 * eyeCos_2);
-    mediump float temp_6;
-    mediump float tmpvar_7;
-    tmpvar_7 = (1.9801 - (-1.98 * eyeCos_2));
-    mediump float tmpvar_8;
-    tmpvar_8 = clamp ((tmpvar_7 / 0.01), 0.0, 1.0);
-    temp_6 = ((tmpvar_8 * (tmpvar_8 * 
-      (3.0 - (2.0 * tmpvar_8))
-    )) * tmpvar_7);
-    mediump float tmpvar_9;
-    tmpvar_9 = max (temp_6, 0.0001);
-    temp_6 = tmpvar_9;
-    col_1 = (((0.75 + 
-      (0.75 * tmpvar_5)
-    ) * xlv_TEXCOORD1) + ((
-      ((((0.01001645 * 
-        (1.0 + tmpvar_5)
-      ) / tmpvar_9) * xlv_TEXCOORD2) * _LightColor0.xyz)
-     * _SunTint) * _SunStrength));
-  } else {
-    col_1 = (xlv_TEXCOORD1 + (_GroundColor * xlv_TEXCOORD2));
-  };
-  col_1 = (col_1 * _HdrExposure);
-  mediump vec4 tmpvar_10;
-  tmpvar_10.w = 1.0;
-  tmpvar_10.xyz = col_1;
-  gl_FragData[0] = tmpvar_10;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	vec4 _WorldSpaceLightPos0;
+uniform 	mediump vec4 _LightColor0;
+uniform 	mediump float _HdrExposure;
+uniform 	mediump vec3 _GroundColor;
+uniform 	mediump vec3 _SunTint;
+uniform 	mediump float _SunStrength;
+varying mediump vec3 vs_TEXCOORD0;
+varying mediump vec3 vs_TEXCOORD1;
+varying mediump vec3 vs_TEXCOORD2;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+float u_xlat1;
+bool u_xlatb1;
+mediump vec3 u_xlat16_2;
+mediump float u_xlat16_3;
+mediump float u_xlat16_6;
+void main()
+{
+    u_xlat16_0.x = dot(vs_TEXCOORD0.xyz, vs_TEXCOORD0.xyz);
+    u_xlat16_0.x = inversesqrt(u_xlat16_0.x);
+    u_xlat16_0.xyz = u_xlat16_0.xxx * vs_TEXCOORD0.xyz;
+    u_xlat1 = dot(_WorldSpaceLightPos0.xyz, u_xlat16_0.xyz);
+    u_xlat16_0.x = (-u_xlat1) * -1.98000002 + 1.98010004;
+    u_xlat16_3 = u_xlat16_0.x * 100.0;
+    u_xlat16_3 = clamp(u_xlat16_3, 0.0, 1.0);
+    u_xlat16_6 = u_xlat16_3 * -2.0 + 3.0;
+    u_xlat16_3 = u_xlat16_3 * u_xlat16_3;
+    u_xlat16_3 = u_xlat16_3 * u_xlat16_6;
+    u_xlat16_0.x = u_xlat16_0.x * u_xlat16_3;
+    u_xlat16_0.x = max(u_xlat16_0.x, 9.99999975e-05);
+    u_xlat16_3 = u_xlat1 * u_xlat1 + 1.0;
+    u_xlat16_6 = u_xlat1 * u_xlat1;
+    u_xlat16_6 = u_xlat16_6 * 0.75 + 0.75;
+    u_xlat16_3 = u_xlat16_3 * 0.0100164423;
+    u_xlat16_0.x = u_xlat16_3 / u_xlat16_0.x;
+    u_xlat16_0.xyw = u_xlat16_0.xxx * vs_TEXCOORD2.xyz;
+    u_xlat16_0.xyw = u_xlat16_0.xyw * _LightColor0.xyz;
+    u_xlat16_0.xyw = u_xlat16_0.xyw * _SunTint.xyz;
+    u_xlat16_0.xyw = u_xlat16_0.xyw * vec3(vec3(_SunStrength, _SunStrength, _SunStrength));
+    u_xlat16_0.xyz = vec3(u_xlat16_6) * vs_TEXCOORD1.xyz + u_xlat16_0.xyw;
+    u_xlatb1 = vs_TEXCOORD0.y<0.0;
+    u_xlat16_2.xyz = vec3(_GroundColor.x, _GroundColor.y, _GroundColor.z) * vs_TEXCOORD2.xyz + vs_TEXCOORD1.xyz;
+    u_xlat16_0.xyz = (bool(u_xlatb1)) ? u_xlat16_0.xyz : u_xlat16_2.xyz;
+    SV_Target0.xyz = u_xlat16_0.xyz * vec3(_HdrExposure);
+    SV_Target0.w = 1.0;
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier01 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-uniform highp vec4 _WorldSpaceLightPos0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform mediump vec3 _Color;
-highp vec3 kInvWavelength;
-varying mediump vec3 xlv_TEXCOORD0;
-varying mediump vec3 xlv_TEXCOORD1;
-varying mediump vec3 xlv_TEXCOORD2;
-void main ()
+uniform 	vec4 _WorldSpaceLightPos0;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	mediump vec3 _Color;
+attribute highp vec4 in_POSITION0;
+varying mediump vec3 vs_TEXCOORD0;
+varying mediump vec3 vs_TEXCOORD1;
+varying mediump vec3 vs_TEXCOORD2;
+vec4 u_xlat0;
+mediump vec3 u_xlat16_0;
+vec3 u_xlat1;
+vec4 u_xlat2;
+vec4 u_xlat3;
+vec3 u_xlat4;
+vec3 u_xlat5;
+vec3 u_xlat6;
+vec3 u_xlat7;
+vec3 u_xlat8;
+vec3 u_xlat9;
+vec2 u_xlat13;
+float u_xlat14;
+float u_xlat23;
+float u_xlat24;
+float u_xlat31;
+int u_xlati31;
+float u_xlat32;
+bool u_xlatb32;
+float u_xlat33;
+bool u_xlatb33;
+float u_xlat34;
+void main()
 {
-  mediump vec3 tmpvar_1;
-  mediump float tmpvar_2;
-  tmpvar_2 = pow (_Color.x, 0.454545);
-  tmpvar_1.x = (1.0/(((
-    ((0.65 * mix (2.0, 0.7, tmpvar_2)) * (0.65 * mix (2.0, 0.7, tmpvar_2)))
-   * 
-    (0.65 * mix (2.0, 0.7, tmpvar_2))
-  ) * (0.65 * 
-    mix (2.0, 0.7, tmpvar_2)
-  ))));
-  mediump float tmpvar_3;
-  tmpvar_3 = pow (_Color.y, 0.454545);
-  tmpvar_1.y = (1.0/(((
-    ((0.57 * mix (2.0, 0.7, tmpvar_3)) * (0.57 * mix (2.0, 0.7, tmpvar_3)))
-   * 
-    (0.57 * mix (2.0, 0.7, tmpvar_3))
-  ) * (0.57 * 
-    mix (2.0, 0.7, tmpvar_3)
-  ))));
-  mediump float tmpvar_4;
-  tmpvar_4 = pow (_Color.z, 0.454545);
-  tmpvar_1.z = (1.0/(((
-    ((0.475 * mix (2.0, 0.7, tmpvar_4)) * (0.475 * mix (2.0, 0.7, tmpvar_4)))
-   * 
-    (0.475 * mix (2.0, 0.7, tmpvar_4))
-  ) * (0.475 * 
-    mix (2.0, 0.7, tmpvar_4)
-  ))));
-  kInvWavelength = tmpvar_1;
-  highp float far_5;
-  mediump vec3 tmpvar_6;
-  mediump vec3 tmpvar_7;
-  mediump vec3 tmpvar_8;
-  highp vec4 tmpvar_9;
-  highp vec4 tmpvar_10;
-  tmpvar_10.w = 1.0;
-  tmpvar_10.xyz = _glesVertex.xyz;
-  tmpvar_9 = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_10));
-  highp mat3 tmpvar_11;
-  tmpvar_11[0] = unity_ObjectToWorld[0].xyz;
-  tmpvar_11[1] = unity_ObjectToWorld[1].xyz;
-  tmpvar_11[2] = unity_ObjectToWorld[2].xyz;
-  highp vec3 tmpvar_12;
-  tmpvar_12 = normalize((tmpvar_11 * _glesVertex.xyz));
-  tmpvar_6 = -(tmpvar_12);
-  far_5 = 0.0;
-  if ((tmpvar_12.y >= 0.0)) {
-    highp vec3 frontColor_13;
-    highp vec3 samplePoint_14;
-    far_5 = (sqrt((
-      (1.050625 + (tmpvar_12.y * tmpvar_12.y))
-     - 1.0)) - tmpvar_12.y);
-    highp float tmpvar_15;
-    tmpvar_15 = (1.0 - (dot (tmpvar_12, vec3(0.0, 1.0001, 0.0)) / 1.0001));
-    highp float tmpvar_16;
-    tmpvar_16 = (exp((-0.00287 + 
-      (tmpvar_15 * (0.459 + (tmpvar_15 * (3.83 + 
-        (tmpvar_15 * (-6.8 + (tmpvar_15 * 5.25)))
-      ))))
-    )) * 0.2460318);
-    highp float tmpvar_17;
-    tmpvar_17 = (far_5 / 2.0);
-    highp float tmpvar_18;
-    tmpvar_18 = (tmpvar_17 * 40.00004);
-    highp vec3 tmpvar_19;
-    tmpvar_19 = (tmpvar_12 * tmpvar_17);
-    highp vec3 tmpvar_20;
-    tmpvar_20 = (vec3(0.0, 1.0001, 0.0) + (tmpvar_19 * 0.5));
-    highp float tmpvar_21;
-    tmpvar_21 = sqrt(dot (tmpvar_20, tmpvar_20));
-    highp float tmpvar_22;
-    tmpvar_22 = exp((160.0002 * (1.0 - tmpvar_21)));
-    highp float tmpvar_23;
-    tmpvar_23 = (1.0 - (dot (_WorldSpaceLightPos0.xyz, tmpvar_20) / tmpvar_21));
-    highp float tmpvar_24;
-    tmpvar_24 = (1.0 - (dot (tmpvar_12, tmpvar_20) / tmpvar_21));
-    frontColor_13 = (exp((
-      -((tmpvar_16 + (tmpvar_22 * (
-        (0.25 * exp((-0.00287 + (tmpvar_23 * 
-          (0.459 + (tmpvar_23 * (3.83 + (tmpvar_23 * 
-            (-6.8 + (tmpvar_23 * 5.25))
-          ))))
-        ))))
-       - 
-        (0.25 * exp((-0.00287 + (tmpvar_24 * 
-          (0.459 + (tmpvar_24 * (3.83 + (tmpvar_24 * 
-            (-6.8 + (tmpvar_24 * 5.25))
-          ))))
-        ))))
-      ))))
-     * 
-      ((kInvWavelength * 0.03141593) + 0.01256637)
-    )) * (tmpvar_22 * tmpvar_18));
-    samplePoint_14 = (tmpvar_20 + tmpvar_19);
-    highp float tmpvar_25;
-    tmpvar_25 = sqrt(dot (samplePoint_14, samplePoint_14));
-    highp float tmpvar_26;
-    tmpvar_26 = exp((160.0002 * (1.0 - tmpvar_25)));
-    highp float tmpvar_27;
-    tmpvar_27 = (1.0 - (dot (_WorldSpaceLightPos0.xyz, samplePoint_14) / tmpvar_25));
-    highp float tmpvar_28;
-    tmpvar_28 = (1.0 - (dot (tmpvar_12, samplePoint_14) / tmpvar_25));
-    frontColor_13 = (frontColor_13 + (exp(
-      (-((tmpvar_16 + (tmpvar_26 * 
-        ((0.25 * exp((-0.00287 + 
-          (tmpvar_27 * (0.459 + (tmpvar_27 * (3.83 + 
-            (tmpvar_27 * (-6.8 + (tmpvar_27 * 5.25)))
-          ))))
-        ))) - (0.25 * exp((-0.00287 + 
-          (tmpvar_28 * (0.459 + (tmpvar_28 * (3.83 + 
-            (tmpvar_28 * (-6.8 + (tmpvar_28 * 5.25)))
-          ))))
-        ))))
-      ))) * ((kInvWavelength * 0.03141593) + 0.01256637))
-    ) * (tmpvar_26 * tmpvar_18)));
-    samplePoint_14 = (samplePoint_14 + tmpvar_19);
-    tmpvar_7 = (frontColor_13 * (kInvWavelength * 0.05));
-    tmpvar_8 = (frontColor_13 * 0.02);
-  } else {
-    highp vec3 frontColor_1_29;
-    highp vec3 samplePoint_1_30;
-    highp float scaledLength_1_31;
-    highp float temp_32;
-    highp float cameraOffset_33;
-    far_5 = (-0.0001 / min (-1e-05, tmpvar_12.y));
-    highp vec3 tmpvar_34;
-    tmpvar_34 = (vec3(0.0, 1.0001, 0.0) + (far_5 * tmpvar_12));
-    highp float tmpvar_35;
-    highp float tmpvar_36;
-    tmpvar_36 = (1.0 - dot (-(tmpvar_12), tmpvar_34));
-    tmpvar_35 = (0.25 * exp((-0.00287 + 
-      (tmpvar_36 * (0.459 + (tmpvar_36 * (3.83 + 
-        (tmpvar_36 * (-6.8 + (tmpvar_36 * 5.25)))
-      ))))
-    )));
-    highp float tmpvar_37;
-    tmpvar_37 = (1.0 - dot (_WorldSpaceLightPos0.xyz, tmpvar_34));
-    cameraOffset_33 = (0.9996001 * tmpvar_35);
-    temp_32 = ((0.25 * exp(
-      (-0.00287 + (tmpvar_37 * (0.459 + (tmpvar_37 * 
-        (3.83 + (tmpvar_37 * (-6.8 + (tmpvar_37 * 5.25))))
-      ))))
-    )) + tmpvar_35);
-    highp float tmpvar_38;
-    tmpvar_38 = (far_5 / 2.0);
-    scaledLength_1_31 = (tmpvar_38 * 40.00004);
-    highp vec3 tmpvar_39;
-    tmpvar_39 = (tmpvar_12 * tmpvar_38);
-    samplePoint_1_30 = (vec3(0.0, 1.0001, 0.0) + (tmpvar_39 * 0.5));
-    highp float tmpvar_40;
-    tmpvar_40 = exp((160.0002 * (1.0 - 
-      sqrt(dot (samplePoint_1_30, samplePoint_1_30))
-    )));
-    frontColor_1_29 = (exp((
-      (cameraOffset_33 - (tmpvar_40 * temp_32))
-     * 
-      ((kInvWavelength * 0.03141593) + 0.01256637)
-    )) * (tmpvar_40 * scaledLength_1_31));
-    samplePoint_1_30 = (samplePoint_1_30 + tmpvar_39);
-    highp float tmpvar_41;
-    tmpvar_41 = exp((160.0002 * (1.0 - 
-      sqrt(dot (samplePoint_1_30, samplePoint_1_30))
-    )));
-    highp vec3 tmpvar_42;
-    tmpvar_42 = exp(((cameraOffset_33 - 
-      (tmpvar_41 * temp_32)
-    ) * (
-      (kInvWavelength * 0.03141593)
-     + 0.01256637)));
-    frontColor_1_29 = (frontColor_1_29 + (tmpvar_42 * (tmpvar_41 * scaledLength_1_31)));
-    samplePoint_1_30 = (samplePoint_1_30 + tmpvar_39);
-    tmpvar_7 = (frontColor_1_29 * ((kInvWavelength * 0.05) + 0.02));
-    highp vec3 tmpvar_43;
-    tmpvar_43 = clamp (tmpvar_42, vec3(0.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0));
-    tmpvar_8 = tmpvar_43;
-  };
-  gl_Position = tmpvar_9;
-  xlv_TEXCOORD0 = tmpvar_6;
-  xlv_TEXCOORD1 = tmpvar_7;
-  xlv_TEXCOORD2 = tmpvar_8;
+    u_xlat16_0.xyz = log2(_Color.xyz);
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vec3(0.454544991, 0.454544991, 0.454544991);
+    u_xlat16_0.xyz = exp2(u_xlat16_0.xyz);
+    u_xlat1.xyz = u_xlat16_0.xyz * vec3(-1.29999995, -1.29999995, -1.29999995) + vec3(2.0, 2.0, 2.0);
+    u_xlat1.xyz = u_xlat1.xyz * vec3(0.649999976, 0.569999993, 0.474999994);
+    u_xlat1.xyz = u_xlat1.xyz * u_xlat1.xyz;
+    u_xlat1.xyz = u_xlat1.xyz * u_xlat1.xyz;
+    u_xlat1.xyz = vec3(1.0, 1.0, 1.0) / u_xlat1.xyz;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat2 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat3 = u_xlat2.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat2.xxxx + u_xlat3;
+    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat2.zzzz + u_xlat3;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat2.wwww + u_xlat3;
+    u_xlat31 = dot(u_xlat0.xyz, u_xlat0.xyz);
+    u_xlat31 = inversesqrt(u_xlat31);
+    u_xlat2.xyz = u_xlat0.xyz * vec3(u_xlat31);
+    u_xlatb32 = u_xlat2.y>=0.0;
+    if(u_xlatb32){
+        u_xlat32 = u_xlat2.y * u_xlat2.y + 0.0506249666;
+        u_xlat32 = sqrt(u_xlat32);
+        u_xlat32 = (-u_xlat0.y) * u_xlat31 + u_xlat32;
+        u_xlat31 = (-u_xlat0.y) * u_xlat31 + 1.0;
+        u_xlat3.x = u_xlat31 * 5.25 + -6.80000019;
+        u_xlat3.x = u_xlat31 * u_xlat3.x + 3.82999992;
+        u_xlat3.x = u_xlat31 * u_xlat3.x + 0.458999991;
+        u_xlat31 = u_xlat31 * u_xlat3.x + -0.00286999997;
+        u_xlat31 = u_xlat31 * 1.44269502;
+        u_xlat31 = exp2(u_xlat31);
+        u_xlat31 = u_xlat31 * 0.246031836;
+        u_xlat3.xy = vec2(u_xlat32) * vec2(0.5, 20.0);
+        u_xlat4.xyz = u_xlat2.xyz * u_xlat3.xxx;
+        u_xlat4.xyz = u_xlat4.xyz * vec3(0.5, 0.5, 0.5) + vec3(0.0, 1.00010002, 0.0);
+        u_xlat32 = dot(u_xlat4.xyz, u_xlat4.xyz);
+        u_xlat32 = sqrt(u_xlat32);
+        u_xlat23 = (-u_xlat32) + 1.0;
+        u_xlat23 = u_xlat23 * 230.831207;
+        u_xlat23 = exp2(u_xlat23);
+        u_xlat33 = dot(_WorldSpaceLightPos0.xyz, u_xlat4.xyz);
+        u_xlat33 = u_xlat33 / u_xlat32;
+        u_xlat34 = dot(u_xlat2.xyz, u_xlat4.xyz);
+        u_xlat32 = u_xlat34 / u_xlat32;
+        u_xlat33 = (-u_xlat33) + 1.0;
+        u_xlat34 = u_xlat33 * 5.25 + -6.80000019;
+        u_xlat34 = u_xlat33 * u_xlat34 + 3.82999992;
+        u_xlat34 = u_xlat33 * u_xlat34 + 0.458999991;
+        u_xlat33 = u_xlat33 * u_xlat34 + -0.00286999997;
+        u_xlat33 = u_xlat33 * 1.44269502;
+        u_xlat33 = exp2(u_xlat33);
+        u_xlat32 = (-u_xlat32) + 1.0;
+        u_xlat34 = u_xlat32 * 5.25 + -6.80000019;
+        u_xlat34 = u_xlat32 * u_xlat34 + 3.82999992;
+        u_xlat34 = u_xlat32 * u_xlat34 + 0.458999991;
+        u_xlat32 = u_xlat32 * u_xlat34 + -0.00286999997;
+        u_xlat32 = u_xlat32 * 1.44269502;
+        u_xlat32 = exp2(u_xlat32);
+        u_xlat32 = u_xlat32 * 0.25;
+        u_xlat32 = u_xlat33 * 0.25 + (-u_xlat32);
+        u_xlat32 = u_xlat23 * u_xlat32 + u_xlat31;
+        u_xlat5.xyz = u_xlat1.xyz * vec3(0.0314159282, 0.0314159282, 0.0314159282) + vec3(0.0125663709, 0.0125663709, 0.0125663709);
+        u_xlat6.xyz = (-vec3(u_xlat32)) * u_xlat5.xyz;
+        u_xlat6.xyz = u_xlat6.xyz * vec3(1.44269502, 1.44269502, 1.44269502);
+        u_xlat6.xyz = exp2(u_xlat6.xyz);
+        u_xlat32 = u_xlat3.y * u_xlat23;
+        u_xlat3.xzw = u_xlat2.xyz * u_xlat3.xxx + u_xlat4.xyz;
+        u_xlat4.x = dot(u_xlat3.xzw, u_xlat3.xzw);
+        u_xlat4.x = sqrt(u_xlat4.x);
+        u_xlat14 = (-u_xlat4.x) + 1.0;
+        u_xlat14 = u_xlat14 * 230.831207;
+        u_xlat14 = exp2(u_xlat14);
+        u_xlat24 = dot(_WorldSpaceLightPos0.xyz, u_xlat3.xzw);
+        u_xlat24 = u_xlat24 / u_xlat4.x;
+        u_xlat3.x = dot(u_xlat2.xyz, u_xlat3.xzw);
+        u_xlat3.x = u_xlat3.x / u_xlat4.x;
+        u_xlat23 = (-u_xlat24) + 1.0;
+        u_xlat33 = u_xlat23 * 5.25 + -6.80000019;
+        u_xlat33 = u_xlat23 * u_xlat33 + 3.82999992;
+        u_xlat33 = u_xlat23 * u_xlat33 + 0.458999991;
+        u_xlat23 = u_xlat23 * u_xlat33 + -0.00286999997;
+        u_xlat23 = u_xlat23 * 1.44269502;
+        u_xlat23 = exp2(u_xlat23);
+        u_xlat3.x = (-u_xlat3.x) + 1.0;
+        u_xlat33 = u_xlat3.x * 5.25 + -6.80000019;
+        u_xlat33 = u_xlat3.x * u_xlat33 + 3.82999992;
+        u_xlat33 = u_xlat3.x * u_xlat33 + 0.458999991;
+        u_xlat3.x = u_xlat3.x * u_xlat33 + -0.00286999997;
+        u_xlat3.x = u_xlat3.x * 1.44269502;
+        u_xlat3.x = exp2(u_xlat3.x);
+        u_xlat3.x = u_xlat3.x * 0.25;
+        u_xlat3.x = u_xlat23 * 0.25 + (-u_xlat3.x);
+        u_xlat31 = u_xlat14 * u_xlat3.x + u_xlat31;
+        u_xlat3.xzw = u_xlat5.xyz * (-vec3(u_xlat31));
+        u_xlat3.xzw = u_xlat3.xzw * vec3(1.44269502, 1.44269502, 1.44269502);
+        u_xlat3.xzw = exp2(u_xlat3.xzw);
+        u_xlat31 = u_xlat3.y * u_xlat14;
+        u_xlat3.xyz = vec3(u_xlat31) * u_xlat3.xzw;
+        u_xlat3.xyz = u_xlat6.xyz * vec3(u_xlat32) + u_xlat3.xyz;
+        u_xlat4.xyz = u_xlat1.xyz * u_xlat3.xyz;
+        u_xlat4.xyz = u_xlat4.xyz * vec3(0.0500000007, 0.0500000007, 0.0500000007);
+        u_xlat3.xyz = u_xlat3.xyz * vec3(0.0199999996, 0.0199999996, 0.0199999996);
+        vs_TEXCOORD1.xyz = u_xlat4.xyz;
+        vs_TEXCOORD2.xyz = u_xlat3.xyz;
+    } else {
+        u_xlat31 = min(u_xlat2.y, -9.99999975e-06);
+        u_xlat31 = -9.99999975e-05 / u_xlat31;
+        u_xlat3.xyz = vec3(u_xlat31) * u_xlat2.xyz + vec3(0.0, 1.00010002, 0.0);
+        u_xlat32 = dot((-u_xlat2.xyz), u_xlat3.xyz);
+        u_xlat3.x = dot(_WorldSpaceLightPos0.xyz, u_xlat3.xyz);
+        u_xlat32 = (-u_xlat32) + 1.0;
+        u_xlat13.x = u_xlat32 * 5.25 + -6.80000019;
+        u_xlat13.x = u_xlat32 * u_xlat13.x + 3.82999992;
+        u_xlat13.x = u_xlat32 * u_xlat13.x + 0.458999991;
+        u_xlat32 = u_xlat32 * u_xlat13.x + -0.00286999997;
+        u_xlat32 = u_xlat32 * 1.44269502;
+        u_xlat32 = exp2(u_xlat32);
+        u_xlat3.x = (-u_xlat3.x) + 1.0;
+        u_xlat13.x = u_xlat3.x * 5.25 + -6.80000019;
+        u_xlat13.x = u_xlat3.x * u_xlat13.x + 3.82999992;
+        u_xlat13.x = u_xlat3.x * u_xlat13.x + 0.458999991;
+        u_xlat3.x = u_xlat3.x * u_xlat13.x + -0.00286999997;
+        u_xlat3.x = u_xlat3.x * 1.44269502;
+        u_xlat3.x = exp2(u_xlat3.x);
+        u_xlat13.xy = vec2(u_xlat32) * vec2(0.25, 0.249900013);
+        u_xlat32 = u_xlat3.x * 0.25 + u_xlat13.x;
+        u_xlat3.xy = vec2(u_xlat31) * vec2(0.5, 20.0);
+        u_xlat4.xyz = u_xlat2.xyz * u_xlat3.xxx;
+        u_xlat4.xyz = u_xlat4.xyz * vec3(0.5, 0.5, 0.5) + vec3(0.0, 1.00010002, 0.0);
+        u_xlat5.xyz = u_xlat1.xyz * vec3(0.0314159282, 0.0314159282, 0.0314159282) + vec3(0.0125663709, 0.0125663709, 0.0125663709);
+        u_xlat6.xyz = u_xlat4.xyz;
+        u_xlat7.x = float(0.0);
+        u_xlat7.y = float(0.0);
+        u_xlat7.z = float(0.0);
+        u_xlat8.x = float(0.0);
+        u_xlat8.y = float(0.0);
+        u_xlat8.z = float(0.0);
+        for(int u_xlati_loop_1 = 0 ; u_xlati_loop_1<2 ; u_xlati_loop_1++)
+        {
+            u_xlat33 = dot(u_xlat6.xyz, u_xlat6.xyz);
+            u_xlat33 = sqrt(u_xlat33);
+            u_xlat33 = (-u_xlat33) + 1.0;
+            u_xlat33 = u_xlat33 * 230.831207;
+            u_xlat33 = exp2(u_xlat33);
+            u_xlat34 = u_xlat33 * u_xlat32 + (-u_xlat13.y);
+            u_xlat9.xyz = u_xlat5.xyz * (-vec3(u_xlat34));
+            u_xlat9.xyz = u_xlat9.xyz * vec3(1.44269502, 1.44269502, 1.44269502);
+            u_xlat8.xyz = exp2(u_xlat9.xyz);
+            u_xlat33 = u_xlat3.y * u_xlat33;
+            u_xlat7.xyz = u_xlat8.xyz * vec3(u_xlat33) + u_xlat7.xyz;
+            u_xlat6.xyz = u_xlat2.xyz * u_xlat3.xxx + u_xlat6.xyz;
+        }
+        u_xlat1.xyz = u_xlat1.xyz * vec3(0.0500000007, 0.0500000007, 0.0500000007) + vec3(0.0199999996, 0.0199999996, 0.0199999996);
+        u_xlat1.xyz = u_xlat1.xyz * u_xlat7.xyz;
+        u_xlat3.xyz = min(u_xlat8.xyz, vec3(1.0, 1.0, 1.0));
+        vs_TEXCOORD1.xyz = u_xlat1.xyz;
+        vs_TEXCOORD2.xyz = u_xlat3.xyz;
+    //ENDIF
+    }
+    vs_TEXCOORD0.xyz = (-u_xlat2.xyz);
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform highp vec4 _WorldSpaceLightPos0;
-uniform lowp vec4 _LightColor0;
-uniform mediump float _HdrExposure;
-uniform mediump vec3 _GroundColor;
-uniform mediump vec3 _SunTint;
-uniform mediump float _SunStrength;
-varying mediump vec3 xlv_TEXCOORD0;
-varying mediump vec3 xlv_TEXCOORD1;
-varying mediump vec3 xlv_TEXCOORD2;
-void main ()
-{
-  mediump vec3 col_1;
-  if ((xlv_TEXCOORD0.y < 0.0)) {
-    mediump float eyeCos_2;
-    mediump vec3 tmpvar_3;
-    tmpvar_3 = normalize(xlv_TEXCOORD0);
-    highp float tmpvar_4;
-    tmpvar_4 = dot (_WorldSpaceLightPos0.xyz, tmpvar_3);
-    eyeCos_2 = tmpvar_4;
-    mediump float tmpvar_5;
-    tmpvar_5 = (eyeCos_2 * eyeCos_2);
-    mediump float temp_6;
-    mediump float tmpvar_7;
-    tmpvar_7 = (1.9801 - (-1.98 * eyeCos_2));
-    mediump float tmpvar_8;
-    tmpvar_8 = clamp ((tmpvar_7 / 0.01), 0.0, 1.0);
-    temp_6 = ((tmpvar_8 * (tmpvar_8 * 
-      (3.0 - (2.0 * tmpvar_8))
-    )) * tmpvar_7);
-    mediump float tmpvar_9;
-    tmpvar_9 = max (temp_6, 0.0001);
-    temp_6 = tmpvar_9;
-    col_1 = (((0.75 + 
-      (0.75 * tmpvar_5)
-    ) * xlv_TEXCOORD1) + ((
-      ((((0.01001645 * 
-        (1.0 + tmpvar_5)
-      ) / tmpvar_9) * xlv_TEXCOORD2) * _LightColor0.xyz)
-     * _SunTint) * _SunStrength));
-  } else {
-    col_1 = (xlv_TEXCOORD1 + (_GroundColor * xlv_TEXCOORD2));
-  };
-  col_1 = (col_1 * _HdrExposure);
-  mediump vec4 tmpvar_10;
-  tmpvar_10.w = 1.0;
-  tmpvar_10.xyz = col_1;
-  gl_FragData[0] = tmpvar_10;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	vec4 _WorldSpaceLightPos0;
+uniform 	mediump vec4 _LightColor0;
+uniform 	mediump float _HdrExposure;
+uniform 	mediump vec3 _GroundColor;
+uniform 	mediump vec3 _SunTint;
+uniform 	mediump float _SunStrength;
+varying mediump vec3 vs_TEXCOORD0;
+varying mediump vec3 vs_TEXCOORD1;
+varying mediump vec3 vs_TEXCOORD2;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+float u_xlat1;
+bool u_xlatb1;
+mediump vec3 u_xlat16_2;
+mediump float u_xlat16_3;
+mediump float u_xlat16_6;
+void main()
+{
+    u_xlat16_0.x = dot(vs_TEXCOORD0.xyz, vs_TEXCOORD0.xyz);
+    u_xlat16_0.x = inversesqrt(u_xlat16_0.x);
+    u_xlat16_0.xyz = u_xlat16_0.xxx * vs_TEXCOORD0.xyz;
+    u_xlat1 = dot(_WorldSpaceLightPos0.xyz, u_xlat16_0.xyz);
+    u_xlat16_0.x = (-u_xlat1) * -1.98000002 + 1.98010004;
+    u_xlat16_3 = u_xlat16_0.x * 100.0;
+    u_xlat16_3 = clamp(u_xlat16_3, 0.0, 1.0);
+    u_xlat16_6 = u_xlat16_3 * -2.0 + 3.0;
+    u_xlat16_3 = u_xlat16_3 * u_xlat16_3;
+    u_xlat16_3 = u_xlat16_3 * u_xlat16_6;
+    u_xlat16_0.x = u_xlat16_0.x * u_xlat16_3;
+    u_xlat16_0.x = max(u_xlat16_0.x, 9.99999975e-05);
+    u_xlat16_3 = u_xlat1 * u_xlat1 + 1.0;
+    u_xlat16_6 = u_xlat1 * u_xlat1;
+    u_xlat16_6 = u_xlat16_6 * 0.75 + 0.75;
+    u_xlat16_3 = u_xlat16_3 * 0.0100164423;
+    u_xlat16_0.x = u_xlat16_3 / u_xlat16_0.x;
+    u_xlat16_0.xyw = u_xlat16_0.xxx * vs_TEXCOORD2.xyz;
+    u_xlat16_0.xyw = u_xlat16_0.xyw * _LightColor0.xyz;
+    u_xlat16_0.xyw = u_xlat16_0.xyw * _SunTint.xyz;
+    u_xlat16_0.xyw = u_xlat16_0.xyw * vec3(vec3(_SunStrength, _SunStrength, _SunStrength));
+    u_xlat16_0.xyz = vec3(u_xlat16_6) * vs_TEXCOORD1.xyz + u_xlat16_0.xyw;
+    u_xlatb1 = vs_TEXCOORD0.y<0.0;
+    u_xlat16_2.xyz = vec3(_GroundColor.x, _GroundColor.y, _GroundColor.z) * vs_TEXCOORD2.xyz + vs_TEXCOORD1.xyz;
+    u_xlat16_0.xyz = (bool(u_xlatb1)) ? u_xlat16_0.xyz : u_xlat16_2.xyz;
+    SV_Target0.xyz = u_xlat16_0.xyz * vec3(_HdrExposure);
+    SV_Target0.w = 1.0;
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier02 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-uniform highp vec4 _WorldSpaceLightPos0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform mediump vec3 _Color;
-highp vec3 kInvWavelength;
-varying mediump vec3 xlv_TEXCOORD0;
-varying mediump vec3 xlv_TEXCOORD1;
-varying mediump vec3 xlv_TEXCOORD2;
-void main ()
+uniform 	vec4 _WorldSpaceLightPos0;
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	mediump vec3 _Color;
+attribute highp vec4 in_POSITION0;
+varying mediump vec3 vs_TEXCOORD0;
+varying mediump vec3 vs_TEXCOORD1;
+varying mediump vec3 vs_TEXCOORD2;
+vec4 u_xlat0;
+mediump vec3 u_xlat16_0;
+vec3 u_xlat1;
+vec4 u_xlat2;
+vec4 u_xlat3;
+vec3 u_xlat4;
+vec3 u_xlat5;
+vec3 u_xlat6;
+vec3 u_xlat7;
+vec3 u_xlat8;
+vec3 u_xlat9;
+vec2 u_xlat13;
+float u_xlat14;
+float u_xlat23;
+float u_xlat24;
+float u_xlat31;
+int u_xlati31;
+float u_xlat32;
+bool u_xlatb32;
+float u_xlat33;
+bool u_xlatb33;
+float u_xlat34;
+void main()
 {
-  mediump vec3 tmpvar_1;
-  mediump float tmpvar_2;
-  tmpvar_2 = pow (_Color.x, 0.454545);
-  tmpvar_1.x = (1.0/(((
-    ((0.65 * mix (2.0, 0.7, tmpvar_2)) * (0.65 * mix (2.0, 0.7, tmpvar_2)))
-   * 
-    (0.65 * mix (2.0, 0.7, tmpvar_2))
-  ) * (0.65 * 
-    mix (2.0, 0.7, tmpvar_2)
-  ))));
-  mediump float tmpvar_3;
-  tmpvar_3 = pow (_Color.y, 0.454545);
-  tmpvar_1.y = (1.0/(((
-    ((0.57 * mix (2.0, 0.7, tmpvar_3)) * (0.57 * mix (2.0, 0.7, tmpvar_3)))
-   * 
-    (0.57 * mix (2.0, 0.7, tmpvar_3))
-  ) * (0.57 * 
-    mix (2.0, 0.7, tmpvar_3)
-  ))));
-  mediump float tmpvar_4;
-  tmpvar_4 = pow (_Color.z, 0.454545);
-  tmpvar_1.z = (1.0/(((
-    ((0.475 * mix (2.0, 0.7, tmpvar_4)) * (0.475 * mix (2.0, 0.7, tmpvar_4)))
-   * 
-    (0.475 * mix (2.0, 0.7, tmpvar_4))
-  ) * (0.475 * 
-    mix (2.0, 0.7, tmpvar_4)
-  ))));
-  kInvWavelength = tmpvar_1;
-  highp float far_5;
-  mediump vec3 tmpvar_6;
-  mediump vec3 tmpvar_7;
-  mediump vec3 tmpvar_8;
-  highp vec4 tmpvar_9;
-  highp vec4 tmpvar_10;
-  tmpvar_10.w = 1.0;
-  tmpvar_10.xyz = _glesVertex.xyz;
-  tmpvar_9 = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_10));
-  highp mat3 tmpvar_11;
-  tmpvar_11[0] = unity_ObjectToWorld[0].xyz;
-  tmpvar_11[1] = unity_ObjectToWorld[1].xyz;
-  tmpvar_11[2] = unity_ObjectToWorld[2].xyz;
-  highp vec3 tmpvar_12;
-  tmpvar_12 = normalize((tmpvar_11 * _glesVertex.xyz));
-  tmpvar_6 = -(tmpvar_12);
-  far_5 = 0.0;
-  if ((tmpvar_12.y >= 0.0)) {
-    highp vec3 frontColor_13;
-    highp vec3 samplePoint_14;
-    far_5 = (sqrt((
-      (1.050625 + (tmpvar_12.y * tmpvar_12.y))
-     - 1.0)) - tmpvar_12.y);
-    highp float tmpvar_15;
-    tmpvar_15 = (1.0 - (dot (tmpvar_12, vec3(0.0, 1.0001, 0.0)) / 1.0001));
-    highp float tmpvar_16;
-    tmpvar_16 = (exp((-0.00287 + 
-      (tmpvar_15 * (0.459 + (tmpvar_15 * (3.83 + 
-        (tmpvar_15 * (-6.8 + (tmpvar_15 * 5.25)))
-      ))))
-    )) * 0.2460318);
-    highp float tmpvar_17;
-    tmpvar_17 = (far_5 / 2.0);
-    highp float tmpvar_18;
-    tmpvar_18 = (tmpvar_17 * 40.00004);
-    highp vec3 tmpvar_19;
-    tmpvar_19 = (tmpvar_12 * tmpvar_17);
-    highp vec3 tmpvar_20;
-    tmpvar_20 = (vec3(0.0, 1.0001, 0.0) + (tmpvar_19 * 0.5));
-    highp float tmpvar_21;
-    tmpvar_21 = sqrt(dot (tmpvar_20, tmpvar_20));
-    highp float tmpvar_22;
-    tmpvar_22 = exp((160.0002 * (1.0 - tmpvar_21)));
-    highp float tmpvar_23;
-    tmpvar_23 = (1.0 - (dot (_WorldSpaceLightPos0.xyz, tmpvar_20) / tmpvar_21));
-    highp float tmpvar_24;
-    tmpvar_24 = (1.0 - (dot (tmpvar_12, tmpvar_20) / tmpvar_21));
-    frontColor_13 = (exp((
-      -((tmpvar_16 + (tmpvar_22 * (
-        (0.25 * exp((-0.00287 + (tmpvar_23 * 
-          (0.459 + (tmpvar_23 * (3.83 + (tmpvar_23 * 
-            (-6.8 + (tmpvar_23 * 5.25))
-          ))))
-        ))))
-       - 
-        (0.25 * exp((-0.00287 + (tmpvar_24 * 
-          (0.459 + (tmpvar_24 * (3.83 + (tmpvar_24 * 
-            (-6.8 + (tmpvar_24 * 5.25))
-          ))))
-        ))))
-      ))))
-     * 
-      ((kInvWavelength * 0.03141593) + 0.01256637)
-    )) * (tmpvar_22 * tmpvar_18));
-    samplePoint_14 = (tmpvar_20 + tmpvar_19);
-    highp float tmpvar_25;
-    tmpvar_25 = sqrt(dot (samplePoint_14, samplePoint_14));
-    highp float tmpvar_26;
-    tmpvar_26 = exp((160.0002 * (1.0 - tmpvar_25)));
-    highp float tmpvar_27;
-    tmpvar_27 = (1.0 - (dot (_WorldSpaceLightPos0.xyz, samplePoint_14) / tmpvar_25));
-    highp float tmpvar_28;
-    tmpvar_28 = (1.0 - (dot (tmpvar_12, samplePoint_14) / tmpvar_25));
-    frontColor_13 = (frontColor_13 + (exp(
-      (-((tmpvar_16 + (tmpvar_26 * 
-        ((0.25 * exp((-0.00287 + 
-          (tmpvar_27 * (0.459 + (tmpvar_27 * (3.83 + 
-            (tmpvar_27 * (-6.8 + (tmpvar_27 * 5.25)))
-          ))))
-        ))) - (0.25 * exp((-0.00287 + 
-          (tmpvar_28 * (0.459 + (tmpvar_28 * (3.83 + 
-            (tmpvar_28 * (-6.8 + (tmpvar_28 * 5.25)))
-          ))))
-        ))))
-      ))) * ((kInvWavelength * 0.03141593) + 0.01256637))
-    ) * (tmpvar_26 * tmpvar_18)));
-    samplePoint_14 = (samplePoint_14 + tmpvar_19);
-    tmpvar_7 = (frontColor_13 * (kInvWavelength * 0.05));
-    tmpvar_8 = (frontColor_13 * 0.02);
-  } else {
-    highp vec3 frontColor_1_29;
-    highp vec3 samplePoint_1_30;
-    highp float scaledLength_1_31;
-    highp float temp_32;
-    highp float cameraOffset_33;
-    far_5 = (-0.0001 / min (-1e-05, tmpvar_12.y));
-    highp vec3 tmpvar_34;
-    tmpvar_34 = (vec3(0.0, 1.0001, 0.0) + (far_5 * tmpvar_12));
-    highp float tmpvar_35;
-    highp float tmpvar_36;
-    tmpvar_36 = (1.0 - dot (-(tmpvar_12), tmpvar_34));
-    tmpvar_35 = (0.25 * exp((-0.00287 + 
-      (tmpvar_36 * (0.459 + (tmpvar_36 * (3.83 + 
-        (tmpvar_36 * (-6.8 + (tmpvar_36 * 5.25)))
-      ))))
-    )));
-    highp float tmpvar_37;
-    tmpvar_37 = (1.0 - dot (_WorldSpaceLightPos0.xyz, tmpvar_34));
-    cameraOffset_33 = (0.9996001 * tmpvar_35);
-    temp_32 = ((0.25 * exp(
-      (-0.00287 + (tmpvar_37 * (0.459 + (tmpvar_37 * 
-        (3.83 + (tmpvar_37 * (-6.8 + (tmpvar_37 * 5.25))))
-      ))))
-    )) + tmpvar_35);
-    highp float tmpvar_38;
-    tmpvar_38 = (far_5 / 2.0);
-    scaledLength_1_31 = (tmpvar_38 * 40.00004);
-    highp vec3 tmpvar_39;
-    tmpvar_39 = (tmpvar_12 * tmpvar_38);
-    samplePoint_1_30 = (vec3(0.0, 1.0001, 0.0) + (tmpvar_39 * 0.5));
-    highp float tmpvar_40;
-    tmpvar_40 = exp((160.0002 * (1.0 - 
-      sqrt(dot (samplePoint_1_30, samplePoint_1_30))
-    )));
-    frontColor_1_29 = (exp((
-      (cameraOffset_33 - (tmpvar_40 * temp_32))
-     * 
-      ((kInvWavelength * 0.03141593) + 0.01256637)
-    )) * (tmpvar_40 * scaledLength_1_31));
-    samplePoint_1_30 = (samplePoint_1_30 + tmpvar_39);
-    highp float tmpvar_41;
-    tmpvar_41 = exp((160.0002 * (1.0 - 
-      sqrt(dot (samplePoint_1_30, samplePoint_1_30))
-    )));
-    highp vec3 tmpvar_42;
-    tmpvar_42 = exp(((cameraOffset_33 - 
-      (tmpvar_41 * temp_32)
-    ) * (
-      (kInvWavelength * 0.03141593)
-     + 0.01256637)));
-    frontColor_1_29 = (frontColor_1_29 + (tmpvar_42 * (tmpvar_41 * scaledLength_1_31)));
-    samplePoint_1_30 = (samplePoint_1_30 + tmpvar_39);
-    tmpvar_7 = (frontColor_1_29 * ((kInvWavelength * 0.05) + 0.02));
-    highp vec3 tmpvar_43;
-    tmpvar_43 = clamp (tmpvar_42, vec3(0.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0));
-    tmpvar_8 = tmpvar_43;
-  };
-  gl_Position = tmpvar_9;
-  xlv_TEXCOORD0 = tmpvar_6;
-  xlv_TEXCOORD1 = tmpvar_7;
-  xlv_TEXCOORD2 = tmpvar_8;
+    u_xlat16_0.xyz = log2(_Color.xyz);
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vec3(0.454544991, 0.454544991, 0.454544991);
+    u_xlat16_0.xyz = exp2(u_xlat16_0.xyz);
+    u_xlat1.xyz = u_xlat16_0.xyz * vec3(-1.29999995, -1.29999995, -1.29999995) + vec3(2.0, 2.0, 2.0);
+    u_xlat1.xyz = u_xlat1.xyz * vec3(0.649999976, 0.569999993, 0.474999994);
+    u_xlat1.xyz = u_xlat1.xyz * u_xlat1.xyz;
+    u_xlat1.xyz = u_xlat1.xyz * u_xlat1.xyz;
+    u_xlat1.xyz = vec3(1.0, 1.0, 1.0) / u_xlat1.xyz;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat2 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat3 = u_xlat2.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat2.xxxx + u_xlat3;
+    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat2.zzzz + u_xlat3;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat2.wwww + u_xlat3;
+    u_xlat31 = dot(u_xlat0.xyz, u_xlat0.xyz);
+    u_xlat31 = inversesqrt(u_xlat31);
+    u_xlat2.xyz = u_xlat0.xyz * vec3(u_xlat31);
+    u_xlatb32 = u_xlat2.y>=0.0;
+    if(u_xlatb32){
+        u_xlat32 = u_xlat2.y * u_xlat2.y + 0.0506249666;
+        u_xlat32 = sqrt(u_xlat32);
+        u_xlat32 = (-u_xlat0.y) * u_xlat31 + u_xlat32;
+        u_xlat31 = (-u_xlat0.y) * u_xlat31 + 1.0;
+        u_xlat3.x = u_xlat31 * 5.25 + -6.80000019;
+        u_xlat3.x = u_xlat31 * u_xlat3.x + 3.82999992;
+        u_xlat3.x = u_xlat31 * u_xlat3.x + 0.458999991;
+        u_xlat31 = u_xlat31 * u_xlat3.x + -0.00286999997;
+        u_xlat31 = u_xlat31 * 1.44269502;
+        u_xlat31 = exp2(u_xlat31);
+        u_xlat31 = u_xlat31 * 0.246031836;
+        u_xlat3.xy = vec2(u_xlat32) * vec2(0.5, 20.0);
+        u_xlat4.xyz = u_xlat2.xyz * u_xlat3.xxx;
+        u_xlat4.xyz = u_xlat4.xyz * vec3(0.5, 0.5, 0.5) + vec3(0.0, 1.00010002, 0.0);
+        u_xlat32 = dot(u_xlat4.xyz, u_xlat4.xyz);
+        u_xlat32 = sqrt(u_xlat32);
+        u_xlat23 = (-u_xlat32) + 1.0;
+        u_xlat23 = u_xlat23 * 230.831207;
+        u_xlat23 = exp2(u_xlat23);
+        u_xlat33 = dot(_WorldSpaceLightPos0.xyz, u_xlat4.xyz);
+        u_xlat33 = u_xlat33 / u_xlat32;
+        u_xlat34 = dot(u_xlat2.xyz, u_xlat4.xyz);
+        u_xlat32 = u_xlat34 / u_xlat32;
+        u_xlat33 = (-u_xlat33) + 1.0;
+        u_xlat34 = u_xlat33 * 5.25 + -6.80000019;
+        u_xlat34 = u_xlat33 * u_xlat34 + 3.82999992;
+        u_xlat34 = u_xlat33 * u_xlat34 + 0.458999991;
+        u_xlat33 = u_xlat33 * u_xlat34 + -0.00286999997;
+        u_xlat33 = u_xlat33 * 1.44269502;
+        u_xlat33 = exp2(u_xlat33);
+        u_xlat32 = (-u_xlat32) + 1.0;
+        u_xlat34 = u_xlat32 * 5.25 + -6.80000019;
+        u_xlat34 = u_xlat32 * u_xlat34 + 3.82999992;
+        u_xlat34 = u_xlat32 * u_xlat34 + 0.458999991;
+        u_xlat32 = u_xlat32 * u_xlat34 + -0.00286999997;
+        u_xlat32 = u_xlat32 * 1.44269502;
+        u_xlat32 = exp2(u_xlat32);
+        u_xlat32 = u_xlat32 * 0.25;
+        u_xlat32 = u_xlat33 * 0.25 + (-u_xlat32);
+        u_xlat32 = u_xlat23 * u_xlat32 + u_xlat31;
+        u_xlat5.xyz = u_xlat1.xyz * vec3(0.0314159282, 0.0314159282, 0.0314159282) + vec3(0.0125663709, 0.0125663709, 0.0125663709);
+        u_xlat6.xyz = (-vec3(u_xlat32)) * u_xlat5.xyz;
+        u_xlat6.xyz = u_xlat6.xyz * vec3(1.44269502, 1.44269502, 1.44269502);
+        u_xlat6.xyz = exp2(u_xlat6.xyz);
+        u_xlat32 = u_xlat3.y * u_xlat23;
+        u_xlat3.xzw = u_xlat2.xyz * u_xlat3.xxx + u_xlat4.xyz;
+        u_xlat4.x = dot(u_xlat3.xzw, u_xlat3.xzw);
+        u_xlat4.x = sqrt(u_xlat4.x);
+        u_xlat14 = (-u_xlat4.x) + 1.0;
+        u_xlat14 = u_xlat14 * 230.831207;
+        u_xlat14 = exp2(u_xlat14);
+        u_xlat24 = dot(_WorldSpaceLightPos0.xyz, u_xlat3.xzw);
+        u_xlat24 = u_xlat24 / u_xlat4.x;
+        u_xlat3.x = dot(u_xlat2.xyz, u_xlat3.xzw);
+        u_xlat3.x = u_xlat3.x / u_xlat4.x;
+        u_xlat23 = (-u_xlat24) + 1.0;
+        u_xlat33 = u_xlat23 * 5.25 + -6.80000019;
+        u_xlat33 = u_xlat23 * u_xlat33 + 3.82999992;
+        u_xlat33 = u_xlat23 * u_xlat33 + 0.458999991;
+        u_xlat23 = u_xlat23 * u_xlat33 + -0.00286999997;
+        u_xlat23 = u_xlat23 * 1.44269502;
+        u_xlat23 = exp2(u_xlat23);
+        u_xlat3.x = (-u_xlat3.x) + 1.0;
+        u_xlat33 = u_xlat3.x * 5.25 + -6.80000019;
+        u_xlat33 = u_xlat3.x * u_xlat33 + 3.82999992;
+        u_xlat33 = u_xlat3.x * u_xlat33 + 0.458999991;
+        u_xlat3.x = u_xlat3.x * u_xlat33 + -0.00286999997;
+        u_xlat3.x = u_xlat3.x * 1.44269502;
+        u_xlat3.x = exp2(u_xlat3.x);
+        u_xlat3.x = u_xlat3.x * 0.25;
+        u_xlat3.x = u_xlat23 * 0.25 + (-u_xlat3.x);
+        u_xlat31 = u_xlat14 * u_xlat3.x + u_xlat31;
+        u_xlat3.xzw = u_xlat5.xyz * (-vec3(u_xlat31));
+        u_xlat3.xzw = u_xlat3.xzw * vec3(1.44269502, 1.44269502, 1.44269502);
+        u_xlat3.xzw = exp2(u_xlat3.xzw);
+        u_xlat31 = u_xlat3.y * u_xlat14;
+        u_xlat3.xyz = vec3(u_xlat31) * u_xlat3.xzw;
+        u_xlat3.xyz = u_xlat6.xyz * vec3(u_xlat32) + u_xlat3.xyz;
+        u_xlat4.xyz = u_xlat1.xyz * u_xlat3.xyz;
+        u_xlat4.xyz = u_xlat4.xyz * vec3(0.0500000007, 0.0500000007, 0.0500000007);
+        u_xlat3.xyz = u_xlat3.xyz * vec3(0.0199999996, 0.0199999996, 0.0199999996);
+        vs_TEXCOORD1.xyz = u_xlat4.xyz;
+        vs_TEXCOORD2.xyz = u_xlat3.xyz;
+    } else {
+        u_xlat31 = min(u_xlat2.y, -9.99999975e-06);
+        u_xlat31 = -9.99999975e-05 / u_xlat31;
+        u_xlat3.xyz = vec3(u_xlat31) * u_xlat2.xyz + vec3(0.0, 1.00010002, 0.0);
+        u_xlat32 = dot((-u_xlat2.xyz), u_xlat3.xyz);
+        u_xlat3.x = dot(_WorldSpaceLightPos0.xyz, u_xlat3.xyz);
+        u_xlat32 = (-u_xlat32) + 1.0;
+        u_xlat13.x = u_xlat32 * 5.25 + -6.80000019;
+        u_xlat13.x = u_xlat32 * u_xlat13.x + 3.82999992;
+        u_xlat13.x = u_xlat32 * u_xlat13.x + 0.458999991;
+        u_xlat32 = u_xlat32 * u_xlat13.x + -0.00286999997;
+        u_xlat32 = u_xlat32 * 1.44269502;
+        u_xlat32 = exp2(u_xlat32);
+        u_xlat3.x = (-u_xlat3.x) + 1.0;
+        u_xlat13.x = u_xlat3.x * 5.25 + -6.80000019;
+        u_xlat13.x = u_xlat3.x * u_xlat13.x + 3.82999992;
+        u_xlat13.x = u_xlat3.x * u_xlat13.x + 0.458999991;
+        u_xlat3.x = u_xlat3.x * u_xlat13.x + -0.00286999997;
+        u_xlat3.x = u_xlat3.x * 1.44269502;
+        u_xlat3.x = exp2(u_xlat3.x);
+        u_xlat13.xy = vec2(u_xlat32) * vec2(0.25, 0.249900013);
+        u_xlat32 = u_xlat3.x * 0.25 + u_xlat13.x;
+        u_xlat3.xy = vec2(u_xlat31) * vec2(0.5, 20.0);
+        u_xlat4.xyz = u_xlat2.xyz * u_xlat3.xxx;
+        u_xlat4.xyz = u_xlat4.xyz * vec3(0.5, 0.5, 0.5) + vec3(0.0, 1.00010002, 0.0);
+        u_xlat5.xyz = u_xlat1.xyz * vec3(0.0314159282, 0.0314159282, 0.0314159282) + vec3(0.0125663709, 0.0125663709, 0.0125663709);
+        u_xlat6.xyz = u_xlat4.xyz;
+        u_xlat7.x = float(0.0);
+        u_xlat7.y = float(0.0);
+        u_xlat7.z = float(0.0);
+        u_xlat8.x = float(0.0);
+        u_xlat8.y = float(0.0);
+        u_xlat8.z = float(0.0);
+        for(int u_xlati_loop_1 = 0 ; u_xlati_loop_1<2 ; u_xlati_loop_1++)
+        {
+            u_xlat33 = dot(u_xlat6.xyz, u_xlat6.xyz);
+            u_xlat33 = sqrt(u_xlat33);
+            u_xlat33 = (-u_xlat33) + 1.0;
+            u_xlat33 = u_xlat33 * 230.831207;
+            u_xlat33 = exp2(u_xlat33);
+            u_xlat34 = u_xlat33 * u_xlat32 + (-u_xlat13.y);
+            u_xlat9.xyz = u_xlat5.xyz * (-vec3(u_xlat34));
+            u_xlat9.xyz = u_xlat9.xyz * vec3(1.44269502, 1.44269502, 1.44269502);
+            u_xlat8.xyz = exp2(u_xlat9.xyz);
+            u_xlat33 = u_xlat3.y * u_xlat33;
+            u_xlat7.xyz = u_xlat8.xyz * vec3(u_xlat33) + u_xlat7.xyz;
+            u_xlat6.xyz = u_xlat2.xyz * u_xlat3.xxx + u_xlat6.xyz;
+        }
+        u_xlat1.xyz = u_xlat1.xyz * vec3(0.0500000007, 0.0500000007, 0.0500000007) + vec3(0.0199999996, 0.0199999996, 0.0199999996);
+        u_xlat1.xyz = u_xlat1.xyz * u_xlat7.xyz;
+        u_xlat3.xyz = min(u_xlat8.xyz, vec3(1.0, 1.0, 1.0));
+        vs_TEXCOORD1.xyz = u_xlat1.xyz;
+        vs_TEXCOORD2.xyz = u_xlat3.xyz;
+    //ENDIF
+    }
+    vs_TEXCOORD0.xyz = (-u_xlat2.xyz);
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform highp vec4 _WorldSpaceLightPos0;
-uniform lowp vec4 _LightColor0;
-uniform mediump float _HdrExposure;
-uniform mediump vec3 _GroundColor;
-uniform mediump vec3 _SunTint;
-uniform mediump float _SunStrength;
-varying mediump vec3 xlv_TEXCOORD0;
-varying mediump vec3 xlv_TEXCOORD1;
-varying mediump vec3 xlv_TEXCOORD2;
-void main ()
-{
-  mediump vec3 col_1;
-  if ((xlv_TEXCOORD0.y < 0.0)) {
-    mediump float eyeCos_2;
-    mediump vec3 tmpvar_3;
-    tmpvar_3 = normalize(xlv_TEXCOORD0);
-    highp float tmpvar_4;
-    tmpvar_4 = dot (_WorldSpaceLightPos0.xyz, tmpvar_3);
-    eyeCos_2 = tmpvar_4;
-    mediump float tmpvar_5;
-    tmpvar_5 = (eyeCos_2 * eyeCos_2);
-    mediump float temp_6;
-    mediump float tmpvar_7;
-    tmpvar_7 = (1.9801 - (-1.98 * eyeCos_2));
-    mediump float tmpvar_8;
-    tmpvar_8 = clamp ((tmpvar_7 / 0.01), 0.0, 1.0);
-    temp_6 = ((tmpvar_8 * (tmpvar_8 * 
-      (3.0 - (2.0 * tmpvar_8))
-    )) * tmpvar_7);
-    mediump float tmpvar_9;
-    tmpvar_9 = max (temp_6, 0.0001);
-    temp_6 = tmpvar_9;
-    col_1 = (((0.75 + 
-      (0.75 * tmpvar_5)
-    ) * xlv_TEXCOORD1) + ((
-      ((((0.01001645 * 
-        (1.0 + tmpvar_5)
-      ) / tmpvar_9) * xlv_TEXCOORD2) * _LightColor0.xyz)
-     * _SunTint) * _SunStrength));
-  } else {
-    col_1 = (xlv_TEXCOORD1 + (_GroundColor * xlv_TEXCOORD2));
-  };
-  col_1 = (col_1 * _HdrExposure);
-  mediump vec4 tmpvar_10;
-  tmpvar_10.w = 1.0;
-  tmpvar_10.xyz = col_1;
-  gl_FragData[0] = tmpvar_10;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	vec4 _WorldSpaceLightPos0;
+uniform 	mediump vec4 _LightColor0;
+uniform 	mediump float _HdrExposure;
+uniform 	mediump vec3 _GroundColor;
+uniform 	mediump vec3 _SunTint;
+uniform 	mediump float _SunStrength;
+varying mediump vec3 vs_TEXCOORD0;
+varying mediump vec3 vs_TEXCOORD1;
+varying mediump vec3 vs_TEXCOORD2;
+#define SV_Target0 gl_FragData[0]
+mediump vec4 u_xlat16_0;
+float u_xlat1;
+bool u_xlatb1;
+mediump vec3 u_xlat16_2;
+mediump float u_xlat16_3;
+mediump float u_xlat16_6;
+void main()
+{
+    u_xlat16_0.x = dot(vs_TEXCOORD0.xyz, vs_TEXCOORD0.xyz);
+    u_xlat16_0.x = inversesqrt(u_xlat16_0.x);
+    u_xlat16_0.xyz = u_xlat16_0.xxx * vs_TEXCOORD0.xyz;
+    u_xlat1 = dot(_WorldSpaceLightPos0.xyz, u_xlat16_0.xyz);
+    u_xlat16_0.x = (-u_xlat1) * -1.98000002 + 1.98010004;
+    u_xlat16_3 = u_xlat16_0.x * 100.0;
+    u_xlat16_3 = clamp(u_xlat16_3, 0.0, 1.0);
+    u_xlat16_6 = u_xlat16_3 * -2.0 + 3.0;
+    u_xlat16_3 = u_xlat16_3 * u_xlat16_3;
+    u_xlat16_3 = u_xlat16_3 * u_xlat16_6;
+    u_xlat16_0.x = u_xlat16_0.x * u_xlat16_3;
+    u_xlat16_0.x = max(u_xlat16_0.x, 9.99999975e-05);
+    u_xlat16_3 = u_xlat1 * u_xlat1 + 1.0;
+    u_xlat16_6 = u_xlat1 * u_xlat1;
+    u_xlat16_6 = u_xlat16_6 * 0.75 + 0.75;
+    u_xlat16_3 = u_xlat16_3 * 0.0100164423;
+    u_xlat16_0.x = u_xlat16_3 / u_xlat16_0.x;
+    u_xlat16_0.xyw = u_xlat16_0.xxx * vs_TEXCOORD2.xyz;
+    u_xlat16_0.xyw = u_xlat16_0.xyw * _LightColor0.xyz;
+    u_xlat16_0.xyw = u_xlat16_0.xyw * _SunTint.xyz;
+    u_xlat16_0.xyw = u_xlat16_0.xyw * vec3(vec3(_SunStrength, _SunStrength, _SunStrength));
+    u_xlat16_0.xyz = vec3(u_xlat16_6) * vs_TEXCOORD1.xyz + u_xlat16_0.xyw;
+    u_xlatb1 = vs_TEXCOORD0.y<0.0;
+    u_xlat16_2.xyz = vec3(_GroundColor.x, _GroundColor.y, _GroundColor.z) * vs_TEXCOORD2.xyz + vs_TEXCOORD1.xyz;
+    u_xlat16_0.xyz = (bool(u_xlatb1)) ? u_xlat16_0.xyz : u_xlat16_2.xyz;
+    SV_Target0.xyz = u_xlat16_0.xyz * vec3(_HdrExposure);
+    SV_Target0.w = 1.0;
+    return;
+}
 
 #endif
 "

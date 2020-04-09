@@ -20,7 +20,7 @@ SubShader {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Transparent-100" "RenderType" = "Transparent" }
   ZTest Less
   Cull Off
-  GpuProgramID 61574
+  GpuProgramID 30872
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }
@@ -33,7 +33,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -50,7 +50,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -66,20 +66,20 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = u_xlat10_0 * vs_COLOR1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR1;
     u_xlat16_1 = max(u_xlat16_0.w, 0.00999999978);
     SV_Target0 = u_xlat16_0;
     u_xlat16_1 = min(u_xlat16_1, 1.0);
@@ -89,7 +89,7 @@ void main()
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     return;
 }
 
@@ -107,7 +107,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -124,7 +124,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -140,20 +140,20 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = u_xlat10_0 * vs_COLOR1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR1;
     u_xlat16_1 = max(u_xlat16_0.w, 0.00999999978);
     SV_Target0 = u_xlat16_0;
     u_xlat16_1 = min(u_xlat16_1, 1.0);
@@ -163,7 +163,7 @@ void main()
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     return;
 }
 
@@ -181,7 +181,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -198,7 +198,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -214,20 +214,20 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = u_xlat10_0 * vs_COLOR1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR1;
     u_xlat16_1 = max(u_xlat16_0.w, 0.00999999978);
     SV_Target0 = u_xlat16_0;
     u_xlat16_1 = min(u_xlat16_1, 1.0);
@@ -237,7 +237,7 @@ void main()
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     return;
 }
 
@@ -256,7 +256,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -274,7 +274,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -292,25 +292,25 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 vec4 u_xlat1;
 mediump float u_xlat16_2;
 float u_xlat9;
 bool u_xlatb9;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1.w = u_xlat10_0.w * vs_COLOR1.w;
-    u_xlat16_0.xyz = u_xlat10_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat1.w = u_xlat16_0.w * vs_COLOR1.w;
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = max(u_xlat1.w, 0.00999999978);
     u_xlat16_2 = min(u_xlat16_2, 1.0);
     u_xlat16_2 = u_xlat16_2 + (-_CutOut);
@@ -319,7 +319,7 @@ void main()
 #else
     u_xlatb9 = u_xlat16_2<0.0;
 #endif
-    if((int(u_xlatb9) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb9) * int(0xffffffffu)))!=0){discard;}
     u_xlat9 = vs_TEXCOORD1;
 #ifdef UNITY_ADRENO_ES3
     u_xlat9 = min(max(u_xlat9, 0.0), 1.0);
@@ -346,7 +346,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -364,7 +364,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -382,25 +382,25 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 vec4 u_xlat1;
 mediump float u_xlat16_2;
 float u_xlat9;
 bool u_xlatb9;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1.w = u_xlat10_0.w * vs_COLOR1.w;
-    u_xlat16_0.xyz = u_xlat10_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat1.w = u_xlat16_0.w * vs_COLOR1.w;
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = max(u_xlat1.w, 0.00999999978);
     u_xlat16_2 = min(u_xlat16_2, 1.0);
     u_xlat16_2 = u_xlat16_2 + (-_CutOut);
@@ -409,7 +409,7 @@ void main()
 #else
     u_xlatb9 = u_xlat16_2<0.0;
 #endif
-    if((int(u_xlatb9) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb9) * int(0xffffffffu)))!=0){discard;}
     u_xlat9 = vs_TEXCOORD1;
 #ifdef UNITY_ADRENO_ES3
     u_xlat9 = min(max(u_xlat9, 0.0), 1.0);
@@ -436,7 +436,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -454,7 +454,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -472,25 +472,25 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 vec4 u_xlat1;
 mediump float u_xlat16_2;
 float u_xlat9;
 bool u_xlatb9;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1.w = u_xlat10_0.w * vs_COLOR1.w;
-    u_xlat16_0.xyz = u_xlat10_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat1.w = u_xlat16_0.w * vs_COLOR1.w;
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = max(u_xlat1.w, 0.00999999978);
     u_xlat16_2 = min(u_xlat16_2, 1.0);
     u_xlat16_2 = u_xlat16_2 + (-_CutOut);
@@ -499,7 +499,7 @@ void main()
 #else
     u_xlatb9 = u_xlat16_2<0.0;
 #endif
-    if((int(u_xlatb9) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb9) * int(0xffffffffu)))!=0){discard;}
     u_xlat9 = vs_TEXCOORD1;
 #ifdef UNITY_ADRENO_ES3
     u_xlat9 = min(max(u_xlat9, 0.0), 1.0);
@@ -525,7 +525,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -542,7 +542,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -558,20 +558,20 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = u_xlat10_0 * vs_COLOR1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR1;
     u_xlat16_1 = max(u_xlat16_0.w, 0.00999999978);
     SV_Target0 = u_xlat16_0;
     u_xlat16_1 = min(u_xlat16_1, 1.0);
@@ -581,7 +581,7 @@ void main()
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     return;
 }
 
@@ -599,7 +599,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -616,7 +616,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -632,20 +632,20 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = u_xlat10_0 * vs_COLOR1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR1;
     u_xlat16_1 = max(u_xlat16_0.w, 0.00999999978);
     SV_Target0 = u_xlat16_0;
     u_xlat16_1 = min(u_xlat16_1, 1.0);
@@ -655,7 +655,7 @@ void main()
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     return;
 }
 
@@ -673,7 +673,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -690,7 +690,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -706,20 +706,20 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = u_xlat10_0 * vs_COLOR1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0 = u_xlat16_0 * vs_COLOR1;
     u_xlat16_1 = max(u_xlat16_0.w, 0.00999999978);
     SV_Target0 = u_xlat16_0;
     u_xlat16_1 = min(u_xlat16_1, 1.0);
@@ -729,7 +729,7 @@ void main()
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     return;
 }
 
@@ -748,7 +748,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -766,7 +766,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -784,25 +784,25 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 vec4 u_xlat1;
 mediump float u_xlat16_2;
 float u_xlat9;
 bool u_xlatb9;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1.w = u_xlat10_0.w * vs_COLOR1.w;
-    u_xlat16_0.xyz = u_xlat10_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat1.w = u_xlat16_0.w * vs_COLOR1.w;
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = max(u_xlat1.w, 0.00999999978);
     u_xlat16_2 = min(u_xlat16_2, 1.0);
     u_xlat16_2 = u_xlat16_2 + (-_CutOut);
@@ -811,7 +811,7 @@ void main()
 #else
     u_xlatb9 = u_xlat16_2<0.0;
 #endif
-    if((int(u_xlatb9) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb9) * int(0xffffffffu)))!=0){discard;}
     u_xlat9 = vs_TEXCOORD1;
 #ifdef UNITY_ADRENO_ES3
     u_xlat9 = min(max(u_xlat9, 0.0), 1.0);
@@ -838,7 +838,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -856,7 +856,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -874,25 +874,25 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 vec4 u_xlat1;
 mediump float u_xlat16_2;
 float u_xlat9;
 bool u_xlatb9;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1.w = u_xlat10_0.w * vs_COLOR1.w;
-    u_xlat16_0.xyz = u_xlat10_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat1.w = u_xlat16_0.w * vs_COLOR1.w;
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = max(u_xlat1.w, 0.00999999978);
     u_xlat16_2 = min(u_xlat16_2, 1.0);
     u_xlat16_2 = u_xlat16_2 + (-_CutOut);
@@ -901,7 +901,7 @@ void main()
 #else
     u_xlatb9 = u_xlat16_2<0.0;
 #endif
-    if((int(u_xlatb9) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb9) * int(0xffffffffu)))!=0){discard;}
     u_xlat9 = vs_TEXCOORD1;
 #ifdef UNITY_ADRENO_ES3
     u_xlat9 = min(max(u_xlat9, 0.0), 1.0);
@@ -928,7 +928,7 @@ uniform 	vec4 _MainTex_ST;
 uniform 	mediump float _Scale;
 uniform 	mediump float _OffsetX;
 uniform 	mediump float _OffsetY;
-uniform lowp sampler2D _MainTex2;
+uniform mediump sampler2D _MainTex2;
 in highp vec4 in_POSITION0;
 in highp vec4 in_TEXCOORD0;
 out highp vec2 vs_TEXCOORD0;
@@ -946,7 +946,7 @@ void main()
     u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
     u_xlat1.xy = hlslcc_mtx4x4unity_ObjectToWorld[3].xz * in_POSITION0.ww + u_xlat0.xz;
     u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat16_2.xy = vec2(u_xlat1.x + float(_OffsetX), u_xlat1.y + float(_OffsetY));
+    u_xlat16_2.xy = u_xlat1.xy + vec2(_OffsetX, _OffsetY);
     u_xlat16_2.xy = u_xlat16_2.xy / vec2(_Scale);
     vs_TEXCOORD2.xy = u_xlat16_2.xy;
     u_xlat1 = textureLod(_MainTex2, u_xlat16_2.xy, 0.0);
@@ -964,25 +964,25 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump float _CutOut;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 vec4 u_xlat1;
 mediump float u_xlat16_2;
 float u_xlat9;
 bool u_xlatb9;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1.w = u_xlat10_0.w * vs_COLOR1.w;
-    u_xlat16_0.xyz = u_xlat10_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat1.w = u_xlat16_0.w * vs_COLOR1.w;
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vs_COLOR1.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = max(u_xlat1.w, 0.00999999978);
     u_xlat16_2 = min(u_xlat16_2, 1.0);
     u_xlat16_2 = u_xlat16_2 + (-_CutOut);
@@ -991,7 +991,7 @@ void main()
 #else
     u_xlatb9 = u_xlat16_2<0.0;
 #endif
-    if((int(u_xlatb9) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb9) * int(0xffffffffu)))!=0){discard;}
     u_xlat9 = vs_TEXCOORD1;
 #ifdef UNITY_ADRENO_ES3
     u_xlat9 = min(max(u_xlat9, 0.0), 1.0);

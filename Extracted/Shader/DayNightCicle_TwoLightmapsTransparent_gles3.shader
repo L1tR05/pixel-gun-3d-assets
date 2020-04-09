@@ -18,7 +18,7 @@ SubShader {
  Pass {
   LOD 100
   Tags { "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Transparent+1" "RenderType" = "Transparent" }
-  GpuProgramID 36807
+  GpuProgramID 24062
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -99,39 +99,39 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_Lightmap_HDR;
 uniform 	float _Brightness;
 uniform 	float _Lerp;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _LightMap;
-uniform lowp sampler2D _LightMapNight;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _LightMap;
+uniform mediump sampler2D _LightMapNight;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 vec3 u_xlat1;
 mediump vec3 u_xlat16_1;
-lowp vec3 u_xlat10_1;
 bool u_xlatb1;
 mediump vec3 u_xlat16_2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat0 = u_xlat10_0 * _Color;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat0 = u_xlat16_0 * _Color;
 #ifdef UNITY_ADRENO_ES3
     u_xlatb1 = !!(u_xlat0.w<0.5);
 #else
     u_xlatb1 = u_xlat0.w<0.5;
 #endif
-    if((int(u_xlatb1) * int(0xffffffffu))!=0){discard;}
-    u_xlat10_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_1.xyz * unity_Lightmap_HDR.xxx;
-    u_xlat10_1.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
-    u_xlat16_1.xyz = unity_Lightmap_HDR.xxx * u_xlat10_1.xyz + (-u_xlat16_2.xyz);
+    if(((int(u_xlatb1) * int(0xffffffffu)))!=0){discard;}
+    u_xlat16_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_1.xyz * unity_Lightmap_HDR.xxx;
+    u_xlat16_1.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_1.xyz = unity_Lightmap_HDR.xxx * u_xlat16_1.xyz + (-u_xlat16_2.xyz);
     u_xlat1.xyz = vec3(vec3(_Lerp, _Lerp, _Lerp)) * u_xlat16_1.xyz + u_xlat16_2.xyz;
     u_xlat1.xyz = u_xlat1.xyz * vec3(_Brightness);
     u_xlat1.xyz = u_xlat1.xyz * vs_COLOR0.xyz;
@@ -222,39 +222,39 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_Lightmap_HDR;
 uniform 	float _Brightness;
 uniform 	float _Lerp;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _LightMap;
-uniform lowp sampler2D _LightMapNight;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _LightMap;
+uniform mediump sampler2D _LightMapNight;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 vec3 u_xlat1;
 mediump vec3 u_xlat16_1;
-lowp vec3 u_xlat10_1;
 bool u_xlatb1;
 mediump vec3 u_xlat16_2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat0 = u_xlat10_0 * _Color;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat0 = u_xlat16_0 * _Color;
 #ifdef UNITY_ADRENO_ES3
     u_xlatb1 = !!(u_xlat0.w<0.5);
 #else
     u_xlatb1 = u_xlat0.w<0.5;
 #endif
-    if((int(u_xlatb1) * int(0xffffffffu))!=0){discard;}
-    u_xlat10_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_1.xyz * unity_Lightmap_HDR.xxx;
-    u_xlat10_1.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
-    u_xlat16_1.xyz = unity_Lightmap_HDR.xxx * u_xlat10_1.xyz + (-u_xlat16_2.xyz);
+    if(((int(u_xlatb1) * int(0xffffffffu)))!=0){discard;}
+    u_xlat16_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_1.xyz * unity_Lightmap_HDR.xxx;
+    u_xlat16_1.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_1.xyz = unity_Lightmap_HDR.xxx * u_xlat16_1.xyz + (-u_xlat16_2.xyz);
     u_xlat1.xyz = vec3(vec3(_Lerp, _Lerp, _Lerp)) * u_xlat16_1.xyz + u_xlat16_2.xyz;
     u_xlat1.xyz = u_xlat1.xyz * vec3(_Brightness);
     u_xlat1.xyz = u_xlat1.xyz * vs_COLOR0.xyz;
@@ -345,39 +345,39 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_Lightmap_HDR;
 uniform 	float _Brightness;
 uniform 	float _Lerp;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _LightMap;
-uniform lowp sampler2D _LightMapNight;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _LightMap;
+uniform mediump sampler2D _LightMapNight;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 vec3 u_xlat1;
 mediump vec3 u_xlat16_1;
-lowp vec3 u_xlat10_1;
 bool u_xlatb1;
 mediump vec3 u_xlat16_2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat0 = u_xlat10_0 * _Color;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat0 = u_xlat16_0 * _Color;
 #ifdef UNITY_ADRENO_ES3
     u_xlatb1 = !!(u_xlat0.w<0.5);
 #else
     u_xlatb1 = u_xlat0.w<0.5;
 #endif
-    if((int(u_xlatb1) * int(0xffffffffu))!=0){discard;}
-    u_xlat10_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_1.xyz * unity_Lightmap_HDR.xxx;
-    u_xlat10_1.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
-    u_xlat16_1.xyz = unity_Lightmap_HDR.xxx * u_xlat10_1.xyz + (-u_xlat16_2.xyz);
+    if(((int(u_xlatb1) * int(0xffffffffu)))!=0){discard;}
+    u_xlat16_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_1.xyz * unity_Lightmap_HDR.xxx;
+    u_xlat16_1.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_1.xyz = unity_Lightmap_HDR.xxx * u_xlat16_1.xyz + (-u_xlat16_2.xyz);
     u_xlat1.xyz = vec3(vec3(_Lerp, _Lerp, _Lerp)) * u_xlat16_1.xyz + u_xlat16_2.xyz;
     u_xlat1.xyz = u_xlat1.xyz * vec3(_Brightness);
     u_xlat1.xyz = u_xlat1.xyz * vs_COLOR0.xyz;

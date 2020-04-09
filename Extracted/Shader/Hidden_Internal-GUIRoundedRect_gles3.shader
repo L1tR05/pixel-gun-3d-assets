@@ -6,13 +6,15 @@
 Shader "Hidden/Internal-GUIRoundedRect" {
 Properties {
 _MainTex ("Texture", any) = "white" { }
+_SrcBlend ("SrcBlend", Float) = 5
+_DstBlend ("DstBlend", Float) = 10
 }
 SubShader {
  Pass {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 62409
+  GpuProgramID 44824
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -60,168 +62,196 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
+uniform 	int _ManualTex2SRGB;
+uniform 	int _SrcBlend;
 uniform 	float _CornerRadiuses[4];
 uniform 	float _BorderWidths[4];
 uniform 	float _Rect[4];
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in highp vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
-float u_xlat0;
-bool u_xlatb0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
-bvec3 u_xlatb1;
+vec3 u_xlat0;
+bvec2 u_xlatb0;
+vec2 u_xlat1;
+mediump vec4 u_xlat16_1;
+bvec2 u_xlatb1;
 vec4 u_xlat2;
+mediump vec3 u_xlat16_2;
+ivec2 u_xlati2;
 vec3 u_xlat3;
-mediump float u_xlat16_5;
+mediump vec3 u_xlat16_5;
 vec3 u_xlat6;
-lowp float u_xlat10_6;
 bvec3 u_xlatb6;
-float u_xlat7;
-bool u_xlatb7;
 float u_xlat12;
 bool u_xlatb12;
 float u_xlat13;
-ivec2 u_xlati13;
-bvec2 u_xlatb13;
+bool u_xlatb13;
 vec2 u_xlat15;
 vec2 u_xlat16;
 float u_xlat18;
-float u_xlat19;
+bool u_xlatb18;
+int u_xlati19;
+mediump float u_xlat16_23;
 void main()
 {
-    u_xlat0 = _BorderWidths[0] + _BorderWidths[2];
-    u_xlat0 = (-u_xlat0) + _Rect[2];
-    u_xlat6.x = _BorderWidths[0] + _Rect[0];
-    u_xlat0 = u_xlat0 + u_xlat6.x;
+    u_xlat0.x = _BorderWidths[0];
+    u_xlat1.x = _BorderWidths[2];
+    u_xlat12 = vs_TEXCOORD2.x + (-_Rect[0]);
+    u_xlat12 = (-_Rect[2]) * 0.5 + u_xlat12;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(vs_TEXCOORD2.x>=u_xlat6.x);
+    u_xlatb12 = !!(0.0>=u_xlat12);
 #else
-    u_xlatb6.x = vs_TEXCOORD2.x>=u_xlat6.x;
+    u_xlatb12 = 0.0>=u_xlat12;
 #endif
+    u_xlat18 = _Rect[0] + _Rect[2];
+    u_xlat13 = vs_TEXCOORD2.y + (-_Rect[1]);
+    u_xlat13 = (-_Rect[3]) * 0.5 + u_xlat13;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(u_xlat0>=vs_TEXCOORD2.x);
+    u_xlatb13 = !!(0.0>=u_xlat13);
 #else
-    u_xlatb0 = u_xlat0>=vs_TEXCOORD2.x;
+    u_xlatb13 = 0.0>=u_xlat13;
 #endif
-    u_xlatb0 = u_xlatb0 && u_xlatb6.x;
-    u_xlat6.x = _BorderWidths[1] + _Rect[1];
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb12 = !!(vs_TEXCOORD2.y>=u_xlat6.x);
-#else
-    u_xlatb12 = vs_TEXCOORD2.y>=u_xlat6.x;
-#endif
-    u_xlatb0 = u_xlatb12 && u_xlatb0;
-    u_xlat12 = _BorderWidths[1] + _BorderWidths[3];
-    u_xlat12 = (-u_xlat12) + _Rect[3];
-    u_xlat6.x = u_xlat12 + u_xlat6.x;
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(u_xlat6.x>=vs_TEXCOORD2.y);
-#else
-    u_xlatb6.x = u_xlat6.x>=vs_TEXCOORD2.y;
-#endif
-    u_xlatb0 = u_xlatb6.x && u_xlatb0;
-    u_xlat1.x = _BorderWidths[0];
-    u_xlat2.x = _BorderWidths[2];
-    u_xlat6.x = vs_TEXCOORD2.x + (-_Rect[0]);
-    u_xlat6.x = (-_Rect[2]) * 0.5 + u_xlat6.x;
-    u_xlat12 = _Rect[0] + _Rect[2];
-    u_xlat18 = vs_TEXCOORD2.y + (-_Rect[1]);
-    u_xlat6.z = (-_Rect[3]) * 0.5 + u_xlat18;
-    u_xlatb6.xz = greaterThanEqual(vec4(0.0, 0.0, 0.0, 0.0), u_xlat6.xxzz).xz;
-    u_xlati13.xy = (u_xlatb6.z) ? ivec2(0, 1) : ivec2(3, 2);
-    u_xlati13.x = (u_xlatb6.x) ? u_xlati13.x : u_xlati13.y;
-    u_xlat2.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat1.y = _Rect[0] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.xy = (u_xlatb6.x) ? u_xlat1.xy : u_xlat2.xy;
+    u_xlati2.xy = (bool(u_xlatb13)) ? ivec2(0, 1) : ivec2(3, 2);
+    u_xlati19 = (u_xlatb12) ? u_xlati2.x : u_xlati2.y;
+    u_xlat1.y = u_xlat18 + (-_CornerRadiuses[u_xlati19]);
+    u_xlat0.y = _Rect[0] + _CornerRadiuses[u_xlati19];
+    u_xlat2.xy = (bool(u_xlatb12)) ? u_xlat0.xy : u_xlat1.xy;
     u_xlat15.x = _BorderWidths[1];
     u_xlat16.x = _BorderWidths[3];
-    u_xlat12 = _Rect[1] + _Rect[3];
-    u_xlat16.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.zw = (u_xlatb6.z) ? u_xlat15.xy : u_xlat16.xy;
-    u_xlat1.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = u_xlat1.x / u_xlat1.y;
-    u_xlat3.xy = vec2((-u_xlat2.y) + vs_TEXCOORD2.x, (-u_xlat2.w) + vs_TEXCOORD2.y);
-    u_xlat3.z = u_xlat12 * u_xlat3.y;
-    u_xlat12 = dot(u_xlat3.xz, u_xlat3.xz);
-    u_xlat19 = dot(u_xlat3.xy, u_xlat3.xy);
-    u_xlat19 = sqrt(u_xlat19);
-    u_xlat13 = u_xlat19 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = sqrt(u_xlat12);
-    u_xlat12 = (-u_xlat1.x) + u_xlat12;
-    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat1.xyxx).xy;
-    u_xlatb1.x = u_xlatb1.y && u_xlatb1.x;
-    u_xlat7 = dFdx(vs_TEXCOORD2.x);
-    u_xlat7 = float(1.0) / abs(u_xlat7);
-    u_xlat12 = u_xlat12 * u_xlat7 + 0.5;
+    u_xlat0.x = _Rect[1] + _Rect[3];
+    u_xlat16.y = u_xlat0.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati19];
+    u_xlat2.zw = (bool(u_xlatb13)) ? u_xlat15.xy : u_xlat16.xy;
+    u_xlat0.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati19]);
+    u_xlat18 = u_xlat0.x / u_xlat0.y;
+    u_xlat3.xy = (-u_xlat2.yw) + vs_TEXCOORD2.xy;
+    u_xlat3.z = u_xlat18 * u_xlat3.y;
+    u_xlat18 = dot(u_xlat3.xz, u_xlat3.xz);
+    u_xlat1.x = dot(u_xlat3.xy, u_xlat3.xy);
+    u_xlat1.x = sqrt(u_xlat1.x);
+    u_xlat1.x = u_xlat1.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat18 = sqrt(u_xlat18);
+    u_xlat18 = (-u_xlat0.x) + u_xlat18;
+    u_xlatb0.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat0.xyxx).xy;
+    u_xlatb0.x = u_xlatb0.y && u_xlatb0.x;
+    u_xlat6.x = dFdx(vs_TEXCOORD2.x);
+    u_xlat6.x = float(1.0) / abs(u_xlat6.x);
+    u_xlat18 = u_xlat18 * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat12 = min(max(u_xlat12, 0.0), 1.0);
+    u_xlat18 = min(max(u_xlat18, 0.0), 1.0);
 #else
-    u_xlat12 = clamp(u_xlat12, 0.0, 1.0);
+    u_xlat18 = clamp(u_xlat18, 0.0, 1.0);
 #endif
-    u_xlat7 = u_xlat13 * u_xlat7 + 0.5;
+    u_xlat6.x = u_xlat1.x * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat7 = min(max(u_xlat7, 0.0), 1.0);
+    u_xlat6.x = min(max(u_xlat6.x, 0.0), 1.0);
 #else
-    u_xlat7 = clamp(u_xlat7, 0.0, 1.0);
+    u_xlat6.x = clamp(u_xlat6.x, 0.0, 1.0);
 #endif
-    u_xlat12 = (u_xlatb1.x) ? u_xlat12 : 1.0;
-    u_xlatb1.xz = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xxzx).xz;
-    u_xlatb1.x = u_xlatb1.z || u_xlatb1.x;
-    u_xlat12 = u_xlatb1.x ? u_xlat12 : float(0.0);
-    u_xlat1.x = u_xlatb1.x ? u_xlat7 : float(0.0);
+    u_xlat0.x = (u_xlatb0.x) ? u_xlat18 : 1.0;
+    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xzxx).xy;
+    u_xlatb18 = u_xlatb1.y || u_xlatb1.x;
+    u_xlat0.x = u_xlatb18 ? u_xlat0.x : float(0.0);
+    u_xlat6.x = u_xlatb18 ? u_xlat6.x : float(0.0);
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb7 = !!(u_xlat1.x==0.0);
+    u_xlatb18 = !!(u_xlat6.x==0.0);
 #else
-    u_xlatb7 = u_xlat1.x==0.0;
+    u_xlatb18 = u_xlat6.x==0.0;
 #endif
-    u_xlat1.x = (-u_xlat1.x) + 1.0;
-    u_xlat12 = (u_xlatb7) ? u_xlat12 : u_xlat1.x;
-    u_xlatb1.xy = greaterThanEqual(u_xlat2.ywyy, vs_TEXCOORD2.xyxx).xy;
-    u_xlatb13.xy = greaterThanEqual(vs_TEXCOORD2.xyxy, u_xlat2.ywyw).xy;
-    u_xlatb6.x = (u_xlatb6.x) ? u_xlatb1.x : u_xlatb13.x;
-    u_xlatb6.z = (u_xlatb6.z) ? u_xlatb1.y : u_xlatb13.y;
-    u_xlatb6.x = u_xlatb6.z && u_xlatb6.x;
-    u_xlat12 = (u_xlatb6.x) ? u_xlat12 : 1.0;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat12 = u_xlat12 * u_xlat1.w;
-    u_xlat0 = (u_xlatb0) ? 0.0 : u_xlat12;
-    u_xlat16_5 = (u_xlatb6.x) ? u_xlat12 : u_xlat0;
+    u_xlat6.x = (-u_xlat6.x) + 1.0;
+    u_xlat0.x = (u_xlatb18) ? u_xlat0.x : u_xlat6.x;
+    u_xlatb6.xz = greaterThanEqual(u_xlat2.yyww, vs_TEXCOORD2.xxyy).xz;
+    u_xlatb1.xy = greaterThanEqual(vs_TEXCOORD2.xyxx, u_xlat2.ywyy).xy;
+    u_xlatb6.x = (u_xlatb12) ? u_xlatb6.x : u_xlatb1.x;
+    u_xlatb12 = (u_xlatb13) ? u_xlatb6.z : u_xlatb1.y;
+    u_xlatb6.x = u_xlatb12 && u_xlatb6.x;
+    u_xlat0.x = (u_xlatb6.x) ? u_xlat0.x : 1.0;
+    u_xlat12 = _BorderWidths[0] + _BorderWidths[2];
+    u_xlat12 = (-u_xlat12) + _Rect[2];
+    u_xlat18 = _BorderWidths[0] + _Rect[0];
+    u_xlat12 = u_xlat12 + u_xlat18;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(0.0<_BorderWidths[0]);
+    u_xlatb18 = !!(vs_TEXCOORD2.x>=u_xlat18);
 #else
-    u_xlatb0 = 0.0<_BorderWidths[0];
+    u_xlatb18 = vs_TEXCOORD2.x>=u_xlat18;
 #endif
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[1]);
+    u_xlatb12 = !!(u_xlat12>=vs_TEXCOORD2.x);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[1];
+    u_xlatb12 = u_xlat12>=vs_TEXCOORD2.x;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb18;
+    u_xlat18 = _BorderWidths[1] + _Rect[1];
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[2]);
+    u_xlatb1.x = !!(vs_TEXCOORD2.y>=u_xlat18);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[2];
+    u_xlatb1.x = vs_TEXCOORD2.y>=u_xlat18;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb1.x;
+    u_xlat1.x = _BorderWidths[1] + _BorderWidths[3];
+    u_xlat1.x = (-u_xlat1.x) + _Rect[3];
+    u_xlat18 = u_xlat18 + u_xlat1.x;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[3]);
+    u_xlatb18 = !!(u_xlat18>=vs_TEXCOORD2.y);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[3];
+    u_xlatb18 = u_xlat18>=vs_TEXCOORD2.y;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
-    u_xlat0 = (u_xlatb0) ? u_xlat16_5 : 1.0;
-    u_xlat0 = u_xlat0 * u_xlat12;
-    u_xlat10_6 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat1.w = u_xlat10_6 * u_xlat0;
-    SV_Target0 = u_xlat1;
+    u_xlatb12 = u_xlatb18 && u_xlatb12;
+    u_xlat12 = (u_xlatb12) ? 0.0 : 1.0;
+    u_xlat6.x = (u_xlatb6.x) ? 1.0 : u_xlat12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb12 = !!(0.0<_BorderWidths[0]);
+#else
+    u_xlatb12 = 0.0<_BorderWidths[0];
+#endif
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[1]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[1];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[2]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[2];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[3]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[3];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+    u_xlat6.x = (u_xlatb12) ? u_xlat6.x : 1.0;
+    u_xlat0.z = u_xlat6.x * u_xlat0.x;
+    u_xlat6.z = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_5.xyz = max(u_xlat16_1.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_5.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_5.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_1.xyz;
+    u_xlat16_23 = u_xlat16_1.w * vs_COLOR0.w;
+    u_xlat0.x = u_xlat0.x * u_xlat16_23;
+    u_xlat0.xz = u_xlat6.xz * u_xlat0.xz;
+    u_xlat0.x = u_xlat6.z * u_xlat0.x;
+    SV_Target0.w = u_xlat0.x;
+    u_xlat16_5.xyz = u_xlat16_5.xyz * vs_COLOR0.xyz;
+    u_xlat0.xyz = u_xlat0.zzz * u_xlat16_5.xyz;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(_SrcBlend!=5);
+#else
+    u_xlatb18 = _SrcBlend!=5;
+#endif
+    SV_Target0.xyz = (bool(u_xlatb18)) ? u_xlat0.xyz : u_xlat16_5.xyz;
     return;
 }
 
@@ -274,168 +304,196 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
+uniform 	int _ManualTex2SRGB;
+uniform 	int _SrcBlend;
 uniform 	float _CornerRadiuses[4];
 uniform 	float _BorderWidths[4];
 uniform 	float _Rect[4];
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in highp vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
-float u_xlat0;
-bool u_xlatb0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
-bvec3 u_xlatb1;
+vec3 u_xlat0;
+bvec2 u_xlatb0;
+vec2 u_xlat1;
+mediump vec4 u_xlat16_1;
+bvec2 u_xlatb1;
 vec4 u_xlat2;
+mediump vec3 u_xlat16_2;
+ivec2 u_xlati2;
 vec3 u_xlat3;
-mediump float u_xlat16_5;
+mediump vec3 u_xlat16_5;
 vec3 u_xlat6;
-lowp float u_xlat10_6;
 bvec3 u_xlatb6;
-float u_xlat7;
-bool u_xlatb7;
 float u_xlat12;
 bool u_xlatb12;
 float u_xlat13;
-ivec2 u_xlati13;
-bvec2 u_xlatb13;
+bool u_xlatb13;
 vec2 u_xlat15;
 vec2 u_xlat16;
 float u_xlat18;
-float u_xlat19;
+bool u_xlatb18;
+int u_xlati19;
+mediump float u_xlat16_23;
 void main()
 {
-    u_xlat0 = _BorderWidths[0] + _BorderWidths[2];
-    u_xlat0 = (-u_xlat0) + _Rect[2];
-    u_xlat6.x = _BorderWidths[0] + _Rect[0];
-    u_xlat0 = u_xlat0 + u_xlat6.x;
+    u_xlat0.x = _BorderWidths[0];
+    u_xlat1.x = _BorderWidths[2];
+    u_xlat12 = vs_TEXCOORD2.x + (-_Rect[0]);
+    u_xlat12 = (-_Rect[2]) * 0.5 + u_xlat12;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(vs_TEXCOORD2.x>=u_xlat6.x);
+    u_xlatb12 = !!(0.0>=u_xlat12);
 #else
-    u_xlatb6.x = vs_TEXCOORD2.x>=u_xlat6.x;
+    u_xlatb12 = 0.0>=u_xlat12;
 #endif
+    u_xlat18 = _Rect[0] + _Rect[2];
+    u_xlat13 = vs_TEXCOORD2.y + (-_Rect[1]);
+    u_xlat13 = (-_Rect[3]) * 0.5 + u_xlat13;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(u_xlat0>=vs_TEXCOORD2.x);
+    u_xlatb13 = !!(0.0>=u_xlat13);
 #else
-    u_xlatb0 = u_xlat0>=vs_TEXCOORD2.x;
+    u_xlatb13 = 0.0>=u_xlat13;
 #endif
-    u_xlatb0 = u_xlatb0 && u_xlatb6.x;
-    u_xlat6.x = _BorderWidths[1] + _Rect[1];
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb12 = !!(vs_TEXCOORD2.y>=u_xlat6.x);
-#else
-    u_xlatb12 = vs_TEXCOORD2.y>=u_xlat6.x;
-#endif
-    u_xlatb0 = u_xlatb12 && u_xlatb0;
-    u_xlat12 = _BorderWidths[1] + _BorderWidths[3];
-    u_xlat12 = (-u_xlat12) + _Rect[3];
-    u_xlat6.x = u_xlat12 + u_xlat6.x;
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(u_xlat6.x>=vs_TEXCOORD2.y);
-#else
-    u_xlatb6.x = u_xlat6.x>=vs_TEXCOORD2.y;
-#endif
-    u_xlatb0 = u_xlatb6.x && u_xlatb0;
-    u_xlat1.x = _BorderWidths[0];
-    u_xlat2.x = _BorderWidths[2];
-    u_xlat6.x = vs_TEXCOORD2.x + (-_Rect[0]);
-    u_xlat6.x = (-_Rect[2]) * 0.5 + u_xlat6.x;
-    u_xlat12 = _Rect[0] + _Rect[2];
-    u_xlat18 = vs_TEXCOORD2.y + (-_Rect[1]);
-    u_xlat6.z = (-_Rect[3]) * 0.5 + u_xlat18;
-    u_xlatb6.xz = greaterThanEqual(vec4(0.0, 0.0, 0.0, 0.0), u_xlat6.xxzz).xz;
-    u_xlati13.xy = (u_xlatb6.z) ? ivec2(0, 1) : ivec2(3, 2);
-    u_xlati13.x = (u_xlatb6.x) ? u_xlati13.x : u_xlati13.y;
-    u_xlat2.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat1.y = _Rect[0] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.xy = (u_xlatb6.x) ? u_xlat1.xy : u_xlat2.xy;
+    u_xlati2.xy = (bool(u_xlatb13)) ? ivec2(0, 1) : ivec2(3, 2);
+    u_xlati19 = (u_xlatb12) ? u_xlati2.x : u_xlati2.y;
+    u_xlat1.y = u_xlat18 + (-_CornerRadiuses[u_xlati19]);
+    u_xlat0.y = _Rect[0] + _CornerRadiuses[u_xlati19];
+    u_xlat2.xy = (bool(u_xlatb12)) ? u_xlat0.xy : u_xlat1.xy;
     u_xlat15.x = _BorderWidths[1];
     u_xlat16.x = _BorderWidths[3];
-    u_xlat12 = _Rect[1] + _Rect[3];
-    u_xlat16.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.zw = (u_xlatb6.z) ? u_xlat15.xy : u_xlat16.xy;
-    u_xlat1.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = u_xlat1.x / u_xlat1.y;
-    u_xlat3.xy = vec2((-u_xlat2.y) + vs_TEXCOORD2.x, (-u_xlat2.w) + vs_TEXCOORD2.y);
-    u_xlat3.z = u_xlat12 * u_xlat3.y;
-    u_xlat12 = dot(u_xlat3.xz, u_xlat3.xz);
-    u_xlat19 = dot(u_xlat3.xy, u_xlat3.xy);
-    u_xlat19 = sqrt(u_xlat19);
-    u_xlat13 = u_xlat19 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = sqrt(u_xlat12);
-    u_xlat12 = (-u_xlat1.x) + u_xlat12;
-    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat1.xyxx).xy;
-    u_xlatb1.x = u_xlatb1.y && u_xlatb1.x;
-    u_xlat7 = dFdx(vs_TEXCOORD2.x);
-    u_xlat7 = float(1.0) / abs(u_xlat7);
-    u_xlat12 = u_xlat12 * u_xlat7 + 0.5;
+    u_xlat0.x = _Rect[1] + _Rect[3];
+    u_xlat16.y = u_xlat0.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati19];
+    u_xlat2.zw = (bool(u_xlatb13)) ? u_xlat15.xy : u_xlat16.xy;
+    u_xlat0.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati19]);
+    u_xlat18 = u_xlat0.x / u_xlat0.y;
+    u_xlat3.xy = (-u_xlat2.yw) + vs_TEXCOORD2.xy;
+    u_xlat3.z = u_xlat18 * u_xlat3.y;
+    u_xlat18 = dot(u_xlat3.xz, u_xlat3.xz);
+    u_xlat1.x = dot(u_xlat3.xy, u_xlat3.xy);
+    u_xlat1.x = sqrt(u_xlat1.x);
+    u_xlat1.x = u_xlat1.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat18 = sqrt(u_xlat18);
+    u_xlat18 = (-u_xlat0.x) + u_xlat18;
+    u_xlatb0.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat0.xyxx).xy;
+    u_xlatb0.x = u_xlatb0.y && u_xlatb0.x;
+    u_xlat6.x = dFdx(vs_TEXCOORD2.x);
+    u_xlat6.x = float(1.0) / abs(u_xlat6.x);
+    u_xlat18 = u_xlat18 * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat12 = min(max(u_xlat12, 0.0), 1.0);
+    u_xlat18 = min(max(u_xlat18, 0.0), 1.0);
 #else
-    u_xlat12 = clamp(u_xlat12, 0.0, 1.0);
+    u_xlat18 = clamp(u_xlat18, 0.0, 1.0);
 #endif
-    u_xlat7 = u_xlat13 * u_xlat7 + 0.5;
+    u_xlat6.x = u_xlat1.x * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat7 = min(max(u_xlat7, 0.0), 1.0);
+    u_xlat6.x = min(max(u_xlat6.x, 0.0), 1.0);
 #else
-    u_xlat7 = clamp(u_xlat7, 0.0, 1.0);
+    u_xlat6.x = clamp(u_xlat6.x, 0.0, 1.0);
 #endif
-    u_xlat12 = (u_xlatb1.x) ? u_xlat12 : 1.0;
-    u_xlatb1.xz = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xxzx).xz;
-    u_xlatb1.x = u_xlatb1.z || u_xlatb1.x;
-    u_xlat12 = u_xlatb1.x ? u_xlat12 : float(0.0);
-    u_xlat1.x = u_xlatb1.x ? u_xlat7 : float(0.0);
+    u_xlat0.x = (u_xlatb0.x) ? u_xlat18 : 1.0;
+    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xzxx).xy;
+    u_xlatb18 = u_xlatb1.y || u_xlatb1.x;
+    u_xlat0.x = u_xlatb18 ? u_xlat0.x : float(0.0);
+    u_xlat6.x = u_xlatb18 ? u_xlat6.x : float(0.0);
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb7 = !!(u_xlat1.x==0.0);
+    u_xlatb18 = !!(u_xlat6.x==0.0);
 #else
-    u_xlatb7 = u_xlat1.x==0.0;
+    u_xlatb18 = u_xlat6.x==0.0;
 #endif
-    u_xlat1.x = (-u_xlat1.x) + 1.0;
-    u_xlat12 = (u_xlatb7) ? u_xlat12 : u_xlat1.x;
-    u_xlatb1.xy = greaterThanEqual(u_xlat2.ywyy, vs_TEXCOORD2.xyxx).xy;
-    u_xlatb13.xy = greaterThanEqual(vs_TEXCOORD2.xyxy, u_xlat2.ywyw).xy;
-    u_xlatb6.x = (u_xlatb6.x) ? u_xlatb1.x : u_xlatb13.x;
-    u_xlatb6.z = (u_xlatb6.z) ? u_xlatb1.y : u_xlatb13.y;
-    u_xlatb6.x = u_xlatb6.z && u_xlatb6.x;
-    u_xlat12 = (u_xlatb6.x) ? u_xlat12 : 1.0;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat12 = u_xlat12 * u_xlat1.w;
-    u_xlat0 = (u_xlatb0) ? 0.0 : u_xlat12;
-    u_xlat16_5 = (u_xlatb6.x) ? u_xlat12 : u_xlat0;
+    u_xlat6.x = (-u_xlat6.x) + 1.0;
+    u_xlat0.x = (u_xlatb18) ? u_xlat0.x : u_xlat6.x;
+    u_xlatb6.xz = greaterThanEqual(u_xlat2.yyww, vs_TEXCOORD2.xxyy).xz;
+    u_xlatb1.xy = greaterThanEqual(vs_TEXCOORD2.xyxx, u_xlat2.ywyy).xy;
+    u_xlatb6.x = (u_xlatb12) ? u_xlatb6.x : u_xlatb1.x;
+    u_xlatb12 = (u_xlatb13) ? u_xlatb6.z : u_xlatb1.y;
+    u_xlatb6.x = u_xlatb12 && u_xlatb6.x;
+    u_xlat0.x = (u_xlatb6.x) ? u_xlat0.x : 1.0;
+    u_xlat12 = _BorderWidths[0] + _BorderWidths[2];
+    u_xlat12 = (-u_xlat12) + _Rect[2];
+    u_xlat18 = _BorderWidths[0] + _Rect[0];
+    u_xlat12 = u_xlat12 + u_xlat18;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(0.0<_BorderWidths[0]);
+    u_xlatb18 = !!(vs_TEXCOORD2.x>=u_xlat18);
 #else
-    u_xlatb0 = 0.0<_BorderWidths[0];
+    u_xlatb18 = vs_TEXCOORD2.x>=u_xlat18;
 #endif
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[1]);
+    u_xlatb12 = !!(u_xlat12>=vs_TEXCOORD2.x);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[1];
+    u_xlatb12 = u_xlat12>=vs_TEXCOORD2.x;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb18;
+    u_xlat18 = _BorderWidths[1] + _Rect[1];
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[2]);
+    u_xlatb1.x = !!(vs_TEXCOORD2.y>=u_xlat18);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[2];
+    u_xlatb1.x = vs_TEXCOORD2.y>=u_xlat18;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb1.x;
+    u_xlat1.x = _BorderWidths[1] + _BorderWidths[3];
+    u_xlat1.x = (-u_xlat1.x) + _Rect[3];
+    u_xlat18 = u_xlat18 + u_xlat1.x;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[3]);
+    u_xlatb18 = !!(u_xlat18>=vs_TEXCOORD2.y);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[3];
+    u_xlatb18 = u_xlat18>=vs_TEXCOORD2.y;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
-    u_xlat0 = (u_xlatb0) ? u_xlat16_5 : 1.0;
-    u_xlat0 = u_xlat0 * u_xlat12;
-    u_xlat10_6 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat1.w = u_xlat10_6 * u_xlat0;
-    SV_Target0 = u_xlat1;
+    u_xlatb12 = u_xlatb18 && u_xlatb12;
+    u_xlat12 = (u_xlatb12) ? 0.0 : 1.0;
+    u_xlat6.x = (u_xlatb6.x) ? 1.0 : u_xlat12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb12 = !!(0.0<_BorderWidths[0]);
+#else
+    u_xlatb12 = 0.0<_BorderWidths[0];
+#endif
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[1]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[1];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[2]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[2];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[3]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[3];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+    u_xlat6.x = (u_xlatb12) ? u_xlat6.x : 1.0;
+    u_xlat0.z = u_xlat6.x * u_xlat0.x;
+    u_xlat6.z = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_5.xyz = max(u_xlat16_1.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_5.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_5.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_1.xyz;
+    u_xlat16_23 = u_xlat16_1.w * vs_COLOR0.w;
+    u_xlat0.x = u_xlat0.x * u_xlat16_23;
+    u_xlat0.xz = u_xlat6.xz * u_xlat0.xz;
+    u_xlat0.x = u_xlat6.z * u_xlat0.x;
+    SV_Target0.w = u_xlat0.x;
+    u_xlat16_5.xyz = u_xlat16_5.xyz * vs_COLOR0.xyz;
+    u_xlat0.xyz = u_xlat0.zzz * u_xlat16_5.xyz;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(_SrcBlend!=5);
+#else
+    u_xlatb18 = _SrcBlend!=5;
+#endif
+    SV_Target0.xyz = (bool(u_xlatb18)) ? u_xlat0.xyz : u_xlat16_5.xyz;
     return;
 }
 
@@ -488,168 +546,196 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
+uniform 	int _ManualTex2SRGB;
+uniform 	int _SrcBlend;
 uniform 	float _CornerRadiuses[4];
 uniform 	float _BorderWidths[4];
 uniform 	float _Rect[4];
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in highp vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
-float u_xlat0;
-bool u_xlatb0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
-bvec3 u_xlatb1;
+vec3 u_xlat0;
+bvec2 u_xlatb0;
+vec2 u_xlat1;
+mediump vec4 u_xlat16_1;
+bvec2 u_xlatb1;
 vec4 u_xlat2;
+mediump vec3 u_xlat16_2;
+ivec2 u_xlati2;
 vec3 u_xlat3;
-mediump float u_xlat16_5;
+mediump vec3 u_xlat16_5;
 vec3 u_xlat6;
-lowp float u_xlat10_6;
 bvec3 u_xlatb6;
-float u_xlat7;
-bool u_xlatb7;
 float u_xlat12;
 bool u_xlatb12;
 float u_xlat13;
-ivec2 u_xlati13;
-bvec2 u_xlatb13;
+bool u_xlatb13;
 vec2 u_xlat15;
 vec2 u_xlat16;
 float u_xlat18;
-float u_xlat19;
+bool u_xlatb18;
+int u_xlati19;
+mediump float u_xlat16_23;
 void main()
 {
-    u_xlat0 = _BorderWidths[0] + _BorderWidths[2];
-    u_xlat0 = (-u_xlat0) + _Rect[2];
-    u_xlat6.x = _BorderWidths[0] + _Rect[0];
-    u_xlat0 = u_xlat0 + u_xlat6.x;
+    u_xlat0.x = _BorderWidths[0];
+    u_xlat1.x = _BorderWidths[2];
+    u_xlat12 = vs_TEXCOORD2.x + (-_Rect[0]);
+    u_xlat12 = (-_Rect[2]) * 0.5 + u_xlat12;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(vs_TEXCOORD2.x>=u_xlat6.x);
+    u_xlatb12 = !!(0.0>=u_xlat12);
 #else
-    u_xlatb6.x = vs_TEXCOORD2.x>=u_xlat6.x;
+    u_xlatb12 = 0.0>=u_xlat12;
 #endif
+    u_xlat18 = _Rect[0] + _Rect[2];
+    u_xlat13 = vs_TEXCOORD2.y + (-_Rect[1]);
+    u_xlat13 = (-_Rect[3]) * 0.5 + u_xlat13;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(u_xlat0>=vs_TEXCOORD2.x);
+    u_xlatb13 = !!(0.0>=u_xlat13);
 #else
-    u_xlatb0 = u_xlat0>=vs_TEXCOORD2.x;
+    u_xlatb13 = 0.0>=u_xlat13;
 #endif
-    u_xlatb0 = u_xlatb0 && u_xlatb6.x;
-    u_xlat6.x = _BorderWidths[1] + _Rect[1];
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb12 = !!(vs_TEXCOORD2.y>=u_xlat6.x);
-#else
-    u_xlatb12 = vs_TEXCOORD2.y>=u_xlat6.x;
-#endif
-    u_xlatb0 = u_xlatb12 && u_xlatb0;
-    u_xlat12 = _BorderWidths[1] + _BorderWidths[3];
-    u_xlat12 = (-u_xlat12) + _Rect[3];
-    u_xlat6.x = u_xlat12 + u_xlat6.x;
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(u_xlat6.x>=vs_TEXCOORD2.y);
-#else
-    u_xlatb6.x = u_xlat6.x>=vs_TEXCOORD2.y;
-#endif
-    u_xlatb0 = u_xlatb6.x && u_xlatb0;
-    u_xlat1.x = _BorderWidths[0];
-    u_xlat2.x = _BorderWidths[2];
-    u_xlat6.x = vs_TEXCOORD2.x + (-_Rect[0]);
-    u_xlat6.x = (-_Rect[2]) * 0.5 + u_xlat6.x;
-    u_xlat12 = _Rect[0] + _Rect[2];
-    u_xlat18 = vs_TEXCOORD2.y + (-_Rect[1]);
-    u_xlat6.z = (-_Rect[3]) * 0.5 + u_xlat18;
-    u_xlatb6.xz = greaterThanEqual(vec4(0.0, 0.0, 0.0, 0.0), u_xlat6.xxzz).xz;
-    u_xlati13.xy = (u_xlatb6.z) ? ivec2(0, 1) : ivec2(3, 2);
-    u_xlati13.x = (u_xlatb6.x) ? u_xlati13.x : u_xlati13.y;
-    u_xlat2.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat1.y = _Rect[0] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.xy = (u_xlatb6.x) ? u_xlat1.xy : u_xlat2.xy;
+    u_xlati2.xy = (bool(u_xlatb13)) ? ivec2(0, 1) : ivec2(3, 2);
+    u_xlati19 = (u_xlatb12) ? u_xlati2.x : u_xlati2.y;
+    u_xlat1.y = u_xlat18 + (-_CornerRadiuses[u_xlati19]);
+    u_xlat0.y = _Rect[0] + _CornerRadiuses[u_xlati19];
+    u_xlat2.xy = (bool(u_xlatb12)) ? u_xlat0.xy : u_xlat1.xy;
     u_xlat15.x = _BorderWidths[1];
     u_xlat16.x = _BorderWidths[3];
-    u_xlat12 = _Rect[1] + _Rect[3];
-    u_xlat16.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.zw = (u_xlatb6.z) ? u_xlat15.xy : u_xlat16.xy;
-    u_xlat1.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = u_xlat1.x / u_xlat1.y;
-    u_xlat3.xy = vec2((-u_xlat2.y) + vs_TEXCOORD2.x, (-u_xlat2.w) + vs_TEXCOORD2.y);
-    u_xlat3.z = u_xlat12 * u_xlat3.y;
-    u_xlat12 = dot(u_xlat3.xz, u_xlat3.xz);
-    u_xlat19 = dot(u_xlat3.xy, u_xlat3.xy);
-    u_xlat19 = sqrt(u_xlat19);
-    u_xlat13 = u_xlat19 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = sqrt(u_xlat12);
-    u_xlat12 = (-u_xlat1.x) + u_xlat12;
-    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat1.xyxx).xy;
-    u_xlatb1.x = u_xlatb1.y && u_xlatb1.x;
-    u_xlat7 = dFdx(vs_TEXCOORD2.x);
-    u_xlat7 = float(1.0) / abs(u_xlat7);
-    u_xlat12 = u_xlat12 * u_xlat7 + 0.5;
+    u_xlat0.x = _Rect[1] + _Rect[3];
+    u_xlat16.y = u_xlat0.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati19];
+    u_xlat2.zw = (bool(u_xlatb13)) ? u_xlat15.xy : u_xlat16.xy;
+    u_xlat0.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati19]);
+    u_xlat18 = u_xlat0.x / u_xlat0.y;
+    u_xlat3.xy = (-u_xlat2.yw) + vs_TEXCOORD2.xy;
+    u_xlat3.z = u_xlat18 * u_xlat3.y;
+    u_xlat18 = dot(u_xlat3.xz, u_xlat3.xz);
+    u_xlat1.x = dot(u_xlat3.xy, u_xlat3.xy);
+    u_xlat1.x = sqrt(u_xlat1.x);
+    u_xlat1.x = u_xlat1.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat18 = sqrt(u_xlat18);
+    u_xlat18 = (-u_xlat0.x) + u_xlat18;
+    u_xlatb0.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat0.xyxx).xy;
+    u_xlatb0.x = u_xlatb0.y && u_xlatb0.x;
+    u_xlat6.x = dFdx(vs_TEXCOORD2.x);
+    u_xlat6.x = float(1.0) / abs(u_xlat6.x);
+    u_xlat18 = u_xlat18 * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat12 = min(max(u_xlat12, 0.0), 1.0);
+    u_xlat18 = min(max(u_xlat18, 0.0), 1.0);
 #else
-    u_xlat12 = clamp(u_xlat12, 0.0, 1.0);
+    u_xlat18 = clamp(u_xlat18, 0.0, 1.0);
 #endif
-    u_xlat7 = u_xlat13 * u_xlat7 + 0.5;
+    u_xlat6.x = u_xlat1.x * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat7 = min(max(u_xlat7, 0.0), 1.0);
+    u_xlat6.x = min(max(u_xlat6.x, 0.0), 1.0);
 #else
-    u_xlat7 = clamp(u_xlat7, 0.0, 1.0);
+    u_xlat6.x = clamp(u_xlat6.x, 0.0, 1.0);
 #endif
-    u_xlat12 = (u_xlatb1.x) ? u_xlat12 : 1.0;
-    u_xlatb1.xz = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xxzx).xz;
-    u_xlatb1.x = u_xlatb1.z || u_xlatb1.x;
-    u_xlat12 = u_xlatb1.x ? u_xlat12 : float(0.0);
-    u_xlat1.x = u_xlatb1.x ? u_xlat7 : float(0.0);
+    u_xlat0.x = (u_xlatb0.x) ? u_xlat18 : 1.0;
+    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xzxx).xy;
+    u_xlatb18 = u_xlatb1.y || u_xlatb1.x;
+    u_xlat0.x = u_xlatb18 ? u_xlat0.x : float(0.0);
+    u_xlat6.x = u_xlatb18 ? u_xlat6.x : float(0.0);
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb7 = !!(u_xlat1.x==0.0);
+    u_xlatb18 = !!(u_xlat6.x==0.0);
 #else
-    u_xlatb7 = u_xlat1.x==0.0;
+    u_xlatb18 = u_xlat6.x==0.0;
 #endif
-    u_xlat1.x = (-u_xlat1.x) + 1.0;
-    u_xlat12 = (u_xlatb7) ? u_xlat12 : u_xlat1.x;
-    u_xlatb1.xy = greaterThanEqual(u_xlat2.ywyy, vs_TEXCOORD2.xyxx).xy;
-    u_xlatb13.xy = greaterThanEqual(vs_TEXCOORD2.xyxy, u_xlat2.ywyw).xy;
-    u_xlatb6.x = (u_xlatb6.x) ? u_xlatb1.x : u_xlatb13.x;
-    u_xlatb6.z = (u_xlatb6.z) ? u_xlatb1.y : u_xlatb13.y;
-    u_xlatb6.x = u_xlatb6.z && u_xlatb6.x;
-    u_xlat12 = (u_xlatb6.x) ? u_xlat12 : 1.0;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat12 = u_xlat12 * u_xlat1.w;
-    u_xlat0 = (u_xlatb0) ? 0.0 : u_xlat12;
-    u_xlat16_5 = (u_xlatb6.x) ? u_xlat12 : u_xlat0;
+    u_xlat6.x = (-u_xlat6.x) + 1.0;
+    u_xlat0.x = (u_xlatb18) ? u_xlat0.x : u_xlat6.x;
+    u_xlatb6.xz = greaterThanEqual(u_xlat2.yyww, vs_TEXCOORD2.xxyy).xz;
+    u_xlatb1.xy = greaterThanEqual(vs_TEXCOORD2.xyxx, u_xlat2.ywyy).xy;
+    u_xlatb6.x = (u_xlatb12) ? u_xlatb6.x : u_xlatb1.x;
+    u_xlatb12 = (u_xlatb13) ? u_xlatb6.z : u_xlatb1.y;
+    u_xlatb6.x = u_xlatb12 && u_xlatb6.x;
+    u_xlat0.x = (u_xlatb6.x) ? u_xlat0.x : 1.0;
+    u_xlat12 = _BorderWidths[0] + _BorderWidths[2];
+    u_xlat12 = (-u_xlat12) + _Rect[2];
+    u_xlat18 = _BorderWidths[0] + _Rect[0];
+    u_xlat12 = u_xlat12 + u_xlat18;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(0.0<_BorderWidths[0]);
+    u_xlatb18 = !!(vs_TEXCOORD2.x>=u_xlat18);
 #else
-    u_xlatb0 = 0.0<_BorderWidths[0];
+    u_xlatb18 = vs_TEXCOORD2.x>=u_xlat18;
 #endif
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[1]);
+    u_xlatb12 = !!(u_xlat12>=vs_TEXCOORD2.x);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[1];
+    u_xlatb12 = u_xlat12>=vs_TEXCOORD2.x;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb18;
+    u_xlat18 = _BorderWidths[1] + _Rect[1];
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[2]);
+    u_xlatb1.x = !!(vs_TEXCOORD2.y>=u_xlat18);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[2];
+    u_xlatb1.x = vs_TEXCOORD2.y>=u_xlat18;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb1.x;
+    u_xlat1.x = _BorderWidths[1] + _BorderWidths[3];
+    u_xlat1.x = (-u_xlat1.x) + _Rect[3];
+    u_xlat18 = u_xlat18 + u_xlat1.x;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[3]);
+    u_xlatb18 = !!(u_xlat18>=vs_TEXCOORD2.y);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[3];
+    u_xlatb18 = u_xlat18>=vs_TEXCOORD2.y;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
-    u_xlat0 = (u_xlatb0) ? u_xlat16_5 : 1.0;
-    u_xlat0 = u_xlat0 * u_xlat12;
-    u_xlat10_6 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat1.w = u_xlat10_6 * u_xlat0;
-    SV_Target0 = u_xlat1;
+    u_xlatb12 = u_xlatb18 && u_xlatb12;
+    u_xlat12 = (u_xlatb12) ? 0.0 : 1.0;
+    u_xlat6.x = (u_xlatb6.x) ? 1.0 : u_xlat12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb12 = !!(0.0<_BorderWidths[0]);
+#else
+    u_xlatb12 = 0.0<_BorderWidths[0];
+#endif
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[1]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[1];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[2]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[2];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[3]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[3];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+    u_xlat6.x = (u_xlatb12) ? u_xlat6.x : 1.0;
+    u_xlat0.z = u_xlat6.x * u_xlat0.x;
+    u_xlat6.z = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_5.xyz = max(u_xlat16_1.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_5.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_5.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_1.xyz;
+    u_xlat16_23 = u_xlat16_1.w * vs_COLOR0.w;
+    u_xlat0.x = u_xlat0.x * u_xlat16_23;
+    u_xlat0.xz = u_xlat6.xz * u_xlat0.xz;
+    u_xlat0.x = u_xlat6.z * u_xlat0.x;
+    SV_Target0.w = u_xlat0.x;
+    u_xlat16_5.xyz = u_xlat16_5.xyz * vs_COLOR0.xyz;
+    u_xlat0.xyz = u_xlat0.zzz * u_xlat16_5.xyz;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(_SrcBlend!=5);
+#else
+    u_xlatb18 = _SrcBlend!=5;
+#endif
+    SV_Target0.xyz = (bool(u_xlatb18)) ? u_xlat0.xyz : u_xlat16_5.xyz;
     return;
 }
 
@@ -675,7 +761,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 77836
+  GpuProgramID 99788
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -723,168 +809,196 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
+uniform 	int _ManualTex2SRGB;
+uniform 	int _SrcBlend;
 uniform 	float _CornerRadiuses[4];
 uniform 	float _BorderWidths[4];
 uniform 	float _Rect[4];
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in highp vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
-float u_xlat0;
-bool u_xlatb0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
-bvec3 u_xlatb1;
+vec3 u_xlat0;
+bvec2 u_xlatb0;
+vec2 u_xlat1;
+mediump vec4 u_xlat16_1;
+bvec2 u_xlatb1;
 vec4 u_xlat2;
+mediump vec3 u_xlat16_2;
+ivec2 u_xlati2;
 vec3 u_xlat3;
-mediump float u_xlat16_5;
+mediump vec3 u_xlat16_5;
 vec3 u_xlat6;
-lowp float u_xlat10_6;
 bvec3 u_xlatb6;
-float u_xlat7;
-bool u_xlatb7;
 float u_xlat12;
 bool u_xlatb12;
 float u_xlat13;
-ivec2 u_xlati13;
-bvec2 u_xlatb13;
+bool u_xlatb13;
 vec2 u_xlat15;
 vec2 u_xlat16;
 float u_xlat18;
-float u_xlat19;
+bool u_xlatb18;
+int u_xlati19;
+mediump float u_xlat16_23;
 void main()
 {
-    u_xlat0 = _BorderWidths[0] + _BorderWidths[2];
-    u_xlat0 = (-u_xlat0) + _Rect[2];
-    u_xlat6.x = _BorderWidths[0] + _Rect[0];
-    u_xlat0 = u_xlat0 + u_xlat6.x;
+    u_xlat0.x = _BorderWidths[0];
+    u_xlat1.x = _BorderWidths[2];
+    u_xlat12 = vs_TEXCOORD2.x + (-_Rect[0]);
+    u_xlat12 = (-_Rect[2]) * 0.5 + u_xlat12;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(vs_TEXCOORD2.x>=u_xlat6.x);
+    u_xlatb12 = !!(0.0>=u_xlat12);
 #else
-    u_xlatb6.x = vs_TEXCOORD2.x>=u_xlat6.x;
+    u_xlatb12 = 0.0>=u_xlat12;
 #endif
+    u_xlat18 = _Rect[0] + _Rect[2];
+    u_xlat13 = vs_TEXCOORD2.y + (-_Rect[1]);
+    u_xlat13 = (-_Rect[3]) * 0.5 + u_xlat13;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(u_xlat0>=vs_TEXCOORD2.x);
+    u_xlatb13 = !!(0.0>=u_xlat13);
 #else
-    u_xlatb0 = u_xlat0>=vs_TEXCOORD2.x;
+    u_xlatb13 = 0.0>=u_xlat13;
 #endif
-    u_xlatb0 = u_xlatb0 && u_xlatb6.x;
-    u_xlat6.x = _BorderWidths[1] + _Rect[1];
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb12 = !!(vs_TEXCOORD2.y>=u_xlat6.x);
-#else
-    u_xlatb12 = vs_TEXCOORD2.y>=u_xlat6.x;
-#endif
-    u_xlatb0 = u_xlatb12 && u_xlatb0;
-    u_xlat12 = _BorderWidths[1] + _BorderWidths[3];
-    u_xlat12 = (-u_xlat12) + _Rect[3];
-    u_xlat6.x = u_xlat12 + u_xlat6.x;
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(u_xlat6.x>=vs_TEXCOORD2.y);
-#else
-    u_xlatb6.x = u_xlat6.x>=vs_TEXCOORD2.y;
-#endif
-    u_xlatb0 = u_xlatb6.x && u_xlatb0;
-    u_xlat1.x = _BorderWidths[0];
-    u_xlat2.x = _BorderWidths[2];
-    u_xlat6.x = vs_TEXCOORD2.x + (-_Rect[0]);
-    u_xlat6.x = (-_Rect[2]) * 0.5 + u_xlat6.x;
-    u_xlat12 = _Rect[0] + _Rect[2];
-    u_xlat18 = vs_TEXCOORD2.y + (-_Rect[1]);
-    u_xlat6.z = (-_Rect[3]) * 0.5 + u_xlat18;
-    u_xlatb6.xz = greaterThanEqual(vec4(0.0, 0.0, 0.0, 0.0), u_xlat6.xxzz).xz;
-    u_xlati13.xy = (u_xlatb6.z) ? ivec2(0, 1) : ivec2(3, 2);
-    u_xlati13.x = (u_xlatb6.x) ? u_xlati13.x : u_xlati13.y;
-    u_xlat2.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat1.y = _Rect[0] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.xy = (u_xlatb6.x) ? u_xlat1.xy : u_xlat2.xy;
+    u_xlati2.xy = (bool(u_xlatb13)) ? ivec2(0, 1) : ivec2(3, 2);
+    u_xlati19 = (u_xlatb12) ? u_xlati2.x : u_xlati2.y;
+    u_xlat1.y = u_xlat18 + (-_CornerRadiuses[u_xlati19]);
+    u_xlat0.y = _Rect[0] + _CornerRadiuses[u_xlati19];
+    u_xlat2.xy = (bool(u_xlatb12)) ? u_xlat0.xy : u_xlat1.xy;
     u_xlat15.x = _BorderWidths[1];
     u_xlat16.x = _BorderWidths[3];
-    u_xlat12 = _Rect[1] + _Rect[3];
-    u_xlat16.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.zw = (u_xlatb6.z) ? u_xlat15.xy : u_xlat16.xy;
-    u_xlat1.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = u_xlat1.x / u_xlat1.y;
-    u_xlat3.xy = vec2((-u_xlat2.y) + vs_TEXCOORD2.x, (-u_xlat2.w) + vs_TEXCOORD2.y);
-    u_xlat3.z = u_xlat12 * u_xlat3.y;
-    u_xlat12 = dot(u_xlat3.xz, u_xlat3.xz);
-    u_xlat19 = dot(u_xlat3.xy, u_xlat3.xy);
-    u_xlat19 = sqrt(u_xlat19);
-    u_xlat13 = u_xlat19 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = sqrt(u_xlat12);
-    u_xlat12 = (-u_xlat1.x) + u_xlat12;
-    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat1.xyxx).xy;
-    u_xlatb1.x = u_xlatb1.y && u_xlatb1.x;
-    u_xlat7 = dFdx(vs_TEXCOORD2.x);
-    u_xlat7 = float(1.0) / abs(u_xlat7);
-    u_xlat12 = u_xlat12 * u_xlat7 + 0.5;
+    u_xlat0.x = _Rect[1] + _Rect[3];
+    u_xlat16.y = u_xlat0.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati19];
+    u_xlat2.zw = (bool(u_xlatb13)) ? u_xlat15.xy : u_xlat16.xy;
+    u_xlat0.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati19]);
+    u_xlat18 = u_xlat0.x / u_xlat0.y;
+    u_xlat3.xy = (-u_xlat2.yw) + vs_TEXCOORD2.xy;
+    u_xlat3.z = u_xlat18 * u_xlat3.y;
+    u_xlat18 = dot(u_xlat3.xz, u_xlat3.xz);
+    u_xlat1.x = dot(u_xlat3.xy, u_xlat3.xy);
+    u_xlat1.x = sqrt(u_xlat1.x);
+    u_xlat1.x = u_xlat1.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat18 = sqrt(u_xlat18);
+    u_xlat18 = (-u_xlat0.x) + u_xlat18;
+    u_xlatb0.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat0.xyxx).xy;
+    u_xlatb0.x = u_xlatb0.y && u_xlatb0.x;
+    u_xlat6.x = dFdx(vs_TEXCOORD2.x);
+    u_xlat6.x = float(1.0) / abs(u_xlat6.x);
+    u_xlat18 = u_xlat18 * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat12 = min(max(u_xlat12, 0.0), 1.0);
+    u_xlat18 = min(max(u_xlat18, 0.0), 1.0);
 #else
-    u_xlat12 = clamp(u_xlat12, 0.0, 1.0);
+    u_xlat18 = clamp(u_xlat18, 0.0, 1.0);
 #endif
-    u_xlat7 = u_xlat13 * u_xlat7 + 0.5;
+    u_xlat6.x = u_xlat1.x * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat7 = min(max(u_xlat7, 0.0), 1.0);
+    u_xlat6.x = min(max(u_xlat6.x, 0.0), 1.0);
 #else
-    u_xlat7 = clamp(u_xlat7, 0.0, 1.0);
+    u_xlat6.x = clamp(u_xlat6.x, 0.0, 1.0);
 #endif
-    u_xlat12 = (u_xlatb1.x) ? u_xlat12 : 1.0;
-    u_xlatb1.xz = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xxzx).xz;
-    u_xlatb1.x = u_xlatb1.z || u_xlatb1.x;
-    u_xlat12 = u_xlatb1.x ? u_xlat12 : float(0.0);
-    u_xlat1.x = u_xlatb1.x ? u_xlat7 : float(0.0);
+    u_xlat0.x = (u_xlatb0.x) ? u_xlat18 : 1.0;
+    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xzxx).xy;
+    u_xlatb18 = u_xlatb1.y || u_xlatb1.x;
+    u_xlat0.x = u_xlatb18 ? u_xlat0.x : float(0.0);
+    u_xlat6.x = u_xlatb18 ? u_xlat6.x : float(0.0);
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb7 = !!(u_xlat1.x==0.0);
+    u_xlatb18 = !!(u_xlat6.x==0.0);
 #else
-    u_xlatb7 = u_xlat1.x==0.0;
+    u_xlatb18 = u_xlat6.x==0.0;
 #endif
-    u_xlat1.x = (-u_xlat1.x) + 1.0;
-    u_xlat12 = (u_xlatb7) ? u_xlat12 : u_xlat1.x;
-    u_xlatb1.xy = greaterThanEqual(u_xlat2.ywyy, vs_TEXCOORD2.xyxx).xy;
-    u_xlatb13.xy = greaterThanEqual(vs_TEXCOORD2.xyxy, u_xlat2.ywyw).xy;
-    u_xlatb6.x = (u_xlatb6.x) ? u_xlatb1.x : u_xlatb13.x;
-    u_xlatb6.z = (u_xlatb6.z) ? u_xlatb1.y : u_xlatb13.y;
-    u_xlatb6.x = u_xlatb6.z && u_xlatb6.x;
-    u_xlat12 = (u_xlatb6.x) ? u_xlat12 : 1.0;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat12 = u_xlat12 * u_xlat1.w;
-    u_xlat0 = (u_xlatb0) ? 0.0 : u_xlat12;
-    u_xlat16_5 = (u_xlatb6.x) ? u_xlat12 : u_xlat0;
+    u_xlat6.x = (-u_xlat6.x) + 1.0;
+    u_xlat0.x = (u_xlatb18) ? u_xlat0.x : u_xlat6.x;
+    u_xlatb6.xz = greaterThanEqual(u_xlat2.yyww, vs_TEXCOORD2.xxyy).xz;
+    u_xlatb1.xy = greaterThanEqual(vs_TEXCOORD2.xyxx, u_xlat2.ywyy).xy;
+    u_xlatb6.x = (u_xlatb12) ? u_xlatb6.x : u_xlatb1.x;
+    u_xlatb12 = (u_xlatb13) ? u_xlatb6.z : u_xlatb1.y;
+    u_xlatb6.x = u_xlatb12 && u_xlatb6.x;
+    u_xlat0.x = (u_xlatb6.x) ? u_xlat0.x : 1.0;
+    u_xlat12 = _BorderWidths[0] + _BorderWidths[2];
+    u_xlat12 = (-u_xlat12) + _Rect[2];
+    u_xlat18 = _BorderWidths[0] + _Rect[0];
+    u_xlat12 = u_xlat12 + u_xlat18;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(0.0<_BorderWidths[0]);
+    u_xlatb18 = !!(vs_TEXCOORD2.x>=u_xlat18);
 #else
-    u_xlatb0 = 0.0<_BorderWidths[0];
+    u_xlatb18 = vs_TEXCOORD2.x>=u_xlat18;
 #endif
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[1]);
+    u_xlatb12 = !!(u_xlat12>=vs_TEXCOORD2.x);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[1];
+    u_xlatb12 = u_xlat12>=vs_TEXCOORD2.x;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb18;
+    u_xlat18 = _BorderWidths[1] + _Rect[1];
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[2]);
+    u_xlatb1.x = !!(vs_TEXCOORD2.y>=u_xlat18);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[2];
+    u_xlatb1.x = vs_TEXCOORD2.y>=u_xlat18;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb1.x;
+    u_xlat1.x = _BorderWidths[1] + _BorderWidths[3];
+    u_xlat1.x = (-u_xlat1.x) + _Rect[3];
+    u_xlat18 = u_xlat18 + u_xlat1.x;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[3]);
+    u_xlatb18 = !!(u_xlat18>=vs_TEXCOORD2.y);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[3];
+    u_xlatb18 = u_xlat18>=vs_TEXCOORD2.y;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
-    u_xlat0 = (u_xlatb0) ? u_xlat16_5 : 1.0;
-    u_xlat0 = u_xlat0 * u_xlat12;
-    u_xlat10_6 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat1.w = u_xlat10_6 * u_xlat0;
-    SV_Target0 = u_xlat1;
+    u_xlatb12 = u_xlatb18 && u_xlatb12;
+    u_xlat12 = (u_xlatb12) ? 0.0 : 1.0;
+    u_xlat6.x = (u_xlatb6.x) ? 1.0 : u_xlat12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb12 = !!(0.0<_BorderWidths[0]);
+#else
+    u_xlatb12 = 0.0<_BorderWidths[0];
+#endif
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[1]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[1];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[2]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[2];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[3]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[3];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+    u_xlat6.x = (u_xlatb12) ? u_xlat6.x : 1.0;
+    u_xlat0.z = u_xlat6.x * u_xlat0.x;
+    u_xlat6.z = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_5.xyz = max(u_xlat16_1.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_5.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_5.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_1.xyz;
+    u_xlat16_23 = u_xlat16_1.w * vs_COLOR0.w;
+    u_xlat0.x = u_xlat0.x * u_xlat16_23;
+    u_xlat0.xz = u_xlat6.xz * u_xlat0.xz;
+    u_xlat0.x = u_xlat6.z * u_xlat0.x;
+    SV_Target0.w = u_xlat0.x;
+    u_xlat16_5.xyz = u_xlat16_5.xyz * vs_COLOR0.xyz;
+    u_xlat0.xyz = u_xlat0.zzz * u_xlat16_5.xyz;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(_SrcBlend!=5);
+#else
+    u_xlatb18 = _SrcBlend!=5;
+#endif
+    SV_Target0.xyz = (bool(u_xlatb18)) ? u_xlat0.xyz : u_xlat16_5.xyz;
     return;
 }
 
@@ -937,168 +1051,196 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
+uniform 	int _ManualTex2SRGB;
+uniform 	int _SrcBlend;
 uniform 	float _CornerRadiuses[4];
 uniform 	float _BorderWidths[4];
 uniform 	float _Rect[4];
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in highp vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
-float u_xlat0;
-bool u_xlatb0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
-bvec3 u_xlatb1;
+vec3 u_xlat0;
+bvec2 u_xlatb0;
+vec2 u_xlat1;
+mediump vec4 u_xlat16_1;
+bvec2 u_xlatb1;
 vec4 u_xlat2;
+mediump vec3 u_xlat16_2;
+ivec2 u_xlati2;
 vec3 u_xlat3;
-mediump float u_xlat16_5;
+mediump vec3 u_xlat16_5;
 vec3 u_xlat6;
-lowp float u_xlat10_6;
 bvec3 u_xlatb6;
-float u_xlat7;
-bool u_xlatb7;
 float u_xlat12;
 bool u_xlatb12;
 float u_xlat13;
-ivec2 u_xlati13;
-bvec2 u_xlatb13;
+bool u_xlatb13;
 vec2 u_xlat15;
 vec2 u_xlat16;
 float u_xlat18;
-float u_xlat19;
+bool u_xlatb18;
+int u_xlati19;
+mediump float u_xlat16_23;
 void main()
 {
-    u_xlat0 = _BorderWidths[0] + _BorderWidths[2];
-    u_xlat0 = (-u_xlat0) + _Rect[2];
-    u_xlat6.x = _BorderWidths[0] + _Rect[0];
-    u_xlat0 = u_xlat0 + u_xlat6.x;
+    u_xlat0.x = _BorderWidths[0];
+    u_xlat1.x = _BorderWidths[2];
+    u_xlat12 = vs_TEXCOORD2.x + (-_Rect[0]);
+    u_xlat12 = (-_Rect[2]) * 0.5 + u_xlat12;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(vs_TEXCOORD2.x>=u_xlat6.x);
+    u_xlatb12 = !!(0.0>=u_xlat12);
 #else
-    u_xlatb6.x = vs_TEXCOORD2.x>=u_xlat6.x;
+    u_xlatb12 = 0.0>=u_xlat12;
 #endif
+    u_xlat18 = _Rect[0] + _Rect[2];
+    u_xlat13 = vs_TEXCOORD2.y + (-_Rect[1]);
+    u_xlat13 = (-_Rect[3]) * 0.5 + u_xlat13;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(u_xlat0>=vs_TEXCOORD2.x);
+    u_xlatb13 = !!(0.0>=u_xlat13);
 #else
-    u_xlatb0 = u_xlat0>=vs_TEXCOORD2.x;
+    u_xlatb13 = 0.0>=u_xlat13;
 #endif
-    u_xlatb0 = u_xlatb0 && u_xlatb6.x;
-    u_xlat6.x = _BorderWidths[1] + _Rect[1];
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb12 = !!(vs_TEXCOORD2.y>=u_xlat6.x);
-#else
-    u_xlatb12 = vs_TEXCOORD2.y>=u_xlat6.x;
-#endif
-    u_xlatb0 = u_xlatb12 && u_xlatb0;
-    u_xlat12 = _BorderWidths[1] + _BorderWidths[3];
-    u_xlat12 = (-u_xlat12) + _Rect[3];
-    u_xlat6.x = u_xlat12 + u_xlat6.x;
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(u_xlat6.x>=vs_TEXCOORD2.y);
-#else
-    u_xlatb6.x = u_xlat6.x>=vs_TEXCOORD2.y;
-#endif
-    u_xlatb0 = u_xlatb6.x && u_xlatb0;
-    u_xlat1.x = _BorderWidths[0];
-    u_xlat2.x = _BorderWidths[2];
-    u_xlat6.x = vs_TEXCOORD2.x + (-_Rect[0]);
-    u_xlat6.x = (-_Rect[2]) * 0.5 + u_xlat6.x;
-    u_xlat12 = _Rect[0] + _Rect[2];
-    u_xlat18 = vs_TEXCOORD2.y + (-_Rect[1]);
-    u_xlat6.z = (-_Rect[3]) * 0.5 + u_xlat18;
-    u_xlatb6.xz = greaterThanEqual(vec4(0.0, 0.0, 0.0, 0.0), u_xlat6.xxzz).xz;
-    u_xlati13.xy = (u_xlatb6.z) ? ivec2(0, 1) : ivec2(3, 2);
-    u_xlati13.x = (u_xlatb6.x) ? u_xlati13.x : u_xlati13.y;
-    u_xlat2.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat1.y = _Rect[0] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.xy = (u_xlatb6.x) ? u_xlat1.xy : u_xlat2.xy;
+    u_xlati2.xy = (bool(u_xlatb13)) ? ivec2(0, 1) : ivec2(3, 2);
+    u_xlati19 = (u_xlatb12) ? u_xlati2.x : u_xlati2.y;
+    u_xlat1.y = u_xlat18 + (-_CornerRadiuses[u_xlati19]);
+    u_xlat0.y = _Rect[0] + _CornerRadiuses[u_xlati19];
+    u_xlat2.xy = (bool(u_xlatb12)) ? u_xlat0.xy : u_xlat1.xy;
     u_xlat15.x = _BorderWidths[1];
     u_xlat16.x = _BorderWidths[3];
-    u_xlat12 = _Rect[1] + _Rect[3];
-    u_xlat16.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.zw = (u_xlatb6.z) ? u_xlat15.xy : u_xlat16.xy;
-    u_xlat1.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = u_xlat1.x / u_xlat1.y;
-    u_xlat3.xy = vec2((-u_xlat2.y) + vs_TEXCOORD2.x, (-u_xlat2.w) + vs_TEXCOORD2.y);
-    u_xlat3.z = u_xlat12 * u_xlat3.y;
-    u_xlat12 = dot(u_xlat3.xz, u_xlat3.xz);
-    u_xlat19 = dot(u_xlat3.xy, u_xlat3.xy);
-    u_xlat19 = sqrt(u_xlat19);
-    u_xlat13 = u_xlat19 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = sqrt(u_xlat12);
-    u_xlat12 = (-u_xlat1.x) + u_xlat12;
-    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat1.xyxx).xy;
-    u_xlatb1.x = u_xlatb1.y && u_xlatb1.x;
-    u_xlat7 = dFdx(vs_TEXCOORD2.x);
-    u_xlat7 = float(1.0) / abs(u_xlat7);
-    u_xlat12 = u_xlat12 * u_xlat7 + 0.5;
+    u_xlat0.x = _Rect[1] + _Rect[3];
+    u_xlat16.y = u_xlat0.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati19];
+    u_xlat2.zw = (bool(u_xlatb13)) ? u_xlat15.xy : u_xlat16.xy;
+    u_xlat0.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati19]);
+    u_xlat18 = u_xlat0.x / u_xlat0.y;
+    u_xlat3.xy = (-u_xlat2.yw) + vs_TEXCOORD2.xy;
+    u_xlat3.z = u_xlat18 * u_xlat3.y;
+    u_xlat18 = dot(u_xlat3.xz, u_xlat3.xz);
+    u_xlat1.x = dot(u_xlat3.xy, u_xlat3.xy);
+    u_xlat1.x = sqrt(u_xlat1.x);
+    u_xlat1.x = u_xlat1.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat18 = sqrt(u_xlat18);
+    u_xlat18 = (-u_xlat0.x) + u_xlat18;
+    u_xlatb0.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat0.xyxx).xy;
+    u_xlatb0.x = u_xlatb0.y && u_xlatb0.x;
+    u_xlat6.x = dFdx(vs_TEXCOORD2.x);
+    u_xlat6.x = float(1.0) / abs(u_xlat6.x);
+    u_xlat18 = u_xlat18 * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat12 = min(max(u_xlat12, 0.0), 1.0);
+    u_xlat18 = min(max(u_xlat18, 0.0), 1.0);
 #else
-    u_xlat12 = clamp(u_xlat12, 0.0, 1.0);
+    u_xlat18 = clamp(u_xlat18, 0.0, 1.0);
 #endif
-    u_xlat7 = u_xlat13 * u_xlat7 + 0.5;
+    u_xlat6.x = u_xlat1.x * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat7 = min(max(u_xlat7, 0.0), 1.0);
+    u_xlat6.x = min(max(u_xlat6.x, 0.0), 1.0);
 #else
-    u_xlat7 = clamp(u_xlat7, 0.0, 1.0);
+    u_xlat6.x = clamp(u_xlat6.x, 0.0, 1.0);
 #endif
-    u_xlat12 = (u_xlatb1.x) ? u_xlat12 : 1.0;
-    u_xlatb1.xz = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xxzx).xz;
-    u_xlatb1.x = u_xlatb1.z || u_xlatb1.x;
-    u_xlat12 = u_xlatb1.x ? u_xlat12 : float(0.0);
-    u_xlat1.x = u_xlatb1.x ? u_xlat7 : float(0.0);
+    u_xlat0.x = (u_xlatb0.x) ? u_xlat18 : 1.0;
+    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xzxx).xy;
+    u_xlatb18 = u_xlatb1.y || u_xlatb1.x;
+    u_xlat0.x = u_xlatb18 ? u_xlat0.x : float(0.0);
+    u_xlat6.x = u_xlatb18 ? u_xlat6.x : float(0.0);
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb7 = !!(u_xlat1.x==0.0);
+    u_xlatb18 = !!(u_xlat6.x==0.0);
 #else
-    u_xlatb7 = u_xlat1.x==0.0;
+    u_xlatb18 = u_xlat6.x==0.0;
 #endif
-    u_xlat1.x = (-u_xlat1.x) + 1.0;
-    u_xlat12 = (u_xlatb7) ? u_xlat12 : u_xlat1.x;
-    u_xlatb1.xy = greaterThanEqual(u_xlat2.ywyy, vs_TEXCOORD2.xyxx).xy;
-    u_xlatb13.xy = greaterThanEqual(vs_TEXCOORD2.xyxy, u_xlat2.ywyw).xy;
-    u_xlatb6.x = (u_xlatb6.x) ? u_xlatb1.x : u_xlatb13.x;
-    u_xlatb6.z = (u_xlatb6.z) ? u_xlatb1.y : u_xlatb13.y;
-    u_xlatb6.x = u_xlatb6.z && u_xlatb6.x;
-    u_xlat12 = (u_xlatb6.x) ? u_xlat12 : 1.0;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat12 = u_xlat12 * u_xlat1.w;
-    u_xlat0 = (u_xlatb0) ? 0.0 : u_xlat12;
-    u_xlat16_5 = (u_xlatb6.x) ? u_xlat12 : u_xlat0;
+    u_xlat6.x = (-u_xlat6.x) + 1.0;
+    u_xlat0.x = (u_xlatb18) ? u_xlat0.x : u_xlat6.x;
+    u_xlatb6.xz = greaterThanEqual(u_xlat2.yyww, vs_TEXCOORD2.xxyy).xz;
+    u_xlatb1.xy = greaterThanEqual(vs_TEXCOORD2.xyxx, u_xlat2.ywyy).xy;
+    u_xlatb6.x = (u_xlatb12) ? u_xlatb6.x : u_xlatb1.x;
+    u_xlatb12 = (u_xlatb13) ? u_xlatb6.z : u_xlatb1.y;
+    u_xlatb6.x = u_xlatb12 && u_xlatb6.x;
+    u_xlat0.x = (u_xlatb6.x) ? u_xlat0.x : 1.0;
+    u_xlat12 = _BorderWidths[0] + _BorderWidths[2];
+    u_xlat12 = (-u_xlat12) + _Rect[2];
+    u_xlat18 = _BorderWidths[0] + _Rect[0];
+    u_xlat12 = u_xlat12 + u_xlat18;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(0.0<_BorderWidths[0]);
+    u_xlatb18 = !!(vs_TEXCOORD2.x>=u_xlat18);
 #else
-    u_xlatb0 = 0.0<_BorderWidths[0];
+    u_xlatb18 = vs_TEXCOORD2.x>=u_xlat18;
 #endif
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[1]);
+    u_xlatb12 = !!(u_xlat12>=vs_TEXCOORD2.x);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[1];
+    u_xlatb12 = u_xlat12>=vs_TEXCOORD2.x;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb18;
+    u_xlat18 = _BorderWidths[1] + _Rect[1];
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[2]);
+    u_xlatb1.x = !!(vs_TEXCOORD2.y>=u_xlat18);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[2];
+    u_xlatb1.x = vs_TEXCOORD2.y>=u_xlat18;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb1.x;
+    u_xlat1.x = _BorderWidths[1] + _BorderWidths[3];
+    u_xlat1.x = (-u_xlat1.x) + _Rect[3];
+    u_xlat18 = u_xlat18 + u_xlat1.x;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[3]);
+    u_xlatb18 = !!(u_xlat18>=vs_TEXCOORD2.y);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[3];
+    u_xlatb18 = u_xlat18>=vs_TEXCOORD2.y;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
-    u_xlat0 = (u_xlatb0) ? u_xlat16_5 : 1.0;
-    u_xlat0 = u_xlat0 * u_xlat12;
-    u_xlat10_6 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat1.w = u_xlat10_6 * u_xlat0;
-    SV_Target0 = u_xlat1;
+    u_xlatb12 = u_xlatb18 && u_xlatb12;
+    u_xlat12 = (u_xlatb12) ? 0.0 : 1.0;
+    u_xlat6.x = (u_xlatb6.x) ? 1.0 : u_xlat12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb12 = !!(0.0<_BorderWidths[0]);
+#else
+    u_xlatb12 = 0.0<_BorderWidths[0];
+#endif
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[1]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[1];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[2]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[2];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[3]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[3];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+    u_xlat6.x = (u_xlatb12) ? u_xlat6.x : 1.0;
+    u_xlat0.z = u_xlat6.x * u_xlat0.x;
+    u_xlat6.z = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_5.xyz = max(u_xlat16_1.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_5.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_5.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_1.xyz;
+    u_xlat16_23 = u_xlat16_1.w * vs_COLOR0.w;
+    u_xlat0.x = u_xlat0.x * u_xlat16_23;
+    u_xlat0.xz = u_xlat6.xz * u_xlat0.xz;
+    u_xlat0.x = u_xlat6.z * u_xlat0.x;
+    SV_Target0.w = u_xlat0.x;
+    u_xlat16_5.xyz = u_xlat16_5.xyz * vs_COLOR0.xyz;
+    u_xlat0.xyz = u_xlat0.zzz * u_xlat16_5.xyz;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(_SrcBlend!=5);
+#else
+    u_xlatb18 = _SrcBlend!=5;
+#endif
+    SV_Target0.xyz = (bool(u_xlatb18)) ? u_xlat0.xyz : u_xlat16_5.xyz;
     return;
 }
 
@@ -1151,168 +1293,196 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
+uniform 	int _ManualTex2SRGB;
+uniform 	int _SrcBlend;
 uniform 	float _CornerRadiuses[4];
 uniform 	float _BorderWidths[4];
 uniform 	float _Rect[4];
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in highp vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
-float u_xlat0;
-bool u_xlatb0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
-bvec3 u_xlatb1;
+vec3 u_xlat0;
+bvec2 u_xlatb0;
+vec2 u_xlat1;
+mediump vec4 u_xlat16_1;
+bvec2 u_xlatb1;
 vec4 u_xlat2;
+mediump vec3 u_xlat16_2;
+ivec2 u_xlati2;
 vec3 u_xlat3;
-mediump float u_xlat16_5;
+mediump vec3 u_xlat16_5;
 vec3 u_xlat6;
-lowp float u_xlat10_6;
 bvec3 u_xlatb6;
-float u_xlat7;
-bool u_xlatb7;
 float u_xlat12;
 bool u_xlatb12;
 float u_xlat13;
-ivec2 u_xlati13;
-bvec2 u_xlatb13;
+bool u_xlatb13;
 vec2 u_xlat15;
 vec2 u_xlat16;
 float u_xlat18;
-float u_xlat19;
+bool u_xlatb18;
+int u_xlati19;
+mediump float u_xlat16_23;
 void main()
 {
-    u_xlat0 = _BorderWidths[0] + _BorderWidths[2];
-    u_xlat0 = (-u_xlat0) + _Rect[2];
-    u_xlat6.x = _BorderWidths[0] + _Rect[0];
-    u_xlat0 = u_xlat0 + u_xlat6.x;
+    u_xlat0.x = _BorderWidths[0];
+    u_xlat1.x = _BorderWidths[2];
+    u_xlat12 = vs_TEXCOORD2.x + (-_Rect[0]);
+    u_xlat12 = (-_Rect[2]) * 0.5 + u_xlat12;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(vs_TEXCOORD2.x>=u_xlat6.x);
+    u_xlatb12 = !!(0.0>=u_xlat12);
 #else
-    u_xlatb6.x = vs_TEXCOORD2.x>=u_xlat6.x;
+    u_xlatb12 = 0.0>=u_xlat12;
 #endif
+    u_xlat18 = _Rect[0] + _Rect[2];
+    u_xlat13 = vs_TEXCOORD2.y + (-_Rect[1]);
+    u_xlat13 = (-_Rect[3]) * 0.5 + u_xlat13;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(u_xlat0>=vs_TEXCOORD2.x);
+    u_xlatb13 = !!(0.0>=u_xlat13);
 #else
-    u_xlatb0 = u_xlat0>=vs_TEXCOORD2.x;
+    u_xlatb13 = 0.0>=u_xlat13;
 #endif
-    u_xlatb0 = u_xlatb0 && u_xlatb6.x;
-    u_xlat6.x = _BorderWidths[1] + _Rect[1];
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb12 = !!(vs_TEXCOORD2.y>=u_xlat6.x);
-#else
-    u_xlatb12 = vs_TEXCOORD2.y>=u_xlat6.x;
-#endif
-    u_xlatb0 = u_xlatb12 && u_xlatb0;
-    u_xlat12 = _BorderWidths[1] + _BorderWidths[3];
-    u_xlat12 = (-u_xlat12) + _Rect[3];
-    u_xlat6.x = u_xlat12 + u_xlat6.x;
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(u_xlat6.x>=vs_TEXCOORD2.y);
-#else
-    u_xlatb6.x = u_xlat6.x>=vs_TEXCOORD2.y;
-#endif
-    u_xlatb0 = u_xlatb6.x && u_xlatb0;
-    u_xlat1.x = _BorderWidths[0];
-    u_xlat2.x = _BorderWidths[2];
-    u_xlat6.x = vs_TEXCOORD2.x + (-_Rect[0]);
-    u_xlat6.x = (-_Rect[2]) * 0.5 + u_xlat6.x;
-    u_xlat12 = _Rect[0] + _Rect[2];
-    u_xlat18 = vs_TEXCOORD2.y + (-_Rect[1]);
-    u_xlat6.z = (-_Rect[3]) * 0.5 + u_xlat18;
-    u_xlatb6.xz = greaterThanEqual(vec4(0.0, 0.0, 0.0, 0.0), u_xlat6.xxzz).xz;
-    u_xlati13.xy = (u_xlatb6.z) ? ivec2(0, 1) : ivec2(3, 2);
-    u_xlati13.x = (u_xlatb6.x) ? u_xlati13.x : u_xlati13.y;
-    u_xlat2.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat1.y = _Rect[0] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.xy = (u_xlatb6.x) ? u_xlat1.xy : u_xlat2.xy;
+    u_xlati2.xy = (bool(u_xlatb13)) ? ivec2(0, 1) : ivec2(3, 2);
+    u_xlati19 = (u_xlatb12) ? u_xlati2.x : u_xlati2.y;
+    u_xlat1.y = u_xlat18 + (-_CornerRadiuses[u_xlati19]);
+    u_xlat0.y = _Rect[0] + _CornerRadiuses[u_xlati19];
+    u_xlat2.xy = (bool(u_xlatb12)) ? u_xlat0.xy : u_xlat1.xy;
     u_xlat15.x = _BorderWidths[1];
     u_xlat16.x = _BorderWidths[3];
-    u_xlat12 = _Rect[1] + _Rect[3];
-    u_xlat16.y = u_xlat12 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati13.x];
-    u_xlat2.zw = (u_xlatb6.z) ? u_xlat15.xy : u_xlat16.xy;
-    u_xlat1.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = u_xlat1.x / u_xlat1.y;
-    u_xlat3.xy = vec2((-u_xlat2.y) + vs_TEXCOORD2.x, (-u_xlat2.w) + vs_TEXCOORD2.y);
-    u_xlat3.z = u_xlat12 * u_xlat3.y;
-    u_xlat12 = dot(u_xlat3.xz, u_xlat3.xz);
-    u_xlat19 = dot(u_xlat3.xy, u_xlat3.xy);
-    u_xlat19 = sqrt(u_xlat19);
-    u_xlat13 = u_xlat19 + (-_CornerRadiuses[u_xlati13.x]);
-    u_xlat12 = sqrt(u_xlat12);
-    u_xlat12 = (-u_xlat1.x) + u_xlat12;
-    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat1.xyxx).xy;
-    u_xlatb1.x = u_xlatb1.y && u_xlatb1.x;
-    u_xlat7 = dFdx(vs_TEXCOORD2.x);
-    u_xlat7 = float(1.0) / abs(u_xlat7);
-    u_xlat12 = u_xlat12 * u_xlat7 + 0.5;
+    u_xlat0.x = _Rect[1] + _Rect[3];
+    u_xlat16.y = u_xlat0.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat15.y = _Rect[1] + _CornerRadiuses[u_xlati19];
+    u_xlat2.zw = (bool(u_xlatb13)) ? u_xlat15.xy : u_xlat16.xy;
+    u_xlat0.xy = (-u_xlat2.xz) + vec2(_CornerRadiuses[u_xlati19]);
+    u_xlat18 = u_xlat0.x / u_xlat0.y;
+    u_xlat3.xy = (-u_xlat2.yw) + vs_TEXCOORD2.xy;
+    u_xlat3.z = u_xlat18 * u_xlat3.y;
+    u_xlat18 = dot(u_xlat3.xz, u_xlat3.xz);
+    u_xlat1.x = dot(u_xlat3.xy, u_xlat3.xy);
+    u_xlat1.x = sqrt(u_xlat1.x);
+    u_xlat1.x = u_xlat1.x + (-_CornerRadiuses[u_xlati19]);
+    u_xlat18 = sqrt(u_xlat18);
+    u_xlat18 = (-u_xlat0.x) + u_xlat18;
+    u_xlatb0.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat0.xyxx).xy;
+    u_xlatb0.x = u_xlatb0.y && u_xlatb0.x;
+    u_xlat6.x = dFdx(vs_TEXCOORD2.x);
+    u_xlat6.x = float(1.0) / abs(u_xlat6.x);
+    u_xlat18 = u_xlat18 * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat12 = min(max(u_xlat12, 0.0), 1.0);
+    u_xlat18 = min(max(u_xlat18, 0.0), 1.0);
 #else
-    u_xlat12 = clamp(u_xlat12, 0.0, 1.0);
+    u_xlat18 = clamp(u_xlat18, 0.0, 1.0);
 #endif
-    u_xlat7 = u_xlat13 * u_xlat7 + 0.5;
+    u_xlat6.x = u_xlat1.x * u_xlat6.x + 0.5;
 #ifdef UNITY_ADRENO_ES3
-    u_xlat7 = min(max(u_xlat7, 0.0), 1.0);
+    u_xlat6.x = min(max(u_xlat6.x, 0.0), 1.0);
 #else
-    u_xlat7 = clamp(u_xlat7, 0.0, 1.0);
+    u_xlat6.x = clamp(u_xlat6.x, 0.0, 1.0);
 #endif
-    u_xlat12 = (u_xlatb1.x) ? u_xlat12 : 1.0;
-    u_xlatb1.xz = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xxzx).xz;
-    u_xlatb1.x = u_xlatb1.z || u_xlatb1.x;
-    u_xlat12 = u_xlatb1.x ? u_xlat12 : float(0.0);
-    u_xlat1.x = u_xlatb1.x ? u_xlat7 : float(0.0);
+    u_xlat0.x = (u_xlatb0.x) ? u_xlat18 : 1.0;
+    u_xlatb1.xy = lessThan(vec4(0.0, 0.0, 0.0, 0.0), u_xlat2.xzxx).xy;
+    u_xlatb18 = u_xlatb1.y || u_xlatb1.x;
+    u_xlat0.x = u_xlatb18 ? u_xlat0.x : float(0.0);
+    u_xlat6.x = u_xlatb18 ? u_xlat6.x : float(0.0);
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb7 = !!(u_xlat1.x==0.0);
+    u_xlatb18 = !!(u_xlat6.x==0.0);
 #else
-    u_xlatb7 = u_xlat1.x==0.0;
+    u_xlatb18 = u_xlat6.x==0.0;
 #endif
-    u_xlat1.x = (-u_xlat1.x) + 1.0;
-    u_xlat12 = (u_xlatb7) ? u_xlat12 : u_xlat1.x;
-    u_xlatb1.xy = greaterThanEqual(u_xlat2.ywyy, vs_TEXCOORD2.xyxx).xy;
-    u_xlatb13.xy = greaterThanEqual(vs_TEXCOORD2.xyxy, u_xlat2.ywyw).xy;
-    u_xlatb6.x = (u_xlatb6.x) ? u_xlatb1.x : u_xlatb13.x;
-    u_xlatb6.z = (u_xlatb6.z) ? u_xlatb1.y : u_xlatb13.y;
-    u_xlatb6.x = u_xlatb6.z && u_xlatb6.x;
-    u_xlat12 = (u_xlatb6.x) ? u_xlat12 : 1.0;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat12 = u_xlat12 * u_xlat1.w;
-    u_xlat0 = (u_xlatb0) ? 0.0 : u_xlat12;
-    u_xlat16_5 = (u_xlatb6.x) ? u_xlat12 : u_xlat0;
+    u_xlat6.x = (-u_xlat6.x) + 1.0;
+    u_xlat0.x = (u_xlatb18) ? u_xlat0.x : u_xlat6.x;
+    u_xlatb6.xz = greaterThanEqual(u_xlat2.yyww, vs_TEXCOORD2.xxyy).xz;
+    u_xlatb1.xy = greaterThanEqual(vs_TEXCOORD2.xyxx, u_xlat2.ywyy).xy;
+    u_xlatb6.x = (u_xlatb12) ? u_xlatb6.x : u_xlatb1.x;
+    u_xlatb12 = (u_xlatb13) ? u_xlatb6.z : u_xlatb1.y;
+    u_xlatb6.x = u_xlatb12 && u_xlatb6.x;
+    u_xlat0.x = (u_xlatb6.x) ? u_xlat0.x : 1.0;
+    u_xlat12 = _BorderWidths[0] + _BorderWidths[2];
+    u_xlat12 = (-u_xlat12) + _Rect[2];
+    u_xlat18 = _BorderWidths[0] + _Rect[0];
+    u_xlat12 = u_xlat12 + u_xlat18;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb0 = !!(0.0<_BorderWidths[0]);
+    u_xlatb18 = !!(vs_TEXCOORD2.x>=u_xlat18);
 #else
-    u_xlatb0 = 0.0<_BorderWidths[0];
+    u_xlatb18 = vs_TEXCOORD2.x>=u_xlat18;
 #endif
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[1]);
+    u_xlatb12 = !!(u_xlat12>=vs_TEXCOORD2.x);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[1];
+    u_xlatb12 = u_xlat12>=vs_TEXCOORD2.x;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb18;
+    u_xlat18 = _BorderWidths[1] + _Rect[1];
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[2]);
+    u_xlatb1.x = !!(vs_TEXCOORD2.y>=u_xlat18);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[2];
+    u_xlatb1.x = vs_TEXCOORD2.y>=u_xlat18;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
+    u_xlatb12 = u_xlatb12 && u_xlatb1.x;
+    u_xlat1.x = _BorderWidths[1] + _BorderWidths[3];
+    u_xlat1.x = (-u_xlat1.x) + _Rect[3];
+    u_xlat18 = u_xlat18 + u_xlat1.x;
 #ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(0.0<_BorderWidths[3]);
+    u_xlatb18 = !!(u_xlat18>=vs_TEXCOORD2.y);
 #else
-    u_xlatb6.x = 0.0<_BorderWidths[3];
+    u_xlatb18 = u_xlat18>=vs_TEXCOORD2.y;
 #endif
-    u_xlatb0 = u_xlatb6.x || u_xlatb0;
-    u_xlat0 = (u_xlatb0) ? u_xlat16_5 : 1.0;
-    u_xlat0 = u_xlat0 * u_xlat12;
-    u_xlat10_6 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat1.w = u_xlat10_6 * u_xlat0;
-    SV_Target0 = u_xlat1;
+    u_xlatb12 = u_xlatb18 && u_xlatb12;
+    u_xlat12 = (u_xlatb12) ? 0.0 : 1.0;
+    u_xlat6.x = (u_xlatb6.x) ? 1.0 : u_xlat12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb12 = !!(0.0<_BorderWidths[0]);
+#else
+    u_xlatb12 = 0.0<_BorderWidths[0];
+#endif
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[1]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[1];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[2]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[2];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(0.0<_BorderWidths[3]);
+#else
+    u_xlatb18 = 0.0<_BorderWidths[3];
+#endif
+    u_xlatb12 = u_xlatb18 || u_xlatb12;
+    u_xlat6.x = (u_xlatb12) ? u_xlat6.x : 1.0;
+    u_xlat0.z = u_xlat6.x * u_xlat0.x;
+    u_xlat6.z = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_5.xyz = max(u_xlat16_1.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_5.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_5.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_1.xyz;
+    u_xlat16_23 = u_xlat16_1.w * vs_COLOR0.w;
+    u_xlat0.x = u_xlat0.x * u_xlat16_23;
+    u_xlat0.xz = u_xlat6.xz * u_xlat0.xz;
+    u_xlat0.x = u_xlat6.z * u_xlat0.x;
+    SV_Target0.w = u_xlat0.x;
+    u_xlat16_5.xyz = u_xlat16_5.xyz * vs_COLOR0.xyz;
+    u_xlat0.xyz = u_xlat0.zzz * u_xlat16_5.xyz;
+#ifdef UNITY_ADRENO_ES3
+    u_xlatb18 = !!(_SrcBlend!=5);
+#else
+    u_xlatb18 = _SrcBlend!=5;
+#endif
+    SV_Target0.xyz = (bool(u_xlatb18)) ? u_xlat0.xyz : u_xlat16_5.xyz;
     return;
 }
 

@@ -12,7 +12,7 @@ SubShader {
   Tags { "RenderType" = "Overlay" }
   ZWrite Off
   Cull Off
-  GpuProgramID 47341
+  GpuProgramID 55344
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -47,17 +47,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _HaloFalloff;
+uniform mediump sampler2D _HaloFalloff;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_HaloFalloff, vs_TEXCOORD0.xy).w;
-    SV_Target0.xyz = vec3(u_xlat10_0) * vs_COLOR0.xyz;
-    SV_Target0.w = u_xlat10_0;
+    u_xlat16_0 = texture(_HaloFalloff, vs_TEXCOORD0.xy).w;
+    SV_Target0.xyz = vec3(u_xlat16_0) * vs_COLOR0.xyz;
+    SV_Target0.w = u_xlat16_0;
     return;
 }
 
@@ -97,17 +98,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _HaloFalloff;
+uniform mediump sampler2D _HaloFalloff;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_HaloFalloff, vs_TEXCOORD0.xy).w;
-    SV_Target0.xyz = vec3(u_xlat10_0) * vs_COLOR0.xyz;
-    SV_Target0.w = u_xlat10_0;
+    u_xlat16_0 = texture(_HaloFalloff, vs_TEXCOORD0.xy).w;
+    SV_Target0.xyz = vec3(u_xlat16_0) * vs_COLOR0.xyz;
+    SV_Target0.w = u_xlat16_0;
     return;
 }
 
@@ -147,17 +149,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _HaloFalloff;
+uniform mediump sampler2D _HaloFalloff;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_HaloFalloff, vs_TEXCOORD0.xy).w;
-    SV_Target0.xyz = vec3(u_xlat10_0) * vs_COLOR0.xyz;
-    SV_Target0.w = u_xlat10_0;
+    u_xlat16_0 = texture(_HaloFalloff, vs_TEXCOORD0.xy).w;
+    SV_Target0.xyz = vec3(u_xlat16_0) * vs_COLOR0.xyz;
+    SV_Target0.w = u_xlat16_0;
     return;
 }
 
@@ -202,8 +205,9 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _HaloFalloff;
+uniform mediump sampler2D _HaloFalloff;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;
@@ -267,8 +271,9 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _HaloFalloff;
+uniform mediump sampler2D _HaloFalloff;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;
@@ -332,8 +337,9 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _HaloFalloff;
+uniform mediump sampler2D _HaloFalloff;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;

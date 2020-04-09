@@ -11,7 +11,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 249
+  GpuProgramID 58289
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -43,23 +43,23 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ZBufferParams;
 uniform 	vec4 hlslcc_mtx4x4unity_WorldToCamera[4];
 uniform highp sampler2D _CameraDepthTexture;
-uniform lowp sampler2D _CameraNormalsTexture;
+uniform mediump sampler2D _CameraNormalsTexture;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
 vec3 u_xlat1;
 bool u_xlatb3;
 float u_xlat4;
 void main()
 {
-    u_xlat10_0.xyz = texture(_CameraNormalsTexture, vs_TEXCOORD0.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_0.xyz * vec3(2.0, 2.0, 2.0) + vec3(-1.0, -1.0, -1.0);
+    u_xlat16_0.xyz = texture(_CameraNormalsTexture, vs_TEXCOORD0.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vec3(2.0, 2.0, 2.0) + vec3(-1.0, -1.0, -1.0);
     u_xlat1.xyz = u_xlat16_0.yyy * hlslcc_mtx4x4unity_WorldToCamera[1].xyz;
     u_xlat0.xyw = hlslcc_mtx4x4unity_WorldToCamera[0].xyz * u_xlat16_0.xxx + u_xlat1.xyz;
     u_xlat0.xyz = hlslcc_mtx4x4unity_WorldToCamera[2].xyz * u_xlat16_0.zzz + u_xlat0.xyw;
@@ -116,23 +116,23 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ZBufferParams;
 uniform 	vec4 hlslcc_mtx4x4unity_WorldToCamera[4];
 uniform highp sampler2D _CameraDepthTexture;
-uniform lowp sampler2D _CameraNormalsTexture;
+uniform mediump sampler2D _CameraNormalsTexture;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
 vec3 u_xlat1;
 bool u_xlatb3;
 float u_xlat4;
 void main()
 {
-    u_xlat10_0.xyz = texture(_CameraNormalsTexture, vs_TEXCOORD0.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_0.xyz * vec3(2.0, 2.0, 2.0) + vec3(-1.0, -1.0, -1.0);
+    u_xlat16_0.xyz = texture(_CameraNormalsTexture, vs_TEXCOORD0.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vec3(2.0, 2.0, 2.0) + vec3(-1.0, -1.0, -1.0);
     u_xlat1.xyz = u_xlat16_0.yyy * hlslcc_mtx4x4unity_WorldToCamera[1].xyz;
     u_xlat0.xyw = hlslcc_mtx4x4unity_WorldToCamera[0].xyz * u_xlat16_0.xxx + u_xlat1.xyz;
     u_xlat0.xyz = hlslcc_mtx4x4unity_WorldToCamera[2].xyz * u_xlat16_0.zzz + u_xlat0.xyw;
@@ -189,23 +189,23 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ZBufferParams;
 uniform 	vec4 hlslcc_mtx4x4unity_WorldToCamera[4];
 uniform highp sampler2D _CameraDepthTexture;
-uniform lowp sampler2D _CameraNormalsTexture;
+uniform mediump sampler2D _CameraNormalsTexture;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
 vec3 u_xlat1;
 bool u_xlatb3;
 float u_xlat4;
 void main()
 {
-    u_xlat10_0.xyz = texture(_CameraNormalsTexture, vs_TEXCOORD0.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_0.xyz * vec3(2.0, 2.0, 2.0) + vec3(-1.0, -1.0, -1.0);
+    u_xlat16_0.xyz = texture(_CameraNormalsTexture, vs_TEXCOORD0.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_0.xyz * vec3(2.0, 2.0, 2.0) + vec3(-1.0, -1.0, -1.0);
     u_xlat1.xyz = u_xlat16_0.yyy * hlslcc_mtx4x4unity_WorldToCamera[1].xyz;
     u_xlat0.xyw = hlslcc_mtx4x4unity_WorldToCamera[0].xyz * u_xlat16_0.xxx + u_xlat1.xyz;
     u_xlat0.xyz = hlslcc_mtx4x4unity_WorldToCamera[2].xyz * u_xlat16_0.zzz + u_xlat0.xyw;

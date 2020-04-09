@@ -13,7 +13,7 @@ SubShader {
  Tags { "RenderType" = "Opaque" }
  Pass {
   Tags { "RenderType" = "Opaque" }
-  GpuProgramID 42178
+  GpuProgramID 25696
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -73,6 +73,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -152,6 +153,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -231,6 +233,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -270,7 +273,7 @@ SubShader {
  Tags { "RenderType" = "TransparentCutout" }
  Pass {
   Tags { "RenderType" = "TransparentCutout" }
-  GpuProgramID 88112
+  GpuProgramID 115287
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -334,28 +337,29 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 * _Color.w + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 * _Color.w + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -432,28 +436,29 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 * _Color.w + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 * _Color.w + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -530,28 +535,29 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 * _Color.w + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 * _Color.w + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -584,7 +590,7 @@ SubShader {
  Tags { "RenderType" = "TreeBark" }
  Pass {
   Tags { "RenderType" = "TreeBark" }
-  GpuProgramID 184775
+  GpuProgramID 189644
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -631,7 +637,7 @@ void main()
     u_xlat2 = abs(u_xlat0) * abs(u_xlat0);
     u_xlat0 = -abs(u_xlat0) * vec4(2.0, 2.0, 2.0, 2.0) + vec4(3.0, 3.0, 3.0, 3.0);
     u_xlat0 = u_xlat0 * u_xlat2;
-    u_xlat0.xy = vec2(u_xlat0.y + u_xlat0.x, u_xlat0.w + u_xlat0.z);
+    u_xlat0.xy = u_xlat0.yw + u_xlat0.xz;
     u_xlat2.xyz = u_xlat0.yyy * _Wind.xyz;
     u_xlat2.xyz = u_xlat2.xyz * in_TEXCOORD1.yyy;
     u_xlat3.y = u_xlat0.y * in_TEXCOORD1.y;
@@ -689,6 +695,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -755,7 +762,7 @@ void main()
     u_xlat2 = abs(u_xlat0) * abs(u_xlat0);
     u_xlat0 = -abs(u_xlat0) * vec4(2.0, 2.0, 2.0, 2.0) + vec4(3.0, 3.0, 3.0, 3.0);
     u_xlat0 = u_xlat0 * u_xlat2;
-    u_xlat0.xy = vec2(u_xlat0.y + u_xlat0.x, u_xlat0.w + u_xlat0.z);
+    u_xlat0.xy = u_xlat0.yw + u_xlat0.xz;
     u_xlat2.xyz = u_xlat0.yyy * _Wind.xyz;
     u_xlat2.xyz = u_xlat2.xyz * in_TEXCOORD1.yyy;
     u_xlat3.y = u_xlat0.y * in_TEXCOORD1.y;
@@ -813,6 +820,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -879,7 +887,7 @@ void main()
     u_xlat2 = abs(u_xlat0) * abs(u_xlat0);
     u_xlat0 = -abs(u_xlat0) * vec4(2.0, 2.0, 2.0, 2.0) + vec4(3.0, 3.0, 3.0, 3.0);
     u_xlat0 = u_xlat0 * u_xlat2;
-    u_xlat0.xy = vec2(u_xlat0.y + u_xlat0.x, u_xlat0.w + u_xlat0.z);
+    u_xlat0.xy = u_xlat0.yw + u_xlat0.xz;
     u_xlat2.xyz = u_xlat0.yyy * _Wind.xyz;
     u_xlat2.xyz = u_xlat2.xyz * in_TEXCOORD1.yyy;
     u_xlat3.y = u_xlat0.y * in_TEXCOORD1.y;
@@ -937,6 +945,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -976,7 +985,7 @@ SubShader {
  Tags { "RenderType" = "TreeLeaf" }
  Pass {
   Tags { "RenderType" = "TreeLeaf" }
-  GpuProgramID 221045
+  GpuProgramID 221783
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -1040,7 +1049,7 @@ void main()
     u_xlat5 = abs(u_xlat4) * abs(u_xlat4);
     u_xlat4 = -abs(u_xlat4) * vec4(2.0, 2.0, 2.0, 2.0) + vec4(3.0, 3.0, 3.0, 3.0);
     u_xlat4 = u_xlat4 * u_xlat5;
-    u_xlat4.xy = vec2(u_xlat4.y + u_xlat4.x, u_xlat4.w + u_xlat4.z);
+    u_xlat4.xy = u_xlat4.yw + u_xlat4.xz;
     u_xlat5.xyz = u_xlat4.yyy * _Wind.xyz;
     u_xlat5.xyz = u_xlat5.xyz * in_TEXCOORD1.yyy;
     u_xlat6.y = u_xlat4.y * in_TEXCOORD1.y;
@@ -1095,27 +1104,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -1192,7 +1202,7 @@ void main()
     u_xlat5 = abs(u_xlat4) * abs(u_xlat4);
     u_xlat4 = -abs(u_xlat4) * vec4(2.0, 2.0, 2.0, 2.0) + vec4(3.0, 3.0, 3.0, 3.0);
     u_xlat4 = u_xlat4 * u_xlat5;
-    u_xlat4.xy = vec2(u_xlat4.y + u_xlat4.x, u_xlat4.w + u_xlat4.z);
+    u_xlat4.xy = u_xlat4.yw + u_xlat4.xz;
     u_xlat5.xyz = u_xlat4.yyy * _Wind.xyz;
     u_xlat5.xyz = u_xlat5.xyz * in_TEXCOORD1.yyy;
     u_xlat6.y = u_xlat4.y * in_TEXCOORD1.y;
@@ -1247,27 +1257,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -1344,7 +1355,7 @@ void main()
     u_xlat5 = abs(u_xlat4) * abs(u_xlat4);
     u_xlat4 = -abs(u_xlat4) * vec4(2.0, 2.0, 2.0, 2.0) + vec4(3.0, 3.0, 3.0, 3.0);
     u_xlat4 = u_xlat4 * u_xlat5;
-    u_xlat4.xy = vec2(u_xlat4.y + u_xlat4.x, u_xlat4.w + u_xlat4.z);
+    u_xlat4.xy = u_xlat4.yw + u_xlat4.xz;
     u_xlat5.xyz = u_xlat4.yyy * _Wind.xyz;
     u_xlat5.xyz = u_xlat5.xyz * in_TEXCOORD1.yyy;
     u_xlat6.y = u_xlat4.y * in_TEXCOORD1.y;
@@ -1399,27 +1410,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -1452,7 +1464,7 @@ SubShader {
  Tags { "DisableBatching" = "true" "RenderType" = "TreeOpaque" }
  Pass {
   Tags { "DisableBatching" = "true" "RenderType" = "TreeOpaque" }
-  GpuProgramID 262205
+  GpuProgramID 290987
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -1528,6 +1540,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -1623,6 +1636,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -1718,6 +1732,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -1757,7 +1772,7 @@ SubShader {
  Tags { "DisableBatching" = "true" "RenderType" = "TreeTransparentCutout" }
  Pass {
   Tags { "DisableBatching" = "true" "RenderType" = "TreeTransparentCutout" }
-  GpuProgramID 366738
+  GpuProgramID 346673
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -1836,27 +1851,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -1948,27 +1964,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -2060,27 +2077,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -2111,7 +2129,7 @@ SubProgram "gles3 hw_tier02 " {
  Pass {
   Tags { "DisableBatching" = "true" "RenderType" = "TreeTransparentCutout" }
   Cull Front
-  GpuProgramID 421841
+  GpuProgramID 411418
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -2191,27 +2209,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -2304,27 +2323,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -2417,27 +2437,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -2471,7 +2492,7 @@ SubShader {
  Pass {
   Tags { "RenderType" = "TreeBillboard" }
   Cull Off
-  GpuProgramID 498374
+  GpuProgramID 475393
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -2544,26 +2565,27 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + -0.00100000005;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + -0.00100000005;
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -2649,26 +2671,27 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + -0.00100000005;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + -0.00100000005;
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -2754,26 +2777,27 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 + -0.00100000005;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 + -0.00100000005;
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -2807,7 +2831,7 @@ SubShader {
  Pass {
   Tags { "RenderType" = "GrassBillboard" }
   Cull Off
-  GpuProgramID 545325
+  GpuProgramID 573702
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -2927,28 +2951,29 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 * vs_COLOR0.w + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 * vs_COLOR0.w + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -3081,28 +3106,29 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 * vs_COLOR0.w + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 * vs_COLOR0.w + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -3235,28 +3261,29 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 * vs_COLOR0.w + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 * vs_COLOR0.w + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -3290,7 +3317,7 @@ SubShader {
  Pass {
   Tags { "RenderType" = "Grass" }
   Cull Off
-  GpuProgramID 631617
+  GpuProgramID 638220
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -3397,28 +3424,29 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 * vs_COLOR0.w + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 * vs_COLOR0.w + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -3538,28 +3566,29 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 * vs_COLOR0.w + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 * vs_COLOR0.w + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);
@@ -3679,28 +3708,29 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Cutoff;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec4 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 vec2 u_xlat2;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat16_1 = u_xlat10_0 * vs_COLOR0.w + (-_Cutoff);
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat16_1 = u_xlat16_0 * vs_COLOR0.w + (-_Cutoff);
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_1<0.0);
 #else
     u_xlatb0 = u_xlat16_1<0.0;
 #endif
-    if((int(u_xlatb0) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb0) * int(0xffffffffu)))!=0){discard;}
     u_xlat0.x = vs_TEXCOORD1.z + 1.0;
     u_xlat0.xy = vs_TEXCOORD1.xy / u_xlat0.xx;
     u_xlat0.xy = u_xlat0.xy * vec2(0.281262308, 0.281262308) + vec2(0.5, 0.5);

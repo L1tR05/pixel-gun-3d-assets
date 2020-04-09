@@ -8,7 +8,7 @@ Properties {
 }
 SubShader {
  Pass {
-  Name "RGBAEXTERNAL_TO_RGBA"
+  Name "RGBAExternal_To_RGBA"
   ZTest Always
   ZWrite Off
   Cull Off
@@ -16,11 +16,9 @@ SubShader {
 Program "vp" {
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -29,9 +27,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER1 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -96,7 +107,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 20
+#line 32
 
 #line 12
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -274,6 +285,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)
@@ -299,11 +316,9 @@ vec3 ObjSpaceViewDir( vec4 v )
 }
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -311,9 +326,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER2 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -378,7 +406,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 19
+#line 31
 
 #line 12
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -556,6 +584,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)
@@ -581,11 +615,9 @@ vec3 ObjSpaceViewDir( vec4 v )
 }
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -593,9 +625,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER3 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -660,7 +705,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 19
+#line 31
 
 #line 12
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -838,6 +883,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)
@@ -865,11 +916,9 @@ vec3 ObjSpaceViewDir( vec4 v )
 Program "fp" {
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -878,9 +927,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER1 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -945,7 +1007,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 20
+#line 32
 
 #line 12
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -1123,6 +1185,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)
@@ -1148,11 +1216,9 @@ vec3 ObjSpaceViewDir( vec4 v )
 }
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -1160,9 +1226,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER2 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -1227,7 +1306,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 19
+#line 31
 
 #line 12
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -1405,6 +1484,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)
@@ -1430,11 +1515,9 @@ vec3 ObjSpaceViewDir( vec4 v )
 }
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -1442,9 +1525,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER3 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -1509,7 +1605,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 19
+#line 31
 
 #line 12
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -1687,6 +1783,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)
@@ -1713,7 +1815,7 @@ vec3 ObjSpaceViewDir( vec4 v )
 }
 }
  Pass {
-  Name "RGBASPLITEXTERNAL_TO_RGBA"
+  Name "RGBASplitExternal_To_RGBA"
   ZTest Always
   ZWrite Off
   Cull Off
@@ -1721,11 +1823,9 @@ vec3 ObjSpaceViewDir( vec4 v )
 Program "vp" {
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -1734,9 +1834,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER1 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -1801,7 +1914,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 20
+#line 32
 
 #line 60
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -1979,6 +2092,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)
@@ -2005,11 +2124,9 @@ vec3 ObjSpaceViewDir( vec4 v )
 }
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -2017,9 +2134,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER2 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -2084,7 +2214,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 19
+#line 31
 
 #line 60
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -2262,6 +2392,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)
@@ -2288,11 +2424,9 @@ vec3 ObjSpaceViewDir( vec4 v )
 }
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -2300,9 +2434,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER3 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -2367,7 +2514,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 19
+#line 31
 
 #line 60
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -2545,6 +2692,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)
@@ -2573,11 +2726,9 @@ vec3 ObjSpaceViewDir( vec4 v )
 Program "fp" {
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -2586,9 +2737,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER1 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -2653,7 +2817,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 20
+#line 32
 
 #line 60
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -2831,6 +2995,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)
@@ -2857,11 +3027,9 @@ vec3 ObjSpaceViewDir( vec4 v )
 }
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -2869,9 +3037,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER2 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -2936,7 +3117,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 19
+#line 31
 
 #line 60
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -3114,6 +3295,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)
@@ -3140,11 +3327,9 @@ vec3 ObjSpaceViewDir( vec4 v )
 }
 SubProgram "gles " {
 "#version 100
-// default float precision for fragment shader is patched on runtime as some drivers have issues with highp
 #extension GL_OES_EGL_image_external : require
 #define UNITY_NO_DXT5nm 1
 #define UNITY_NO_RGBM 1
-#define UNITY_ENABLE_REFLECTION_BUFFERS 1
 #define UNITY_FRAMEBUFFER_FETCH_AVAILABLE 1
 #define UNITY_NO_CUBEMAP_ARRAY 1
 #define UNITY_NO_SCREENSPACE_SHADOWS 1
@@ -3152,9 +3337,22 @@ SubProgram "gles " {
 #define SHADER_API_MOBILE 1
 #define UNITY_HARDWARE_TIER3 1
 #define UNITY_COLORSPACE_GAMMA 1
+#define UNITY_HALF_PRECISION_FRAGMENT_SHADER_REGISTERS 1
 #define UNITY_LIGHTMAP_DLDR_ENCODING 1
 #ifndef SHADER_TARGET
     #define SHADER_TARGET 25
+#endif
+#ifndef SHADER_REQUIRE_DERIVATIVES
+    #define SHADER_REQUIRE_DERIVATIVES 1
+#endif
+#ifndef SHADER_TARGET_AVAILABLE
+    #define SHADER_TARGET_AVAILABLE 25
+#endif
+#ifndef SHADER_AVAILABLE_DERIVATIVES
+    #define SHADER_AVAILABLE_DERIVATIVES 1
+#endif
+#ifndef SHADER_AVAILABLE_FRAGCOORD
+    #define SHADER_AVAILABLE_FRAGCOORD 1
 #endif
 #ifndef SHADER_API_GLES
     #define SHADER_API_GLES 1
@@ -3219,7 +3417,7 @@ mat4 transpose(mat4 mtx)
 
 #endif // GLSL_SUPPORT_INCLUDED
 
-#line 19
+#line 31
 
 #line 60
 #ifdef DUMMY_PREPROCESSOR_TO_WORK_AROUND_HLSL_COMPILER_LINE_HANDLING
@@ -3397,6 +3595,12 @@ vec3 ObjSpaceViewDir( vec4 v )
             
 #endif
 #ifdef FRAGMENT
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+precision highp int;
 
 
             vec4 AdjustForColorSpace(vec4 color)

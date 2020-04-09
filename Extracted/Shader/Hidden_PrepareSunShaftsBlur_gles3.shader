@@ -13,7 +13,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 7847
+  GpuProgramID 50821
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -44,17 +44,17 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ZBufferParams;
 uniform 	mediump float _NoSkyBoxMask;
 uniform 	mediump vec4 _SunPosition;
 uniform highp sampler2D _CameraDepthTexture;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec2 u_xlat0;
-mediump float u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 void main()
@@ -68,11 +68,11 @@ void main()
 #else
     u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
 #endif
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
-    u_xlat16_0 = u_xlat16_0 * _NoSkyBoxMask;
-    u_xlat16_0 = max(u_xlat16_0, u_xlat10_0.w);
-    u_xlat16_1 = u_xlat16_1 * u_xlat16_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0.x = dot(u_xlat16_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_0.x = u_xlat16_0.x * _NoSkyBoxMask;
+    u_xlat16_0.x = max(u_xlat16_0.x, u_xlat16_0.w);
+    u_xlat16_1 = u_xlat16_1 * u_xlat16_0.x;
     u_xlat0.x = texture(_CameraDepthTexture, vs_TEXCOORD0.xy).x;
     u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
     u_xlat0.x = float(1.0) / u_xlat0.x;
@@ -117,17 +117,17 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ZBufferParams;
 uniform 	mediump float _NoSkyBoxMask;
 uniform 	mediump vec4 _SunPosition;
 uniform highp sampler2D _CameraDepthTexture;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec2 u_xlat0;
-mediump float u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 void main()
@@ -141,11 +141,11 @@ void main()
 #else
     u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
 #endif
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
-    u_xlat16_0 = u_xlat16_0 * _NoSkyBoxMask;
-    u_xlat16_0 = max(u_xlat16_0, u_xlat10_0.w);
-    u_xlat16_1 = u_xlat16_1 * u_xlat16_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0.x = dot(u_xlat16_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_0.x = u_xlat16_0.x * _NoSkyBoxMask;
+    u_xlat16_0.x = max(u_xlat16_0.x, u_xlat16_0.w);
+    u_xlat16_1 = u_xlat16_1 * u_xlat16_0.x;
     u_xlat0.x = texture(_CameraDepthTexture, vs_TEXCOORD0.xy).x;
     u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
     u_xlat0.x = float(1.0) / u_xlat0.x;
@@ -190,17 +190,17 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _ZBufferParams;
 uniform 	mediump float _NoSkyBoxMask;
 uniform 	mediump vec4 _SunPosition;
 uniform highp sampler2D _CameraDepthTexture;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec2 u_xlat0;
-mediump float u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
 void main()
@@ -214,11 +214,11 @@ void main()
 #else
     u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
 #endif
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_0 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
-    u_xlat16_0 = u_xlat16_0 * _NoSkyBoxMask;
-    u_xlat16_0 = max(u_xlat16_0, u_xlat10_0.w);
-    u_xlat16_1 = u_xlat16_1 * u_xlat16_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_0.x = dot(u_xlat16_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_0.x = u_xlat16_0.x * _NoSkyBoxMask;
+    u_xlat16_0.x = max(u_xlat16_0.x, u_xlat16_0.w);
+    u_xlat16_1 = u_xlat16_1 * u_xlat16_0.x;
     u_xlat0.x = texture(_CameraDepthTexture, vs_TEXCOORD0.xy).x;
     u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
     u_xlat0.x = float(1.0) / u_xlat0.x;
@@ -251,7 +251,7 @@ SubProgram "gles3 hw_tier02 " {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 116553
+  GpuProgramID 113549
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -282,20 +282,19 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _NoSkyBoxMask;
 uniform 	mediump vec4 _SunPosition;
-uniform lowp sampler2D _Skybox;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _Skybox;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec2 u_xlat0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
-mediump float u_xlat16_2;
-lowp vec3 u_xlat10_2;
+mediump vec3 u_xlat16_2;
 mediump float u_xlat16_4;
 mediump float u_xlat16_9;
 void main()
@@ -309,13 +308,13 @@ void main()
 #else
     u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
 #endif
-    u_xlat10_0 = texture(_Skybox, vs_TEXCOORD0.xy);
-    u_xlat16_2 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
-    u_xlat16_2 = u_xlat16_2 * _NoSkyBoxMask;
-    u_xlat16_9 = max(u_xlat10_0.w, u_xlat16_2);
+    u_xlat16_0 = texture(_Skybox, vs_TEXCOORD0.xy);
+    u_xlat16_2.x = dot(u_xlat16_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_2.x = u_xlat16_2.x * _NoSkyBoxMask;
+    u_xlat16_9 = max(u_xlat16_0.w, u_xlat16_2.x);
     u_xlat16_1 = u_xlat16_1 * u_xlat16_9;
-    u_xlat10_2.xyz = texture(_MainTex, vs_TEXCOORD0.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_0.xyz + (-u_xlat10_2.xyz);
+    u_xlat16_2.xyz = texture(_MainTex, vs_TEXCOORD0.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_0.xyz + (-u_xlat16_2.xyz);
     u_xlat16_4 = dot(abs(u_xlat16_0.xyz), vec3(0.219999999, 0.707000017, 0.0710000023));
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_4<0.200000003);
@@ -358,20 +357,19 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _NoSkyBoxMask;
 uniform 	mediump vec4 _SunPosition;
-uniform lowp sampler2D _Skybox;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _Skybox;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec2 u_xlat0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
-mediump float u_xlat16_2;
-lowp vec3 u_xlat10_2;
+mediump vec3 u_xlat16_2;
 mediump float u_xlat16_4;
 mediump float u_xlat16_9;
 void main()
@@ -385,13 +383,13 @@ void main()
 #else
     u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
 #endif
-    u_xlat10_0 = texture(_Skybox, vs_TEXCOORD0.xy);
-    u_xlat16_2 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
-    u_xlat16_2 = u_xlat16_2 * _NoSkyBoxMask;
-    u_xlat16_9 = max(u_xlat10_0.w, u_xlat16_2);
+    u_xlat16_0 = texture(_Skybox, vs_TEXCOORD0.xy);
+    u_xlat16_2.x = dot(u_xlat16_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_2.x = u_xlat16_2.x * _NoSkyBoxMask;
+    u_xlat16_9 = max(u_xlat16_0.w, u_xlat16_2.x);
     u_xlat16_1 = u_xlat16_1 * u_xlat16_9;
-    u_xlat10_2.xyz = texture(_MainTex, vs_TEXCOORD0.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_0.xyz + (-u_xlat10_2.xyz);
+    u_xlat16_2.xyz = texture(_MainTex, vs_TEXCOORD0.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_0.xyz + (-u_xlat16_2.xyz);
     u_xlat16_4 = dot(abs(u_xlat16_0.xyz), vec3(0.219999999, 0.707000017, 0.0710000023));
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_4<0.200000003);
@@ -434,20 +432,19 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _NoSkyBoxMask;
 uniform 	mediump vec4 _SunPosition;
-uniform lowp sampler2D _Skybox;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _Skybox;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec2 u_xlat0;
-mediump vec3 u_xlat16_0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 bool u_xlatb0;
 mediump float u_xlat16_1;
-mediump float u_xlat16_2;
-lowp vec3 u_xlat10_2;
+mediump vec3 u_xlat16_2;
 mediump float u_xlat16_4;
 mediump float u_xlat16_9;
 void main()
@@ -461,13 +458,13 @@ void main()
 #else
     u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);
 #endif
-    u_xlat10_0 = texture(_Skybox, vs_TEXCOORD0.xy);
-    u_xlat16_2 = dot(u_xlat10_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
-    u_xlat16_2 = u_xlat16_2 * _NoSkyBoxMask;
-    u_xlat16_9 = max(u_xlat10_0.w, u_xlat16_2);
+    u_xlat16_0 = texture(_Skybox, vs_TEXCOORD0.xy);
+    u_xlat16_2.x = dot(u_xlat16_0.xyz, vec3(0.589999974, 0.300000012, 0.109999999));
+    u_xlat16_2.x = u_xlat16_2.x * _NoSkyBoxMask;
+    u_xlat16_9 = max(u_xlat16_0.w, u_xlat16_2.x);
     u_xlat16_1 = u_xlat16_1 * u_xlat16_9;
-    u_xlat10_2.xyz = texture(_MainTex, vs_TEXCOORD0.xy).xyz;
-    u_xlat16_0.xyz = u_xlat10_0.xyz + (-u_xlat10_2.xyz);
+    u_xlat16_2.xyz = texture(_MainTex, vs_TEXCOORD0.xy).xyz;
+    u_xlat16_0.xyz = u_xlat16_0.xyz + (-u_xlat16_2.xyz);
     u_xlat16_4 = dot(abs(u_xlat16_0.xyz), vec3(0.219999999, 0.707000017, 0.0710000023));
 #ifdef UNITY_ADRENO_ES3
     u_xlatb0 = !!(u_xlat16_4<0.200000003);

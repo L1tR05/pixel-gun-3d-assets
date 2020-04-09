@@ -19,7 +19,7 @@ SubShader {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZWrite Off
   Cull Off
-  GpuProgramID 63943
+  GpuProgramID 56051
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -53,17 +53,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 uniform 	float _Base;
 uniform 	float _Smooth;
 uniform 	float _Outline;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec2 u_xlat0;
-lowp float u_xlat10_1;
+mediump float u_xlat16_1;
 vec2 u_xlat4;
 bool u_xlatb4;
 void main()
@@ -72,8 +73,8 @@ void main()
     u_xlat4.xy = (-vec2(vec2(_Smooth, _Smooth))) + vec2(_Base, _Outline);
     u_xlat0.xy = (-u_xlat4.xy) + u_xlat0.xy;
     u_xlat0.xy = vec2(1.0, 1.0) / u_xlat0.xy;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat4.xy = (-u_xlat4.xy) + vec2(u_xlat10_1);
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat4.xy = (-u_xlat4.xy) + vec2(u_xlat16_1);
     u_xlat0.xy = u_xlat0.xy * u_xlat4.xy;
 #ifdef UNITY_ADRENO_ES3
     u_xlat0.xy = min(max(u_xlat0.xy, 0.0), 1.0);
@@ -130,17 +131,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 uniform 	float _Base;
 uniform 	float _Smooth;
 uniform 	float _Outline;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec2 u_xlat0;
-lowp float u_xlat10_1;
+mediump float u_xlat16_1;
 vec2 u_xlat4;
 bool u_xlatb4;
 void main()
@@ -149,8 +151,8 @@ void main()
     u_xlat4.xy = (-vec2(vec2(_Smooth, _Smooth))) + vec2(_Base, _Outline);
     u_xlat0.xy = (-u_xlat4.xy) + u_xlat0.xy;
     u_xlat0.xy = vec2(1.0, 1.0) / u_xlat0.xy;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat4.xy = (-u_xlat4.xy) + vec2(u_xlat10_1);
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat4.xy = (-u_xlat4.xy) + vec2(u_xlat16_1);
     u_xlat0.xy = u_xlat0.xy * u_xlat4.xy;
 #ifdef UNITY_ADRENO_ES3
     u_xlat0.xy = min(max(u_xlat0.xy, 0.0), 1.0);
@@ -207,17 +209,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 uniform 	float _Base;
 uniform 	float _Smooth;
 uniform 	float _Outline;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec2 u_xlat0;
-lowp float u_xlat10_1;
+mediump float u_xlat16_1;
 vec2 u_xlat4;
 bool u_xlatb4;
 void main()
@@ -226,8 +229,8 @@ void main()
     u_xlat4.xy = (-vec2(vec2(_Smooth, _Smooth))) + vec2(_Base, _Outline);
     u_xlat0.xy = (-u_xlat4.xy) + u_xlat0.xy;
     u_xlat0.xy = vec2(1.0, 1.0) / u_xlat0.xy;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
-    u_xlat4.xy = (-u_xlat4.xy) + vec2(u_xlat10_1);
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy).w;
+    u_xlat4.xy = (-u_xlat4.xy) + vec2(u_xlat16_1);
     u_xlat0.xy = u_xlat0.xy * u_xlat4.xy;
 #ifdef UNITY_ADRENO_ES3
     u_xlat0.xy = min(max(u_xlat0.xy, 0.0), 1.0);

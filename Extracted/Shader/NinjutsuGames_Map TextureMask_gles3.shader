@@ -20,7 +20,7 @@ SubShader {
   ZWrite Off
   Cull Off
   Offset -1, -1
-  GpuProgramID 22775
+  GpuProgramID 60445
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -58,23 +58,24 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 uniform 	vec4 _CirclesScl;
 uniform 	vec4 _CirclesOfst;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _Circle;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _Circle;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump float u_xlat16_0;
-lowp float u_xlat10_0;
+mediump float u_xlat10_0;
 vec4 u_xlat1;
 vec4 u_xlat2;
 vec4 u_xlat3;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 float u_xlat4;
-lowp float u_xlat10_4;
+mediump float u_xlat10_4;
 float u_xlat8;
 mediump float u_xlat16_8;
 void main()
@@ -99,8 +100,8 @@ void main()
     u_xlat1.xyz = (-vec3(u_xlat16_0));
     u_xlat2.xyz = vec3(u_xlat16_0) * vec3(0.0, 1.0, 0.5);
     u_xlat1.w = -0.0;
-    u_xlat10_3 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat3 = u_xlat10_3 * _Color;
+    u_xlat16_3 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat3 = u_xlat16_3 * _Color;
     u_xlat2.w = u_xlat3.w;
     u_xlat1 = u_xlat1 + u_xlat2.xxyw;
     u_xlat3.w = u_xlat2.z;
@@ -164,23 +165,24 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 uniform 	vec4 _CirclesScl;
 uniform 	vec4 _CirclesOfst;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _Circle;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _Circle;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump float u_xlat16_0;
-lowp float u_xlat10_0;
+mediump float u_xlat10_0;
 vec4 u_xlat1;
 vec4 u_xlat2;
 vec4 u_xlat3;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 float u_xlat4;
-lowp float u_xlat10_4;
+mediump float u_xlat10_4;
 float u_xlat8;
 mediump float u_xlat16_8;
 void main()
@@ -205,8 +207,8 @@ void main()
     u_xlat1.xyz = (-vec3(u_xlat16_0));
     u_xlat2.xyz = vec3(u_xlat16_0) * vec3(0.0, 1.0, 0.5);
     u_xlat1.w = -0.0;
-    u_xlat10_3 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat3 = u_xlat10_3 * _Color;
+    u_xlat16_3 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat3 = u_xlat16_3 * _Color;
     u_xlat2.w = u_xlat3.w;
     u_xlat1 = u_xlat1 + u_xlat2.xxyw;
     u_xlat3.w = u_xlat2.z;
@@ -270,23 +272,24 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Color;
 uniform 	vec4 _CirclesScl;
 uniform 	vec4 _CirclesOfst;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _Circle;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _Circle;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 mediump float u_xlat16_0;
-lowp float u_xlat10_0;
+mediump float u_xlat10_0;
 vec4 u_xlat1;
 vec4 u_xlat2;
 vec4 u_xlat3;
-lowp vec4 u_xlat10_3;
+mediump vec4 u_xlat16_3;
 float u_xlat4;
-lowp float u_xlat10_4;
+mediump float u_xlat10_4;
 float u_xlat8;
 mediump float u_xlat16_8;
 void main()
@@ -311,8 +314,8 @@ void main()
     u_xlat1.xyz = (-vec3(u_xlat16_0));
     u_xlat2.xyz = vec3(u_xlat16_0) * vec3(0.0, 1.0, 0.5);
     u_xlat1.w = -0.0;
-    u_xlat10_3 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat3 = u_xlat10_3 * _Color;
+    u_xlat16_3 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat3 = u_xlat16_3 * _Color;
     u_xlat2.w = u_xlat3.w;
     u_xlat1 = u_xlat1 + u_xlat2.xxyw;
     u_xlat3.w = u_xlat2.z;

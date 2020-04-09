@@ -14,7 +14,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 10209
+  GpuProgramID 37786
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -60,23 +60,35 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform 	int _ManualTex2SRGB;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_0;
+mediump vec3 u_xlat16_1;
+vec3 u_xlat2;
+mediump vec3 u_xlat16_2;
+mediump float u_xlat16_10;
 void main()
 {
-    u_xlat10_0 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat1.w = u_xlat10_0 * u_xlat1.w;
-    SV_Target0 = u_xlat1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1.xyz = max(u_xlat16_0.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_1.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_1.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_0.xyz;
+    u_xlat16_10 = u_xlat16_0.w * vs_COLOR0.w;
+    SV_Target0.xyz = u_xlat16_1.xyz * vs_COLOR0.xyz;
+    u_xlat16_0.x = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0.x = u_xlat16_0.x * u_xlat16_10;
+    SV_Target0.w = u_xlat16_0.x;
     return;
 }
 
@@ -127,23 +139,35 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform 	int _ManualTex2SRGB;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_0;
+mediump vec3 u_xlat16_1;
+vec3 u_xlat2;
+mediump vec3 u_xlat16_2;
+mediump float u_xlat16_10;
 void main()
 {
-    u_xlat10_0 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat1.w = u_xlat10_0 * u_xlat1.w;
-    SV_Target0 = u_xlat1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1.xyz = max(u_xlat16_0.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_1.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_1.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_0.xyz;
+    u_xlat16_10 = u_xlat16_0.w * vs_COLOR0.w;
+    SV_Target0.xyz = u_xlat16_1.xyz * vs_COLOR0.xyz;
+    u_xlat16_0.x = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0.x = u_xlat16_0.x * u_xlat16_10;
+    SV_Target0.w = u_xlat16_0.x;
     return;
 }
 
@@ -194,23 +218,35 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform 	int _ManualTex2SRGB;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_0;
+mediump vec3 u_xlat16_1;
+vec3 u_xlat2;
+mediump vec3 u_xlat16_2;
+mediump float u_xlat16_10;
 void main()
 {
-    u_xlat10_0 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat1.w = u_xlat10_0 * u_xlat1.w;
-    SV_Target0 = u_xlat1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1.xyz = max(u_xlat16_0.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_1.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_1.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_0.xyz;
+    u_xlat16_10 = u_xlat16_0.w * vs_COLOR0.w;
+    SV_Target0.xyz = u_xlat16_1.xyz * vs_COLOR0.xyz;
+    u_xlat16_0.x = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0.x = u_xlat16_0.x * u_xlat16_10;
+    SV_Target0.w = u_xlat16_0.x;
     return;
 }
 
@@ -238,7 +274,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 96838
+  GpuProgramID 89821
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -284,23 +320,35 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform 	int _ManualTex2SRGB;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_0;
+mediump vec3 u_xlat16_1;
+vec3 u_xlat2;
+mediump vec3 u_xlat16_2;
+mediump float u_xlat16_10;
 void main()
 {
-    u_xlat10_0 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat1.w = u_xlat10_0 * u_xlat1.w;
-    SV_Target0 = u_xlat1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1.xyz = max(u_xlat16_0.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_1.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_1.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_0.xyz;
+    u_xlat16_10 = u_xlat16_0.w * vs_COLOR0.w;
+    SV_Target0.xyz = u_xlat16_1.xyz * vs_COLOR0.xyz;
+    u_xlat16_0.x = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0.x = u_xlat16_0.x * u_xlat16_10;
+    SV_Target0.w = u_xlat16_0.x;
     return;
 }
 
@@ -351,23 +399,35 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform 	int _ManualTex2SRGB;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_0;
+mediump vec3 u_xlat16_1;
+vec3 u_xlat2;
+mediump vec3 u_xlat16_2;
+mediump float u_xlat16_10;
 void main()
 {
-    u_xlat10_0 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat1.w = u_xlat10_0 * u_xlat1.w;
-    SV_Target0 = u_xlat1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1.xyz = max(u_xlat16_0.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_1.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_1.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_0.xyz;
+    u_xlat16_10 = u_xlat16_0.w * vs_COLOR0.w;
+    SV_Target0.xyz = u_xlat16_1.xyz * vs_COLOR0.xyz;
+    u_xlat16_0.x = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0.x = u_xlat16_0.x * u_xlat16_10;
+    SV_Target0.w = u_xlat16_0.x;
     return;
 }
 
@@ -418,23 +478,35 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _GUIClipTexture;
+uniform 	int _ManualTex2SRGB;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _GUIClipTexture;
 in mediump vec4 vs_COLOR0;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
-vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_0;
+mediump vec3 u_xlat16_1;
+vec3 u_xlat2;
+mediump vec3 u_xlat16_2;
+mediump float u_xlat16_10;
 void main()
 {
-    u_xlat10_0 = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * vs_COLOR0;
-    u_xlat1.w = u_xlat10_0 * u_xlat1.w;
-    SV_Target0 = u_xlat1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1.xyz = max(u_xlat16_0.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_2.xyz = log2(u_xlat16_1.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(0.416666657, 0.416666657, 0.416666657);
+    u_xlat16_2.xyz = exp2(u_xlat16_2.xyz);
+    u_xlat16_2.xyz = u_xlat16_2.xyz * vec3(1.05499995, 1.05499995, 1.05499995) + vec3(-0.0549999997, -0.0549999997, -0.0549999997);
+    u_xlat2.xyz = max(u_xlat16_2.xyz, vec3(0.0, 0.0, 0.0));
+    u_xlat16_1.xyz = (_ManualTex2SRGB != 0) ? u_xlat2.xyz : u_xlat16_0.xyz;
+    u_xlat16_10 = u_xlat16_0.w * vs_COLOR0.w;
+    SV_Target0.xyz = u_xlat16_1.xyz * vs_COLOR0.xyz;
+    u_xlat16_0.x = texture(_GUIClipTexture, vs_TEXCOORD1.xy).w;
+    u_xlat16_0.x = u_xlat16_0.x * u_xlat16_10;
+    SV_Target0.w = u_xlat16_0.x;
     return;
 }
 

@@ -48,6 +48,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -94,6 +95,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -140,6 +142,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
@@ -219,6 +222,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -303,6 +307,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -387,6 +392,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 in mediump vec4 vs_COLOR0;
@@ -433,7 +439,7 @@ Keywords { "FOG_LINEAR" }
   LOD 100
   Tags { "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 28839
+  GpuProgramID 15764
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -465,17 +471,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Alpha;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0.w = u_xlat10_0.w * _Alpha;
-    SV_Target0.xyz = u_xlat10_0.xyz;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0.w = u_xlat16_0.w * _Alpha;
+    SV_Target0.xyz = u_xlat16_0.xyz;
     return;
 }
 
@@ -512,17 +519,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Alpha;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0.w = u_xlat10_0.w * _Alpha;
-    SV_Target0.xyz = u_xlat10_0.xyz;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0.w = u_xlat16_0.w * _Alpha;
+    SV_Target0.xyz = u_xlat16_0.xyz;
     return;
 }
 
@@ -559,17 +567,18 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _Alpha;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    SV_Target0.w = u_xlat10_0.w * _Alpha;
-    SV_Target0.xyz = u_xlat10_0.xyz;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    SV_Target0.w = u_xlat16_0.w * _Alpha;
+    SV_Target0.xyz = u_xlat16_0.xyz;
     return;
 }
 
@@ -611,15 +620,16 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump float _Alpha;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 void main()
 {
@@ -629,9 +639,9 @@ void main()
 #else
     u_xlat0.x = clamp(u_xlat0.x, 0.0, 1.0);
 #endif
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_2.xyz = u_xlat10_1.xyz + (-unity_FogColor.xyz);
-    SV_Target0.w = u_xlat10_1.w * _Alpha;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_2.xyz = u_xlat16_1.xyz + (-unity_FogColor.xyz);
+    SV_Target0.w = u_xlat16_1.w * _Alpha;
     u_xlat0.xyz = u_xlat0.xxx * u_xlat16_2.xyz + unity_FogColor.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     return;
@@ -675,15 +685,16 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump float _Alpha;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 void main()
 {
@@ -693,9 +704,9 @@ void main()
 #else
     u_xlat0.x = clamp(u_xlat0.x, 0.0, 1.0);
 #endif
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_2.xyz = u_xlat10_1.xyz + (-unity_FogColor.xyz);
-    SV_Target0.w = u_xlat10_1.w * _Alpha;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_2.xyz = u_xlat16_1.xyz + (-unity_FogColor.xyz);
+    SV_Target0.w = u_xlat16_1.w * _Alpha;
     u_xlat0.xyz = u_xlat0.xxx * u_xlat16_2.xyz + unity_FogColor.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     return;
@@ -739,15 +750,16 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
 uniform 	mediump float _Alpha;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 in highp float vs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 void main()
 {
@@ -757,9 +769,9 @@ void main()
 #else
     u_xlat0.x = clamp(u_xlat0.x, 0.0, 1.0);
 #endif
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_2.xyz = u_xlat10_1.xyz + (-unity_FogColor.xyz);
-    SV_Target0.w = u_xlat10_1.w * _Alpha;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_2.xyz = u_xlat16_1.xyz + (-unity_FogColor.xyz);
+    SV_Target0.w = u_xlat16_1.w * _Alpha;
     u_xlat0.xyz = u_xlat0.xxx * u_xlat16_2.xyz + unity_FogColor.xyz;
     SV_Target0.xyz = u_xlat0.xyz;
     return;

@@ -13,7 +13,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 64648
+  GpuProgramID 18099
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -44,18 +44,19 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	float _Multiplyer;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec4 u_xlat16_1;
 mediump float u_xlat16_2;
 int u_xlati3;
 vec2 u_xlat4;
 mediump vec4 u_xlat16_5;
-lowp vec4 u_xlat10_6;
+mediump vec4 u_xlat16_6;
 mediump float u_xlat16_9;
 float u_xlat10;
 int u_xlati10;
@@ -66,16 +67,16 @@ int u_xlati17;
 bool u_xlatb17;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_1 = u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = u_xlat16_0;
     u_xlat16_2 = 1.0;
-    for(int u_xlati_loop_1 = -8 ; u_xlati_loop_1<8 ; u_xlati_loop_1++)
+    for(int u_xlati_loop_1 = int(0xFFFFFFF8u) ; u_xlati_loop_1<8 ; u_xlati_loop_1++)
     {
         u_xlat10 = float(u_xlati_loop_1);
         u_xlat4.x = u_xlat10 * _Multiplyer;
         u_xlat16_5 = u_xlat16_1;
         u_xlat16_9 = u_xlat16_2;
-        u_xlati10 = -8;
+        u_xlati10 = int(0xFFFFFFF8u);
         while(true){
 #ifdef UNITY_ADRENO_ES3
             u_xlatb17 = !!(u_xlati10>=8);
@@ -94,8 +95,8 @@ void main()
             u_xlat17.x = float(u_xlati10);
             u_xlat4.y = u_xlat17.x * _Multiplyer;
             u_xlat17.xy = u_xlat4.xy * vec2(0.00150000001, 0.00150000001) + vs_TEXCOORD0.xy;
-            u_xlat10_6 = texture(_MainTex, u_xlat17.xy);
-            u_xlat16_5 = u_xlat10_6 * vec4(u_xlat16_16) + u_xlat16_5;
+            u_xlat16_6 = texture(_MainTex, u_xlat17.xy);
+            u_xlat16_5 = u_xlat16_6 * vec4(u_xlat16_16) + u_xlat16_5;
             u_xlati10 = u_xlati10 + 1;
             u_xlat16_5 = u_xlat16_5;
         }
@@ -139,18 +140,19 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	float _Multiplyer;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec4 u_xlat16_1;
 mediump float u_xlat16_2;
 int u_xlati3;
 vec2 u_xlat4;
 mediump vec4 u_xlat16_5;
-lowp vec4 u_xlat10_6;
+mediump vec4 u_xlat16_6;
 mediump float u_xlat16_9;
 float u_xlat10;
 int u_xlati10;
@@ -161,16 +163,16 @@ int u_xlati17;
 bool u_xlatb17;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_1 = u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = u_xlat16_0;
     u_xlat16_2 = 1.0;
-    for(int u_xlati_loop_1 = -8 ; u_xlati_loop_1<8 ; u_xlati_loop_1++)
+    for(int u_xlati_loop_1 = int(0xFFFFFFF8u) ; u_xlati_loop_1<8 ; u_xlati_loop_1++)
     {
         u_xlat10 = float(u_xlati_loop_1);
         u_xlat4.x = u_xlat10 * _Multiplyer;
         u_xlat16_5 = u_xlat16_1;
         u_xlat16_9 = u_xlat16_2;
-        u_xlati10 = -8;
+        u_xlati10 = int(0xFFFFFFF8u);
         while(true){
 #ifdef UNITY_ADRENO_ES3
             u_xlatb17 = !!(u_xlati10>=8);
@@ -189,8 +191,8 @@ void main()
             u_xlat17.x = float(u_xlati10);
             u_xlat4.y = u_xlat17.x * _Multiplyer;
             u_xlat17.xy = u_xlat4.xy * vec2(0.00150000001, 0.00150000001) + vs_TEXCOORD0.xy;
-            u_xlat10_6 = texture(_MainTex, u_xlat17.xy);
-            u_xlat16_5 = u_xlat10_6 * vec4(u_xlat16_16) + u_xlat16_5;
+            u_xlat16_6 = texture(_MainTex, u_xlat17.xy);
+            u_xlat16_5 = u_xlat16_6 * vec4(u_xlat16_16) + u_xlat16_5;
             u_xlati10 = u_xlati10 + 1;
             u_xlat16_5 = u_xlat16_5;
         }
@@ -234,18 +236,19 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	float _Multiplyer;
-uniform lowp sampler2D _MainTex;
+uniform mediump sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec4 u_xlat16_1;
 mediump float u_xlat16_2;
 int u_xlati3;
 vec2 u_xlat4;
 mediump vec4 u_xlat16_5;
-lowp vec4 u_xlat10_6;
+mediump vec4 u_xlat16_6;
 mediump float u_xlat16_9;
 float u_xlat10;
 int u_xlati10;
@@ -256,16 +259,16 @@ int u_xlati17;
 bool u_xlatb17;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_1 = u_xlat10_0;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = u_xlat16_0;
     u_xlat16_2 = 1.0;
-    for(int u_xlati_loop_1 = -8 ; u_xlati_loop_1<8 ; u_xlati_loop_1++)
+    for(int u_xlati_loop_1 = int(0xFFFFFFF8u) ; u_xlati_loop_1<8 ; u_xlati_loop_1++)
     {
         u_xlat10 = float(u_xlati_loop_1);
         u_xlat4.x = u_xlat10 * _Multiplyer;
         u_xlat16_5 = u_xlat16_1;
         u_xlat16_9 = u_xlat16_2;
-        u_xlati10 = -8;
+        u_xlati10 = int(0xFFFFFFF8u);
         while(true){
 #ifdef UNITY_ADRENO_ES3
             u_xlatb17 = !!(u_xlati10>=8);
@@ -284,8 +287,8 @@ void main()
             u_xlat17.x = float(u_xlati10);
             u_xlat4.y = u_xlat17.x * _Multiplyer;
             u_xlat17.xy = u_xlat4.xy * vec2(0.00150000001, 0.00150000001) + vs_TEXCOORD0.xy;
-            u_xlat10_6 = texture(_MainTex, u_xlat17.xy);
-            u_xlat16_5 = u_xlat10_6 * vec4(u_xlat16_16) + u_xlat16_5;
+            u_xlat16_6 = texture(_MainTex, u_xlat17.xy);
+            u_xlat16_5 = u_xlat16_6 * vec4(u_xlat16_16) + u_xlat16_5;
             u_xlati10 = u_xlati10 + 1;
             u_xlat16_5 = u_xlat16_5;
         }

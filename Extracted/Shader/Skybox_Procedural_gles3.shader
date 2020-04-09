@@ -17,7 +17,7 @@ SubShader {
   Tags { "PreviewType" = "Skybox" "QUEUE" = "Background" "RenderType" = "Background" }
   ZWrite Off
   Cull Off
-  GpuProgramID 16313
+  GpuProgramID 42091
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -226,6 +226,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _WorldSpaceLightPos0;
 uniform 	mediump vec4 _LightColor0;
@@ -493,6 +494,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _WorldSpaceLightPos0;
 uniform 	mediump vec4 _LightColor0;
@@ -760,6 +762,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	vec4 _WorldSpaceLightPos0;
 uniform 	mediump vec4 _LightColor0;

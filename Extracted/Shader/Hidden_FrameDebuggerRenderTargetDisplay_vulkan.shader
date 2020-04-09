@@ -14,7 +14,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 52480
+  GpuProgramID 555
 Program "vp" {
 SubProgram "vulkan hw_tier00 " {
 "// shader disassembly not supported on SPIR-V
@@ -46,7 +46,7 @@ SubProgram "vulkan hw_tier02 " {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 86592
+  GpuProgramID 97613
 Program "vp" {
 SubProgram "vulkan hw_tier00 " {
 "// shader disassembly not supported on SPIR-V
@@ -79,7 +79,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 154206
+  GpuProgramID 154055
 Program "vp" {
 SubProgram "vulkan hw_tier00 " {
 "// shader disassembly not supported on SPIR-V

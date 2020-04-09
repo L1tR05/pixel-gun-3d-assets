@@ -11,7 +11,7 @@ SubShader {
  Tags { "RenderType" = "Opaque" }
  Pass {
   Tags { "RenderType" = "Opaque" }
-  GpuProgramID 59481
+  GpuProgramID 23880
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -20,7 +20,7 @@ SubProgram "gles3 hw_tier00 " {
 uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
 uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
 in highp vec4 in_POSITION0;
-out highp vec4 vs_TEXCOORD1;
+layout(location = 0) out highp vec4 vs_TEXCOORD1;
 vec4 u_xlat0;
 vec4 u_xlat1;
 void main()
@@ -41,11 +41,12 @@ void main()
 #ifdef FRAGMENT
 #version 310 es
 
+precision highp float;
 precision highp int;
 vec3 ImmCB_0_0_0[11];
 uniform 	vec3 _WorldSpaceCameraPos;
-in highp vec4 gs_TEXCOORD0;
-in highp vec4 gs_TEXCOORD1;
+layout(location = 0) in highp vec4 gs_TEXCOORD0;
+layout(location = 1) in highp vec4 gs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 vec3 u_xlat1;
@@ -90,12 +91,18 @@ void main()
 #endif
 #ifdef GEOMETRY
 #version 310 es
+#ifdef GL_ARB_geometry_shader
 #extension GL_ARB_geometry_shader : enable
+#endif
+#ifdef GL_OES_geometry_shader
 #extension GL_OES_geometry_shader : enable
+#endif
+#ifdef GL_EXT_geometry_shader
 #extension GL_EXT_geometry_shader : enable
+#endif
 
 uniform 	float _WireThickness;
-in highp vec4 vs_TEXCOORD1 [3];
+layout(location = 0) in highp vec4 vs_TEXCOORD1 [3];
 vec4 u_xlat0;
 vec3 u_xlat1;
 float u_xlat2;
@@ -104,8 +111,8 @@ float u_xlat4;
 float u_xlat6;
 layout(triangles) in;
 layout(triangle_strip) out;
-out highp vec4 gs_TEXCOORD0;
-out highp vec4 gs_TEXCOORD1;
+layout(location = 0) out highp vec4 gs_TEXCOORD0;
+layout(location = 1) out highp vec4 gs_TEXCOORD1;
 layout(max_vertices = 3) out;
 void main()
 {
@@ -169,7 +176,7 @@ SubProgram "gles3 hw_tier01 " {
 uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
 uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
 in highp vec4 in_POSITION0;
-out highp vec4 vs_TEXCOORD1;
+layout(location = 0) out highp vec4 vs_TEXCOORD1;
 vec4 u_xlat0;
 vec4 u_xlat1;
 void main()
@@ -190,11 +197,12 @@ void main()
 #ifdef FRAGMENT
 #version 310 es
 
+precision highp float;
 precision highp int;
 vec3 ImmCB_0_0_0[11];
 uniform 	vec3 _WorldSpaceCameraPos;
-in highp vec4 gs_TEXCOORD0;
-in highp vec4 gs_TEXCOORD1;
+layout(location = 0) in highp vec4 gs_TEXCOORD0;
+layout(location = 1) in highp vec4 gs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 vec3 u_xlat1;
@@ -239,12 +247,18 @@ void main()
 #endif
 #ifdef GEOMETRY
 #version 310 es
+#ifdef GL_ARB_geometry_shader
 #extension GL_ARB_geometry_shader : enable
+#endif
+#ifdef GL_OES_geometry_shader
 #extension GL_OES_geometry_shader : enable
+#endif
+#ifdef GL_EXT_geometry_shader
 #extension GL_EXT_geometry_shader : enable
+#endif
 
 uniform 	float _WireThickness;
-in highp vec4 vs_TEXCOORD1 [3];
+layout(location = 0) in highp vec4 vs_TEXCOORD1 [3];
 vec4 u_xlat0;
 vec3 u_xlat1;
 float u_xlat2;
@@ -253,8 +267,8 @@ float u_xlat4;
 float u_xlat6;
 layout(triangles) in;
 layout(triangle_strip) out;
-out highp vec4 gs_TEXCOORD0;
-out highp vec4 gs_TEXCOORD1;
+layout(location = 0) out highp vec4 gs_TEXCOORD0;
+layout(location = 1) out highp vec4 gs_TEXCOORD1;
 layout(max_vertices = 3) out;
 void main()
 {
@@ -318,7 +332,7 @@ SubProgram "gles3 hw_tier02 " {
 uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
 uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
 in highp vec4 in_POSITION0;
-out highp vec4 vs_TEXCOORD1;
+layout(location = 0) out highp vec4 vs_TEXCOORD1;
 vec4 u_xlat0;
 vec4 u_xlat1;
 void main()
@@ -339,11 +353,12 @@ void main()
 #ifdef FRAGMENT
 #version 310 es
 
+precision highp float;
 precision highp int;
 vec3 ImmCB_0_0_0[11];
 uniform 	vec3 _WorldSpaceCameraPos;
-in highp vec4 gs_TEXCOORD0;
-in highp vec4 gs_TEXCOORD1;
+layout(location = 0) in highp vec4 gs_TEXCOORD0;
+layout(location = 1) in highp vec4 gs_TEXCOORD1;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec4 u_xlat0;
 vec3 u_xlat1;
@@ -388,12 +403,18 @@ void main()
 #endif
 #ifdef GEOMETRY
 #version 310 es
+#ifdef GL_ARB_geometry_shader
 #extension GL_ARB_geometry_shader : enable
+#endif
+#ifdef GL_OES_geometry_shader
 #extension GL_OES_geometry_shader : enable
+#endif
+#ifdef GL_EXT_geometry_shader
 #extension GL_EXT_geometry_shader : enable
+#endif
 
 uniform 	float _WireThickness;
-in highp vec4 vs_TEXCOORD1 [3];
+layout(location = 0) in highp vec4 vs_TEXCOORD1 [3];
 vec4 u_xlat0;
 vec3 u_xlat1;
 float u_xlat2;
@@ -402,8 +423,8 @@ float u_xlat4;
 float u_xlat6;
 layout(triangles) in;
 layout(triangle_strip) out;
-out highp vec4 gs_TEXCOORD0;
-out highp vec4 gs_TEXCOORD1;
+layout(location = 0) out highp vec4 gs_TEXCOORD0;
+layout(location = 1) out highp vec4 gs_TEXCOORD1;
 layout(max_vertices = 3) out;
 void main()
 {

@@ -20,7 +20,7 @@ SubShader {
   LOD 100
   Tags { "QUEUE" = "Geometry+10" "RenderType" = "Transparent" }
   ZWrite Off
-  GpuProgramID 50204
+  GpuProgramID 43589
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }
@@ -59,7 +59,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -68,21 +68,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     SV_Target0 = u_xlat16_0 * vs_TEXCOORD2;
     return;
 }
@@ -127,7 +127,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -136,21 +136,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     SV_Target0 = u_xlat16_0 * vs_TEXCOORD2;
     return;
 }
@@ -195,7 +195,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -204,21 +204,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     SV_Target0 = u_xlat16_0 * vs_TEXCOORD2;
     return;
 }
@@ -267,7 +267,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -276,27 +276,26 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 vec3 u_xlat1;
-mediump vec3 u_xlat16_1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump float u_xlat16_2;
 float u_xlat10;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     u_xlat16_1.xyz = u_xlat16_0.xyz * vs_TEXCOORD2.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = u_xlat16_0.w * vs_TEXCOORD2.w;
     SV_Target0.w = u_xlat16_2;
@@ -355,7 +354,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -364,27 +363,26 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 vec3 u_xlat1;
-mediump vec3 u_xlat16_1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump float u_xlat16_2;
 float u_xlat10;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     u_xlat16_1.xyz = u_xlat16_0.xyz * vs_TEXCOORD2.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = u_xlat16_0.w * vs_TEXCOORD2.w;
     SV_Target0.w = u_xlat16_2;
@@ -443,7 +441,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -452,27 +450,26 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 vec3 u_xlat1;
-mediump vec3 u_xlat16_1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump float u_xlat16_2;
 float u_xlat10;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     u_xlat16_1.xyz = u_xlat16_0.xyz * vs_TEXCOORD2.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = u_xlat16_0.w * vs_TEXCOORD2.w;
     SV_Target0.w = u_xlat16_2;
@@ -527,7 +524,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -536,21 +533,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     SV_Target0 = u_xlat16_0 * vs_TEXCOORD2;
     return;
 }
@@ -595,7 +592,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -604,21 +601,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     SV_Target0 = u_xlat16_0 * vs_TEXCOORD2;
     return;
 }
@@ -663,7 +660,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -672,21 +669,21 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     SV_Target0 = u_xlat16_0 * vs_TEXCOORD2;
     return;
 }
@@ -735,7 +732,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -744,27 +741,26 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 vec3 u_xlat1;
-mediump vec3 u_xlat16_1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump float u_xlat16_2;
 float u_xlat10;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     u_xlat16_1.xyz = u_xlat16_0.xyz * vs_TEXCOORD2.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = u_xlat16_0.w * vs_TEXCOORD2.w;
     SV_Target0.w = u_xlat16_2;
@@ -823,7 +819,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -832,27 +828,26 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 vec3 u_xlat1;
-mediump vec3 u_xlat16_1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump float u_xlat16_2;
 float u_xlat10;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     u_xlat16_1.xyz = u_xlat16_0.xyz * vs_TEXCOORD2.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = u_xlat16_0.w * vs_TEXCOORD2.w;
     SV_Target0.w = u_xlat16_2;
@@ -911,7 +906,7 @@ void main()
     u_xlat1 = fract(u_xlat1);
     vs_TEXCOORD0.xy = u_xlat0.xy + u_xlat1.xy;
     u_xlat0.xy = in_TEXCOORD0.xy * _DetailTex_ST.xy + _DetailTex_ST.zw;
-    vs_TEXCOORD1.xy = vec2(u_xlat1.z + u_xlat0.x, u_xlat1.w + u_xlat0.y);
+    vs_TEXCOORD1.xy = u_xlat1.zw + u_xlat0.xy;
     vs_TEXCOORD2 = vec4(_AMultiplier);
     return;
 }
@@ -920,27 +915,26 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_FogColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DetailTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DetailTex;
 in highp float vs_TEXCOORD3;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_TEXCOORD2;
 layout(location = 0) out mediump vec4 SV_Target0;
 mediump vec4 u_xlat16_0;
-lowp vec4 u_xlat10_0;
 vec3 u_xlat1;
-mediump vec3 u_xlat16_1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump float u_xlat16_2;
 float u_xlat10;
 void main()
 {
-    u_xlat10_0 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat10_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
-    u_xlat16_0 = u_xlat10_0 * u_xlat10_1;
+    u_xlat16_0 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_1 = texture(_DetailTex, vs_TEXCOORD1.xy);
+    u_xlat16_0 = u_xlat16_0 * u_xlat16_1;
     u_xlat16_1.xyz = u_xlat16_0.xyz * vs_TEXCOORD2.xyz + (-unity_FogColor.xyz);
     u_xlat16_2 = u_xlat16_0.w * vs_TEXCOORD2.w;
     SV_Target0.w = u_xlat16_2;

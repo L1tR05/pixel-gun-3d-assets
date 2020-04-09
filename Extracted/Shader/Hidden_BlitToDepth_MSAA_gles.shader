@@ -11,7 +11,7 @@ SubShader {
  Pass {
   ZTest Always
   Cull Off
-  GpuProgramID 4079
+  GpuProgramID 55646
 Program "vp" {
 }
 Program "fp" {

@@ -15,214 +15,241 @@ SubShader {
   Tags { "QUEUE" = "Background" "RenderType" = "Background" }
   ZTest Always
   ZWrite Off
-  GpuProgramID 19854
+  GpuProgramID 54436
 Program "vp" {
 SubProgram "gles hw_tier00 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute highp vec3 in_TEXCOORD0;
+varying highp vec3 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_1));
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xyz;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xyz = in_TEXCOORD0.xyz;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
+#version 100
+#ifdef GL_EXT_shader_texture_lod
 #extension GL_EXT_shader_texture_lod : enable
-lowp vec4 impl_low_textureCubeLodEXT(lowp samplerCube sampler, highp vec3 coord, mediump float lod)
-{
-#if defined(GL_EXT_shader_texture_lod)
-	return textureCubeLodEXT(sampler, coord, lod);
-#else
-	return textureCube(sampler, coord, lod);
 #endif
-}
+#if !defined(GL_EXT_shader_texture_lod)
+#define texture1DLodEXT texture1D
+#define texture2DLodEXT texture2D
+#define texture2DProjLodEXT texture2DProj
+#define texture3DLodEXT texture3D
+#define textureCubeLodEXT textureCube
+#endif
 
-uniform mediump vec4 _TexA_HDR;
-uniform mediump vec4 _TexB_HDR;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	mediump vec4 _TexA_HDR;
+uniform 	mediump vec4 _TexB_HDR;
+uniform 	float _Level;
+uniform 	float _value;
 uniform lowp samplerCube _TexA;
 uniform lowp samplerCube _TexB;
-uniform highp float _Level;
-uniform highp float _value;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+varying highp vec3 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec3 u_xlat0;
+mediump vec3 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+mediump vec3 u_xlat16_1;
+mediump float u_xlat16_7;
+void main()
 {
-  mediump vec3 res_1;
-  mediump vec4 tmpvar_2;
-  lowp vec4 tmpvar_3;
-  tmpvar_3 = impl_low_textureCubeLodEXT (_TexA, xlv_TEXCOORD0, _Level);
-  tmpvar_2 = tmpvar_3;
-  mediump vec3 tmpvar_4;
-  tmpvar_4 = ((_TexA_HDR.x * (
-    (_TexA_HDR.w * (tmpvar_2.w - 1.0))
-   + 1.0)) * tmpvar_2.xyz);
-  mediump vec4 tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = impl_low_textureCubeLodEXT (_TexB, xlv_TEXCOORD0, _Level);
-  tmpvar_5 = tmpvar_6;
-  mediump vec3 tmpvar_7;
-  tmpvar_7 = ((_TexB_HDR.x * (
-    (_TexB_HDR.w * (tmpvar_5.w - 1.0))
-   + 1.0)) * tmpvar_5.xyz);
-  highp vec3 tmpvar_8;
-  tmpvar_8 = mix (tmpvar_4, tmpvar_7, vec3(_value));
-  res_1 = tmpvar_8;
-  mediump vec4 tmpvar_9;
-  tmpvar_9.w = 1.0;
-  tmpvar_9.xyz = res_1;
-  gl_FragData[0] = tmpvar_9;
+    u_xlat10_0 = textureCubeLodEXT(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
+    u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
+    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
+    u_xlat10_0 = textureCubeLodEXT(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
+    u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
+    SV_Target0.xyz = u_xlat0.xyz;
+    SV_Target0.w = 1.0;
+    return;
 }
-
 
 #endif
 "
 }
 SubProgram "gles hw_tier01 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute highp vec3 in_TEXCOORD0;
+varying highp vec3 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_1));
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xyz;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xyz = in_TEXCOORD0.xyz;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
+#version 100
+#ifdef GL_EXT_shader_texture_lod
 #extension GL_EXT_shader_texture_lod : enable
-lowp vec4 impl_low_textureCubeLodEXT(lowp samplerCube sampler, highp vec3 coord, mediump float lod)
-{
-#if defined(GL_EXT_shader_texture_lod)
-	return textureCubeLodEXT(sampler, coord, lod);
-#else
-	return textureCube(sampler, coord, lod);
 #endif
-}
+#if !defined(GL_EXT_shader_texture_lod)
+#define texture1DLodEXT texture1D
+#define texture2DLodEXT texture2D
+#define texture2DProjLodEXT texture2DProj
+#define texture3DLodEXT texture3D
+#define textureCubeLodEXT textureCube
+#endif
 
-uniform mediump vec4 _TexA_HDR;
-uniform mediump vec4 _TexB_HDR;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	mediump vec4 _TexA_HDR;
+uniform 	mediump vec4 _TexB_HDR;
+uniform 	float _Level;
+uniform 	float _value;
 uniform lowp samplerCube _TexA;
 uniform lowp samplerCube _TexB;
-uniform highp float _Level;
-uniform highp float _value;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+varying highp vec3 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec3 u_xlat0;
+mediump vec3 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+mediump vec3 u_xlat16_1;
+mediump float u_xlat16_7;
+void main()
 {
-  mediump vec3 res_1;
-  mediump vec4 tmpvar_2;
-  lowp vec4 tmpvar_3;
-  tmpvar_3 = impl_low_textureCubeLodEXT (_TexA, xlv_TEXCOORD0, _Level);
-  tmpvar_2 = tmpvar_3;
-  mediump vec3 tmpvar_4;
-  tmpvar_4 = ((_TexA_HDR.x * (
-    (_TexA_HDR.w * (tmpvar_2.w - 1.0))
-   + 1.0)) * tmpvar_2.xyz);
-  mediump vec4 tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = impl_low_textureCubeLodEXT (_TexB, xlv_TEXCOORD0, _Level);
-  tmpvar_5 = tmpvar_6;
-  mediump vec3 tmpvar_7;
-  tmpvar_7 = ((_TexB_HDR.x * (
-    (_TexB_HDR.w * (tmpvar_5.w - 1.0))
-   + 1.0)) * tmpvar_5.xyz);
-  highp vec3 tmpvar_8;
-  tmpvar_8 = mix (tmpvar_4, tmpvar_7, vec3(_value));
-  res_1 = tmpvar_8;
-  mediump vec4 tmpvar_9;
-  tmpvar_9.w = 1.0;
-  tmpvar_9.xyz = res_1;
-  gl_FragData[0] = tmpvar_9;
+    u_xlat10_0 = textureCubeLodEXT(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
+    u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
+    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
+    u_xlat10_0 = textureCubeLodEXT(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
+    u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
+    SV_Target0.xyz = u_xlat0.xyz;
+    SV_Target0.w = 1.0;
+    return;
 }
-
 
 #endif
 "
 }
 SubProgram "gles hw_tier02 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute highp vec3 in_TEXCOORD0;
+varying highp vec3 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_1));
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xyz;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xyz = in_TEXCOORD0.xyz;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
+#version 100
+#ifdef GL_EXT_shader_texture_lod
 #extension GL_EXT_shader_texture_lod : enable
-lowp vec4 impl_low_textureCubeLodEXT(lowp samplerCube sampler, highp vec3 coord, mediump float lod)
-{
-#if defined(GL_EXT_shader_texture_lod)
-	return textureCubeLodEXT(sampler, coord, lod);
-#else
-	return textureCube(sampler, coord, lod);
 #endif
-}
+#if !defined(GL_EXT_shader_texture_lod)
+#define texture1DLodEXT texture1D
+#define texture2DLodEXT texture2D
+#define texture2DProjLodEXT texture2DProj
+#define texture3DLodEXT texture3D
+#define textureCubeLodEXT textureCube
+#endif
 
-uniform mediump vec4 _TexA_HDR;
-uniform mediump vec4 _TexB_HDR;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	mediump vec4 _TexA_HDR;
+uniform 	mediump vec4 _TexB_HDR;
+uniform 	float _Level;
+uniform 	float _value;
 uniform lowp samplerCube _TexA;
 uniform lowp samplerCube _TexB;
-uniform highp float _Level;
-uniform highp float _value;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+varying highp vec3 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec3 u_xlat0;
+mediump vec3 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+mediump vec3 u_xlat16_1;
+mediump float u_xlat16_7;
+void main()
 {
-  mediump vec3 res_1;
-  mediump vec4 tmpvar_2;
-  lowp vec4 tmpvar_3;
-  tmpvar_3 = impl_low_textureCubeLodEXT (_TexA, xlv_TEXCOORD0, _Level);
-  tmpvar_2 = tmpvar_3;
-  mediump vec3 tmpvar_4;
-  tmpvar_4 = ((_TexA_HDR.x * (
-    (_TexA_HDR.w * (tmpvar_2.w - 1.0))
-   + 1.0)) * tmpvar_2.xyz);
-  mediump vec4 tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = impl_low_textureCubeLodEXT (_TexB, xlv_TEXCOORD0, _Level);
-  tmpvar_5 = tmpvar_6;
-  mediump vec3 tmpvar_7;
-  tmpvar_7 = ((_TexB_HDR.x * (
-    (_TexB_HDR.w * (tmpvar_5.w - 1.0))
-   + 1.0)) * tmpvar_5.xyz);
-  highp vec3 tmpvar_8;
-  tmpvar_8 = mix (tmpvar_4, tmpvar_7, vec3(_value));
-  res_1 = tmpvar_8;
-  mediump vec4 tmpvar_9;
-  tmpvar_9.w = 1.0;
-  tmpvar_9.xyz = res_1;
-  gl_FragData[0] = tmpvar_9;
+    u_xlat10_0 = textureCubeLodEXT(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
+    u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
+    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
+    u_xlat10_0 = textureCubeLodEXT(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
+    u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
+    SV_Target0.xyz = u_xlat0.xyz;
+    SV_Target0.w = 1.0;
+    return;
 }
-
 
 #endif
 "
@@ -247,214 +274,241 @@ SubShader {
   Tags { "QUEUE" = "Background" "RenderType" = "Background" }
   ZTest Always
   ZWrite Off
-  GpuProgramID 105093
+  GpuProgramID 120266
 Program "vp" {
 SubProgram "gles hw_tier00 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute highp vec3 in_TEXCOORD0;
+varying highp vec3 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_1));
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xyz;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xyz = in_TEXCOORD0.xyz;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
+#version 100
+#ifdef GL_EXT_shader_texture_lod
 #extension GL_EXT_shader_texture_lod : enable
-lowp vec4 impl_low_textureCubeLodEXT(lowp samplerCube sampler, highp vec3 coord, mediump float lod)
-{
-#if defined(GL_EXT_shader_texture_lod)
-	return textureCubeLodEXT(sampler, coord, lod);
-#else
-	return textureCube(sampler, coord, lod);
 #endif
-}
+#if !defined(GL_EXT_shader_texture_lod)
+#define texture1DLodEXT texture1D
+#define texture2DLodEXT texture2D
+#define texture2DProjLodEXT texture2DProj
+#define texture3DLodEXT texture3D
+#define textureCubeLodEXT textureCube
+#endif
 
-uniform mediump vec4 _TexA_HDR;
-uniform mediump vec4 _TexB_HDR;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	mediump vec4 _TexA_HDR;
+uniform 	mediump vec4 _TexB_HDR;
+uniform 	float _Level;
+uniform 	float _value;
 uniform lowp samplerCube _TexA;
 uniform lowp samplerCube _TexB;
-uniform highp float _Level;
-uniform highp float _value;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+varying highp vec3 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec3 u_xlat0;
+mediump vec3 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+mediump vec3 u_xlat16_1;
+mediump float u_xlat16_7;
+void main()
 {
-  mediump vec3 res_1;
-  mediump vec4 tmpvar_2;
-  lowp vec4 tmpvar_3;
-  tmpvar_3 = impl_low_textureCubeLodEXT (_TexA, xlv_TEXCOORD0, _Level);
-  tmpvar_2 = tmpvar_3;
-  mediump vec3 tmpvar_4;
-  tmpvar_4 = ((_TexA_HDR.x * (
-    (_TexA_HDR.w * (tmpvar_2.w - 1.0))
-   + 1.0)) * tmpvar_2.xyz);
-  mediump vec4 tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = impl_low_textureCubeLodEXT (_TexB, xlv_TEXCOORD0, _Level);
-  tmpvar_5 = tmpvar_6;
-  mediump vec3 tmpvar_7;
-  tmpvar_7 = ((_TexB_HDR.x * (
-    (_TexB_HDR.w * (tmpvar_5.w - 1.0))
-   + 1.0)) * tmpvar_5.xyz);
-  highp vec3 tmpvar_8;
-  tmpvar_8 = mix (tmpvar_4, tmpvar_7, vec3(_value));
-  res_1 = tmpvar_8;
-  mediump vec4 tmpvar_9;
-  tmpvar_9.w = 1.0;
-  tmpvar_9.xyz = res_1;
-  gl_FragData[0] = tmpvar_9;
+    u_xlat10_0 = textureCubeLodEXT(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
+    u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
+    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
+    u_xlat10_0 = textureCubeLodEXT(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
+    u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
+    SV_Target0.xyz = u_xlat0.xyz;
+    SV_Target0.w = 1.0;
+    return;
 }
-
 
 #endif
 "
 }
 SubProgram "gles hw_tier01 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute highp vec3 in_TEXCOORD0;
+varying highp vec3 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_1));
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xyz;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xyz = in_TEXCOORD0.xyz;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
+#version 100
+#ifdef GL_EXT_shader_texture_lod
 #extension GL_EXT_shader_texture_lod : enable
-lowp vec4 impl_low_textureCubeLodEXT(lowp samplerCube sampler, highp vec3 coord, mediump float lod)
-{
-#if defined(GL_EXT_shader_texture_lod)
-	return textureCubeLodEXT(sampler, coord, lod);
-#else
-	return textureCube(sampler, coord, lod);
 #endif
-}
+#if !defined(GL_EXT_shader_texture_lod)
+#define texture1DLodEXT texture1D
+#define texture2DLodEXT texture2D
+#define texture2DProjLodEXT texture2DProj
+#define texture3DLodEXT texture3D
+#define textureCubeLodEXT textureCube
+#endif
 
-uniform mediump vec4 _TexA_HDR;
-uniform mediump vec4 _TexB_HDR;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	mediump vec4 _TexA_HDR;
+uniform 	mediump vec4 _TexB_HDR;
+uniform 	float _Level;
+uniform 	float _value;
 uniform lowp samplerCube _TexA;
 uniform lowp samplerCube _TexB;
-uniform highp float _Level;
-uniform highp float _value;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+varying highp vec3 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec3 u_xlat0;
+mediump vec3 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+mediump vec3 u_xlat16_1;
+mediump float u_xlat16_7;
+void main()
 {
-  mediump vec3 res_1;
-  mediump vec4 tmpvar_2;
-  lowp vec4 tmpvar_3;
-  tmpvar_3 = impl_low_textureCubeLodEXT (_TexA, xlv_TEXCOORD0, _Level);
-  tmpvar_2 = tmpvar_3;
-  mediump vec3 tmpvar_4;
-  tmpvar_4 = ((_TexA_HDR.x * (
-    (_TexA_HDR.w * (tmpvar_2.w - 1.0))
-   + 1.0)) * tmpvar_2.xyz);
-  mediump vec4 tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = impl_low_textureCubeLodEXT (_TexB, xlv_TEXCOORD0, _Level);
-  tmpvar_5 = tmpvar_6;
-  mediump vec3 tmpvar_7;
-  tmpvar_7 = ((_TexB_HDR.x * (
-    (_TexB_HDR.w * (tmpvar_5.w - 1.0))
-   + 1.0)) * tmpvar_5.xyz);
-  highp vec3 tmpvar_8;
-  tmpvar_8 = mix (tmpvar_4, tmpvar_7, vec3(_value));
-  res_1 = tmpvar_8;
-  mediump vec4 tmpvar_9;
-  tmpvar_9.w = 1.0;
-  tmpvar_9.xyz = res_1;
-  gl_FragData[0] = tmpvar_9;
+    u_xlat10_0 = textureCubeLodEXT(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
+    u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
+    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
+    u_xlat10_0 = textureCubeLodEXT(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
+    u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
+    SV_Target0.xyz = u_xlat0.xyz;
+    SV_Target0.w = 1.0;
+    return;
 }
-
 
 #endif
 "
 }
 SubProgram "gles hw_tier02 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+attribute highp vec4 in_POSITION0;
+attribute highp vec3 in_TEXCOORD0;
+varying highp vec3 vs_TEXCOORD0;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.w = 1.0;
-  tmpvar_1.xyz = _glesVertex.xyz;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_1));
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xyz;
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD0.xyz = in_TEXCOORD0.xyz;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
+#version 100
+#ifdef GL_EXT_shader_texture_lod
 #extension GL_EXT_shader_texture_lod : enable
-lowp vec4 impl_low_textureCubeLodEXT(lowp samplerCube sampler, highp vec3 coord, mediump float lod)
-{
-#if defined(GL_EXT_shader_texture_lod)
-	return textureCubeLodEXT(sampler, coord, lod);
-#else
-	return textureCube(sampler, coord, lod);
 #endif
-}
+#if !defined(GL_EXT_shader_texture_lod)
+#define texture1DLodEXT texture1D
+#define texture2DLodEXT texture2D
+#define texture2DProjLodEXT texture2DProj
+#define texture3DLodEXT texture3D
+#define textureCubeLodEXT textureCube
+#endif
 
-uniform mediump vec4 _TexA_HDR;
-uniform mediump vec4 _TexB_HDR;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	mediump vec4 _TexA_HDR;
+uniform 	mediump vec4 _TexB_HDR;
+uniform 	float _Level;
+uniform 	float _value;
 uniform lowp samplerCube _TexA;
 uniform lowp samplerCube _TexB;
-uniform highp float _Level;
-uniform highp float _value;
-varying highp vec3 xlv_TEXCOORD0;
-void main ()
+varying highp vec3 vs_TEXCOORD0;
+#define SV_Target0 gl_FragData[0]
+vec3 u_xlat0;
+mediump vec3 u_xlat16_0;
+lowp vec4 u_xlat10_0;
+mediump vec3 u_xlat16_1;
+mediump float u_xlat16_7;
+void main()
 {
-  mediump vec3 res_1;
-  mediump vec4 tmpvar_2;
-  lowp vec4 tmpvar_3;
-  tmpvar_3 = impl_low_textureCubeLodEXT (_TexA, xlv_TEXCOORD0, _Level);
-  tmpvar_2 = tmpvar_3;
-  mediump vec3 tmpvar_4;
-  tmpvar_4 = ((_TexA_HDR.x * (
-    (_TexA_HDR.w * (tmpvar_2.w - 1.0))
-   + 1.0)) * tmpvar_2.xyz);
-  mediump vec4 tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = impl_low_textureCubeLodEXT (_TexB, xlv_TEXCOORD0, _Level);
-  tmpvar_5 = tmpvar_6;
-  mediump vec3 tmpvar_7;
-  tmpvar_7 = ((_TexB_HDR.x * (
-    (_TexB_HDR.w * (tmpvar_5.w - 1.0))
-   + 1.0)) * tmpvar_5.xyz);
-  highp vec3 tmpvar_8;
-  tmpvar_8 = mix (tmpvar_4, tmpvar_7, vec3(_value));
-  res_1 = tmpvar_8;
-  mediump vec4 tmpvar_9;
-  tmpvar_9.w = 1.0;
-  tmpvar_9.xyz = res_1;
-  gl_FragData[0] = tmpvar_9;
+    u_xlat10_0 = textureCubeLodEXT(_TexA, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_1.x = _TexA_HDR.w * u_xlat16_1.x + 1.0;
+    u_xlat16_1.x = u_xlat16_1.x * _TexA_HDR.x;
+    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
+    u_xlat10_0 = textureCubeLodEXT(_TexB, vs_TEXCOORD0.xyz, _Level);
+    u_xlat16_7 = u_xlat10_0.w + -1.0;
+    u_xlat16_7 = _TexB_HDR.w * u_xlat16_7 + 1.0;
+    u_xlat16_7 = u_xlat16_7 * _TexB_HDR.x;
+    u_xlat16_0.xyz = vec3(u_xlat16_7) * u_xlat10_0.xyz + (-u_xlat16_1.xyz);
+    u_xlat0.xyz = vec3(vec3(_value, _value, _value)) * u_xlat16_0.xyz + u_xlat16_1.xyz;
+    SV_Target0.xyz = u_xlat0.xyz;
+    SV_Target0.w = 1.0;
+    return;
 }
-
 
 #endif
 "

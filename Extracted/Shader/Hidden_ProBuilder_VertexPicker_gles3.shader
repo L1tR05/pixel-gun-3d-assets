@@ -9,11 +9,11 @@ Properties {
 SubShader {
  Tags { "DisableBatching" = "true" "IGNOREPROJECTOR" = "true" "ProBuilderPicker" = "VertexPass" "RenderType" = "Transparent" }
  Pass {
-  Name "VERTICES"
+  Name "Vertices"
   Tags { "DisableBatching" = "true" "IGNOREPROJECTOR" = "true" "ProBuilderPicker" = "VertexPass" "RenderType" = "Transparent" }
   Cull Off
   Offset -1, -1
-  GpuProgramID 5343
+  GpuProgramID 1485
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -66,6 +66,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out highp vec4 SV_Target0;
@@ -129,6 +130,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out highp vec4 SV_Target0;
@@ -192,6 +194,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 in highp vec4 vs_COLOR0;
 layout(location = 0) out highp vec4 SV_Target0;

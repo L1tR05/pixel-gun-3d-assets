@@ -16,7 +16,7 @@ SubShader {
   Tags { "PreviewType" = "Skybox" "QUEUE" = "Background" "RenderType" = "Background" }
   ZWrite Off
   Cull Off
-  GpuProgramID 32916
+  GpuProgramID 36324
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -57,22 +57,23 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Tex_HDR;
 uniform 	mediump vec4 _Tint;
 uniform 	mediump float _Exposure;
-uniform lowp samplerCube _Tex;
+uniform mediump samplerCube _Tex;
 in highp vec3 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_Tex, vs_TEXCOORD0.xyz);
-    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_0 = texture(_Tex, vs_TEXCOORD0.xyz);
+    u_xlat16_1.x = u_xlat16_0.w + -1.0;
     u_xlat16_1.x = _Tex_HDR.w * u_xlat16_1.x + 1.0;
     u_xlat16_1.x = u_xlat16_1.x * _Tex_HDR.x;
-    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
+    u_xlat16_1.xyz = u_xlat16_0.xyz * u_xlat16_1.xxx;
     u_xlat16_1.xyz = u_xlat16_1.xyz * _Tint.xyz;
     u_xlat16_1.xyz = u_xlat16_1.xyz * vec3(_Exposure);
     SV_Target0.xyz = u_xlat16_1.xyz + u_xlat16_1.xyz;
@@ -122,22 +123,23 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Tex_HDR;
 uniform 	mediump vec4 _Tint;
 uniform 	mediump float _Exposure;
-uniform lowp samplerCube _Tex;
+uniform mediump samplerCube _Tex;
 in highp vec3 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_Tex, vs_TEXCOORD0.xyz);
-    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_0 = texture(_Tex, vs_TEXCOORD0.xyz);
+    u_xlat16_1.x = u_xlat16_0.w + -1.0;
     u_xlat16_1.x = _Tex_HDR.w * u_xlat16_1.x + 1.0;
     u_xlat16_1.x = u_xlat16_1.x * _Tex_HDR.x;
-    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
+    u_xlat16_1.xyz = u_xlat16_0.xyz * u_xlat16_1.xxx;
     u_xlat16_1.xyz = u_xlat16_1.xyz * _Tint.xyz;
     u_xlat16_1.xyz = u_xlat16_1.xyz * vec3(_Exposure);
     SV_Target0.xyz = u_xlat16_1.xyz + u_xlat16_1.xyz;
@@ -187,22 +189,23 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 _Tex_HDR;
 uniform 	mediump vec4 _Tint;
 uniform 	mediump float _Exposure;
-uniform lowp samplerCube _Tex;
+uniform mediump samplerCube _Tex;
 in highp vec3 vs_TEXCOORD0;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp vec4 u_xlat10_0;
+mediump vec4 u_xlat16_0;
 mediump vec3 u_xlat16_1;
 void main()
 {
-    u_xlat10_0 = texture(_Tex, vs_TEXCOORD0.xyz);
-    u_xlat16_1.x = u_xlat10_0.w + -1.0;
+    u_xlat16_0 = texture(_Tex, vs_TEXCOORD0.xyz);
+    u_xlat16_1.x = u_xlat16_0.w + -1.0;
     u_xlat16_1.x = _Tex_HDR.w * u_xlat16_1.x + 1.0;
     u_xlat16_1.x = u_xlat16_1.x * _Tex_HDR.x;
-    u_xlat16_1.xyz = u_xlat10_0.xyz * u_xlat16_1.xxx;
+    u_xlat16_1.xyz = u_xlat16_0.xyz * u_xlat16_1.xxx;
     u_xlat16_1.xyz = u_xlat16_1.xyz * _Tint.xyz;
     u_xlat16_1.xyz = u_xlat16_1.xyz * vec3(_Exposure);
     SV_Target0.xyz = u_xlat16_1.xyz + u_xlat16_1.xyz;

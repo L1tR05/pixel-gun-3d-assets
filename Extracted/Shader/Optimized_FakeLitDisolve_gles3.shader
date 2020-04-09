@@ -21,7 +21,7 @@ SubShader {
   LOD 200
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Transparent-100" "RenderType" = "Transparent" }
   ZTest Less
-  GpuProgramID 63454
+  GpuProgramID 64194
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }
@@ -73,28 +73,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
 uniform 	mediump float _Disolve;
 uniform 	mediump vec4 _DisolveColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DisolveTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DisolveTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 mediump vec4 u_xlat16_3;
-lowp vec4 u_xlat10_3;
 mediump vec3 u_xlat16_4;
 bvec3 u_xlatb5;
 mediump float u_xlat16_6;
 void main()
 {
-    u_xlat10_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
-    u_xlat16_1.x = u_xlat10_0 + -1.0;
+    u_xlat16_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
+    u_xlat16_1.x = u_xlat16_0 + -1.0;
     u_xlat16_6 = (-u_xlat16_1.x) + 1.0;
     u_xlat16_1.x = _Disolve * u_xlat16_6 + u_xlat16_1.x;
     u_xlat16_6 = u_xlat16_1.x + _CutOut;
@@ -113,12 +113,12 @@ void main()
     u_xlatb5.x = u_xlat16_2.x<0.0;
 #endif
     u_xlatb5.x = u_xlatb0 && u_xlatb5.x;
-    if((int(u_xlatb5.x) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb5.x) * int(0xffffffffu)))!=0){discard;}
     u_xlat16_2.xyz = vec3(vec3(_CutOut, _CutOut, _CutOut)) + vec3(0.300000012, 0.0199999996, 0.00999999978);
     u_xlatb5.xyz = lessThan(u_xlat16_1.wwww, u_xlat16_2.xyzz).xyz;
     u_xlat16_2.xyz = _DisolveColor.xyz * vec3(0.333333343, 0.333333343, 0.333333343);
-    u_xlat10_3 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_3 = u_xlat10_3 * vs_COLOR1;
+    u_xlat16_3 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_3 = u_xlat16_3 * vs_COLOR1;
     u_xlat16_2.xyz = u_xlat16_2.xyz * u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.x) ? u_xlat16_2.xyz : u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.y) ? _DisolveColor.xyz : u_xlat16_2.xyz;
@@ -181,28 +181,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
 uniform 	mediump float _Disolve;
 uniform 	mediump vec4 _DisolveColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DisolveTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DisolveTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 mediump vec4 u_xlat16_3;
-lowp vec4 u_xlat10_3;
 mediump vec3 u_xlat16_4;
 bvec3 u_xlatb5;
 mediump float u_xlat16_6;
 void main()
 {
-    u_xlat10_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
-    u_xlat16_1.x = u_xlat10_0 + -1.0;
+    u_xlat16_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
+    u_xlat16_1.x = u_xlat16_0 + -1.0;
     u_xlat16_6 = (-u_xlat16_1.x) + 1.0;
     u_xlat16_1.x = _Disolve * u_xlat16_6 + u_xlat16_1.x;
     u_xlat16_6 = u_xlat16_1.x + _CutOut;
@@ -221,12 +221,12 @@ void main()
     u_xlatb5.x = u_xlat16_2.x<0.0;
 #endif
     u_xlatb5.x = u_xlatb0 && u_xlatb5.x;
-    if((int(u_xlatb5.x) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb5.x) * int(0xffffffffu)))!=0){discard;}
     u_xlat16_2.xyz = vec3(vec3(_CutOut, _CutOut, _CutOut)) + vec3(0.300000012, 0.0199999996, 0.00999999978);
     u_xlatb5.xyz = lessThan(u_xlat16_1.wwww, u_xlat16_2.xyzz).xyz;
     u_xlat16_2.xyz = _DisolveColor.xyz * vec3(0.333333343, 0.333333343, 0.333333343);
-    u_xlat10_3 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_3 = u_xlat10_3 * vs_COLOR1;
+    u_xlat16_3 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_3 = u_xlat16_3 * vs_COLOR1;
     u_xlat16_2.xyz = u_xlat16_2.xyz * u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.x) ? u_xlat16_2.xyz : u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.y) ? _DisolveColor.xyz : u_xlat16_2.xyz;
@@ -289,28 +289,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
 uniform 	mediump float _Disolve;
 uniform 	mediump vec4 _DisolveColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DisolveTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DisolveTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 mediump vec4 u_xlat16_3;
-lowp vec4 u_xlat10_3;
 mediump vec3 u_xlat16_4;
 bvec3 u_xlatb5;
 mediump float u_xlat16_6;
 void main()
 {
-    u_xlat10_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
-    u_xlat16_1.x = u_xlat10_0 + -1.0;
+    u_xlat16_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
+    u_xlat16_1.x = u_xlat16_0 + -1.0;
     u_xlat16_6 = (-u_xlat16_1.x) + 1.0;
     u_xlat16_1.x = _Disolve * u_xlat16_6 + u_xlat16_1.x;
     u_xlat16_6 = u_xlat16_1.x + _CutOut;
@@ -329,12 +329,12 @@ void main()
     u_xlatb5.x = u_xlat16_2.x<0.0;
 #endif
     u_xlatb5.x = u_xlatb0 && u_xlatb5.x;
-    if((int(u_xlatb5.x) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb5.x) * int(0xffffffffu)))!=0){discard;}
     u_xlat16_2.xyz = vec3(vec3(_CutOut, _CutOut, _CutOut)) + vec3(0.300000012, 0.0199999996, 0.00999999978);
     u_xlatb5.xyz = lessThan(u_xlat16_1.wwww, u_xlat16_2.xyzz).xyz;
     u_xlat16_2.xyz = _DisolveColor.xyz * vec3(0.333333343, 0.333333343, 0.333333343);
-    u_xlat10_3 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_3 = u_xlat10_3 * vs_COLOR1;
+    u_xlat16_3 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_3 = u_xlat16_3 * vs_COLOR1;
     u_xlat16_2.xyz = u_xlat16_2.xyz * u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.x) ? u_xlat16_2.xyz : u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.y) ? _DisolveColor.xyz : u_xlat16_2.xyz;
@@ -397,28 +397,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
 uniform 	mediump float _Disolve;
 uniform 	mediump vec4 _DisolveColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DisolveTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DisolveTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 mediump vec4 u_xlat16_3;
-lowp vec4 u_xlat10_3;
 mediump vec3 u_xlat16_4;
 bvec3 u_xlatb5;
 mediump float u_xlat16_6;
 void main()
 {
-    u_xlat10_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
-    u_xlat16_1.x = u_xlat10_0 + -1.0;
+    u_xlat16_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
+    u_xlat16_1.x = u_xlat16_0 + -1.0;
     u_xlat16_6 = (-u_xlat16_1.x) + 1.0;
     u_xlat16_1.x = _Disolve * u_xlat16_6 + u_xlat16_1.x;
     u_xlat16_6 = u_xlat16_1.x + _CutOut;
@@ -437,12 +437,12 @@ void main()
     u_xlatb5.x = u_xlat16_2.x<0.0;
 #endif
     u_xlatb5.x = u_xlatb0 && u_xlatb5.x;
-    if((int(u_xlatb5.x) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb5.x) * int(0xffffffffu)))!=0){discard;}
     u_xlat16_2.xyz = vec3(vec3(_CutOut, _CutOut, _CutOut)) + vec3(0.300000012, 0.0199999996, 0.00999999978);
     u_xlatb5.xyz = lessThan(u_xlat16_1.wwww, u_xlat16_2.xyzz).xyz;
     u_xlat16_2.xyz = _DisolveColor.xyz * vec3(0.333333343, 0.333333343, 0.333333343);
-    u_xlat10_3 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_3 = u_xlat10_3 * vs_COLOR1;
+    u_xlat16_3 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_3 = u_xlat16_3 * vs_COLOR1;
     u_xlat16_2.xyz = u_xlat16_2.xyz * u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.x) ? u_xlat16_2.xyz : u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.y) ? _DisolveColor.xyz : u_xlat16_2.xyz;
@@ -505,28 +505,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
 uniform 	mediump float _Disolve;
 uniform 	mediump vec4 _DisolveColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DisolveTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DisolveTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 mediump vec4 u_xlat16_3;
-lowp vec4 u_xlat10_3;
 mediump vec3 u_xlat16_4;
 bvec3 u_xlatb5;
 mediump float u_xlat16_6;
 void main()
 {
-    u_xlat10_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
-    u_xlat16_1.x = u_xlat10_0 + -1.0;
+    u_xlat16_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
+    u_xlat16_1.x = u_xlat16_0 + -1.0;
     u_xlat16_6 = (-u_xlat16_1.x) + 1.0;
     u_xlat16_1.x = _Disolve * u_xlat16_6 + u_xlat16_1.x;
     u_xlat16_6 = u_xlat16_1.x + _CutOut;
@@ -545,12 +545,12 @@ void main()
     u_xlatb5.x = u_xlat16_2.x<0.0;
 #endif
     u_xlatb5.x = u_xlatb0 && u_xlatb5.x;
-    if((int(u_xlatb5.x) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb5.x) * int(0xffffffffu)))!=0){discard;}
     u_xlat16_2.xyz = vec3(vec3(_CutOut, _CutOut, _CutOut)) + vec3(0.300000012, 0.0199999996, 0.00999999978);
     u_xlatb5.xyz = lessThan(u_xlat16_1.wwww, u_xlat16_2.xyzz).xyz;
     u_xlat16_2.xyz = _DisolveColor.xyz * vec3(0.333333343, 0.333333343, 0.333333343);
-    u_xlat10_3 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_3 = u_xlat10_3 * vs_COLOR1;
+    u_xlat16_3 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_3 = u_xlat16_3 * vs_COLOR1;
     u_xlat16_2.xyz = u_xlat16_2.xyz * u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.x) ? u_xlat16_2.xyz : u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.y) ? _DisolveColor.xyz : u_xlat16_2.xyz;
@@ -613,28 +613,28 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump float _CutOut;
 uniform 	mediump float _Disolve;
 uniform 	mediump vec4 _DisolveColor;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _DisolveTex;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _DisolveTex;
 in highp vec2 vs_TEXCOORD0;
 in mediump vec4 vs_COLOR1;
 layout(location = 0) out mediump vec4 SV_Target0;
-lowp float u_xlat10_0;
+mediump float u_xlat16_0;
 bool u_xlatb0;
 mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 mediump vec4 u_xlat16_3;
-lowp vec4 u_xlat10_3;
 mediump vec3 u_xlat16_4;
 bvec3 u_xlatb5;
 mediump float u_xlat16_6;
 void main()
 {
-    u_xlat10_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
-    u_xlat16_1.x = u_xlat10_0 + -1.0;
+    u_xlat16_0 = texture(_DisolveTex, vs_TEXCOORD0.xy).x;
+    u_xlat16_1.x = u_xlat16_0 + -1.0;
     u_xlat16_6 = (-u_xlat16_1.x) + 1.0;
     u_xlat16_1.x = _Disolve * u_xlat16_6 + u_xlat16_1.x;
     u_xlat16_6 = u_xlat16_1.x + _CutOut;
@@ -653,12 +653,12 @@ void main()
     u_xlatb5.x = u_xlat16_2.x<0.0;
 #endif
     u_xlatb5.x = u_xlatb0 && u_xlatb5.x;
-    if((int(u_xlatb5.x) * int(0xffffffffu))!=0){discard;}
+    if(((int(u_xlatb5.x) * int(0xffffffffu)))!=0){discard;}
     u_xlat16_2.xyz = vec3(vec3(_CutOut, _CutOut, _CutOut)) + vec3(0.300000012, 0.0199999996, 0.00999999978);
     u_xlatb5.xyz = lessThan(u_xlat16_1.wwww, u_xlat16_2.xyzz).xyz;
     u_xlat16_2.xyz = _DisolveColor.xyz * vec3(0.333333343, 0.333333343, 0.333333343);
-    u_xlat10_3 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat16_3 = u_xlat10_3 * vs_COLOR1;
+    u_xlat16_3 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat16_3 = u_xlat16_3 * vs_COLOR1;
     u_xlat16_2.xyz = u_xlat16_2.xyz * u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.x) ? u_xlat16_2.xyz : u_xlat16_3.xyz;
     u_xlat16_2.xyz = (u_xlatb5.y) ? _DisolveColor.xyz : u_xlat16_2.xyz;

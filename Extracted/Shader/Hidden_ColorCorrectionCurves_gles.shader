@@ -15,334 +15,289 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 55031
+  GpuProgramID 35762
 Program "vp" {
 SubProgram "gles hw_tier00 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _CameraDepthTexture_ST;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec2 xlv_TEXCOORD1;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _CameraDepthTexture_ST;
+attribute highp vec4 in_POSITION0;
+attribute mediump vec2 in_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD1;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  mediump vec2 tmpvar_1;
-  tmpvar_1 = _glesMultiTexCoord0.xy;
-  highp vec2 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  tmpvar_2 = tmpvar_1;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_2;
-  xlv_TEXCOORD1 = ((_glesMultiTexCoord0.xy * _CameraDepthTexture_ST.xy) + _CameraDepthTexture_ST.zw);
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD1.xy = in_TEXCOORD0.xy * _CameraDepthTexture_ST.xy + _CameraDepthTexture_ST.zw;
+    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform highp vec4 _ZBufferParams;
-uniform sampler2D _MainTex;
-uniform sampler2D _CameraDepthTexture;
-uniform sampler2D _RgbTex;
-uniform sampler2D _ZCurve;
-uniform sampler2D _RgbDepthTex;
-uniform lowp float _Saturation;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec2 xlv_TEXCOORD1;
-void main ()
-{
-  mediump vec3 depthBlue_1;
-  mediump vec3 depthGreen_2;
-  mediump vec3 depthRed_3;
-  mediump float zval_4;
-  mediump float theDepth_5;
-  mediump vec3 blue_6;
-  mediump vec3 green_7;
-  mediump vec3 red_8;
-  mediump vec4 color_9;
-  lowp vec4 tmpvar_10;
-  tmpvar_10 = texture2D (_MainTex, xlv_TEXCOORD0);
-  color_9 = tmpvar_10;
-  mediump vec2 tmpvar_11;
-  tmpvar_11.x = color_9.x;
-  tmpvar_11.y = 0.125;
-  lowp vec3 tmpvar_12;
-  tmpvar_12 = (texture2D (_RgbTex, tmpvar_11).xyz * vec3(1.0, 0.0, 0.0));
-  red_8 = tmpvar_12;
-  mediump vec2 tmpvar_13;
-  tmpvar_13.x = color_9.y;
-  tmpvar_13.y = 0.375;
-  lowp vec3 tmpvar_14;
-  tmpvar_14 = (texture2D (_RgbTex, tmpvar_13).xyz * vec3(0.0, 1.0, 0.0));
-  green_7 = tmpvar_14;
-  mediump vec2 tmpvar_15;
-  tmpvar_15.x = color_9.z;
-  tmpvar_15.y = 0.625;
-  lowp vec3 tmpvar_16;
-  tmpvar_16 = (texture2D (_RgbTex, tmpvar_15).xyz * vec3(0.0, 0.0, 1.0));
-  blue_6 = tmpvar_16;
-  lowp float tmpvar_17;
-  tmpvar_17 = texture2D (_CameraDepthTexture, xlv_TEXCOORD1).x;
-  theDepth_5 = tmpvar_17;
-  highp float z_18;
-  z_18 = theDepth_5;
-  highp vec2 tmpvar_19;
-  tmpvar_19.y = 0.5;
-  tmpvar_19.x = (1.0/(((_ZBufferParams.x * z_18) + _ZBufferParams.y)));
-  lowp float tmpvar_20;
-  tmpvar_20 = texture2D (_ZCurve, tmpvar_19).x;
-  zval_4 = tmpvar_20;
-  mediump vec2 tmpvar_21;
-  tmpvar_21.x = color_9.x;
-  tmpvar_21.y = 0.125;
-  lowp vec3 tmpvar_22;
-  tmpvar_22 = (texture2D (_RgbDepthTex, tmpvar_21).xyz * vec3(1.0, 0.0, 0.0));
-  depthRed_3 = tmpvar_22;
-  mediump vec2 tmpvar_23;
-  tmpvar_23.x = color_9.y;
-  tmpvar_23.y = 0.375;
-  lowp vec3 tmpvar_24;
-  tmpvar_24 = (texture2D (_RgbDepthTex, tmpvar_23).xyz * vec3(0.0, 1.0, 0.0));
-  depthGreen_2 = tmpvar_24;
-  mediump vec2 tmpvar_25;
-  tmpvar_25.x = color_9.z;
-  tmpvar_25.y = 0.625;
-  lowp vec3 tmpvar_26;
-  tmpvar_26 = (texture2D (_RgbDepthTex, tmpvar_25).xyz * vec3(0.0, 0.0, 1.0));
-  depthBlue_1 = tmpvar_26;
-  mediump vec4 tmpvar_27;
-  tmpvar_27.xyz = mix (((red_8 + green_7) + blue_6), ((depthRed_3 + depthBlue_1) + depthGreen_2), vec3(zval_4));
-  tmpvar_27.w = color_9.w;
-  color_9.w = tmpvar_27.w;
-  color_9.xyz = mix (vec3(dot (tmpvar_27.xyz, vec3(0.22, 0.707, 0.071))), tmpvar_27.xyz, vec3(_Saturation));
-  gl_FragData[0] = color_9;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	vec4 _ZBufferParams;
+uniform 	mediump float _Saturation;
+uniform lowp sampler2D _MainTex;
+uniform lowp sampler2D _RgbTex;
+uniform highp sampler2D _CameraDepthTexture;
+uniform lowp sampler2D _ZCurve;
+uniform lowp sampler2D _RgbDepthTex;
+varying highp vec2 vs_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD1;
+#define SV_Target0 gl_FragData[0]
+vec4 u_xlat0;
+lowp vec3 u_xlat10_0;
+vec2 u_xlat1;
+mediump vec3 u_xlat16_2;
+lowp vec3 u_xlat10_2;
+lowp vec3 u_xlat10_3;
+lowp vec3 u_xlat10_4;
+mediump vec3 u_xlat16_5;
+mediump vec3 u_xlat16_6;
+vec2 u_xlat15;
+mediump float u_xlat16_26;
+void main()
+{
+    u_xlat0 = texture2D(_MainTex, vs_TEXCOORD0.xy).xzyw;
+    u_xlat1.x = u_xlat0.y;
+    u_xlat1.y = float(0.625);
+    u_xlat15.y = float(0.5);
+    u_xlat10_2.xyz = texture2D(_RgbDepthTex, u_xlat1.xy).xyz;
+    u_xlat10_3.xyz = texture2D(_RgbTex, u_xlat1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 0.0, 1.0);
+    SV_Target0.w = u_xlat0.w;
+    u_xlat0.y = float(0.125);
+    u_xlat0.w = float(0.375);
+    u_xlat10_4.xyz = texture2D(_RgbDepthTex, u_xlat0.xy).xyz;
+    u_xlat16_5.xyz = u_xlat10_4.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat10_2.xyz = texture2D(_RgbDepthTex, u_xlat0.zw).xyz;
+    u_xlat16_5.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0) + u_xlat16_5.xyz;
+    u_xlat10_2.xyz = texture2D(_RgbTex, u_xlat0.zw).xyz;
+    u_xlat10_0.xyz = texture2D(_RgbTex, u_xlat0.xy).xyz;
+    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0);
+    u_xlat16_6.xyz = u_xlat10_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_6.xyz = u_xlat10_3.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_6.xyz;
+    u_xlat16_5.xyz = u_xlat16_5.xyz + (-u_xlat16_6.xyz);
+    u_xlat0.x = texture2D(_CameraDepthTexture, vs_TEXCOORD1.xy).x;
+    u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
+    u_xlat15.x = float(1.0) / u_xlat0.x;
+    u_xlat10_0.x = texture2D(_ZCurve, u_xlat15.xy).x;
+    u_xlat16_5.xyz = u_xlat10_0.xxx * u_xlat16_5.xyz + u_xlat16_6.xyz;
+    u_xlat16_26 = dot(u_xlat16_5.xyz, vec3(0.219999999, 0.707000017, 0.0710000023));
+    u_xlat16_5.xyz = (-vec3(u_xlat16_26)) + u_xlat16_5.xyz;
+    SV_Target0.xyz = vec3(_Saturation) * u_xlat16_5.xyz + vec3(u_xlat16_26);
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier01 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _CameraDepthTexture_ST;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec2 xlv_TEXCOORD1;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _CameraDepthTexture_ST;
+attribute highp vec4 in_POSITION0;
+attribute mediump vec2 in_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD1;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  mediump vec2 tmpvar_1;
-  tmpvar_1 = _glesMultiTexCoord0.xy;
-  highp vec2 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  tmpvar_2 = tmpvar_1;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_2;
-  xlv_TEXCOORD1 = ((_glesMultiTexCoord0.xy * _CameraDepthTexture_ST.xy) + _CameraDepthTexture_ST.zw);
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD1.xy = in_TEXCOORD0.xy * _CameraDepthTexture_ST.xy + _CameraDepthTexture_ST.zw;
+    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform highp vec4 _ZBufferParams;
-uniform sampler2D _MainTex;
-uniform sampler2D _CameraDepthTexture;
-uniform sampler2D _RgbTex;
-uniform sampler2D _ZCurve;
-uniform sampler2D _RgbDepthTex;
-uniform lowp float _Saturation;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec2 xlv_TEXCOORD1;
-void main ()
-{
-  mediump vec3 depthBlue_1;
-  mediump vec3 depthGreen_2;
-  mediump vec3 depthRed_3;
-  mediump float zval_4;
-  mediump float theDepth_5;
-  mediump vec3 blue_6;
-  mediump vec3 green_7;
-  mediump vec3 red_8;
-  mediump vec4 color_9;
-  lowp vec4 tmpvar_10;
-  tmpvar_10 = texture2D (_MainTex, xlv_TEXCOORD0);
-  color_9 = tmpvar_10;
-  mediump vec2 tmpvar_11;
-  tmpvar_11.x = color_9.x;
-  tmpvar_11.y = 0.125;
-  lowp vec3 tmpvar_12;
-  tmpvar_12 = (texture2D (_RgbTex, tmpvar_11).xyz * vec3(1.0, 0.0, 0.0));
-  red_8 = tmpvar_12;
-  mediump vec2 tmpvar_13;
-  tmpvar_13.x = color_9.y;
-  tmpvar_13.y = 0.375;
-  lowp vec3 tmpvar_14;
-  tmpvar_14 = (texture2D (_RgbTex, tmpvar_13).xyz * vec3(0.0, 1.0, 0.0));
-  green_7 = tmpvar_14;
-  mediump vec2 tmpvar_15;
-  tmpvar_15.x = color_9.z;
-  tmpvar_15.y = 0.625;
-  lowp vec3 tmpvar_16;
-  tmpvar_16 = (texture2D (_RgbTex, tmpvar_15).xyz * vec3(0.0, 0.0, 1.0));
-  blue_6 = tmpvar_16;
-  lowp float tmpvar_17;
-  tmpvar_17 = texture2D (_CameraDepthTexture, xlv_TEXCOORD1).x;
-  theDepth_5 = tmpvar_17;
-  highp float z_18;
-  z_18 = theDepth_5;
-  highp vec2 tmpvar_19;
-  tmpvar_19.y = 0.5;
-  tmpvar_19.x = (1.0/(((_ZBufferParams.x * z_18) + _ZBufferParams.y)));
-  lowp float tmpvar_20;
-  tmpvar_20 = texture2D (_ZCurve, tmpvar_19).x;
-  zval_4 = tmpvar_20;
-  mediump vec2 tmpvar_21;
-  tmpvar_21.x = color_9.x;
-  tmpvar_21.y = 0.125;
-  lowp vec3 tmpvar_22;
-  tmpvar_22 = (texture2D (_RgbDepthTex, tmpvar_21).xyz * vec3(1.0, 0.0, 0.0));
-  depthRed_3 = tmpvar_22;
-  mediump vec2 tmpvar_23;
-  tmpvar_23.x = color_9.y;
-  tmpvar_23.y = 0.375;
-  lowp vec3 tmpvar_24;
-  tmpvar_24 = (texture2D (_RgbDepthTex, tmpvar_23).xyz * vec3(0.0, 1.0, 0.0));
-  depthGreen_2 = tmpvar_24;
-  mediump vec2 tmpvar_25;
-  tmpvar_25.x = color_9.z;
-  tmpvar_25.y = 0.625;
-  lowp vec3 tmpvar_26;
-  tmpvar_26 = (texture2D (_RgbDepthTex, tmpvar_25).xyz * vec3(0.0, 0.0, 1.0));
-  depthBlue_1 = tmpvar_26;
-  mediump vec4 tmpvar_27;
-  tmpvar_27.xyz = mix (((red_8 + green_7) + blue_6), ((depthRed_3 + depthBlue_1) + depthGreen_2), vec3(zval_4));
-  tmpvar_27.w = color_9.w;
-  color_9.w = tmpvar_27.w;
-  color_9.xyz = mix (vec3(dot (tmpvar_27.xyz, vec3(0.22, 0.707, 0.071))), tmpvar_27.xyz, vec3(_Saturation));
-  gl_FragData[0] = color_9;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	vec4 _ZBufferParams;
+uniform 	mediump float _Saturation;
+uniform lowp sampler2D _MainTex;
+uniform lowp sampler2D _RgbTex;
+uniform highp sampler2D _CameraDepthTexture;
+uniform lowp sampler2D _ZCurve;
+uniform lowp sampler2D _RgbDepthTex;
+varying highp vec2 vs_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD1;
+#define SV_Target0 gl_FragData[0]
+vec4 u_xlat0;
+lowp vec3 u_xlat10_0;
+vec2 u_xlat1;
+mediump vec3 u_xlat16_2;
+lowp vec3 u_xlat10_2;
+lowp vec3 u_xlat10_3;
+lowp vec3 u_xlat10_4;
+mediump vec3 u_xlat16_5;
+mediump vec3 u_xlat16_6;
+vec2 u_xlat15;
+mediump float u_xlat16_26;
+void main()
+{
+    u_xlat0 = texture2D(_MainTex, vs_TEXCOORD0.xy).xzyw;
+    u_xlat1.x = u_xlat0.y;
+    u_xlat1.y = float(0.625);
+    u_xlat15.y = float(0.5);
+    u_xlat10_2.xyz = texture2D(_RgbDepthTex, u_xlat1.xy).xyz;
+    u_xlat10_3.xyz = texture2D(_RgbTex, u_xlat1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 0.0, 1.0);
+    SV_Target0.w = u_xlat0.w;
+    u_xlat0.y = float(0.125);
+    u_xlat0.w = float(0.375);
+    u_xlat10_4.xyz = texture2D(_RgbDepthTex, u_xlat0.xy).xyz;
+    u_xlat16_5.xyz = u_xlat10_4.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat10_2.xyz = texture2D(_RgbDepthTex, u_xlat0.zw).xyz;
+    u_xlat16_5.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0) + u_xlat16_5.xyz;
+    u_xlat10_2.xyz = texture2D(_RgbTex, u_xlat0.zw).xyz;
+    u_xlat10_0.xyz = texture2D(_RgbTex, u_xlat0.xy).xyz;
+    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0);
+    u_xlat16_6.xyz = u_xlat10_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_6.xyz = u_xlat10_3.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_6.xyz;
+    u_xlat16_5.xyz = u_xlat16_5.xyz + (-u_xlat16_6.xyz);
+    u_xlat0.x = texture2D(_CameraDepthTexture, vs_TEXCOORD1.xy).x;
+    u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
+    u_xlat15.x = float(1.0) / u_xlat0.x;
+    u_xlat10_0.x = texture2D(_ZCurve, u_xlat15.xy).x;
+    u_xlat16_5.xyz = u_xlat10_0.xxx * u_xlat16_5.xyz + u_xlat16_6.xyz;
+    u_xlat16_26 = dot(u_xlat16_5.xyz, vec3(0.219999999, 0.707000017, 0.0710000023));
+    u_xlat16_5.xyz = (-vec3(u_xlat16_26)) + u_xlat16_5.xyz;
+    SV_Target0.xyz = vec3(_Saturation) * u_xlat16_5.xyz + vec3(u_xlat16_26);
+    return;
+}
 
 #endif
 "
 }
 SubProgram "gles hw_tier02 " {
-"#version 100
+"#ifdef VERTEX
+#version 100
 
-#ifdef VERTEX
-attribute vec4 _glesVertex;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 unity_ObjectToWorld;
-uniform highp mat4 unity_MatrixVP;
-uniform highp vec4 _CameraDepthTexture_ST;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec2 xlv_TEXCOORD1;
-void main ()
+uniform 	vec4 hlslcc_mtx4x4unity_ObjectToWorld[4];
+uniform 	vec4 hlslcc_mtx4x4unity_MatrixVP[4];
+uniform 	vec4 _CameraDepthTexture_ST;
+attribute highp vec4 in_POSITION0;
+attribute mediump vec2 in_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD1;
+vec4 u_xlat0;
+vec4 u_xlat1;
+void main()
 {
-  mediump vec2 tmpvar_1;
-  tmpvar_1 = _glesMultiTexCoord0.xy;
-  highp vec2 tmpvar_2;
-  highp vec4 tmpvar_3;
-  tmpvar_3.w = 1.0;
-  tmpvar_3.xyz = _glesVertex.xyz;
-  tmpvar_2 = tmpvar_1;
-  gl_Position = (unity_MatrixVP * (unity_ObjectToWorld * tmpvar_3));
-  xlv_TEXCOORD0 = tmpvar_2;
-  xlv_TEXCOORD1 = ((_glesMultiTexCoord0.xy * _CameraDepthTexture_ST.xy) + _CameraDepthTexture_ST.zw);
+    u_xlat0 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat0;
+    u_xlat0 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat0;
+    u_xlat0 = u_xlat0 + hlslcc_mtx4x4unity_ObjectToWorld[3];
+    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat0.xxxx + u_xlat1;
+    u_xlat1 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat0.zzzz + u_xlat1;
+    gl_Position = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat0.wwww + u_xlat1;
+    vs_TEXCOORD1.xy = in_TEXCOORD0.xy * _CameraDepthTexture_ST.xy + _CameraDepthTexture_ST.zw;
+    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;
+    return;
 }
-
 
 #endif
 #ifdef FRAGMENT
-uniform highp vec4 _ZBufferParams;
-uniform sampler2D _MainTex;
-uniform sampler2D _CameraDepthTexture;
-uniform sampler2D _RgbTex;
-uniform sampler2D _ZCurve;
-uniform sampler2D _RgbDepthTex;
-uniform lowp float _Saturation;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec2 xlv_TEXCOORD1;
-void main ()
-{
-  mediump vec3 depthBlue_1;
-  mediump vec3 depthGreen_2;
-  mediump vec3 depthRed_3;
-  mediump float zval_4;
-  mediump float theDepth_5;
-  mediump vec3 blue_6;
-  mediump vec3 green_7;
-  mediump vec3 red_8;
-  mediump vec4 color_9;
-  lowp vec4 tmpvar_10;
-  tmpvar_10 = texture2D (_MainTex, xlv_TEXCOORD0);
-  color_9 = tmpvar_10;
-  mediump vec2 tmpvar_11;
-  tmpvar_11.x = color_9.x;
-  tmpvar_11.y = 0.125;
-  lowp vec3 tmpvar_12;
-  tmpvar_12 = (texture2D (_RgbTex, tmpvar_11).xyz * vec3(1.0, 0.0, 0.0));
-  red_8 = tmpvar_12;
-  mediump vec2 tmpvar_13;
-  tmpvar_13.x = color_9.y;
-  tmpvar_13.y = 0.375;
-  lowp vec3 tmpvar_14;
-  tmpvar_14 = (texture2D (_RgbTex, tmpvar_13).xyz * vec3(0.0, 1.0, 0.0));
-  green_7 = tmpvar_14;
-  mediump vec2 tmpvar_15;
-  tmpvar_15.x = color_9.z;
-  tmpvar_15.y = 0.625;
-  lowp vec3 tmpvar_16;
-  tmpvar_16 = (texture2D (_RgbTex, tmpvar_15).xyz * vec3(0.0, 0.0, 1.0));
-  blue_6 = tmpvar_16;
-  lowp float tmpvar_17;
-  tmpvar_17 = texture2D (_CameraDepthTexture, xlv_TEXCOORD1).x;
-  theDepth_5 = tmpvar_17;
-  highp float z_18;
-  z_18 = theDepth_5;
-  highp vec2 tmpvar_19;
-  tmpvar_19.y = 0.5;
-  tmpvar_19.x = (1.0/(((_ZBufferParams.x * z_18) + _ZBufferParams.y)));
-  lowp float tmpvar_20;
-  tmpvar_20 = texture2D (_ZCurve, tmpvar_19).x;
-  zval_4 = tmpvar_20;
-  mediump vec2 tmpvar_21;
-  tmpvar_21.x = color_9.x;
-  tmpvar_21.y = 0.125;
-  lowp vec3 tmpvar_22;
-  tmpvar_22 = (texture2D (_RgbDepthTex, tmpvar_21).xyz * vec3(1.0, 0.0, 0.0));
-  depthRed_3 = tmpvar_22;
-  mediump vec2 tmpvar_23;
-  tmpvar_23.x = color_9.y;
-  tmpvar_23.y = 0.375;
-  lowp vec3 tmpvar_24;
-  tmpvar_24 = (texture2D (_RgbDepthTex, tmpvar_23).xyz * vec3(0.0, 1.0, 0.0));
-  depthGreen_2 = tmpvar_24;
-  mediump vec2 tmpvar_25;
-  tmpvar_25.x = color_9.z;
-  tmpvar_25.y = 0.625;
-  lowp vec3 tmpvar_26;
-  tmpvar_26 = (texture2D (_RgbDepthTex, tmpvar_25).xyz * vec3(0.0, 0.0, 1.0));
-  depthBlue_1 = tmpvar_26;
-  mediump vec4 tmpvar_27;
-  tmpvar_27.xyz = mix (((red_8 + green_7) + blue_6), ((depthRed_3 + depthBlue_1) + depthGreen_2), vec3(zval_4));
-  tmpvar_27.w = color_9.w;
-  color_9.w = tmpvar_27.w;
-  color_9.xyz = mix (vec3(dot (tmpvar_27.xyz, vec3(0.22, 0.707, 0.071))), tmpvar_27.xyz, vec3(_Saturation));
-  gl_FragData[0] = color_9;
-}
+#version 100
 
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+precision highp int;
+uniform 	vec4 _ZBufferParams;
+uniform 	mediump float _Saturation;
+uniform lowp sampler2D _MainTex;
+uniform lowp sampler2D _RgbTex;
+uniform highp sampler2D _CameraDepthTexture;
+uniform lowp sampler2D _ZCurve;
+uniform lowp sampler2D _RgbDepthTex;
+varying highp vec2 vs_TEXCOORD0;
+varying highp vec2 vs_TEXCOORD1;
+#define SV_Target0 gl_FragData[0]
+vec4 u_xlat0;
+lowp vec3 u_xlat10_0;
+vec2 u_xlat1;
+mediump vec3 u_xlat16_2;
+lowp vec3 u_xlat10_2;
+lowp vec3 u_xlat10_3;
+lowp vec3 u_xlat10_4;
+mediump vec3 u_xlat16_5;
+mediump vec3 u_xlat16_6;
+vec2 u_xlat15;
+mediump float u_xlat16_26;
+void main()
+{
+    u_xlat0 = texture2D(_MainTex, vs_TEXCOORD0.xy).xzyw;
+    u_xlat1.x = u_xlat0.y;
+    u_xlat1.y = float(0.625);
+    u_xlat15.y = float(0.5);
+    u_xlat10_2.xyz = texture2D(_RgbDepthTex, u_xlat1.xy).xyz;
+    u_xlat10_3.xyz = texture2D(_RgbTex, u_xlat1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 0.0, 1.0);
+    SV_Target0.w = u_xlat0.w;
+    u_xlat0.y = float(0.125);
+    u_xlat0.w = float(0.375);
+    u_xlat10_4.xyz = texture2D(_RgbDepthTex, u_xlat0.xy).xyz;
+    u_xlat16_5.xyz = u_xlat10_4.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat10_2.xyz = texture2D(_RgbDepthTex, u_xlat0.zw).xyz;
+    u_xlat16_5.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0) + u_xlat16_5.xyz;
+    u_xlat10_2.xyz = texture2D(_RgbTex, u_xlat0.zw).xyz;
+    u_xlat10_0.xyz = texture2D(_RgbTex, u_xlat0.xy).xyz;
+    u_xlat16_2.xyz = u_xlat10_2.xyz * vec3(0.0, 1.0, 0.0);
+    u_xlat16_6.xyz = u_xlat10_0.xyz * vec3(1.0, 0.0, 0.0) + u_xlat16_2.xyz;
+    u_xlat16_6.xyz = u_xlat10_3.xyz * vec3(0.0, 0.0, 1.0) + u_xlat16_6.xyz;
+    u_xlat16_5.xyz = u_xlat16_5.xyz + (-u_xlat16_6.xyz);
+    u_xlat0.x = texture2D(_CameraDepthTexture, vs_TEXCOORD1.xy).x;
+    u_xlat0.x = _ZBufferParams.x * u_xlat0.x + _ZBufferParams.y;
+    u_xlat15.x = float(1.0) / u_xlat0.x;
+    u_xlat10_0.x = texture2D(_ZCurve, u_xlat15.xy).x;
+    u_xlat16_5.xyz = u_xlat10_0.xxx * u_xlat16_5.xyz + u_xlat16_6.xyz;
+    u_xlat16_26 = dot(u_xlat16_5.xyz, vec3(0.219999999, 0.707000017, 0.0710000023));
+    u_xlat16_5.xyz = (-vec3(u_xlat16_26)) + u_xlat16_5.xyz;
+    SV_Target0.xyz = vec3(_Saturation) * u_xlat16_5.xyz + vec3(u_xlat16_26);
+    return;
+}
 
 #endif
 "

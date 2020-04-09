@@ -12,7 +12,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 11304
+  GpuProgramID 20171
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -44,6 +44,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform highp sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
@@ -87,6 +88,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform highp sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;
@@ -130,6 +132,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform highp sampler2D _MainTex;
 in highp vec2 vs_TEXCOORD0;

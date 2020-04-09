@@ -18,7 +18,7 @@ SubShader {
  Pass {
   LOD 100
   Tags { "LIGHTMODE" = "FORWARDBASE" "RenderType" = "Opaque" }
-  GpuProgramID 16140
+  GpuProgramID 40182
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -99,35 +99,35 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_Lightmap_HDR;
 uniform 	float _Brightness;
 uniform 	float _Lerp;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _LightMap;
-uniform lowp sampler2D _LightMapNight;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _LightMap;
+uniform mediump sampler2D _LightMapNight;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
 vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 void main()
 {
-    u_xlat10_0.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
-    u_xlat10_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_1.xyz * unity_Lightmap_HDR.xxx;
-    u_xlat16_0.xyz = unity_Lightmap_HDR.xxx * u_xlat10_0.xyz + (-u_xlat16_2.xyz);
+    u_xlat16_0.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_1.xyz * unity_Lightmap_HDR.xxx;
+    u_xlat16_0.xyz = unity_Lightmap_HDR.xxx * u_xlat16_0.xyz + (-u_xlat16_2.xyz);
     u_xlat0.xyz = vec3(vec3(_Lerp, _Lerp, _Lerp)) * u_xlat16_0.xyz + u_xlat16_2.xyz;
     u_xlat0.xyz = u_xlat0.xyz * vec3(_Brightness);
     u_xlat0.xyz = u_xlat0.xyz * vs_COLOR0.xyz;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * _Color;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat1 = u_xlat16_1 * _Color;
     u_xlat1.xyz = u_xlat0.xyz * u_xlat1.xyz;
     SV_Target0 = u_xlat1;
     return;
@@ -215,35 +215,35 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_Lightmap_HDR;
 uniform 	float _Brightness;
 uniform 	float _Lerp;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _LightMap;
-uniform lowp sampler2D _LightMapNight;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _LightMap;
+uniform mediump sampler2D _LightMapNight;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
 vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 void main()
 {
-    u_xlat10_0.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
-    u_xlat10_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_1.xyz * unity_Lightmap_HDR.xxx;
-    u_xlat16_0.xyz = unity_Lightmap_HDR.xxx * u_xlat10_0.xyz + (-u_xlat16_2.xyz);
+    u_xlat16_0.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_1.xyz * unity_Lightmap_HDR.xxx;
+    u_xlat16_0.xyz = unity_Lightmap_HDR.xxx * u_xlat16_0.xyz + (-u_xlat16_2.xyz);
     u_xlat0.xyz = vec3(vec3(_Lerp, _Lerp, _Lerp)) * u_xlat16_0.xyz + u_xlat16_2.xyz;
     u_xlat0.xyz = u_xlat0.xyz * vec3(_Brightness);
     u_xlat0.xyz = u_xlat0.xyz * vs_COLOR0.xyz;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * _Color;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat1 = u_xlat16_1 * _Color;
     u_xlat1.xyz = u_xlat0.xyz * u_xlat1.xyz;
     SV_Target0 = u_xlat1;
     return;
@@ -331,35 +331,35 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 uniform 	mediump vec4 unity_Lightmap_HDR;
 uniform 	float _Brightness;
 uniform 	float _Lerp;
 uniform 	mediump vec4 _Color;
-uniform lowp sampler2D _MainTex;
-uniform lowp sampler2D _LightMap;
-uniform lowp sampler2D _LightMapNight;
+uniform mediump sampler2D _MainTex;
+uniform mediump sampler2D _LightMap;
+uniform mediump sampler2D _LightMapNight;
 in highp vec2 vs_TEXCOORD0;
 in highp vec2 vs_TEXCOORD1;
 in mediump vec4 vs_COLOR0;
 layout(location = 0) out mediump vec4 SV_Target0;
 vec3 u_xlat0;
 mediump vec3 u_xlat16_0;
-lowp vec3 u_xlat10_0;
 vec4 u_xlat1;
-lowp vec4 u_xlat10_1;
+mediump vec4 u_xlat16_1;
 mediump vec3 u_xlat16_2;
 void main()
 {
-    u_xlat10_0.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
-    u_xlat10_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
-    u_xlat16_2.xyz = u_xlat10_1.xyz * unity_Lightmap_HDR.xxx;
-    u_xlat16_0.xyz = unity_Lightmap_HDR.xxx * u_xlat10_0.xyz + (-u_xlat16_2.xyz);
+    u_xlat16_0.xyz = texture(_LightMapNight, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_1.xyz = texture(_LightMap, vs_TEXCOORD1.xy).xyz;
+    u_xlat16_2.xyz = u_xlat16_1.xyz * unity_Lightmap_HDR.xxx;
+    u_xlat16_0.xyz = unity_Lightmap_HDR.xxx * u_xlat16_0.xyz + (-u_xlat16_2.xyz);
     u_xlat0.xyz = vec3(vec3(_Lerp, _Lerp, _Lerp)) * u_xlat16_0.xyz + u_xlat16_2.xyz;
     u_xlat0.xyz = u_xlat0.xyz * vec3(_Brightness);
     u_xlat0.xyz = u_xlat0.xyz * vs_COLOR0.xyz;
-    u_xlat10_1 = texture(_MainTex, vs_TEXCOORD0.xy);
-    u_xlat1 = u_xlat10_1 * _Color;
+    u_xlat16_1 = texture(_MainTex, vs_TEXCOORD0.xy);
+    u_xlat1 = u_xlat16_1 * _Color;
     u_xlat1.xyz = u_xlat0.xyz * u_xlat1.xyz;
     SV_Target0 = u_xlat1;
     return;

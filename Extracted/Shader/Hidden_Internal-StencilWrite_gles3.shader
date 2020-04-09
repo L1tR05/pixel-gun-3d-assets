@@ -8,7 +8,7 @@ Properties {
 }
 SubShader {
  Pass {
-  GpuProgramID 39056
+  GpuProgramID 24915
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -36,6 +36,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 layout(location = 0) out mediump vec4 SV_Target0;
 void main()
@@ -73,6 +74,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 layout(location = 0) out mediump vec4 SV_Target0;
 void main()
@@ -110,6 +112,7 @@ void main()
 #ifdef FRAGMENT
 #version 300 es
 
+precision highp float;
 precision highp int;
 layout(location = 0) out mediump vec4 SV_Target0;
 void main()
