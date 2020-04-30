@@ -1,6 +1,6 @@
 [![Pixel Gun 3D Assets](/_media/title.png)](#)
 
-[![Version: 17.5.1](/_media/info_version.png)](#)
+[![Version: 17.5.2](/_media/info_version.png)](#)
 [![Platform: Android](/_media/info_platform.png)](#)
 
 [![Download assets](/_media/title_download.png)](#)
