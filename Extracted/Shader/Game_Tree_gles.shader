@@ -506,7 +506,7 @@ Keywords { "FOG_LINEAR" }
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" }
   ZWrite Off
   Cull Off
-  GpuProgramID 20413
+  GpuProgramID 57381
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -4286,7 +4286,7 @@ Keywords { "DIRECTIONAL" "LIGHTMAP_ON" "LIGHTPROBE_SH" "FOG_LINEAR" }
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "FORWARDADD" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" }
   ZWrite Off
   Cull Off
-  GpuProgramID 114698
+  GpuProgramID 117715
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -4873,7 +4873,7 @@ SubShader {
   Name "FORWARD"
   LOD 200
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" "SHADOWSUPPORT" = "true" }
-  GpuProgramID 243353
+  GpuProgramID 247472
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -9510,7 +9510,7 @@ Keywords { "DIRECTIONAL" "LIGHTMAP_ON" "LIGHTPROBE_SH" "FOG_LINEAR" }
   LOD 200
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "FORWARDADD" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" }
   ZWrite Off
-  GpuProgramID 272800
+  GpuProgramID 280543
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -10138,7 +10138,7 @@ Keywords { "DIRECTIONAL" "FOG_LINEAR" }
   Name "PREPASS"
   LOD 200
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "PREPASSBASE" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" }
-  GpuProgramID 329181
+  GpuProgramID 368404
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -10374,7 +10374,7 @@ SubProgram "gles hw_tier02 " {
   LOD 200
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "PREPASSFINAL" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" }
   ZWrite Off
-  GpuProgramID 418284
+  GpuProgramID 448289
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -13582,7 +13582,7 @@ Keywords { "LIGHTMAP_ON" "LIGHTPROBE_SH" "FOG_LINEAR" }
   Name "DEFERRED"
   LOD 200
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "DEFERRED" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" }
-  GpuProgramID 461798
+  GpuProgramID 492368
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

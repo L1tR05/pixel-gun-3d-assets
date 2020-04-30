@@ -15,7 +15,7 @@ SubShader {
   LOD 200
   Tags { "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   Cull Off
-  GpuProgramID 237
+  GpuProgramID 38148
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

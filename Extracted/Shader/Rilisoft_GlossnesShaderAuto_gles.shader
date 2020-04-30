@@ -16,7 +16,7 @@ SubShader {
   Name "FORWARD"
   LOD 200
   Tags { "LIGHTMODE" = "FORWARDBASE" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
-  GpuProgramID 51617
+  GpuProgramID 13419
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -31850,7 +31850,7 @@ Keywords { "DIRECTIONAL" "SHADOWS_SCREEN" "LIGHTMAP_ON" "LIGHTMAP_SHADOW_MIXING"
   Name "PREPASS"
   LOD 200
   Tags { "LIGHTMODE" = "PREPASSBASE" "RenderType" = "Opaque" }
-  GpuProgramID 80012
+  GpuProgramID 103641
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -32038,7 +32038,7 @@ SubProgram "gles hw_tier02 " {
   LOD 200
   Tags { "LIGHTMODE" = "PREPASSFINAL" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 161126
+  GpuProgramID 160441
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -43784,7 +43784,7 @@ Keywords { "LIGHTMAP_ON" "SHADOWS_SHADOWMASK" "LIGHTPROBE_SH" "FOG_LINEAR" "UNIT
   Name "DEFERRED"
   LOD 200
   Tags { "LIGHTMODE" = "DEFERRED" "RenderType" = "Opaque" }
-  GpuProgramID 238470
+  GpuProgramID 226089
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

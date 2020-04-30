@@ -15,7 +15,7 @@ SubShader {
   LOD 200
   Tags { "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZWrite Off
-  GpuProgramID 38386
+  GpuProgramID 17139
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" }

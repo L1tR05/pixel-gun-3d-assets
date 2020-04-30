@@ -10,7 +10,7 @@ SubShader {
  Tags { "IGNOREPROJECTOR" = "true" "RenderType" = "Geometry" }
  Pass {
   Tags { "IGNOREPROJECTOR" = "true" "RenderType" = "Geometry" }
-  GpuProgramID 32926
+  GpuProgramID 15633
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

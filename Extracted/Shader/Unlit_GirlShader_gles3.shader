@@ -439,7 +439,7 @@ Keywords { "FOG_LINEAR" }
   LOD 100
   Tags { "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 15764
+  GpuProgramID 3962
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

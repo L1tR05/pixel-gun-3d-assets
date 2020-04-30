@@ -19,7 +19,7 @@ SubShader {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
   ZTest Less
   Cull Off
-  GpuProgramID 57833
+  GpuProgramID 65010
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }

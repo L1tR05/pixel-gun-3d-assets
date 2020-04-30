@@ -14,7 +14,7 @@ SubShader {
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZWrite Off
   Offset -1, -1
-  GpuProgramID 63015
+  GpuProgramID 29451
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }

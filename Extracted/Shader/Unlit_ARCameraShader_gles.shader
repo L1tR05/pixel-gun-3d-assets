@@ -18,7 +18,7 @@ SubShader {
   Tags { "RenderType" = "Opaque" }
   ZWrite Off
   Cull Off
-  GpuProgramID 8533
+  GpuProgramID 680
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

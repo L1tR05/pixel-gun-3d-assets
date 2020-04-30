@@ -13,7 +13,7 @@ SubShader {
  Pass {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Transparent" }
   ZWrite Off
-  GpuProgramID 10046
+  GpuProgramID 7562
 Program "vp" {
 SubProgram "gles " {
 "#version 100
@@ -118,7 +118,8 @@ mat4 transpose(mat4 mtx)
 #endif
 /* UNITY: Original start of shader */
         varying mediump vec2 uv;
-                     
+        
+             
         
 
 #ifdef VERTEX
@@ -253,7 +254,8 @@ mat4 transpose(mat4 mtx)
 #endif
 /* UNITY: Original start of shader */
         varying mediump vec2 uv;
-                     
+        
+             
         
 
 #ifdef VERTEX
@@ -388,7 +390,8 @@ mat4 transpose(mat4 mtx)
 #endif
 /* UNITY: Original start of shader */
         varying mediump vec2 uv;
-                     
+        
+             
         
 
 #ifdef VERTEX
@@ -526,7 +529,8 @@ mat4 transpose(mat4 mtx)
 #endif
 /* UNITY: Original start of shader */
         varying mediump vec2 uv;
-                     
+        
+             
         
 
 #ifdef VERTEX
@@ -661,7 +665,8 @@ mat4 transpose(mat4 mtx)
 #endif
 /* UNITY: Original start of shader */
         varying mediump vec2 uv;
-                     
+        
+             
         
 
 #ifdef VERTEX
@@ -796,7 +801,8 @@ mat4 transpose(mat4 mtx)
 #endif
 /* UNITY: Original start of shader */
         varying mediump vec2 uv;
-                     
+        
+             
         
 
 #ifdef VERTEX

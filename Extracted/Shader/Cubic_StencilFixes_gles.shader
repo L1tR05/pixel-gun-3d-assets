@@ -1259,7 +1259,7 @@ Keywords { "FOG_LINEAR" }
   LOD 200
   Tags { "QUEUE" = "Transparent" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 21571
+  GpuProgramID 40450
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

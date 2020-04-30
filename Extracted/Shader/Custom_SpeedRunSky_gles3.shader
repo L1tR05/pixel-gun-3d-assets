@@ -19,7 +19,7 @@ SubShader {
   Name "FORWARD"
   LOD 200
   Tags { "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Geometry+200" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
-  GpuProgramID 33270
+  GpuProgramID 9632
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" }

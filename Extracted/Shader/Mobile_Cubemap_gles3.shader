@@ -15,7 +15,7 @@ SubShader {
   Name "FORWARD"
   LOD 150
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Geometry" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
-  GpuProgramID 38249
+  GpuProgramID 31616
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -32056,7 +32056,7 @@ Keywords { "DIRECTIONAL" "SHADOWS_SCREEN" "LIGHTMAP_ON" "LIGHTMAP_SHADOW_MIXING"
   Name "PREPASS"
   LOD 150
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "PREPASSBASE" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
-  GpuProgramID 109034
+  GpuProgramID 101684
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -32232,7 +32232,7 @@ SubProgram "gles3 hw_tier02 " {
   LOD 150
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "PREPASSFINAL" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 170729
+  GpuProgramID 169178
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -43813,7 +43813,7 @@ Keywords { "LIGHTMAP_ON" "SHADOWS_SHADOWMASK" "LIGHTPROBE_SH" "FOG_LINEAR" "UNIT
   Name "DEFERRED"
   LOD 150
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "DEFERRED" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
-  GpuProgramID 209676
+  GpuProgramID 241806
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

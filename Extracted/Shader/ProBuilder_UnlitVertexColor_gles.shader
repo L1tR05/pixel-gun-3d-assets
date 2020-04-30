@@ -11,7 +11,7 @@ SubShader {
  Pass {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "AlphaTest" "RenderType" = "Transparent" }
   Cull Off
-  GpuProgramID 46748
+  GpuProgramID 56051
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

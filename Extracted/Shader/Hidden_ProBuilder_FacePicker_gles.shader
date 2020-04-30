@@ -11,7 +11,7 @@ SubShader {
  Pass {
   Name "Base"
   Tags { "ProBuilderPicker" = "Base" }
-  GpuProgramID 19717
+  GpuProgramID 45111
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

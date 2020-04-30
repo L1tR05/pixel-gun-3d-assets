@@ -18,7 +18,7 @@ SubShader {
   ZTest Less
   ZWrite Off
   Cull Off
-  GpuProgramID 48554
+  GpuProgramID 11255
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }
@@ -497,7 +497,7 @@ Keywords { "LIGHTMAP_ON" }
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZTest Less
   Offset 0, -1
-  GpuProgramID 77400
+  GpuProgramID 108430
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }

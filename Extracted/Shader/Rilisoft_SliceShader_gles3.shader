@@ -15,7 +15,7 @@ SubShader {
   Tags { "LIGHTMODE" = "FORWARDBASE" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
   ZWrite Off
   Cull Off
-  GpuProgramID 51223
+  GpuProgramID 11523
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -24608,7 +24608,7 @@ Keywords { "DIRECTIONAL" "SHADOWS_SCREEN" "LIGHTMAP_ON" "LIGHTMAP_SHADOW_MIXING"
   Tags { "LIGHTMODE" = "FORWARDADD" "RenderType" = "Opaque" }
   ZWrite Off
   Cull Off
-  GpuProgramID 129935
+  GpuProgramID 79424
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "POINT" }

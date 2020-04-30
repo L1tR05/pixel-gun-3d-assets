@@ -14,7 +14,7 @@ SubShader {
   Tags { "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZTest Always
   ZWrite Off
-  GpuProgramID 5941
+  GpuProgramID 38926
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

@@ -846,7 +846,7 @@ Keywords { "FOG_LINEAR" }
   Name "FORWARD"
   LOD 150
   Tags { "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Geometry" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
-  GpuProgramID 14732
+  GpuProgramID 7776
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -5014,7 +5014,7 @@ Keywords { "DIRECTIONAL" "LIGHTMAP_ON" "LIGHTPROBE_SH" "FOG_LINEAR" }
   Name "PREPASS"
   LOD 150
   Tags { "LIGHTMODE" = "PREPASSBASE" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
-  GpuProgramID 77999
+  GpuProgramID 86211
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -5202,7 +5202,7 @@ SubProgram "gles hw_tier02 " {
   LOD 150
   Tags { "LIGHTMODE" = "PREPASSFINAL" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 133149
+  GpuProgramID 172912
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -8074,7 +8074,7 @@ Keywords { "LIGHTMAP_ON" "LIGHTPROBE_SH" "FOG_LINEAR" }
   Name "DEFERRED"
   LOD 150
   Tags { "LIGHTMODE" = "DEFERRED" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
-  GpuProgramID 246521
+  GpuProgramID 254631
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

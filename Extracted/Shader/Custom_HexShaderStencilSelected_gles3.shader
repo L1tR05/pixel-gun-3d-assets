@@ -14,7 +14,7 @@ SubShader {
   Tags { "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZTest Always
   ZWrite Off
-  GpuProgramID 40072
+  GpuProgramID 8112
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -192,7 +192,7 @@ SubProgram "gles3 hw_tier02 " {
   Tags { "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZTest Greater
   ZWrite Off
-  GpuProgramID 109386
+  GpuProgramID 126225
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

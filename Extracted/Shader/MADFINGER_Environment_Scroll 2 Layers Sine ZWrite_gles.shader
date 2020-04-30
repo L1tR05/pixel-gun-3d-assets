@@ -29,7 +29,7 @@ SubShader {
   LOD 100
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
   Cull Off
-  GpuProgramID 26736
+  GpuProgramID 40348
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }

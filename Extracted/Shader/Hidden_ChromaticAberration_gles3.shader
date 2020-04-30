@@ -12,7 +12,7 @@ SubShader {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 6424
+  GpuProgramID 39291
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -208,7 +208,7 @@ SubProgram "gles3 hw_tier02 " {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 102984
+  GpuProgramID 93408
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -392,7 +392,7 @@ SubProgram "gles3 hw_tier02 " {
   ZTest Always
   ZWrite Off
   Cull Off
-  GpuProgramID 175910
+  GpuProgramID 138378
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

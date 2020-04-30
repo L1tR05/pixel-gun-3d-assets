@@ -15,7 +15,7 @@ SubShader {
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZWrite Off
   Offset -1, -1
-  GpuProgramID 34199
+  GpuProgramID 54007
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -4781,7 +4781,7 @@ Keywords { "DIRECTIONAL" "LIGHTMAP_ON" "LIGHTMAP_SHADOW_MIXING" "LIGHTPROBE_SH" 
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "FORWARDADD" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZWrite Off
   Offset -1, -1
-  GpuProgramID 80496
+  GpuProgramID 84614
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "POINT" }

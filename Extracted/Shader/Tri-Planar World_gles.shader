@@ -18,7 +18,7 @@ SubShader {
  Pass {
   Name "FORWARD"
   Tags { "IGNOREPROJECTOR" = "False" "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Geometry" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
-  GpuProgramID 35189
+  GpuProgramID 2488
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -3472,7 +3472,7 @@ Keywords { "DIRECTIONAL" "LIGHTPROBE_SH" "FOG_LINEAR" }
   Name "FORWARD"
   Tags { "IGNOREPROJECTOR" = "False" "LIGHTMODE" = "FORWARDADD" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 80266
+  GpuProgramID 123411
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -4204,7 +4204,7 @@ Keywords { "DIRECTIONAL" "FOG_LINEAR" }
  Pass {
   Name "PREPASS"
   Tags { "IGNOREPROJECTOR" = "False" "LIGHTMODE" = "PREPASSBASE" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
-  GpuProgramID 192550
+  GpuProgramID 131549
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -4391,7 +4391,7 @@ SubProgram "gles hw_tier02 " {
   Name "PREPASS"
   Tags { "IGNOREPROJECTOR" = "False" "LIGHTMODE" = "PREPASSFINAL" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 235047
+  GpuProgramID 217325
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -6350,7 +6350,7 @@ Keywords { "LIGHTPROBE_SH" "FOG_LINEAR" }
  Pass {
   Name "DEFERRED"
   Tags { "IGNOREPROJECTOR" = "False" "LIGHTMODE" = "DEFERRED" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
-  GpuProgramID 327393
+  GpuProgramID 277336
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

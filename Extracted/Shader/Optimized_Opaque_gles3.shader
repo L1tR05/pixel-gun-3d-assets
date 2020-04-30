@@ -18,7 +18,7 @@ SubShader {
   LOD 200
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
   ZTest Less
-  GpuProgramID 57833
+  GpuProgramID 65010
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }

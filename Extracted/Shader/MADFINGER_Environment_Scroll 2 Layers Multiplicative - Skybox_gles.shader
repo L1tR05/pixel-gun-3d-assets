@@ -21,7 +21,7 @@ SubShader {
   LOD 100
   Tags { "QUEUE" = "Geometry+10" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 46214
+  GpuProgramID 7393
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }

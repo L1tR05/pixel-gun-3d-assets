@@ -17,7 +17,7 @@ SubShader {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Background" "RenderType" = "Transparent" }
   ZWrite Off
   Cull Off
-  GpuProgramID 4460
+  GpuProgramID 60352
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }

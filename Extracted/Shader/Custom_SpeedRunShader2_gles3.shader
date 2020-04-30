@@ -18,7 +18,7 @@ SubShader {
  Pass {
   LOD 100
   Tags { "QUEUE" = "Geometry+200" "RenderType" = "Opaque" }
-  GpuProgramID 51968
+  GpuProgramID 30561
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

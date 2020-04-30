@@ -15,7 +15,7 @@ SubShader {
   LOD 150
   Tags { "LIGHTMODE" = "FORWARDBASE" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
   Cull Off
-  GpuProgramID 16049
+  GpuProgramID 10979
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -5180,7 +5180,7 @@ Keywords { "DIRECTIONAL" "LIGHTMAP_ON" "LIGHTMAP_SHADOW_MIXING" "LIGHTPROBE_SH" 
   LOD 150
   Tags { "LIGHTMODE" = "PREPASSBASE" "RenderType" = "Opaque" }
   Cull Off
-  GpuProgramID 70748
+  GpuProgramID 69957
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -5369,7 +5369,7 @@ SubProgram "gles hw_tier02 " {
   Tags { "LIGHTMODE" = "PREPASSFINAL" "RenderType" = "Opaque" }
   ZWrite Off
   Cull Off
-  GpuProgramID 154330
+  GpuProgramID 168431
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -8074,7 +8074,7 @@ Keywords { "LIGHTMAP_ON" "LIGHTPROBE_SH" "FOG_LINEAR" }
   LOD 150
   Tags { "LIGHTMODE" = "DEFERRED" "RenderType" = "Opaque" }
   Cull Off
-  GpuProgramID 208225
+  GpuProgramID 242545
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

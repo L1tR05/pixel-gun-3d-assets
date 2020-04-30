@@ -18,7 +18,7 @@ SubShader {
   Tags { "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZWrite Off
   Cull Off
-  GpuProgramID 58031
+  GpuProgramID 39555
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

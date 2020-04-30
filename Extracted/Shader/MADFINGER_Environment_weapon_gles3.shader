@@ -15,7 +15,7 @@ SubShader {
  Pass {
   LOD 100
   Tags { "LIGHTMODE" = "FORWARDBASE" "RenderType" = "Opaque" }
-  GpuProgramID 35429
+  GpuProgramID 64282
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_OFF" }

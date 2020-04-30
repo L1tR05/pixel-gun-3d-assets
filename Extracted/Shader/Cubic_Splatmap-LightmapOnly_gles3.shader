@@ -15,7 +15,7 @@ _Splat0 ("Layer 0 (R)", 2D) = "white" { }
 SubShader {
  Pass {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Geometry-100" "RenderType" = "Opaque" }
-  GpuProgramID 52275
+  GpuProgramID 14709
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "LIGHTMAP_ON" }

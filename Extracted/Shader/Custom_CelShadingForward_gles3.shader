@@ -15,7 +15,7 @@ SubShader {
   Name "FORWARD"
   LOD 200
   Tags { "LIGHTMODE" = "FORWARDBASE" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
-  GpuProgramID 34683
+  GpuProgramID 61066
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -27947,7 +27947,7 @@ Keywords { "DIRECTIONAL" "SHADOWS_SCREEN" "LIGHTMAP_ON" "LIGHTMAP_SHADOW_MIXING"
   LOD 200
   Tags { "LIGHTMODE" = "FORWARDADD" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 124728
+  GpuProgramID 81784
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "POINT" }

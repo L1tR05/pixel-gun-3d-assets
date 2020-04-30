@@ -17,7 +17,7 @@ SubShader {
   LOD 200
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Transparent" "RenderType" = "Transparent" "SHADOWSUPPORT" = "true" }
   Cull Off
-  GpuProgramID 30623
+  GpuProgramID 13934
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" }

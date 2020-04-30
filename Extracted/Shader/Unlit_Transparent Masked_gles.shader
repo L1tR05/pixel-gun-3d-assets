@@ -17,7 +17,7 @@ SubShader {
   ZWrite Off
   Cull Off
   Offset -1, -1
-  GpuProgramID 1930
+  GpuProgramID 35716
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

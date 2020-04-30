@@ -15,7 +15,7 @@ SubShader {
   Tags { "DisableBatching" = "true" "IGNOREPROJECTOR" = "true" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZWrite Off
   Cull Off
-  GpuProgramID 22595
+  GpuProgramID 33929
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

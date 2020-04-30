@@ -17,7 +17,7 @@ SubShader {
   Tags { "IGNOREPROJECTOR" = "true" "QUEUE" = "Transparent" "RenderType" = "Transparent" }
   ZWrite Off
   Offset -1, -1
-  GpuProgramID 9493
+  GpuProgramID 23005
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

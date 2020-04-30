@@ -15,7 +15,7 @@ SubShader {
  Pass {
   Tags { "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Transparent-2" "RenderType" = "Geometry" }
   Cull Off
-  GpuProgramID 42469
+  GpuProgramID 55852
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "_EMISSION_OFF" }
@@ -980,7 +980,7 @@ Keywords { "_EMISSION_ALPHA" }
   ZTest Equal
   ZWrite Off
   Cull Off
-  GpuProgramID 74765
+  GpuProgramID 67675
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "_EMISSION_OFF" }

@@ -16,7 +16,7 @@ SubShader {
   Name "FORWARD"
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" "SHADOWSUPPORT" = "true" }
   Offset -1, -1
-  GpuProgramID 3387
+  GpuProgramID 10384
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -3789,7 +3789,7 @@ Keywords { "DIRECTIONAL" "LIGHTPROBE_SH" "FOG_LINEAR" }
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "FORWARDADD" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" }
   ZWrite Off
   Offset -1, -1
-  GpuProgramID 104077
+  GpuProgramID 110640
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -4591,7 +4591,7 @@ Keywords { "DIRECTIONAL" "FOG_LINEAR" }
   Name "PREPASS"
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "PREPASSBASE" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" }
   Offset -1, -1
-  GpuProgramID 193165
+  GpuProgramID 184146
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -4947,7 +4947,7 @@ SubProgram "gles3 hw_tier02 " {
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "PREPASSFINAL" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" }
   ZWrite Off
   Offset -1, -1
-  GpuProgramID 231004
+  GpuProgramID 236911
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -6511,7 +6511,7 @@ Keywords { "LIGHTPROBE_SH" "FOG_LINEAR" }
   Name "DEFERRED"
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "DEFERRED" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" }
   Offset -1, -1
-  GpuProgramID 292968
+  GpuProgramID 313039
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

@@ -16,7 +16,7 @@ SubShader {
   LOD 100
   Tags { "RenderType" = "Transparent" }
   ZWrite Off
-  GpuProgramID 55236
+  GpuProgramID 58496
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

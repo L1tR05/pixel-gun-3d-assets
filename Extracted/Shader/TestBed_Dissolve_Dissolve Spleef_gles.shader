@@ -19,7 +19,7 @@ SubShader {
  Pass {
   Name "FORWARD"
   Tags { "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Geometry" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
-  GpuProgramID 8155
+  GpuProgramID 54925
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -32315,7 +32315,7 @@ Keywords { "DIRECTIONAL" "SHADOWS_SCREEN" "LIGHTMAP_ON" "LIGHTMAP_SHADOW_MIXING"
   Name "FORWARD"
   Tags { "LIGHTMODE" = "FORWARDADD" "QUEUE" = "Geometry" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 114832
+  GpuProgramID 66641
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "POINT" }

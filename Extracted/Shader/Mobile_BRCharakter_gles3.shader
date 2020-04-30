@@ -17,7 +17,7 @@ SubShader {
  Pass {
   LOD 150
   Tags { "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Transparent-50" "RenderType" = "Transparent" }
-  GpuProgramID 47062
+  GpuProgramID 54290
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

@@ -441,7 +441,7 @@ Keywords { "FOG_LINEAR" }
   Name "FORWARD"
   LOD 200
   Tags { "LIGHTMODE" = "FORWARDBASE" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
-  GpuProgramID 17457
+  GpuProgramID 57003
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -6878,7 +6878,7 @@ Keywords { "DIRECTIONAL" "LIGHTMAP_ON" "SHADOWS_SHADOWMASK" "LIGHTPROBE_SH" "FOG
   LOD 200
   Tags { "LIGHTMODE" = "FORWARDADD" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
   ZWrite Off
-  GpuProgramID 96348
+  GpuProgramID 123305
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -8028,7 +8028,7 @@ Keywords { "DIRECTIONAL" "SHADOWS_SHADOWMASK" "FOG_LINEAR" }
   Name "PREPASS"
   LOD 200
   Tags { "LIGHTMODE" = "PREPASSBASE" "RenderType" = "Opaque" }
-  GpuProgramID 145445
+  GpuProgramID 144021
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -8213,7 +8213,7 @@ SubProgram "gles3 hw_tier02 " {
   LOD 200
   Tags { "LIGHTMODE" = "PREPASSFINAL" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 223895
+  GpuProgramID 225450
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX
@@ -13461,7 +13461,7 @@ Keywords { "LIGHTMAP_ON" "SHADOWS_SHADOWMASK" "LIGHTPROBE_SH" "FOG_LINEAR" }
   Name "DEFERRED"
   LOD 200
   Tags { "LIGHTMODE" = "DEFERRED" "RenderType" = "Opaque" }
-  GpuProgramID 315283
+  GpuProgramID 270906
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

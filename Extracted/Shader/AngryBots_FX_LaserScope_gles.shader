@@ -14,7 +14,7 @@ SubShader {
   Tags { "QUEUE" = "Transparent" "Reflection" = "LaserScope" "RenderType" = "Transparent" }
   ZWrite Off
   Cull Off
-  GpuProgramID 5010
+  GpuProgramID 2726
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

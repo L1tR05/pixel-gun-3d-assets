@@ -7748,7 +7748,7 @@ Keywords { "FOG_LINEAR" }
   ZTest Less
   Cull Off
   Offset 1, 1
-  GpuProgramID 29253
+  GpuProgramID 59697
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "SHADOWS_DEPTH" }
@@ -8185,7 +8185,7 @@ Keywords { "SHADOWS_CUBE" }
   Tags { "IGNOREPROJECTOR" = "true" "LIGHTMODE" = "SHADOWCOLLECTOR" "QUEUE" = "AlphaTest" "RenderType" = "TransparentCutout" }
   ZTest Less
   Offset -1, -1
-  GpuProgramID 100998
+  GpuProgramID 103161
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

@@ -13,7 +13,7 @@ SubShader {
   Tags { "DisableBatching" = "true" "IGNOREPROJECTOR" = "true" "ProBuilderPicker" = "VertexPass" "RenderType" = "Transparent" }
   Cull Off
   Offset -1, -1
-  GpuProgramID 1485
+  GpuProgramID 51533
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 "#ifdef VERTEX

@@ -24,7 +24,7 @@ SubShader {
   LOD 150
   Tags { "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Alphatest+100" "RenderType" = "Opaque" }
   Cull Off
-  GpuProgramID 30580
+  GpuProgramID 57833
 Program "vp" {
 SubProgram "gles3 hw_tier00 " {
 Keywords { "DIRECTIONAL" "LIGHTMAP_OFF" }

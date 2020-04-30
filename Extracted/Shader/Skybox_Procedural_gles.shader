@@ -17,7 +17,7 @@ SubShader {
   Tags { "PreviewType" = "Skybox" "QUEUE" = "Background" "RenderType" = "Background" }
   ZWrite Off
   Cull Off
-  GpuProgramID 42091
+  GpuProgramID 47286
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

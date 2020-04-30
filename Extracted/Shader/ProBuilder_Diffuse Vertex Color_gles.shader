@@ -12,7 +12,7 @@ SubShader {
  Pass {
   Name "FORWARD"
   Tags { "LIGHTMODE" = "FORWARDBASE" "RenderType" = "Opaque" "SHADOWSUPPORT" = "true" }
-  GpuProgramID 44343
+  GpuProgramID 14110
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -29137,7 +29137,7 @@ Keywords { "DIRECTIONAL" "SHADOWS_SCREEN" "LIGHTMAP_ON" "LIGHTMAP_SHADOW_MIXING"
   Name "FORWARD"
   Tags { "LIGHTMODE" = "FORWARDADD" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 80687
+  GpuProgramID 106668
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "POINT" }
@@ -32347,7 +32347,7 @@ Keywords { "DIRECTIONAL_COOKIE" "FOG_LINEAR" }
  Pass {
   Name "PREPASS"
   Tags { "LIGHTMODE" = "PREPASSBASE" "RenderType" = "Opaque" }
-  GpuProgramID 169941
+  GpuProgramID 172272
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -32534,7 +32534,7 @@ SubProgram "gles hw_tier02 " {
   Name "PREPASS"
   Tags { "LIGHTMODE" = "PREPASSFINAL" "RenderType" = "Opaque" }
   ZWrite Off
-  GpuProgramID 243554
+  GpuProgramID 218751
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX
@@ -43055,7 +43055,7 @@ Keywords { "LIGHTMAP_ON" "SHADOWS_SHADOWMASK" "LIGHTPROBE_SH" "FOG_LINEAR" "UNIT
  Pass {
   Name "DEFERRED"
   Tags { "LIGHTMODE" = "DEFERRED" "RenderType" = "Opaque" }
-  GpuProgramID 314181
+  GpuProgramID 284917
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 "#ifdef VERTEX

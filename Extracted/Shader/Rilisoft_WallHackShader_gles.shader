@@ -18,7 +18,7 @@ SubShader {
   Tags { "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Geometry" "RenderType" = "Transparent" }
   ZTest Greater
   ZWrite Off
-  GpuProgramID 3247
+  GpuProgramID 1560
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
@@ -4172,7 +4172,7 @@ Keywords { "FOG_LINEAR" }
   LOD 200
   Tags { "LIGHTMODE" = "FORWARDBASE" "QUEUE" = "Geometry" "RenderType" = "Transparent" }
   ZWrite Off
-  GpuProgramID 165032
+  GpuProgramID 159743
 Program "vp" {
 SubProgram "gles hw_tier00 " {
 Keywords { "DIRECTIONAL" }
